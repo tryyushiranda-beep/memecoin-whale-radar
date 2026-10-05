@@ -1,0 +1,31 @@
+name: Memecoin Whale Radar
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Berjalan otomatis setiap 5 menit
+  workflow_dispatch:
+
+jobs:
+  run-tracker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Memecoin Tracker Script
+        run: python tracker.py
+
+      - name: Save Signals
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+          git add signals.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update memecoin signals" && git push)
