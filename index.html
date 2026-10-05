@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memecoin Whale Radar</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #090d16; color: #f1f5f9; margin: 0; padding: 12px; }
+        .header { text-align: center; margin-bottom: 15px; }
+        .btn-notif { width: 100%; padding: 12px; background: #8b5cf6; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; margin-bottom: 15px; cursor: pointer; }
+        .card { background: #1e1b4b; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 5px solid #a855f7; }
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .badge-sol { background: #14f195; color: #000; }
+        .badge-eth { background: #627eea; color: #fff; }
+        .badge-base { background: #0052ff; color: #fff; }
+        .wallet-title { font-weight: bold; font-size: 15px; color: #f472b6; }
+        .details { margin: 8px 0; font-size: 14px; line-height: 1.4; }
+        .btn-group { display: flex; gap: 6px; margin-top: 8px; }
+        .btn-link { flex: 1; text-align: center; padding: 8px 4px; background: #312e81; color: #38bdf8; text-decoration: none; border-radius: 5px; font-size: 11px; font-weight: bold; }
+        .btn-fast { background: #8b5cf6; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>🚀 Memecoin Whale Radar</h2>
+        <button class="btn-notif" onclick="enableNotifications()">🔔 Aktifkan Notifikasi & Suara HP</button>
+    </div>
+
+    <div id="signals-container">Memuat sinyal memecoin...</div>
+
+    <script>
+        let lastSignalHash = "";
+        let audio = new Audio("https://actions.google.com/sounds/v1/alerts/beep_short.ogg");
+
+        function enableNotifications() {
+            if ("Notification" in window) {
+                Notification.requestPermission().then(p => {
+                    if (p === "granted") { 
+                        alert("Notifikasi Suara Memecoin Aktif!"); 
+                        audio.play(); 
+                    }
+                });
+            }
+        }
+
+        async function fetchSignals() {
+            try {
+                const response = await fetch('signals.json?t=' + new Date().getTime());
+                const data = await response.json();
+
+                if (data.length > 0) {
+                    if (lastSignalHash !== "" && lastSignalHash !== data[0].hash) {
+                        audio.play();
+                        if ("Notification" in window && Notification.permission === "granted") {
+                            new Notification(`🚀 MEMECOIN BUY: $${data[0].token}!`, {
+                                body: `${data[0].wallet_name} membeli ${data[0].token} (${data[0].est_val_usd})`,
+                            });
+                        }
+                    }
+                    lastSignalHash = data[0].hash;
+
+                    let html = "";
+                    data.forEach(item => {
+                        let chainClass = 'badge-sol';
+                        if (item.chain === 'ETHEREUM') chainClass = 'badge-eth';
+                        if (item.chain === 'BASE') chainClass = 'badge-base';
+
+                        html += `
+                            <div class="card">
+                                <div style="display:flex; justify-content: space-between; align-items:center;">
+                                    <span class="wallet-title">👤 ${item.wallet_name}</span>
+                                    <span class="badge ${chainClass}">${item.chain}</span>
+                                </div>
+                                <div class="details">
+                                    Memecoin: <b>$${item.token}</b><br>
+                                    Nilai Pembelian: <b>${item.est_val_usd}</b> (${item.amount} token)<br>
+                                    Market Cap: ${item.market_cap} | Liquidity: ${item.liquidity}<br>
+                                    <small style="color:#94a3b8">⏰ ${item.timestamp}</small>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn-link btn-fast" href="${item.photon_link}" target="_blank">⚡ Trade Cepat</a>
+                                    <a class="btn-link" href="${item.dex_chart}" target="_blank">📊 Chart DexScreener</a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('signals-container').innerHTML = html;
+                } else {
+                    document.getElementById('signals-container').innerHTML = "<div style='text-align:center; padding:20px; color:#94a3b8;'>Belum ada aktivitas memecoin dari whale.</div>";
+                }
+            } catch (e) { 
+                console.error("Gagal memuat sinyal:", e); 
+            }
+        }
+
+        setInterval(fetchSignals, 15000);
+        fetchSignals();
+    </script>
+</body>
+</html>
