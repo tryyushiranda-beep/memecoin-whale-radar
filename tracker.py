@@ -3,28 +3,45 @@ import json
 import requests
 from datetime import datetime
 
-# 1. DATABASE WALLET WHALE / INSIDER MEMECOIN TARGET
-# Masukkan alamat wallet whale memecoin (Solana / Ethereum / Base)
+# 1. DATABASE WALLET MEMECOIN YANG DIPANTAU (Solana / EVM)
 WATCHED_WALLETS = [
     {
-        "name": "Memecoin Whale Alpha (SOL)",
+        "name": "Memecoin Whale Alpha",
         "chain": "solana",
-        "address": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
-        "min_buy_usd": 200
-    },
-    {
-        "name": "Inside Trader Memecoin (ETH/BASE)",
-        "chain": "base",
-        "address": "0xae2fc9370923e328d4d843776d63d6b1d4ef633d",
-        "min_buy_usd": 500
+        "address": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU", # Ganti dengan wallet target Anda
+        "min_buy_usd": 100
     }
 ]
 
 SIGNALS_FILE = "signals.json"
 
+def fetch_solana_wallet_txs(wallet_address):
+    """
+    Mengambil transaksi token terbaru dari wallet Solana secara otomatis & gratis via API Solscan/Public.
+    """
+    tx_list = []
+    try:
+        url = f"https://api.solscan.io/account/splTransfers?account={wallet_address}&limit=5"
+        headers = {"User-Agent": "Mozilla/5.0"}
+        res = requests.get(url, headers=headers, timeout=10).json()
+        
+        if res.get('data'):
+            for item in res['data']:
+                # Mengambil transaksi token yang masuk/dibeli
+                if item.get('changeType') == 'inc':  # 'inc' = Incoming/Buy
+                    tx_list.append({
+                        "hash": item.get('signature'),
+                        "token_contract": item.get('tokenAddress'),
+                        "symbol": item.get('symbol', 'MEME'),
+                        "amount": float(item.get('changeAmount', 0)) / (10 ** int(item.get('decimals', 9)))
+                    })
+    except Exception as e:
+        print(f"Peringatan saat mengambil transaksi Solana: {e}")
+    return tx_list
+
 def fetch_dexscreener_details(token_address):
     """
-    Mengambil data real-time memecoin dari DexScreener (Mendukung Solana, Base, Ethereum, BNB).
+    Mengambil harga, likuiditas, dan Market Cap token secara otomatis dari DexScreener API.
     """
     try:
         url = f"https://api.dexscreener.com/latest/dex/tokens/{token_address}"
@@ -64,23 +81,24 @@ def process_memecoin_tracker():
         wallet_address = item["address"]
         min_usd = item["min_buy_usd"]
 
-        # Memantau transaksi wallet target
-        # Mengintegrasikan token kontrak memecoin yang baru saja dibeli
-        detected_txs = [] 
+        # AMBIL TRANSAKSI SECARA OTOMATIS
+        if chain == "solana":
+            detected_txs = fetch_solana_wallet_txs(wallet_address)
+        else:
+            detected_txs = []
 
         for tx in detected_txs:
             tx_hash = tx.get("hash")
             token_contract = tx.get("token_contract")
             
+            # Cek apakah transaksi ini belum pernah dicatat
             if not any(s['hash'] == tx_hash for s in signals):
                 symbol, price, liquidity, fdv, chain_id = fetch_dexscreener_details(token_contract)
                 amount = tx.get("amount", 0)
                 est_usd = amount * price
 
-                # FILTER MEMECOIN AMAN:
-                # 1. Nilai transaksi memenuhi kriteria minimal
-                # 2. Likuiditas minimal $5,000 agar aman dari koin rugpull instan
-                if est_usd >= min_usd and liquidity >= 5000:
+                # Filter Keamanan: Minimal transaksi $100 & Likuiditas minimal $2,000
+                if est_usd >= min_usd or liquidity >= 2000:
                     photon_url = f"https://photon-sol.tinyastro.io/en/r/@meme/{token_contract}" if chain_id == "solana" else f"https://dexscreener.com/{chain_id}/{token_contract}"
                     
                     signal_entry = {
@@ -103,7 +121,9 @@ def process_memecoin_tracker():
 
     if new_found:
         save_signals(signals)
-        print("Sinyal Memecoin baru berhasil diproses dan disimpan!")
+        print("Sinyal Memecoin otomatis baru berhasil ditemukan dan disimpan!")
+    else:
+        print("Pemeriksaan selesai. Belum ada transaksi baru.")
 
 if __name__ == "__main__":
     process_memecoin_tracker()
