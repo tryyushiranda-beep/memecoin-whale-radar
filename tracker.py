@@ -5,27 +5,24 @@ from datetime import datetime
 
 SIGNALS_FILE = "signals.json"
 
-def get_indodax_coins():
-    """Mengambil daftar seluruh simbol koin resmi di Indodax"""
-    indodax_symbols = set()
-    try:
-        url = "https://indodax.com/api/pairs"
-        res = requests.get(url, timeout=10).json()
-        if isinstance(res, list):
-            for pair in res:
-                traded_coin = pair.get('traded_currency', '').upper()
-                if traded_coin:
-                    indodax_symbols.add(traded_coin)
-    except Exception as e:
-        print(f"Error fetching Indodax pairs: {e}")
-    return indodax_symbols
+# Whitelist khusus Memecoin & Altcoin Koin Kecil Berfundamental yang ada di Indodax
+WHITELIST_COINS = {
+    # Memecoin & AI Memes
+    'PEPE', 'DOGE', 'SHIB', 'BONK', 'FLOKI', 'MEME', 'WIF', 'POPCAT', 
+    'MEW', 'NEIRO', 'TURBO', 'BOME', 'MYRO', 'SLERF', 'BABYDOGE',
+    'ACT', 'GRIFFAIN', 'PIPPIN', 'GOAT',
+    # Altcoin Koin Kecil / Fundamental / DeFi / L1 / L2
+    'SUI', 'JUP', 'RAY', 'ONDO', 'PHA', 'PENDLE', 'TIA', 'INJ', 
+    'SEI', 'ARBM', 'OP', 'AERO', 'STX', 'FET', 'RENDER'
+}
+
+# Hanya izinkan jaringan crypto utama (Anti-Robinhood & Anti-Fake Chain)
+ALLOWED_CHAINS = {'SOLANA', 'ETHEREUM', 'BSC', 'POLYGON', 'ARBITRUM', 'BASE'}
 
 def fetch_onchain_whale_signals():
-    indodax_coins = get_indodax_coins()
     signals = []
     seen_txs = set()
     
-    # Ambil transaksi & token trending dari DexScreener API
     url = "https://api.dexscreener.com/token-boosts/top/v1"
     
     try:
@@ -35,9 +32,10 @@ def fetch_onchain_whale_signals():
         if isinstance(data, list):
             for item in data:
                 token_contract = item.get('tokenAddress', '')
-                chain_id = item.get('chainId', 'solana').upper()
+                chain_id = item.get('chainId', '').upper()
                 
-                if not token_contract:
+                # Filter 1: Validasi Jaringan Resmi
+                if not token_contract or chain_id not in ALLOWED_CHAINS:
                     continue
                 
                 pair_url = f"https://api.dexscreener.com/latest/dex/tokens/{token_contract}"
@@ -48,24 +46,19 @@ def fetch_onchain_whale_signals():
                     base_token = pair.get('baseToken', {})
                     token_symbol = base_token.get('symbol', '').upper()
                     
-                    # FILTER 1: Hanya loloskan jika koin TERDAFTAR DI INDODAX!
-                    if token_symbol not in indodax_coins:
-                        continue
-                    
-                    # Abaikan koin utama/stablecoin
-                    if token_symbol in ['SOL', 'WSOL', 'USDC', 'USDT', 'WETH', 'ETH', 'WBTC', 'BTC']:
+                    # Filter 2: Hanya Koin Whitelist Indodax
+                    if token_symbol not in WHITELIST_COINS:
                         continue
                         
                     price = float(pair.get('priceUsd', 0) or 0)
                     volume_5m = float(pair.get('volume', {}).get('m5', 0) or 0)
                     
-                    # FILTER 2: Buang data jika harga atau volume bernilai 0 (Anti-Rp0)
-                    if price <= 0 or volume_5m <= 0:
+                    val_idr = volume_5m * 15800
+                    # Filter 3: Pembelian Whale Valid (Minimal Rp 2 Juta & Anti-Rp0)
+                    if price <= 0 or val_idr < 2_000_000:
                         continue
                     
-                    val_idr = volume_5m * 15800
                     price_idr = price * 15800
-                    
                     wallet_short = f"0x{token_contract[:4]}...{token_contract[-4:]}"
                     tx_hash = f"tx_{token_contract[:6]}_{int(datetime.utcnow().timestamp())}"
                     
@@ -80,7 +73,7 @@ def fetch_onchain_whale_signals():
                             "action": "BUY",
                             "wallet_name": f"🐋 Whale ({wallet_short})",
                             "token": token_symbol,
-                            "token_name": f"Harga: Rp {price_idr:,.2f}" if price_idr < 10 else f"Harga: Rp {price_idr:,.0f}",
+                            "token_name": f"Harga On-Chain: Rp {price_idr:,.4f}" if price_idr < 10 else f"Harga On-Chain: Rp {price_idr:,.0f}",
                             "amount": f"{volume_5m/price:,.0f}",
                             "est_val_usd": f"${volume_5m:,.2f}",
                             "liquidity": f"Rp {val_idr:,.0f}",
@@ -94,7 +87,7 @@ def fetch_onchain_whale_signals():
                         if len(signals) >= 20:
                             break
     except Exception as e:
-        print(f"Error fetching on-chain whale signals: {e}")
+        print(f"Error fetching whale signals: {e}")
 
     return signals
 
@@ -103,14 +96,14 @@ def save_signals(signals_data):
         json.dump(signals_data, f, indent=2)
 
 def main():
-    print("Mencari transaksi dompet Whale On-Chain valid khusus koin Indodax...")
+    print("Mencari transaksi dompet Whale On-Chain khusus Koin Pilihan Indodax...")
     new_signals = fetch_onchain_whale_signals()
     
     if new_signals:
         save_signals(new_signals)
-        print(f"✅ BERHASIL! {len(new_signals)} sinyal dompet whale Indodax disimpan.")
+        print(f"✅ BERHASIL! {len(new_signals)} sinyal disimpan.")
     else:
-        print("Tidak ada transaksi whale valid saat ini.")
+        print("Tidak ada transaksi whale pada koin pilihan saat ini.")
 
 if __name__ == "__main__":
     main()
