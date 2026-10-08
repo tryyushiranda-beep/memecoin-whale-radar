@@ -76,17 +76,17 @@ def fetch_whale_signals():
     return signals
 
 def save_signals(signals_data):
+    # Selalu menimpa (overwrite) file signals.json secara otomatis
     with open(SIGNALS_FILE, "w") as f:
         json.dump(signals_data, f, indent=2)
 
 def main():
-    print("Memeriksa aktivitas dompet paus khusus koin Indodax di jaringan resmi...")
+    print("Memeriksa aktivitas dompet paus khusus koin Indodax...")
     new_signals = fetch_whale_signals()
-    if new_signals:
-        save_signals(new_signals)
-        print(f"✅ BERHASIL! Ditemukan {len(new_signals)} sinyal aktif.")
-    else:
-        print("Tidak ada sinyal terdeteksi saat ini.")
+    
+    # Otomatis simpan data baru (walaupun kosong, sistem yang urus)
+    save_signals(new_signals)
+    print(f"✅ BERHASIL! {len(new_signals)} sinyal aktif diperbarui ke signals.json secara otomatis.")
 
 if __name__ == "__main__":
     main()
