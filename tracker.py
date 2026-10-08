@@ -48,7 +48,7 @@ def fetch_onchain_whale_signals():
                     base_token = pair.get('baseToken', {})
                     token_symbol = base_token.get('symbol', '').upper()
                     
-                    # FILTER UTAMA: Hanya loloskan jika koin TERDAFTAR DI INDODAX!
+                    # FILTER 1: Hanya loloskan jika koin TERDAFTAR DI INDODAX!
                     if token_symbol not in indodax_coins:
                         continue
                     
@@ -59,14 +59,19 @@ def fetch_onchain_whale_signals():
                     price = float(pair.get('priceUsd', 0) or 0)
                     volume_5m = float(pair.get('volume', {}).get('m5', 0) or 0)
                     
-                    # Buat ID Transaksi Dompet Paus On-Chain
+                    # FILTER 2: Buang data jika harga atau volume bernilai 0 (Anti-Rp0)
+                    if price <= 0 or volume_5m <= 0:
+                        continue
+                    
+                    val_idr = volume_5m * 15800
+                    price_idr = price * 15800
+                    
                     wallet_short = f"0x{token_contract[:4]}...{token_contract[-4:]}"
                     tx_hash = f"tx_{token_contract[:6]}_{int(datetime.utcnow().timestamp())}"
                     
                     if tx_hash not in seen_txs:
                         seen_txs.add(tx_hash)
                         indodax_url = f"https://indodax.com/market/{token_symbol}IDR"
-                        val_idr = volume_5m * 15800
                         
                         signal_entry = {
                             "id": tx_hash,
@@ -75,8 +80,8 @@ def fetch_onchain_whale_signals():
                             "action": "BUY",
                             "wallet_name": f"🐋 Whale ({wallet_short})",
                             "token": token_symbol,
-                            "token_name": f"Harga: Rp {price*15800:,.0f}",
-                            "amount": f"{volume_5m/price:,.0f}" if price > 0 else "1,000,000",
+                            "token_name": f"Harga: Rp {price_idr:,.2f}" if price_idr < 10 else f"Harga: Rp {price_idr:,.0f}",
+                            "amount": f"{volume_5m/price:,.0f}",
                             "est_val_usd": f"${volume_5m:,.2f}",
                             "liquidity": f"Rp {val_idr:,.0f}",
                             "market_cap": f"Sinyal Pembelian On-Chain ({chain_id})",
@@ -98,14 +103,14 @@ def save_signals(signals_data):
         json.dump(signals_data, f, indent=2)
 
 def main():
-    print("Mencari transaksi dompet Whale On-Chain khusus koin Indodax...")
+    print("Mencari transaksi dompet Whale On-Chain valid khusus koin Indodax...")
     new_signals = fetch_onchain_whale_signals()
     
     if new_signals:
         save_signals(new_signals)
         print(f"✅ BERHASIL! {len(new_signals)} sinyal dompet whale Indodax disimpan.")
     else:
-        print("Tidak ada transaksi whale on-chain pada koin Indodax saat ini.")
+        print("Tidak ada transaksi whale valid saat ini.")
 
 if __name__ == "__main__":
     main()
