@@ -5,14 +5,11 @@ on:
     - cron: '*/15 * * * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 jobs:
   run-tracker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -37,22 +34,3 @@ jobs:
           git add signals.json
           git commit -m "Auto update memecoin signals" || exit 0
           git push
-
-  deploy-pages:
-    needs: run-tracker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: '.'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
