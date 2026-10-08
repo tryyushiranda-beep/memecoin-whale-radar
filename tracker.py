@@ -5,18 +5,21 @@ from datetime import datetime
 
 SIGNALS_FILE = "signals.json"
 
-# Daftar koin Indodax yang ingin dipantau transaksi pausnya
+# List gabungan Memecoin & Altcoin Koin Kecil Berfundamental di Indodax
 INDODAX_COINS = [
     'PEPE', 'DOGE', 'BONK', 'FLOKI', 'WIF', 'POPCAT', 'MEME',
     'ACT', 'GRIFFAIN', 'GOAT', 'SUI', 'JUP', 'RAY', 'ONDO'
 ]
+
+# Hanya izinkan jaringan/blockchain resmi utama
+ALLOWED_CHAINS = {'SOLANA', 'ETHEREUM', 'BSC', 'POLYGON', 'ARBITRUM', 'BASE'}
 
 def fetch_whale_signals():
     signals = []
     
     for symbol in INDODAX_COINS:
         try:
-            # Cari pair trading paling aktif untuk koin ini di DexScreener
+            # Cari pair trading paling aktif di DexScreener
             search_url = f"https://api.dexscreener.com/latest/dex/search?q={symbol}"
             res = requests.get(search_url, timeout=5).json()
             pairs = res.get('pairs', [])
@@ -24,23 +27,28 @@ def fetch_whale_signals():
             if not pairs:
                 continue
                 
-            # Ambil pair terbaik
-            pair = pairs[0]
-            chain_id = pair.get('chainId', 'solana').upper()
-            price_usd = float(pair.get('priceUsd', 0) or 0)
-            vol_5m = float(pair.get('volume', {}).get('m5', 0) or 0)
-            token_symbol = pair.get('baseToken', {}).get('symbol', '').upper()
+            # Filter pair terbaik yang berada di jaringan resmi
+            selected_pair = None
+            for p in pairs:
+                c_id = p.get('chainId', '').upper()
+                t_sym = p.get('baseToken', {}).get('symbol', '').upper()
+                if c_id in ALLOWED_CHAINS and t_sym == symbol:
+                    selected_pair = p
+                    break
             
-            # Pastikan simbolnya cocok
-            if token_symbol != symbol:
+            if not selected_pair:
                 continue
                 
+            chain_id = selected_pair.get('chainId', 'solana').upper()
+            price_usd = float(selected_pair.get('priceUsd', 0) or 0)
+            vol_5m = float(selected_pair.get('volume', {}).get('m5', 0) or 0)
+            
             price_idr = price_usd * 15800
             val_idr = vol_5m * 15800
             
-            # Deteksi jika ada transaksi/volume berjalan (Minimal Rp 500rb dalam 5m)
+            # Deteksi transaksi berjalan (Minimal Rp 500rb dalam 5m & Anti-Rp0)
             if val_idr >= 500_000 and price_idr > 0:
-                pair_addr = pair.get('pairAddress', '')
+                pair_addr = selected_pair.get('pairAddress', '')
                 wallet_short = f"0x{pair_addr[:4]}...{pair_addr[-4:]}"
                 tx_hash = f"tx_{symbol}_{int(datetime.utcnow().timestamp())}"
                 indodax_url = f"https://indodax.com/market/{symbol}IDR"
@@ -72,7 +80,7 @@ def save_signals(signals_data):
         json.dump(signals_data, f, indent=2)
 
 def main():
-    print("Memeriksa aktivitas dompet paus di koin-koin pilihan Indodax...")
+    print("Memeriksa aktivitas dompet paus khusus koin Indodax di jaringan resmi...")
     new_signals = fetch_whale_signals()
     if new_signals:
         save_signals(new_signals)
