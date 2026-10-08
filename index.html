@@ -5,289 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memecoin Whale Radar (IDR)</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #0d0f1d;
-            color: #ffffff;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-notification {
-            width: 100%;
-            background-color: #7c3aed;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .btn-notification:hover {
-            background-color: #6d28d9;
-        }
-
-        .card-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .card {
-            background-color: #16192e;
-            border: 1px solid #2d325a;
-            border-radius: 10px;
-            padding: 15px;
-            position: relative;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .title-whale {
-            color: #f472b6;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 15px;
-        }
-
-        .badge-chain {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .badge-base { background-color: #2563eb; }
-        .badge-solana { background-color: #14f195; color: black; }
-        .badge-robinhood { background-color: #10b981; }
-        .badge-ethereum { background-color: #6366f1; }
-        .badge-default { background-color: #4b5563; }
-
-        .token-info {
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .token-info b {
-            color: #ffffff;
-        }
-
-        .value-buy {
-            color: #4ade80;
-            font-weight: bold;
-        }
-
-        .meta-info {
-            font-size: 12px;
-            color: #9ca3af;
-            margin-bottom: 8px;
-        }
-
-        .timestamp {
-            font-size: 11px;
-            color: #6b7280;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-action {
-            flex: 1;
-            padding: 8px;
-            border-radius: 6px;
-            border: none;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .btn-trade {
-            background-color: #8b5cf6;
-            color: white;
-        }
-
-        .btn-chart {
-            background-color: #1f293d;
-            color: #38bdf8;
-            border: 1px solid #334155;
-        }
-
-        .btn-trade:hover { background-color: #7c3aed; }
-        .btn-chart:hover { background-color: #334155; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #090d16; color: #f1f5f9; margin: 0; padding: 12px; }
+        .header { text-align: center; margin-bottom: 15px; }
+        .btn-notif { width: 100%; padding: 12px; background: #8b5cf6; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; margin-bottom: 15px; cursor: pointer; }
+        .card { background: #1e1b4b; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 5px solid #a855f7; }
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .badge-sol { background: #14f195; color: #000; }
+        .badge-eth { background: #627eea; color: #fff; }
+        .badge-base { background: #0052ff; color: #fff; }
+        .wallet-title { font-weight: bold; font-size: 15px; color: #f472b6; }
+        .details { margin: 8px 0; font-size: 14px; line-height: 1.5; }
+        .btn-group { display: flex; gap: 6px; margin-top: 10px; }
+        .btn-link { flex: 1; text-align: center; padding: 8px 4px; background: #312e81; color: #38bdf8; text-decoration: none; border-radius: 5px; font-size: 11px; font-weight: bold; }
+        .btn-fast { background: #8b5cf6; color: white; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>🚀 Memecoin Whale Radar (IDR)</h1>
+        <h2>🚀 Memecoin Whale Radar (IDR)</h2>
+        <button class="btn-notif" onclick="enableNotifications()">🔔 Aktifkan Notifikasi & Suara HP</button>
     </div>
 
-    <button class="btn-notification" onclick="enableNotifications()">
-        🔔 Aktifkan Notifikasi & Suara HP
-    </button>
-
-    <div id="radar-list" class="card-container">
-        <!-- Data transaksi whale akan dimuat di sini secara dinamis -->
-    </div>
+    <div id="signals-container">Memuat sinyal memecoin terbaru...</div>
 
     <script>
-        // Estimasi kurs USD ke IDR
-        const KURS_USD_TO_IDR = 15500;
+        let lastSignalHash = "";
+        let audio = new Audio("https://actions.google.com/sounds/v1/alerts/beep_short.ogg");
+        const KURS_USD_TO_IDR = 15800; // Est. 1 USD = Rp15.800
 
-        // Contoh Data Dummy Transaksi Whale Dinamis
-        // (Ganti bagian ini jika kamu menggunakan fetch/websocket dari API asli)
-        const dummyWhaleData = [
-            {
-                id: 1,
-                symbol: "PEPE",
-                chain: "BASE",
-                buyValueUsd: 44190,
-                tokenAmount: 357000000,
-                marketCapUsd: 30843384,
-                liquidityUsd: 669411,
-                timestamp: "2026-10-05 07:18:44 UTC",
-                dexUrl: "https://dexscreener.com"
-            },
-            {
-                id: 2,
-                symbol: "DOGE",
-                chain: "ROBINHOOD",
-                buyValueUsd: 254.8,
-                tokenAmount: 1250,
-                marketCapUsd: 11963,
-                liquidityUsd: 11787,
-                timestamp: "2026-10-05 07:18:44 UTC",
-                dexUrl: "https://dexscreener.com"
-            },
-            {
-                id: 3,
-                symbol: "GRIFFAIN",
-                chain: "SOLANA",
-                buyValueUsd: 15200,
-                tokenAmount: 980000,
-                marketCapUsd: 5400000,
-                liquidityUsd: 320000,
-                timestamp: "2026-10-05 07:19:10 UTC",
-                dexUrl: "https://dexscreener.com"
-            }
-        ];
-
-        // Format Angka ke Rupiah
-        function formatIDR(amountUsd) {
-            const amountIdr = amountUsd * KURS_USD_TO_IDR;
-            return "Rp " + new Intl.NumberFormat("id-ID", {
-                maximumFractionDigits: 0
-            }).format(amountIdr);
-        }
-
-        // Tentukan Warna Badge berdasarkan Chain
-        function getChainBadgeClass(chain) {
-            const c = chain.toUpperCase();
-            if (c === "BASE") return "badge-base";
-            if (c === "SOLANA" || c === "SOL") return "badge-solana";
-            if (c === "ROBINHOOD") return "badge-robinhood";
-            if (c === "ETHEREUM" || c === "ETH") return "badge-ethereum";
-            return "badge-default";
-        }
-
-        // Fungsi Render List Transaksi Whale
-        function renderWhaleRadar(dataList) {
-            const container = document.getElementById("radar-list");
-            container.innerHTML = "";
-
-            dataList.forEach(item => {
-                const buyIdr = formatIDR(item.buyValueUsd);
-                const mcapIdr = formatIDR(item.marketCapUsd);
-                const liqIdr = formatIDR(item.liquidityUsd);
-                const badgeClass = getChainBadgeClass(item.chain);
-
-                const cardHtml = `
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="title-whale">
-                                🥷 🔥 Whale Smart Money
-                            </div>
-                            <span class="badge-chain ${badgeClass}">${item.chain}</span>
-                        </div>
-
-                        <div class="token-info">
-                            Memecoin: <b>$${item.symbol}</b>
-                        </div>
-
-                        <div class="token-info">
-                            Nilai Pembelian: <span class="value-buy">${buyIdr}</span> 
-                            (${item.tokenAmount.toLocaleString("id-ID")} token)
-                        </div>
-
-                        <div class="meta-info">
-                            Market Cap: <b>${mcapIdr}</b> | Likuiditas: <b>${liqIdr}</b>
-                        </div>
-
-                        <div class="timestamp">
-                            ⏰ ${item.timestamp}
-                        </div>
-
-                        <div class="action-buttons">
-                            <a href="#" class="btn-action btn-trade">⚡ Trade Cepat</a>
-                            <a href="${item.dexUrl}" target="_blank" class="btn-action btn-chart">📊 Chart DexScreener</a>
-                        </div>
-                    </div>
-                `;
-
-                container.innerHTML += cardHtml;
-            });
+        function parseUsdToIdr(usdString) {
+            if (!usdString) return "Rp 0";
+            let numeric = parseFloat(usdString.replace(/[^0-9.-]+/g, ""));
+            if (isNaN(numeric)) return usdString;
+            let idrValue = numeric * KURS_USD_TO_IDR;
+            return "Rp " + idrValue.toLocaleString('id-ID', { maximumFractionDigits: 0 });
         }
 
         function enableNotifications() {
-            alert("Notifikasi & Suara HP Berhasil Diaktifkan!");
+            if ("Notification" in window) {
+                Notification.requestPermission().then(p => {
+                    if (p === "granted") { 
+                        alert("Notifikasi Suara Memecoin Aktif!"); 
+                        audio.play(); 
+                    }
+                });
+            }
         }
 
-        // Jalankan Render saat halaman dimuat
-        document.addEventListener("DOMContentLoaded", () => {
-            renderWhaleRadar(dummyWhaleData);
-        });
+        async function fetchSignals() {
+            try {
+                // FORCE ANTI-CACHE: Menambahkan timestamp acak unik di setiap pemanggilan agar browser selalu mengambil file terbaru dari GitHub
+                const uniqueTime = new Date().getTime();
+                const response = await fetch('signals.json?nocache=' + uniqueTime, {
+                    cache: 'no-store'
+                });
+                const data = await response.json();
+
+                if (data && data.length > 0) {
+                    if (lastSignalHash !== "" && lastSignalHash !== data[0].hash) {
+                        audio.play();
+                    }
+                    lastSignalHash = data[0].hash;
+
+                    let html = "";
+                    data.forEach(item => {
+                        let chainClass = 'badge-sol';
+                        if (item.chain === 'ETHEREUM') chainClass = 'badge-eth';
+                        if (item.chain === 'BASE') chainClass = 'badge-base';
+
+                        let valIdr = parseUsdToIdr(item.est_val_usd);
+                        let capIdr = parseUsdToIdr(item.market_cap);
+                        let liqIdr = parseUsdToIdr(item.liquidity);
+
+                        html += `
+                            <div class="card">
+                                <div style="display:flex; justify-content: space-between; align-items:center;">
+                                    <span class="wallet-title">👤 ${item.wallet_name}</span>
+                                    <span class="badge ${chainClass}">${item.chain}</span>
+                                </div>
+                                <div class="details">
+                                    Memecoin: <b>$${item.token}</b> ${item.token_name ? '(' + item.token_name + ')' : ''}<br>
+                                    Nilai Pembelian: <b style="color:#4ade80">${valIdr}</b> (${item.amount} token)<br>
+                                    Market Cap: <b>${capIdr}</b> | Likuiditas: <b>${liqIdr}</b><br>
+                                    <small style="color:#94a3b8">⏰ ${item.timestamp}</small>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn-link btn-fast" href="${item.photon_link}" target="_blank">⚡ Trade Cepat</a>
+                                    <a class="btn-link" href="${item.dex_chart}" target="_blank">📊 Chart DexScreener</a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('signals-container').innerHTML = html;
+                } else {
+                    document.getElementById('signals-container').innerHTML = "<div style='text-align:center; padding:20px; color:#94a3b8;'>Belum ada aktivitas memecoin dari whale.</div>";
+                }
+            } catch (e) { 
+                console.error("Gagal memuat sinyal:", e); 
+            }
+        }
+
+        setInterval(fetchSignals, 10000);
+        fetchSignals();
     </script>
 </body>
 </html>
