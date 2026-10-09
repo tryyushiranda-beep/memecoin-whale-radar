@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Hak akses commit & push otomatis
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
