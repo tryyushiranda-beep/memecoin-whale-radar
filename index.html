@@ -3,88 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memecoin Whale Radar (Indodax On-Chain)</title>
+    <title>Indodax Whale Radar (On-Chain)</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #090d16; color: #f1f5f9; margin: 0; padding: 12px; }
-        .header { text-align: center; margin-bottom: 15px; }
-        .btn-notif { width: 100%; padding: 12px; background: #8b5cf6; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; margin-bottom: 15px; cursor: pointer; }
-        .card { background: #1e1b4b; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 5px solid #a855f7; }
-        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; background: #10b981; color: #000; }
-        .wallet-title { font-weight: bold; font-size: 15px; color: #f472b6; }
-        .details { margin: 8px 0; font-size: 14px; line-height: 1.6; }
-        .btn-group { display: flex; gap: 6px; margin-top: 10px; }
-        .btn-link { flex: 1; text-align: center; padding: 10px 4px; background: #312e81; color: #38bdf8; text-decoration: none; border-radius: 5px; font-size: 12px; font-weight: bold; }
-        .btn-fast { background: #8b5cf6; color: white; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0d0e15;
+            color: #ffffff;
+            margin: 0;
+            padding: 15px;
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0 20px 0;
+        }
+        .header h1 {
+            font-size: 1.4rem;
+            margin: 0;
+            color: #ffffff;
+        }
+        .audio-btn {
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 20px auto;
+            background-color: #7c3aed;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #171925;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #232738;
+            position: relative;
+        }
+        .chain-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #059669;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+        .wallet-title {
+            color: #f472b6;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .info-row {
+            font-size: 0.85rem;
+            margin: 4px 0;
+            color: #cbd5e1;
+        }
+        .info-row span {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .val-highlight {
+            color: #4ade80 !important;
+            font-weight: bold;
+        }
+        .time-text {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+        .btn-trade {
+            display: block;
+            width: 100%;
+            background-color: #6366f1;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+        .empty-state {
+            text-align: center;
+            color: #94a3b8;
+            padding: 40px 0;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h2>🚀 Indodax Whale Radar (On-Chain)</h2>
-        <button class="btn-notif" onclick="enableNotifications()">🔔 Aktifkan Notifikasi & Suara HP</button>
+        <h1>🚀 Indodax Whale Radar (On-Chain)</h1>
     </div>
 
-    <div id="signals-container">Mencari aktivitas dompet paus di Indodax...</div>
+    <button id="enableAudio" class="audio-btn">🔔 Aktifkan Notifikasi & Suara HP</button>
+
+    <div class="container" id="signalsContainer">
+        <div class="empty-state">Mencari aktivitas dompet paus...</div>
+    </div>
 
     <script>
-        let lastSignalHash = "";
-        let audio = new Audio("https://actions.google.com/sounds/v1/alerts/beep_short.ogg");
+        let audioEnabled = false;
+        let lastSignalCount = 0;
 
-        function enableNotifications() {
-            if ("Notification" in window) {
-                Notification.requestPermission().then(p => {
-                    if (p === "granted") { 
-                        alert("Notifikasi Suara Aktif!"); 
-                        audio.play(); 
-                    }
-                });
-            }
-        }
-
-        async function fetchSignals() {
+        // Inisialisasi Audio Beep
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playBeep() {
+            if (!audioEnabled) return;
             try {
-                const uniqueTime = new Date().getTime();
-                const response = await fetch('signals.json?nocache=' + uniqueTime, { cache: 'no-store' });
-                const data = await response.json();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = "sine";
+                osc.frequency.value = 880;
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } catch(e) {}
+        }
 
-                if (data && data.length > 0) {
-                    if (lastSignalHash !== "" && lastSignalHash !== data[0].hash) {
-                        audio.play();
-                    }
-                    lastSignalHash = data[0].hash;
+        document.getElementById('enableAudio').addEventListener('click', () => {
+            audioCtx.resume().then(() => {
+                audioEnabled = true;
+                document.getElementById('enableAudio').innerText = "✅ Notifikasi Suara Aktif";
+                document.getElementById('enableAudio').style.backgroundColor = "#059669";
+                playBeep();
+            });
+        });
 
-                    let html = "";
-                    data.forEach(item => {
-                        html += `
-                            <div class="card">
-                                <div style="display:flex; justify-content: space-between; align-items:center;">
-                                    <span class="wallet-title">${item.wallet_name}</span>
-                                    <span class="badge">${item.chain}</span>
-                                </div>
-                                <div class="details">
-                                    Memecoin: <b>$${item.token}</b><br>
-                                    ${item.token_name}<br>
-                                    Estimasi Nilai Beli: <b style="color:#4ade80">${item.liquidity}</b><br>
-                                    Status: <b>${item.market_cap}</b><br>
-                                    <small style="color:#94a3b8">⏰ ${item.timestamp}</small>
-                                </div>
-                                <div class="btn-group">
-                                    <a class="btn-link btn-fast" href="${item.photon_link}" target="_blank">⚡ Trade Cepat di Indodax</a>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    document.getElementById('signals-container').innerHTML = html;
-                } else {
-                    document.getElementById('signals-container').innerHTML = "<div style='text-align:center; padding:20px; color:#94a3b8;'>Belum ada transaksi dompet paus baru untuk koin pilihan Indodax saat ini.</div>";
-                }
-            } catch (e) { 
-                console.error("Gagal memuat sinyal:", e); 
+        // Fungsi mengubah jam UTC menjadi jam lokal HP
+        function formatToLocalTime(utcString) {
+            try {
+                // Menangani format YYYY-MM-DD HH:MM:SS UTC
+                const isoStr = utcString.replace(" UTC", "").replace(" ", "T") + "Z";
+                const date = new Date(isoStr);
+                
+                if (isNaN(date.getTime())) return utcString;
+
+                return date.toLocaleString('id-ID', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                }).replace(/\./g, ':') + " (Jam HP)";
+            } catch (e) {
+                return utcString;
             }
         }
 
-        setInterval(fetchSignals, 10000);
-        fetchSignals();
+        async function loadSignals() {
+            try {
+                const response = await fetch('signals.json?t=' + new Date().getTime());
+                const signals = await response.json();
+                const container = document.getElementById('signalsContainer');
+
+                if (!signals || signals.length === 0) {
+                    container.innerHTML = '<div class="empty-state">Tidak ada sinyal transaksi paus saat ini.</div>';
+                    lastSignalCount = 0;
+                    return;
+                }
+
+                if (signals.length > lastSignalCount && lastSignalCount !== 0) {
+                    playBeep();
+                }
+                lastSignalCount = signals.length;
+
+                let html = '';
+                signals.forEach(sig => {
+                    const localTime = formatToLocalTime(sig.timestamp);
+                    html += `
+                        <div class="card">
+                            <span class="chain-badge">${sig.chain}</span>
+                            <div class="wallet-title">${sig.wallet_name}</div>
+                            <div class="info-row">Memecoin: <span>$${sig.token}</span></div>
+                            <div class="info-row">${sig.token_name}</div>
+                            <div class="info-row">Estimasi Nilai Beli: <span class="val-highlight">${sig.liquidity}</span></div>
+                            <div class="info-row">Status: <span>${sig.market_cap}</span></div>
+                            <div class="time-text">⏰ ${localTime}</div>
+                            <a href="${sig.dex_chart}" target="_blank" class="btn-trade">⚡ Trade Cepat di Indodax</a>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+            } catch (error) {
+                console.error("Gagal memuat signals.json:", error);
+            }
+        }
+
+        // Muat data awal & interval 10 detik
+        loadSignals();
+        setInterval(loadSignals, 10000);
     </script>
 </body>
 </html>
