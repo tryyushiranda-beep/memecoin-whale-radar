@@ -83,6 +83,37 @@
             color: #94a3b8;
             margin-top: 8px;
         }
+        
+        /* BOX ANALISIS OTOMATIS */
+        .auto-analysis {
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 12px;
+            font-size: 0.8rem;
+        }
+        .status-strong {
+            background-color: rgba(6, 78, 59, 0.5);
+            border: 1px solid #059669;
+            color: #a7f3d0;
+        }
+        .status-medium {
+            background-color: rgba(120, 53, 15, 0.5);
+            border: 1px solid #d97706;
+            color: #fde68a;
+        }
+        .status-low {
+            background-color: rgba(30, 41, 59, 0.8);
+            border: 1px solid #475569;
+            color: #cbd5e1;
+        }
+        .analysis-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
         .btn-trade {
             display: block;
             width: 100%;
@@ -120,7 +151,6 @@
         let audioEnabled = false;
         let lastSignalCount = 0;
 
-        // Inisialisasi Audio Beep
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playBeep() {
             if (!audioEnabled) return;
@@ -146,13 +176,10 @@
             });
         });
 
-        // Fungsi mengubah jam UTC menjadi jam lokal HP
         function formatToLocalTime(utcString) {
             try {
-                // Menangani format YYYY-MM-DD HH:MM:SS UTC
                 const isoStr = utcString.replace(" UTC", "").replace(" ", "T") + "Z";
                 const date = new Date(isoStr);
-                
                 if (isNaN(date.getTime())) return utcString;
 
                 return date.toLocaleString('id-ID', {
@@ -166,6 +193,35 @@
                 }).replace(/\./g, ':') + " (Jam HP)";
             } catch (e) {
                 return utcString;
+            }
+        }
+
+        // Fungsi Otomatis Mengevaluasi Potensi Sinyal
+        function getAutoAnalysis(liquidityStr) {
+            // Ekstrak angka dari teks Rupiah (contoh: "Rp 68,231,352" -> 68231352)
+            const rawVal = parseInt(liquidityStr.replace(/[^0-9]/g, '')) || 0;
+
+            if (rawVal >= 50000000) { // Di atas 50 Juta
+                return {
+                    class: 'status-strong',
+                    icon: '🔥',
+                    status: 'Sinyal Kuat (High Conviction)',
+                    advice: 'Akumulasi masif terdeteksi! Siapkan posisi dengan Stop Loss 3% & target Free Ride (+15%).'
+                };
+            } else if (rawVal >= 10000000) { // 10 Juta - 50 Juta
+                return {
+                    class: 'status-medium',
+                    icon: '⚡',
+                    status: 'Sinyal Sedang (Moderate)',
+                    advice: 'Cek Order Book Indodax. Jika tembok beli tebal, koin berpotensi naik dalam waktu dekat.'
+                };
+            } else { // Di bawah 10 Juta
+                return {
+                    class: 'status-low',
+                    icon: '👀',
+                    status: 'Pantau Dulu (Low Volume)',
+                    advice: 'Volume beli masih kecil. Disarankan menunggu konfirmasi gelombang pembeli berikutnya.'
+                };
             }
         }
 
@@ -189,6 +245,8 @@
                 let html = '';
                 signals.forEach(sig => {
                     const localTime = formatToLocalTime(sig.timestamp);
+                    const autoEval = getAutoAnalysis(sig.liquidity);
+
                     html += `
                         <div class="card">
                             <span class="chain-badge">${sig.chain}</span>
@@ -196,8 +254,14 @@
                             <div class="info-row">Memecoin: <span>$${sig.token}</span></div>
                             <div class="info-row">${sig.token_name}</div>
                             <div class="info-row">Estimasi Nilai Beli: <span class="val-highlight">${sig.liquidity}</span></div>
-                            <div class="info-row">Status: <span>${sig.market_cap}</span></div>
                             <div class="time-text">⏰ ${localTime}</div>
+
+                            <!-- ANALISIS OTOMATIS BERDASARKAN VOLUME -->
+                            <div class="auto-analysis ${autoEval.class}">
+                                <div class="analysis-title">${autoEval.icon} ${autoEval.status}</div>
+                                <div><b>Rekomendasi:</b> ${autoEval.advice}</div>
+                            </div>
+
                             <a href="${sig.dex_chart}" target="_blank" class="btn-trade">⚡ Trade Cepat di Indodax</a>
                         </div>
                     `;
@@ -209,7 +273,6 @@
             }
         }
 
-        // Muat data awal & interval 10 detik
         loadSignals();
         setInterval(loadSignals, 10000);
     </script>
