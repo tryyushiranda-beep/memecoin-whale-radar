@@ -54,18 +54,13 @@ def fetch_whale_signals():
             price_usd = float(selected_pair.get('priceUsd', 0) or 0)
             vol_5m = float(selected_pair.get('volume', {}).get('m5', 0) or 0)
             
-            # Ambil timestamp transaksi paling akhir dari pair (Real-Time Block Time)
-            pair_created_at = selected_pair.get('pairCreatedAt')
-            if pair_created_at:
-                # Menggunakan UTC timestamp dari event terbaru
-                tx_time_str = datetime.fromtimestamp(pair_created_at / 1000, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-            else:
-                tx_time_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+            # Mengambil waktu real-time saat scanner berjalan (bebas bug tanggal lampau)
+            tx_time_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
             
             price_idr = price_usd * 15800
             val_idr = vol_5m * 15800
             
-            # Filter hanya transaksi aktif minimal Rp 500rb
+            # Filter hanya transaksi aktif minimal Rp 500rb dalam 5 menit terakhir
             if val_idr >= 500_000 and price_idr > 0:
                 pair_addr = selected_pair.get('pairAddress', '')
                 wallet_short = f"0x{pair_addr[:4]}...{pair_addr[-4:]}"
