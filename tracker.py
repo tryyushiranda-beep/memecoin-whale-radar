@@ -24,6 +24,20 @@ def get_all_indodax_coins():
     return list(coins)
 
 def fetch_whale_signals():
+    # Load data lama jika ada untuk melacak frekuensi (count)
+    old_counts = {}
+    try:
+        if os.path.exists(SIGNALS_FILE):
+            with open(SIGNALS_FILE, 'r') as f:
+                old_data = json.load(f)
+                if isinstance(old_data, list):
+                    for item in old_data:
+                        symbol = item.get('token')
+                        if symbol:
+                            old_counts[symbol] = item.get('count', 1)
+    except Exception as e:
+        print(f"Error loading old signals: {e}")
+
     indodax_coins = get_all_indodax_coins()
     signals = []
     
@@ -54,18 +68,20 @@ def fetch_whale_signals():
             price_usd = float(selected_pair.get('priceUsd', 0) or 0)
             vol_5m = float(selected_pair.get('volume', {}).get('m5', 0) or 0)
             
-            # Mengambil waktu real-time saat scanner berjalan (bebas bug tanggal lampau)
             tx_time_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
             
             price_idr = price_usd * 15800
             val_idr = vol_5m * 15800
             
-            # Filter hanya transaksi aktif minimal Rp 500rb dalam 5 menit terakhir
-            if val_idr >= 500_000 and price_idr > 0:
+            # FITUR BARU: Filter ketat khusus transaksi >= Rp 50.000.000
+            if val_idr >= 50_000_000 and price_idr > 0:
                 pair_addr = selected_pair.get('pairAddress', '')
                 wallet_short = f"0x{pair_addr[:4]}...{pair_addr[-4:]}"
                 tx_hash = f"tx_{symbol}_{int(datetime.now(timezone.utc).timestamp())}"
                 indodax_url = f"https://indodax.com/market/{symbol}IDR"
+                
+                # FITUR BARU: Hitung akumulasi kemunculan (count)
+                new_count = old_counts.get(symbol, 0) + 1
                 
                 signal_entry = {
                     "id": tx_hash,
@@ -78,6 +94,7 @@ def fetch_whale_signals():
                     "amount": f"{vol_5m/price_usd:,.0f}" if price_usd > 0 else "0",
                     "est_val_usd": f"${vol_5m:,.2f}",
                     "liquidity": f"Rp {val_idr:,.0f}",
+                    "count": new_count,  # Menyimpan frekuensi kemunculan
                     "market_cap": f"Sinyal Pembelian On-Chain ({chain_id})",
                     "timestamp": tx_time_str,
                     "dex_chart": indodax_url,
