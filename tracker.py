@@ -5,19 +5,36 @@ from datetime import datetime
 
 SIGNALS_FILE = "signals.json"
 
-# List gabungan Memecoin & Altcoin Koin Kecil Berfundamental di Indodax
-INDODAX_COINS = [
-    'PEPE', 'DOGE', 'BONK', 'FLOKI', 'WIF', 'POPCAT', 'MEME',
-    'ACT', 'GRIFFAIN', 'GOAT', 'SUI', 'JUP', 'RAY', 'ONDO'
-]
-
 # Hanya izinkan jaringan/blockchain resmi utama
 ALLOWED_CHAINS = {'SOLANA', 'ETHEREUM', 'BSC', 'POLYGON', 'ARBITRUM', 'BASE'}
 
+def get_all_indodax_coins():
+    """Mengambil seluruh daftar altcoin resmi aktif dari API Indodax"""
+    coins = set()
+    try:
+        url = "https://indodax.com/api/pairs"
+        res = requests.get(url, timeout=10).json()
+        if isinstance(res, list):
+            for pair in res:
+                traded_coin = pair.get('traded_currency', '').upper()
+                # Abaikan IDR dan USDT
+                if traded_coin and traded_coin not in ['IDR', 'USDT']:
+                    coins.add(traded_coin)
+    except Exception as e:
+        print(f"Error fetching Indodax market pairs: {e}")
+    return list(coins)
+
 def fetch_whale_signals():
+    indodax_coins = get_all_indodax_coins()
+    print(f"Total Altcoin Indodax terdeteksi: {len(indodax_coins)} koin.")
+    
     signals = []
     
-    for symbol in INDODAX_COINS:
+    for symbol in indodax_coins:
+        # Abaikan BTC / Stablecoin utama dari pindaian altcoin/memecoin
+        if symbol in ['BTC', 'WBTC', 'USDT', 'USDC']:
+            continue
+            
         try:
             # Cari pair trading paling aktif di DexScreener
             search_url = f"https://api.dexscreener.com/latest/dex/search?q={symbol}"
@@ -76,17 +93,15 @@ def fetch_whale_signals():
     return signals
 
 def save_signals(signals_data):
-    # Selalu menimpa (overwrite) file signals.json secara otomatis
     with open(SIGNALS_FILE, "w") as f:
         json.dump(signals_data, f, indent=2)
 
 def main():
-    print("Memeriksa aktivitas dompet paus khusus koin Indodax...")
+    print("Memeriksa aktivitas dompet paus di SELURUH ALTCOIN INDODAX...")
     new_signals = fetch_whale_signals()
     
-    # Otomatis simpan data baru (walaupun kosong, sistem yang urus)
     save_signals(new_signals)
-    print(f"✅ BERHASIL! {len(new_signals)} sinyal aktif diperbarui ke signals.json secara otomatis.")
+    print(f"✅ BERHASIL! Ditemukan {len(new_signals)} sinyal aktif dari seluruh pasar Indodax.")
 
 if __name__ == "__main__":
     main()
