@@ -84,7 +84,6 @@
             margin-top: 8px;
         }
         
-        /* BOX ANALISIS OTOMATIS */
         .auto-analysis {
             border-radius: 8px;
             padding: 10px;
@@ -144,7 +143,7 @@
     <button id="enableAudio" class="audio-btn">🔔 Aktifkan Notifikasi & Suara HP</button>
 
     <div class="container" id="signalsContainer">
-        <div class="empty-state">Mencari aktivitas dompet paus...</div>
+        <div class="empty-state">Mencari aktivitas transaksi paus di atas Rp 50 Juta...</div>
     </div>
 
     <script>
@@ -196,31 +195,29 @@
             }
         }
 
-        // Fungsi Otomatis Mengevaluasi Potensi Sinyal
         function getAutoAnalysis(liquidityStr) {
-            // Ekstrak angka dari teks Rupiah (contoh: "Rp 68,231,352" -> 68231352)
             const rawVal = parseInt(liquidityStr.replace(/[^0-9]/g, '')) || 0;
 
-            if (rawVal >= 50000000) { // Di atas 50 Juta
+            if (rawVal >= 100000000) {
+                return {
+                    class: 'status-strong',
+                    icon: '🚀',
+                    status: 'Sinyal Sangat Kuat (Mega Whale)',
+                    advice: 'Inflow raksasa terdeteksi! Siapkan posisi dengan Stop Loss 3% & target Profit (+15% s/d +30%).'
+                };
+            } else if (rawVal >= 50000000) {
                 return {
                     class: 'status-strong',
                     icon: '🔥',
                     status: 'Sinyal Kuat (High Conviction)',
-                    advice: 'Akumulasi masif terdeteksi! Siapkan posisi dengan Stop Loss 3% & target Free Ride (+15%).'
+                    advice: 'Akumulasi masif terdeteksi! Cek Order Book Indodax untuk konfirmasi momentum.'
                 };
-            } else if (rawVal >= 10000000) { // 10 Juta - 50 Juta
+            } else {
                 return {
                     class: 'status-medium',
                     icon: '⚡',
                     status: 'Sinyal Sedang (Moderate)',
-                    advice: 'Cek Order Book Indodax. Jika tembok beli tebal, koin berpotensi naik dalam waktu dekat.'
-                };
-            } else { // Di bawah 10 Juta
-                return {
-                    class: 'status-low',
-                    icon: '👀',
-                    status: 'Pantau Dulu (Low Volume)',
-                    advice: 'Volume beli masih kecil. Disarankan menunggu konfirmasi gelombang pembeli berikutnya.'
+                    advice: 'Pantau ketat. Jika tembok beli tebal, koin berpotensi naik dalam waktu dekat.'
                 };
             }
         }
@@ -232,7 +229,7 @@
                 const container = document.getElementById('signalsContainer');
 
                 if (!signals || signals.length === 0) {
-                    container.innerHTML = '<div class="empty-state">Tidak ada sinyal transaksi paus saat ini.</div>';
+                    container.innerHTML = '<div class="empty-state">Tidak ada transaksi paus di atas Rp 50 Juta saat ini.</div>';
                     lastSignalCount = 0;
                     return;
                 }
@@ -246,17 +243,34 @@
                 signals.forEach(sig => {
                     const localTime = formatToLocalTime(sig.timestamp);
                     const autoEval = getAutoAnalysis(sig.liquidity);
+                    const scanCount = sig.count || 1;
+
+                    let frequencyBadge = '';
+                    let accumulationAlert = '';
+
+                    if (scanCount >= 3) {
+                        frequencyBadge = `<span class="chain-badge" style="background-color: #ef4444; right: 80px;">🔥 ${scanCount}x Scan</span>`;
+                        accumulationAlert = `
+                            <div style="background-color: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 6px; padding: 6px; margin-top: 8px; color: #fca5a5; font-size: 0.75rem; font-weight: bold;">
+                                🚨 AKUMULASI TINGGI! Koin ini sudah terdeteksi ${scanCount}x dalam pindaian berkala.
+                            </div>
+                        `;
+                    } else {
+                        frequencyBadge = `<span class="chain-badge" style="background-color: #3b82f6; right: 80px;">👀 ${scanCount}x Scan</span>`;
+                    }
 
                     html += `
                         <div class="card">
                             <span class="chain-badge">${sig.chain}</span>
+                            ${frequencyBadge}
                             <div class="wallet-title">${sig.wallet_name}</div>
                             <div class="info-row">Memecoin: <span>$${sig.token}</span></div>
                             <div class="info-row">${sig.token_name}</div>
-                            <div class="info-row">Estimasi Nilai Beli: <span class="val-highlight">${sig.liquidity}</span></div>
+                            <div class="info-row">Nilai Beli Whale: <span class="val-highlight">${sig.liquidity}</span></div>
                             <div class="time-text">⏰ ${localTime}</div>
 
-                            <!-- ANALISIS OTOMATIS BERDASARKAN VOLUME -->
+                            ${accumulationAlert}
+
                             <div class="auto-analysis ${autoEval.class}">
                                 <div class="analysis-title">${autoEval.icon} ${autoEval.status}</div>
                                 <div><b>Rekomendasi:</b> ${autoEval.advice}</div>
