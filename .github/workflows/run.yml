@@ -1,33 +1,35 @@
 name: Memecoin Whale Radar
 
 on:
-  workflow_dispatch: # Memungkinkan kamu menjalankan manual kapan saja
   schedule:
-    - cron: '*/15 * * * *' # Otomatis berjalan setiap 15 menit sekali 24/7
+    # Memaksa pindaian otomatis berjalan setiap 5 menit
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-          
-      - name: Install dependencies
+
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests
-          
-      - name: Run radar tracker
+
+      - name: Run Tracker Script
         run: python tracker.py
-        
-      - name: Commit and push changes
+
+      - name: Commit and Push Changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add signals.json
-          git diff-index --quiet HEAD || git commit -m "Auto-update whale signals"
+          git commit -m "Auto-update whale signals [skip ci]" || exit 0
           git push
