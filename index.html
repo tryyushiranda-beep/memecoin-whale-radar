@@ -14,7 +14,7 @@
         }
         .header {
             text-align: center;
-            padding: 10px 0 20px 0;
+            padding: 10px 0 15px 0;
         }
         .header h1 {
             font-size: 1.4rem;
@@ -25,7 +25,7 @@
             display: block;
             width: 100%;
             max-width: 500px;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 15px auto;
             background-color: #7c3aed;
             color: white;
             border: none;
@@ -35,6 +35,28 @@
             font-size: 0.95rem;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+        }
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            max-width: 500px;
+            margin: 0 auto 15px auto;
+        }
+        .filter-btn {
+            background-color: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .filter-btn.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
         }
         .container {
             max-width: 500px;
@@ -83,7 +105,6 @@
             color: #94a3b8;
             margin-top: 8px;
         }
-        
         .auto-analysis {
             border-radius: 8px;
             padding: 10px;
@@ -100,11 +121,6 @@
             border: 1px solid #d97706;
             color: #fde68a;
         }
-        .status-low {
-            background-color: rgba(30, 41, 59, 0.8);
-            border: 1px solid #475569;
-            color: #cbd5e1;
-        }
         .analysis-title {
             font-weight: bold;
             margin-bottom: 4px;
@@ -112,7 +128,6 @@
             align-items: center;
             gap: 5px;
         }
-
         .btn-trade {
             display: block;
             width: 100%;
@@ -142,6 +157,12 @@
 
     <button id="enableAudio" class="audio-btn">🔔 Aktifkan Notifikasi & Suara HP</button>
 
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="setFilter('ALL', this)">Semua Sinyal</button>
+        <button class="filter-btn" onclick="setFilter('HOT', this)">🔥 Super Akumulasi (3x+)</button>
+        <button class="filter-btn" onclick="setFilter('SOLANA', this)">Solana</button>
+    </div>
+
     <div class="container" id="signalsContainer">
         <div class="empty-state">Mencari aktivitas transaksi paus di atas Rp 50 Juta...</div>
     </div>
@@ -149,6 +170,8 @@
     <script>
         let audioEnabled = false;
         let lastSignalCount = 0;
+        let currentFilter = 'ALL';
+        let rawSignalsData = [];
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playBeep() {
@@ -174,6 +197,13 @@
                 playBeep();
             });
         });
+
+        function setFilter(type, btn) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderSignals();
+        }
 
         function formatToLocalTime(utcString) {
             try {
@@ -222,66 +252,76 @@
             }
         }
 
+        function renderSignals() {
+            const container = document.getElementById('signalsContainer');
+            
+            let filtered = rawSignalsData.filter(sig => {
+                if (currentFilter === 'HOT') return (sig.count || 1) >= 3;
+                if (currentFilter === 'SOLANA') return sig.chain === 'SOLANA';
+                return true;
+            });
+
+            if (!filtered || filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state">Tidak ada sinyal yang sesuai dengan filter ini.</div>';
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(sig => {
+                const localTime = formatToLocalTime(sig.timestamp);
+                const autoEval = getAutoAnalysis(sig.liquidity);
+                const scanCount = sig.count || 1;
+
+                let frequencyBadge = '';
+                let accumulationAlert = '';
+
+                if (scanCount >= 3) {
+                    frequencyBadge = `<span class="chain-badge" style="background-color: #ef4444; right: 80px;">🔥 ${scanCount}x Scan</span>`;
+                    accumulationAlert = `
+                        <div style="background-color: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 6px; padding: 6px; margin-top: 8px; color: #fca5a5; font-size: 0.75rem; font-weight: bold;">
+                            🚨 AKUMULASI TINGGI! Koin ini sudah terdeteksi ${scanCount}x dalam pindaian berkala.
+                        </div>
+                    `;
+                } else {
+                    frequencyBadge = `<span class="chain-badge" style="background-color: #3b82f6; right: 80px;">👀 ${scanCount}x Scan</span>`;
+                }
+
+                html += `
+                    <div class="card">
+                        <span class="chain-badge">${sig.chain}</span>
+                        ${frequencyBadge}
+                        <div class="wallet-title">${sig.wallet_name}</div>
+                        <div class="info-row">Memecoin: <span>$${sig.token}</span></div>
+                        <div class="info-row">${sig.token_name}</div>
+                        <div class="info-row">Nilai Beli Whale: <span class="val-highlight">${sig.liquidity}</span></div>
+                        <div class="time-text">⏰ ${localTime}</div>
+
+                        ${accumulationAlert}
+
+                        <div class="auto-analysis ${autoEval.class}">
+                            <div class="analysis-title">${autoEval.icon} ${autoEval.status}</div>
+                            <div><b>Rekomendasi:</b> ${autoEval.advice}</div>
+                        </div>
+
+                        <a href="${sig.dex_chart}" target="_blank" class="btn-trade">⚡ Trade Cepat di Indodax</a>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
         async function loadSignals() {
             try {
                 const response = await fetch('signals.json?t=' + new Date().getTime());
-                const signals = await response.json();
-                const container = document.getElementById('signalsContainer');
+                rawSignalsData = await response.json();
 
-                if (!signals || signals.length === 0) {
-                    container.innerHTML = '<div class="empty-state">Tidak ada transaksi paus di atas Rp 50 Juta saat ini.</div>';
-                    lastSignalCount = 0;
-                    return;
-                }
-
-                if (signals.length > lastSignalCount && lastSignalCount !== 0) {
+                if (rawSignalsData.length > lastSignalCount && lastSignalCount !== 0) {
                     playBeep();
                 }
-                lastSignalCount = signals.length;
+                lastSignalCount = rawSignalsData.length;
 
-                let html = '';
-                signals.forEach(sig => {
-                    const localTime = formatToLocalTime(sig.timestamp);
-                    const autoEval = getAutoAnalysis(sig.liquidity);
-                    const scanCount = sig.count || 1;
-
-                    let frequencyBadge = '';
-                    let accumulationAlert = '';
-
-                    if (scanCount >= 3) {
-                        frequencyBadge = `<span class="chain-badge" style="background-color: #ef4444; right: 80px;">🔥 ${scanCount}x Scan</span>`;
-                        accumulationAlert = `
-                            <div style="background-color: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 6px; padding: 6px; margin-top: 8px; color: #fca5a5; font-size: 0.75rem; font-weight: bold;">
-                                🚨 AKUMULASI TINGGI! Koin ini sudah terdeteksi ${scanCount}x dalam pindaian berkala.
-                            </div>
-                        `;
-                    } else {
-                        frequencyBadge = `<span class="chain-badge" style="background-color: #3b82f6; right: 80px;">👀 ${scanCount}x Scan</span>`;
-                    }
-
-                    html += `
-                        <div class="card">
-                            <span class="chain-badge">${sig.chain}</span>
-                            ${frequencyBadge}
-                            <div class="wallet-title">${sig.wallet_name}</div>
-                            <div class="info-row">Memecoin: <span>$${sig.token}</span></div>
-                            <div class="info-row">${sig.token_name}</div>
-                            <div class="info-row">Nilai Beli Whale: <span class="val-highlight">${sig.liquidity}</span></div>
-                            <div class="time-text">⏰ ${localTime}</div>
-
-                            ${accumulationAlert}
-
-                            <div class="auto-analysis ${autoEval.class}">
-                                <div class="analysis-title">${autoEval.icon} ${autoEval.status}</div>
-                                <div><b>Rekomendasi:</b> ${autoEval.advice}</div>
-                            </div>
-
-                            <a href="${sig.dex_chart}" target="_blank" class="btn-trade">⚡ Trade Cepat di Indodax</a>
-                        </div>
-                    `;
-                });
-
-                container.innerHTML = html;
+                renderSignals();
             } catch (error) {
                 console.error("Gagal memuat signals.json:", error);
             }
