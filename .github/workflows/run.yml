@@ -36,11 +36,9 @@ jobs:
         run: |
           python tracker.py
 
-      - name: Pull Latest Changes
-        run: git pull --rebase origin main
-
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "auto: update signals.json [skip ci]"
           file_pattern: "signals.json"
+          push_options: '--force'
