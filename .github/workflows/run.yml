@@ -1,36 +1,47 @@
-name: Memecoin Whale Radar
+name: Build and Track Signals
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
+    # Contoh jadwal otomatis (sesuaikan dengan jadwal Anda)
+    - cron: '0 * * * *'
+  workflow_dispatch: # Memungkinkan trigger manual dari tombol GitHub Actions
+
+# Mencegah crash akibat eksekusi paralel yang bentrok saat commit
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     permissions:
-      contents: write
+      contents: write # Diperlukan izin write untuk push commit
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          # Mengambil riwayat penuh agar rebase/pull berjalan lancar
+          fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
-          cache: 'pip'
+          python-version: '3.10'
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run Tracker Script
-        run: python tracker.py
+        run: |
+          python tracker.py # Sesuaikan nama file skrip utama Anda jika berbeda
 
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Auto-update whale signals [skip ci]"
+          commit_message: "auto: update signals.json [skip ci]"
           file_pattern: "signals.json"
+          pull: '--rebase'
