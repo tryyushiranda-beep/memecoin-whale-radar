@@ -264,6 +264,25 @@
       renderSignals();
     }
 
+    function formatToLocalTime(utcTimeString) {
+      if (!utcTimeString) return '';
+      try {
+        // Konversi string UTC dari backend ke Date object lokal HP
+        const dateObj = new Date(utcTimeString.replace(" UTC", "Z"));
+        if (isNaN(dateObj.getTime())) {
+          return utcTimeString; // Fallback jika format string awal berbeda
+        }
+        return dateObj.toLocaleTimeString('id-ID', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        }) + " (Jam HP)";
+      } catch (e) {
+        return utcTimeString;
+      }
+    }
+
     function renderSignals() {
       const container = document.getElementById('signalsContainer');
       let filtered = rawSignalsData;
@@ -289,6 +308,8 @@
           recText = "<strong>🚨 Whale Burst:</strong> Lompatan volume instan! Momentum cepat, siapkan Stop Loss ketat (3%).";
         }
 
+        const localTimeStr = formatToLocalTime(sig.timestamp);
+
         return `
           <div class="card ${cardClass}">
             <div class="card-header">
@@ -303,7 +324,7 @@
             <div class="token-details">${sig.token_name || ''}</div>
             <div class="token-details">Nilai Beli Whale: <span class="val-highlight">${sig.liquidity || 'Rp 0'}</span></div>
             
-            <div class="time-info">⏰ ${sig.timestamp || ''} (Jam UTC)</div>
+            <div class="time-info">⏰ ${localTimeStr}</div>
 
             <div class="recommendation-box ${cardClass}">
               ${recText}
@@ -316,7 +337,7 @@
     }
 
     function loadSignals() {
-      // PARAMETER ?t= KUNCI UTAMA ANTI-CACHE (Paksakan browser ambil data terbaru)
+      // PARAMETER ?t= MEMAKSA BROWSER MENGAMBIL DATA SIGNALS.JSON REAL-TIME TANPA CACHE
       fetch('signals.json?t=' + new Date().getTime())
         .then(response => {
           if (!response.ok) throw new Error("Gagal mengambil data");
