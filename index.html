@@ -238,9 +238,14 @@
 
     <script>
         const SIGNALS_URL = 'signals.json';
-        const REFRESH_INTERVAL = 5000; // Auto update UI tiap 5 detik
+        const REFRESH_INTERVAL = 5000;
 
         function formatIDR(number) {
+            if (number >= 1000000000) {
+                return (number / 1000000000).toFixed(1) + ' Miliar';
+            } else if (number >= 1000000) {
+                return (number / 1000000).toFixed(1) + ' Juta';
+            }
             return new Intl.NumberFormat('id-ID', {
                 style: 'currency',
                 currency: 'IDR',
@@ -250,7 +255,6 @@
 
         async function fetchSignals() {
             try {
-                // Mencegah cache browser
                 const response = await fetch(`${SIGNALS_URL}?t=${new Date().getTime()}`);
                 
                 if (!response.ok) {
@@ -281,7 +285,7 @@
                 container.innerHTML = `
                     <div class="empty-state">
                         <p style="font-weight: 600; color: var(--text-main);">Belum Ada Sinyal Whale Terdeteksi</p>
-                        <p style="font-size: 0.75rem; margin-top: 6px;">Radar memindai koin ber-Market Cap ringan dengan Buy Wall ≥ Rp 20M & HAKA ≥ Rp 5M.</p>
+                        <p style="font-size: 0.75rem; margin-top: 6px;">Radar memindai koin ber-Market Cap ringan dengan Buy Wall ≥ Rp 30M di harga dasar.</p>
                     </div>
                 `;
                 return;
@@ -296,30 +300,30 @@
                     <div class="card">
                         <div class="card-header">
                             <span class="symbol-badge">${signal.symbol} / IDR</span>
-                            <span class="potential-tag">POTENSI ${signal.potential}</span>
+                            <span class="potential-tag">${signal.potential}</span>
                         </div>
 
                         <div class="entry-box">
-                            <span>🎯 REKOMENDASI ENTRY</span>
+                            <span>🎯 REKOMENDASI ENTRY (DISKON ${signal.discount_pct}%)</span>
                             <strong>Rp ${entryPrice.toLocaleString('id-ID')} (Limit Order)</strong>
                         </div>
                         
                         <div class="metrics-grid">
                             <div class="metric-item">
                                 <span>Harga Pasar</span>
-                                <strong>${formatIDR(signal.price_idr)}</strong>
+                                <strong>Rp ${signal.price_idr.toLocaleString('id-ID')}</strong>
                             </div>
                             <div class="metric-item">
-                                <span>Buy Wall (Penahan)</span>
-                                <strong style="color: var(--accent-green);">${formatIDR(signal.buy_wall_idr)}</strong>
+                                <span>Market Cap (Est)</span>
+                                <strong style="color: var(--accent-amber);">Rp ${formatIDR(signal.mcap_idr)}</strong>
                             </div>
                             <div class="metric-item">
-                                <span>Aksi HAKA (5m)</span>
-                                <strong style="color: var(--accent-blue);">${formatIDR(signal.haka_5m_idr)}</strong>
+                                <span>Tembok Paus</span>
+                                <strong style="color: var(--accent-green);">Rp ${formatIDR(signal.buy_wall_idr)}</strong>
                             </div>
                             <div class="metric-item">
-                                <span>Waktu Sinyal</span>
-                                <strong>${signal.timestamp.split(' ')[1]} WIT</strong>
+                                <span>Volume 24 Jam</span>
+                                <strong style="color: var(--accent-blue);">Rp ${formatIDR(signal.vol_24h_idr)}</strong>
                             </div>
                         </div>
 
