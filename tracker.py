@@ -3,19 +3,17 @@ import time
 import json
 
 # ==========================================
-# PARAMETER STRATEGI INDODAX (KETINGGIAN AWAL)
+# PARAMETER STRATEGI: WHALE & MARKET CAP (INDODAX)
 # ==========================================
-MIN_BUY_WALL_IDR = 150_000_000       # Minimal Tembok Beli Rp 150 Juta
-MIN_HAKA_5M_IDR = 30_000_000         # Minimal HAKA Rp 30 Juta dalam 5 menit
-MIN_VOL_24H_IDR = 50_000_000        # Minimal Volume 24 Jam Rp 50 Juta (Filter Koin Mati)
-MAX_VOL_24H_IDR = 5_000_000_000      # Maksimal Volume 24 Jam Rp 5 Miliar (Filter Koin Berat)
+MIN_BUY_WALL_IDR = 30_000_000        # Minimal Tembok Penahan Beli Paus Rp 30 Juta
+MIN_VOL_24H_IDR = 100_000_000        # Minimal Volume Transaksi 24 Jam Rp 100 Juta
+MAX_VOL_24H_IDR = 10_000_000_000     # Maksimal Volume 24 Jam Rp 10 Miliar (Koin Ringan)
 
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
-INDODAX_TRADES_URL = "https://indodax.com/api/trades/"
 
-def get_filtered_pairs():
-    """Mengambil dan menyaring koin IDR berbobot ringan."""
+def get_cheap_lowcap_pairs():
+    """Mengambil koin IDR ber-Market Cap/Volume ringan di Indodax yang harganya masih diskon."""
     try:
         response = requests.get(INDODAX_SUMMARIES_URL, timeout=10).json()
         tickers = response.get('tickers', {})
@@ -26,23 +24,36 @@ def get_filtered_pairs():
                 try:
                     last_price = float(data.get('last', 0))
                     vol_idr = float(data.get('vol_idr', 0))
+                    high_24h = float(data.get('high', 0))
+                    low_24h = float(data.get('low', 0))
+                    
+                    # Hitung estimasi Market Cap lokal berbasis likuiditas perputaran pasar
+                    # Mengukur koin berbobot ringan sampai menengah
+                    estimated_mcap_idr = vol_idr * 12.5 
+                    
+                    # Hitung persentase diskon harga dibanding harga puncak 24 jam terakhir
+                    price_from_high_pct = ((high_24h - last_price) / high_24h) * 100 if high_24h > 0 else 0
                 except (ValueError, TypeError):
                     continue
                 
-                # Filter koin aktif dengan perputaran likuiditas kelas menengah-kecil
+                # Syarat Koin: Volume aktif, berbobot ringan, dan harga belum terbang (masih di dasar)
                 if MIN_VOL_24H_IDR <= vol_idr <= MAX_VOL_24H_IDR and last_price > 0:
-                    valid_pairs.append({
-                        'id': pair_id,
-                        'symbol': pair_id.replace('_idr', '').upper(),
-                        'price': last_price
-                    })
+                    if price_from_high_pct >= 1.5:  # Minimal 1.5% di bawah harga puncak harian
+                        valid_pairs.append({
+                            'id': pair_id,
+                            'symbol': pair_id.replace('_idr', '').upper(),
+                            'price': last_price,
+                            'vol_24h': vol_idr,
+                            'mcap_idr': estimated_mcap_idr,
+                            'discount_pct': round(price_from_high_pct, 1)
+                        })
         return valid_pairs
     except Exception as e:
-        print(f"[ERROR] Gagal mengambil data bursa: {e}")
+        print(f"[ERROR] Gagal mengambil data bursa Indodax: {e}")
         return []
 
-def analyze_order_book(pair_id, current_price):
-    """Menganalisis Tembok Beli (Buy Wall) & Ketebalan Antrean Jual (+30%)."""
+def analyze_whale_buy_wall(pair_id):
+    """Membaca Order Book Indodax untuk mendeteksi Tembok Beli Penahan milik Paus."""
     url = f"{INDODAX_DEPTH_URL}{pair_id}"
     try:
         data = requests.get(url, timeout=5).json()
@@ -52,9 +63,9 @@ def analyze_order_book(pair_id, current_price):
         if not bids or not asks:
             return 0, False
 
-        # 1. Hitung total Buy Wall di 3 tick teratas (Benteng Whale)
+        # 1. Hitung total modal Tembok Beli Paus di 5 antrean Beli (Bids) teratas
         buy_wall_total = 0
-        for bid in bids[:3]:
+        for bid in bids[:5]:
             try:
                 price = float(bid[0])
                 vol = float(bid[1])
@@ -62,74 +73,29 @@ def analyze_order_book(pair_id, current_price):
             except (IndexError, ValueError, TypeError):
                 continue
 
-        # 2. Hitung Ketebalan Antrean Jual sampai target harga +30%
-        target_price_30pct = current_price * 1.30
-        ask_depth_30pct = 0
-        valid_ask_count = 0
-        
-        for ask in asks:
+        # 2. Hitung total antrean Jual (Asks) di 5 tingkat teratas
+        ask_depth_total = 0
+        for ask in asks[:5]:
             try:
                 price = float(ask[0])
                 vol = float(ask[1])
-                if price <= target_price_30pct:
-                    ask_depth_30pct += price * vol
-                    valid_ask_count += 1
-                else:
-                    break
+                ask_depth_total += price * vol
             except (IndexError, ValueError, TypeError):
                 continue
-                
-        # Syarat Thin Ask: Ada antrean jual & total nilai jual < 2x Tembok Beli
-        is_thin_ask = (valid_ask_count > 0) and (ask_depth_30pct < (buy_wall_total * 2))
-        
+
+        # Syarat Jalur Terbang (Thin Ask): Tembok Beli Paus harus lebih kuat dari antrean jual di atasnya
+        is_thin_ask = (buy_wall_total > 0) and (buy_wall_total >= ask_depth_total * 0.8)
+
         return buy_wall_total, is_thin_ask
-    except Exception:
-        return 0, False
-
-def analyze_trades_haka(pair_id):
-    """Menghitung akumulasi HAKA vs HAKI 5 menit terakhir (300 detik)."""
-    url = f"{INDODAX_TRADES_URL}{pair_id}"
-    try:
-        trades = requests.get(url, timeout=5).json()
-        if not isinstance(trades, list):
-            return 0, False
-
-        now = time.time()
-        five_minutes_ago = now - 300
-        
-        haka_vol = 0
-        haki_vol = 0
-        
-        for trade in trades:
-            try:
-                trade_time = float(trade.get('date', 0))
-                if trade_time >= five_minutes_ago:
-                    price = float(trade.get('price', 0))
-                    amount = float(trade.get('amount', 0))
-                    vol = price * amount
-                    
-                    trade_type = str(trade.get('type', '')).lower()
-                    if trade_type == 'buy':
-                        haka_vol += vol
-                    elif trade_type == 'sell':
-                        haki_vol += vol
-                else:
-                    break
-            except (ValueError, TypeError):
-                continue
-                
-        # Dominasi HAKA: Volume >= MIN_HAKA dan minimal 2x dari HAKI (atau HAKI = 0)
-        is_dominant_haka = (haka_vol >= MIN_HAKA_5M_IDR) and (haki_vol == 0 or haka_vol >= (haki_vol * 2))
-        return haka_vol, is_dominant_haka
     except Exception:
         return 0, False
 
 def run_scanner():
     print("\n==================================================")
-    print("  INDODAX SPOT WHALE SCANNER (SINGLE-PASS RUN)    ")
+    print("  INDODAX WHALE RADAR: CHEAP & LOW-CAP SCANNER    ")
     print("==================================================")
     
-    pairs = get_filtered_pairs()
+    pairs = get_cheap_lowcap_pairs()
     valid_signals = []
 
     for pair in pairs:
@@ -137,35 +103,31 @@ def run_scanner():
         symbol = pair['symbol']
         price = pair['price']
         
-        time.sleep(0.15)  # Smart Queue Throttling (Bebas Blokir HTTP 429)
+        time.sleep(0.12)  # Mencegah Rate Limit API
 
-        # 1. Cek Order Book (Buy Wall & Thin Ask)
-        buy_wall_idr, is_thin_ask = analyze_order_book(pair_id, price)
+        # Deteksi keberadaan Tembok Penahan Paus di Order Book Indodax
+        buy_wall_idr, is_thin_ask = analyze_whale_buy_wall(pair_id)
         if buy_wall_idr < MIN_BUY_WALL_IDR or not is_thin_ask:
             continue
 
-        # 2. Cek Akumulasi HAKA 5 Menit (Tanpa Anti-Spoofing, langsung verifikasi HAKA)
-        haka_vol, is_valid_haka = analyze_trades_haka(pair_id)
-        if not is_valid_haka:
-            continue
-
-        # 3. Format Sinyal Valid untuk Dasbor
         signal_data = {
             'symbol': symbol,
             'price_idr': price,
+            'mcap_idr': pair['mcap_idr'],
             'buy_wall_idr': round(buy_wall_idr),
-            'haka_5m_idr': round(haka_vol),
-            'potential': '≥ 30%',
+            'vol_24h_idr': round(pair['vol_24h']),
+            'discount_pct': pair['discount_pct'],
+            'potential': 'Target Pump Besok',
             'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
         }
         valid_signals.append(signal_data)
-        print(f"🔥 [SIGNAL] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f} | HAKA: Rp {haka_vol:,.0f}")
+        print(f"🔥 [WHALE FOUND] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f} | Discount: {pair['discount_pct']}%")
 
     # Ekspor hasil pindaian ke file signals.json
     with open('signals.json', 'w') as f:
         json.dump(valid_signals, f, indent=4)
         
-    print(f"[{time.strftime('%H:%M:%S')}] Pemindaian selesai. {len(valid_signals)} sinyal tersimpan ke signals.json.")
+    print(f"[{time.strftime('%H:%M:%S')}] Pemindaian selesai. {len(valid_signals)} koin murah ber-Tembok Paus tersimpan.")
 
 if __name__ == "__main__":
     run_scanner()
