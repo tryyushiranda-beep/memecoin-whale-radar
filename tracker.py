@@ -1,222 +1,219 @@
 import requests
-import json
 import time
-from datetime import datetime, timezone
+import json
 
 # ==========================================
-# KONFIGURASI PARAMETER AWAL (SUPER SELEKTIF)
+# PARAMETER TERKUNCI (SESUAI STRATEGI)
 # ==========================================
-IDR_PER_USD = 15500              # Kurs perkiraan USD ke IDR
-MIN_PAIR_AGE_HOURS = 24          # Anti-Rugpull: Umur pair minimal 24 jam
-MIN_MCAP_IDR = 15_000_000_000     # Minimum MCap Sweet Spot: Rp 15 Miliar
-MAX_MCAP_IDR = 150_000_000_000    # Maksimum MCap Sweet Spot: Rp 150 Miliar
-MIN_BUY_VOL_5M_IDR = 50_000_000   # Minimum Volume Beli 5 Menit: Rp 50 Juta
+MIN_BUY_WALL_IDR = 150_000_000       # Minimal Tembok Beli Rp 150 Juta
+MIN_HAKA_5M_IDR = 30_000_000         # Minimal HAKA Rp 30 Juta dalam 5 menit
+MIN_VOL_24H_IDR = 50_000_000        # Minimal Volume 24 Jam Rp 50 Juta (Filter Koin Mati)
+MAX_VOL_24H_IDR = 5_000_000_000      # Maksimal Volume 24 Jam Rp 5 Miliar (Filter Koin Berat)
 
-SIGNALS_FILE = "signals.json"
-MAX_SIGNALS_HISTORY = 50
+INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
+INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
+INDODAX_TRADES_URL = "https://indodax.com/api/trades/"
 
-# Blockchain resmi & kredibel untuk menghindari fake/junk token
-ALLOWED_CHAINS = {'SOLANA', 'ETHEREUM', 'BSC', 'POLYGON', 'ARBITRUM', 'BASE', 'AVALANCHE'}
+# Memori lokal untuk fitur Anti-Spoofing
+buy_wall_tracker = {}
 
-def safe_float(val, default=0.0):
+def clean_expired_spoof_tracker():
+    """Membersihkan memori Anti-Spoofing dari koin usang (mencegah memory leak)."""
+    global buy_wall_tracker
+    now = time.time()
+    expired_keys = [k for k, v in buy_wall_tracker.items() if now - v.get('last_seen', 0) > 300]
+    for k in expired_keys:
+        del buy_wall_tracker[k]
+
+def get_filtered_pairs():
+    """Mengambil dan menyaring koin IDR berbobot ringan."""
     try:
-        return float(val) if val is not None else default
-    except (ValueError, TypeError):
-        return default
-
-def safe_int(val, default=0):
-    try:
-        return int(val) if val is not None else default
-    except (ValueError, TypeError):
-        return default
-
-def get_indodax_prices_and_pairs():
-    """
-    Mengambil daftar koin Indodax beserta HARGA ASLI REAL-TIME langsung dari API Indodax
-    """
-    url_pairs = "https://indodax.com/api/pairs"
-    url_ticker = "https://indodax.com/api/ticker_all"
-    
-    indodax_data = {}
-    
-    try:
-        # 1. Ambil data Ticker Harga Indodax
-        res_ticker = requests.get(url_ticker, timeout=10)
-        tickers = {}
-        if res_ticker.status_code == 200:
-            tickers = res_ticker.json().get('tickers', {})
-
-        # 2. Ambil daftar pairs
-        res_pairs = requests.get(url_pairs, timeout=10)
-        if res_pairs.status_code == 200:
-            data = res_pairs.json()
-            items = data if isinstance(data, list) else data.values() if isinstance(data, dict) else []
-            
-            for item in items:
-                if not isinstance(item, dict):
-                    continue
-                traded = str(item.get('traded_currency', '') or '').upper()
-                base = str(item.get('base_currency', '') or '').upper()
-                token_symbol = traded if traded else base
-                
-                if token_symbol and token_symbol not in ['IDR', 'USDT', 'BTC', 'WBTC']:
-                    # Ambil harga last dari ticker Indodax
-                    pair_key = f"{token_symbol.lower()}_idr"
-                    ticker_info = tickers.get(pair_key, {})
-                    last_price_indodax = safe_float(ticker_info.get('last', 0))
-                    
-                    indodax_data[token_symbol] = {
-                        "price_indodax": last_price_indodax
-                    }
-    except Exception as e:
-        print(f"Error fetching Indodax data: {e}")
+        response = requests.get(INDODAX_SUMMARIES_URL, timeout=10).json()
+        tickers = response.get('tickers', {})
         
-    return indodax_data
-
-def scan_dexscreener_exact(token_symbol):
-    url = f"https://api.dexscreener.com/latest/dex/search?q={token_symbol}"
-    
-    try:
-        res = requests.get(url, timeout=10)
-        if res.status_code == 429:
-            print("Rate limited by DexScreener, sleeping 2s...")
-            time.sleep(2)
-            return None
-        if res.status_code == 200:
-            data = res.json()
-            pairs = data.get('pairs') or []
-            if not isinstance(pairs, list):
-                return None
-            
-            best_pair = None
-            max_liq = -1
-            
-            for p in pairs:
-                if not isinstance(p, dict):
+        valid_pairs = []
+        for pair_id, data in tickers.items():
+            if pair_id.endswith('_idr'):
+                try:
+                    last_price = float(data.get('last', 0))
+                    vol_idr = float(data.get('vol_idr', 0))
+                except (ValueError, TypeError):
                     continue
                 
-                chain_id = str(p.get('chainId', '') or '').upper()
-                base_token = p.get('baseToken') or {}
-                base_sym = str(base_token.get('symbol', '') or '').upper()
-                
-                if base_sym == token_symbol and chain_id in ALLOWED_CHAINS:
-                    liq = safe_float((p.get('liquidity') or {}).get('usd', 0))
-                    if liq > max_liq:
-                        max_liq = liq
-                        best_pair = p
-            return best_pair
+                # Filter koin aktif dengan perputaran likuiditas kelas menengah-kecil
+                if MIN_VOL_24H_IDR <= vol_idr <= MAX_VOL_24H_IDR and last_price > 0:
+                    valid_pairs.append({
+                        'id': pair_id,
+                        'symbol': pair_id.replace('_idr', '').upper(),
+                        'price': last_price
+                    })
+        return valid_pairs
     except Exception as e:
-        print(f"Error scanning {token_symbol}: {e}")
-    return None
+        print(f"[ERROR] Gagal mengambil data bursa: {e}")
+        return []
 
-def analyze_whale_activity():
-    indodax_dict = get_indodax_prices_and_pairs()
-    print(f"Total pasangan Indodax terdeteksi: {len(indodax_dict)}")
-    
+def analyze_order_book(pair_id, current_price):
+    """Menganalisis Tembok Beli (Buy Wall) & Ketebalan Antrean Jual (+30%)."""
+    url = f"{INDODAX_DEPTH_URL}{pair_id}"
     try:
-        with open(SIGNALS_FILE, "r") as f:
-            signals_history = json.load(f)
-            if not isinstance(signals_history, list):
-                signals_history = []
-    except Exception:
-        signals_history = []
-
-    new_signals = []
-
-    for token, idx_info in indodax_dict.items():
-        time.sleep(0.15) # Jaga rate limit API
+        data = requests.get(url, timeout=5).json()
+        bids = data.get('buy', [])
+        asks = data.get('sell', [])
         
-        pair_data = scan_dexscreener_exact(token)
-        if not pair_data:
-            continue
+        if not bids or not asks:
+            return 0, False
 
-        # 1. Filter Umur Pair (> 24 Jam)
-        created_at = safe_int(pair_data.get('pairCreatedAt', 0))
-        if created_at > 0:
-            age_hours = (time.time() * 1000 - created_at) / (1000 * 3600)
-            if age_hours < MIN_PAIR_AGE_HOURS:
+        # 1. Hitung total Buy Wall di 3 tick teratas (Benteng Whale)
+        buy_wall_total = 0
+        for bid in bids[:3]:
+            try:
+                price = float(bid[0])
+                vol = float(bid[1])
+                buy_wall_total += price * vol
+            except (IndexError, ValueError, TypeError):
                 continue
 
-        # 2. Filter Market Cap Sweet Spot (Rp 15M - Rp 150M)
-        mcap_usd = safe_float(pair_data.get('marketCap', 0))
-        mcap_idr = mcap_usd * IDR_PER_USD
-        if not (MIN_MCAP_IDR <= mcap_idr <= MAX_MCAP_IDR):
-            continue
-
-        # 3. Filter Volume & Inflow Beli (5 Menit)
-        txns_dict = pair_data.get('txns') or {}
-        txns_5m = txns_dict.get('m5') or {}
-        buys_5m = safe_int(txns_5m.get('buys', 0))
-        sells_5m = safe_int(txns_5m.get('sells', 0))
-
-        vol_dict = pair_data.get('volume') or {}
-        volume_5m_usd = safe_float(vol_dict.get('m5', 0))
+        # 2. Hitung Ketebalan Antrean Jual sampai target harga +30%
+        target_price_30pct = current_price * 1.30
+        ask_depth_30pct = 0
+        valid_ask_count = 0
         
-        change_dict = pair_data.get('priceChange') or {}
-        price_change_5m = safe_float(change_dict.get('m5', 0))
-
-        total_txns = buys_5m + sells_5m
-        buy_ratio = (buys_5m / total_txns) if total_txns > 0 else 0.5
-        est_buy_vol_idr = volume_5m_usd * buy_ratio * IDR_PER_USD
-
-        if est_buy_vol_idr < MIN_BUY_VOL_5M_IDR:
-            continue
-
-        # 4. Ambil Harga Asli Indodax (Fallback ke DexScreener jika Indodax 0)
-        price_indodax = idx_info.get("price_indodax", 0)
-        if price_indodax <= 0:
-            price_usd = safe_float(pair_data.get('priceUsd', 0))
-            price_indodax = price_usd * IDR_PER_USD
-
-        # 5. Klasifikasi Sinyal
-        chain = str(pair_data.get('chainId', 'SOLANA') or 'SOLANA').upper()
-        pair_address = str(pair_data.get('pairAddress', '') or '')
-        short_addr = f"({pair_address[:6]}...{pair_address[-4:]})" if len(pair_address) > 10 else ""
+        for ask in asks:
+            try:
+                price = float(ask[0])
+                vol = float(ask[1])
+                if price <= target_price_30pct:
+                    ask_depth_30pct += price * vol
+                    valid_ask_count += 1
+                else:
+                    break
+            except (IndexError, ValueError, TypeError):
+                continue
+                
+        # Syarat Thin Ask: Ada antrean jual & total nilai jual < 2x Tembok Beli
+        is_thin_ask = (valid_ask_count > 0) and (ask_depth_30pct < (buy_wall_total * 2))
         
-        signal_type = "SILENT"
-        wallet_label = f"💎 SILENT ACCUMULATION (Harga Murah/Dasar) {short_addr}"
-        
-        if est_buy_vol_idr >= 100_000_000 and (price_change_5m > 5.0 or buy_ratio >= 0.7):
-            signal_type = "BURST"
-            wallet_label = f"🚨 WHALE BURST (Lonjakan Instan) {short_addr}"
+        return buy_wall_total, is_thin_ask
+    except Exception:
+        return 0, False
 
-        mcap_m_idr = mcap_idr / 1_000_000_000
-        token_detail_str = f"Harga Indodax: Rp {price_indodax:,.2f} ({price_change_5m:+.2f}% 5m) | MCap: Rp {mcap_m_idr:.1f} M"
-        
-        current_time_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-
-        scan_count = 1
-        for old_sig in signals_history[:10]:
-            if old_sig.get('token') == token:
-                scan_count = safe_int(old_sig.get('count', 1)) + 1
-                break
-
-        signal_obj = {
-            "token": token,
-            "wallet_name": wallet_label,
-            "token_name": token_detail_str,
-            "liquidity": f"Rp {int(est_buy_vol_idr):,}",
-            "timestamp": current_time_utc,
-            "chain": chain,
-            "count": scan_count,
-            "signal_type": signal_type,
-            "dex_chart": f"https://indodax.com/market/{token}IDR"
-        }
-
-        new_signals.append(signal_obj)
-
-    if new_signals:
-        existing_tokens = {s['token'] for s in new_signals}
-        for old_s in signals_history:
-            if old_s.get('token') not in existing_tokens:
-                new_signals.append(old_s)
-        
-        final_list = new_signals[:MAX_SIGNALS_HISTORY]
-        with open(SIGNALS_FILE, "w") as f:
-            json.dump(final_list, f, indent=2)
-        print(f"✅ Berhasil memperbarui {len(new_signals)} sinyal ke {SIGNALS_FILE}")
+def verify_anti_spoofing(pair_id, current_buy_wall):
+    """Fitur Anti-Spoofing: Verifikasi ketahanan tembok minimal 2x pindaian beruntun."""
+    global buy_wall_tracker
+    now = time.time()
+    
+    if pair_id not in buy_wall_tracker:
+        buy_wall_tracker[pair_id] = {'count': 1, 'last_val': current_buy_wall, 'last_seen': now}
+        return False
+    
+    prev = buy_wall_tracker[pair_id]
+    # Jika tembok masih bertahan (minimal 80% dari nilai pindaian awal)
+    if current_buy_wall >= (prev['last_val'] * 0.8):
+        buy_wall_tracker[pair_id]['count'] += 1
+        buy_wall_tracker[pair_id]['last_val'] = current_buy_wall
+        buy_wall_tracker[pair_id]['last_seen'] = now
     else:
-        print("ℹ️ Pindaian selesai. Belum ada akumulasi baru di atas Rp 50 Juta.")
+        # Tembok tergerus / ditarik (Reset hitungan)
+        buy_wall_tracker[pair_id] = {'count': 1, 'last_val': current_buy_wall, 'last_seen': now}
+        return False
+
+    return buy_wall_tracker[pair_id]['count'] >= 2
+
+def analyze_trades_haka(pair_id):
+    """Menghitung akumulasi HAKA vs HAKI 5 menit terakhir (300 detik)."""
+    url = f"{INDODAX_TRADES_URL}{pair_id}"
+    try:
+        trades = requests.get(url, timeout=5).json()
+        if not isinstance(trades, list):
+            return 0, False
+
+        now = time.time()
+        five_minutes_ago = now - 300
+        
+        haka_vol = 0
+        haki_vol = 0
+        
+        for trade in trades:
+            try:
+                trade_time = float(trade.get('date', 0))
+                if trade_time >= five_minutes_ago:
+                    price = float(trade.get('price', 0))
+                    amount = float(trade.get('amount', 0))
+                    vol = price * amount
+                    
+                    trade_type = str(trade.get('type', '')).lower()
+                    if trade_type == 'buy':
+                        haka_vol += vol
+                    elif trade_type == 'sell':
+                        haki_vol += vol
+                else:
+                    break
+            except (ValueError, TypeError):
+                continue
+                
+        # Dominasi HAKA: Volume >= MIN_HAKA dan minimal 2x dari HAKI (atau HAKI = 0)
+        is_dominant_haka = (haka_vol >= MIN_HAKA_5M_IDR) and (haki_vol == 0 or haka_vol >= (haki_vol * 2))
+        return haka_vol, is_dominant_haka
+    except Exception:
+        return 0, False
+
+def run_scanner():
+    print("\n==================================================")
+    print("  INDODAX SPOT WHALE SCANNER (ACCURATE & RUNNING) ")
+    print("==================================================")
+    
+    while True:
+        try:
+            clean_expired_spoof_tracker() # Bersihkan memori usang
+            pairs = get_filtered_pairs()
+            valid_signals = []
+
+            for pair in pairs:
+                pair_id = pair['id']
+                symbol = pair['symbol']
+                price = pair['price']
+                
+                time.sleep(0.15)  # Smart Queue Throttling (Bebas Blokir HTTP 429)
+
+                # 1. Cek Order Book (Buy Wall & Thin Ask)
+                buy_wall_idr, is_thin_ask = analyze_order_book(pair_id, price)
+                if buy_wall_idr < MIN_BUY_WALL_IDR or not is_thin_ask:
+                    continue
+
+                # 2. Verifikasi Anti-Spoofing (Tembok Asli)
+                if not verify_anti_spoofing(pair_id, buy_wall_idr):
+                    continue
+
+                # 3. Cek Akumulasi HAKA 5 Menit
+                haka_vol, is_valid_haka = analyze_trades_haka(pair_id)
+                if not is_valid_haka:
+                    continue
+
+                # 4. Format Sinyal Valid untuk Dasbor
+                signal_data = {
+                    'symbol': symbol,
+                    'price_idr': price,
+                    'buy_wall_idr': round(buy_wall_idr),
+                    'haka_5m_idr': round(haka_vol),
+                    'potential': '≥ 30%',
+                    'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
+                }
+                valid_signals.append(signal_data)
+                print(f"🔥 [SIGNAL] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f} | HAKA: Rp {haka_vol:,.0f}")
+
+            # Ekspor hasil pindaian ke file JSON
+            with open('signals.json', 'w') as f:
+                json.dump(valid_signals, f, indent=4)
+                
+            print(f"[{time.strftime('%H:%M:%S')}] Pindaian selesai. {len(valid_signals)} sinyal tersimpan ke signals.json.")
+            time.sleep(10)
+            
+        except KeyboardInterrupt:
+            print("\n[STOP] Pemindaian dihentikan.")
+            break
+        except Exception as e:
+            print(f"[ERROR] System loop Error: {e}")
+            time.sleep(5)
 
 if __name__ == "__main__":
-    analyze_whale_activity()
+    run_scanner()
