@@ -1,9 +1,10 @@
 import requests
 import time
 import json
+import os
 
 # ==========================================
-# PARAMETER TERKUNCI (SESUAI STRATEGI)
+# PARAMETER TERKUNCI (STRATEGI INDODAX)
 # ==========================================
 MIN_BUY_WALL_IDR = 150_000_000       # Minimal Tembok Beli Rp 150 Juta
 MIN_HAKA_5M_IDR = 30_000_000         # Minimal HAKA Rp 30 Juta dalam 5 menit
@@ -14,16 +15,33 @@ INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
 INDODAX_TRADES_URL = "https://indodax.com/api/trades/"
 
-# Memori lokal untuk fitur Anti-Spoofing
-buy_wall_tracker = {}
+CACHE_FILE = "spoof_cache.json"
 
-def clean_expired_spoof_tracker():
-    """Membersihkan memori Anti-Spoofing dari koin usang (mencegah memory leak)."""
-    global buy_wall_tracker
+def load_spoof_tracker():
+    """Membaca memori Anti-Spoofing dari file cache lokal."""
+    if os.path.exists(CACHE_FILE):
+        try:
+            with open(CACHE_FILE, 'r') as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+def save_spoof_tracker(tracker_data):
+    """Menyimpan memori Anti-Spoofing ke file cache lokal."""
+    try:
+        with open(CACHE_FILE, 'w') as f:
+            json.dump(tracker_data, f, indent=4)
+    except Exception as e:
+        print(f"[WARNING] Gagal menyimpan cache spoof: {e}")
+
+def clean_expired_spoof_tracker(buy_wall_tracker):
+    """Membersihkan memori Anti-Spoofing dari koin usang (> 15 menit)."""
     now = time.time()
-    expired_keys = [k for k, v in buy_wall_tracker.items() if now - v.get('last_seen', 0) > 300]
+    expired_keys = [k for k, v in buy_wall_tracker.items() if now - v.get('last_seen', 0) > 900]
     for k in expired_keys:
         del buy_wall_tracker[k]
+    return buy_wall_tracker
 
 def get_filtered_pairs():
     """Mengambil dan menyaring koin IDR berbobot ringan."""
@@ -97,14 +115,13 @@ def analyze_order_book(pair_id, current_price):
     except Exception:
         return 0, False
 
-def verify_anti_spoofing(pair_id, current_buy_wall):
+def verify_anti_spoofing(pair_id, current_buy_wall, buy_wall_tracker):
     """Fitur Anti-Spoofing: Verifikasi ketahanan tembok minimal 2x pindaian beruntun."""
-    global buy_wall_tracker
     now = time.time()
     
     if pair_id not in buy_wall_tracker:
         buy_wall_tracker[pair_id] = {'count': 1, 'last_val': current_buy_wall, 'last_seen': now}
-        return False
+        return False, buy_wall_tracker
     
     prev = buy_wall_tracker[pair_id]
     # Jika tembok masih bertahan (minimal 80% dari nilai pindaian awal)
@@ -115,9 +132,10 @@ def verify_anti_spoofing(pair_id, current_buy_wall):
     else:
         # Tembok tergerus / ditarik (Reset hitungan)
         buy_wall_tracker[pair_id] = {'count': 1, 'last_val': current_buy_wall, 'last_seen': now}
-        return False
+        return False, buy_wall_tracker
 
-    return buy_wall_tracker[pair_id]['count'] >= 2
+    is_verified = buy_wall_tracker[pair_id]['count'] >= 2
+    return is_verified, buy_wall_tracker
 
 def analyze_trades_haka(pair_id):
     """Menghitung akumulasi HAKA vs HAKI 5 menit terakhir (300 detik)."""
@@ -159,61 +177,57 @@ def analyze_trades_haka(pair_id):
 
 def run_scanner():
     print("\n==================================================")
-    print("  INDODAX SPOT WHALE SCANNER (ACCURATE & RUNNING) ")
+    print("  INDODAX SPOT WHALE SCANNER (GITHUB ACTIONS RUN) ")
     print("==================================================")
     
-    while True:
-        try:
-            clean_expired_spoof_tracker() # Bersihkan memori usang
-            pairs = get_filtered_pairs()
-            valid_signals = []
+    buy_wall_tracker = load_spoof_tracker()
+    buy_wall_tracker = clean_expired_spoof_tracker(buy_wall_tracker)
+    
+    pairs = get_filtered_pairs()
+    valid_signals = []
 
-            for pair in pairs:
-                pair_id = pair['id']
-                symbol = pair['symbol']
-                price = pair['price']
-                
-                time.sleep(0.15)  # Smart Queue Throttling (Bebas Blokir HTTP 429)
+    for pair in pairs:
+        pair_id = pair['id']
+        symbol = pair['symbol']
+        price = pair['price']
+        
+        time.sleep(0.15)  # Smart Queue Throttling (Bebas Blokir HTTP 429)
 
-                # 1. Cek Order Book (Buy Wall & Thin Ask)
-                buy_wall_idr, is_thin_ask = analyze_order_book(pair_id, price)
-                if buy_wall_idr < MIN_BUY_WALL_IDR or not is_thin_ask:
-                    continue
+        # 1. Cek Order Book (Buy Wall & Thin Ask)
+        buy_wall_idr, is_thin_ask = analyze_order_book(pair_id, price)
+        if buy_wall_idr < MIN_BUY_WALL_IDR or not is_thin_ask:
+            continue
 
-                # 2. Verifikasi Anti-Spoofing (Tembok Asli)
-                if not verify_anti_spoofing(pair_id, buy_wall_idr):
-                    continue
+        # 2. Verifikasi Anti-Spoofing (Tembok Asli)
+        is_verified, buy_wall_tracker = verify_anti_spoofing(pair_id, buy_wall_idr, buy_wall_tracker)
+        if not is_verified:
+            continue
 
-                # 3. Cek Akumulasi HAKA 5 Menit
-                haka_vol, is_valid_haka = analyze_trades_haka(pair_id)
-                if not is_valid_haka:
-                    continue
+        # 3. Cek Akumulasi HAKA 5 Menit
+        haka_vol, is_valid_haka = analyze_trades_haka(pair_id)
+        if not is_valid_haka:
+            continue
 
-                # 4. Format Sinyal Valid untuk Dasbor
-                signal_data = {
-                    'symbol': symbol,
-                    'price_idr': price,
-                    'buy_wall_idr': round(buy_wall_idr),
-                    'haka_5m_idr': round(haka_vol),
-                    'potential': '≥ 30%',
-                    'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
-                }
-                valid_signals.append(signal_data)
-                print(f"🔥 [SIGNAL] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f} | HAKA: Rp {haka_vol:,.0f}")
+        # 4. Format Sinyal Valid untuk Dasbor
+        signal_data = {
+            'symbol': symbol,
+            'price_idr': price,
+            'buy_wall_idr': round(buy_wall_idr),
+            'haka_5m_idr': round(haka_vol),
+            'potential': '≥ 30%',
+            'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+        valid_signals.append(signal_data)
+        print(f"🔥 [SIGNAL] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f} | HAKA: Rp {haka_vol:,.0f}")
 
-            # Ekspor hasil pindaian ke file JSON
-            with open('signals.json', 'w') as f:
-                json.dump(valid_signals, f, indent=4)
-                
-            print(f"[{time.strftime('%H:%M:%S')}] Pindaian selesai. {len(valid_signals)} sinyal tersimpan ke signals.json.")
-            time.sleep(10)
-            
-        except KeyboardInterrupt:
-            print("\n[STOP] Pemindaian dihentikan.")
-            break
-        except Exception as e:
-            print(f"[ERROR] System loop Error: {e}")
-            time.sleep(5)
+    # Simpan status Anti-Spoofing terbaru untuk pindaian berikutnya
+    save_spoof_tracker(buy_wall_tracker)
+
+    # Ekspor hasil pindaian ke file JSON
+    with open('signals.json', 'w') as f:
+        json.dump(valid_signals, f, indent=4)
+        
+    print(f"[{time.strftime('%H:%M:%S')}] Pemindaian selesai. {len(valid_signals)} sinyal tersimpan ke signals.json.")
 
 if __name__ == "__main__":
     run_scanner()
