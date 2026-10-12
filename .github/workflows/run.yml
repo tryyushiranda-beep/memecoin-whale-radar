@@ -41,6 +41,6 @@ jobs:
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "auto: update signals.json [skip ci]"
-          file_pattern: "signals.json"
+          commit_message: "auto: update signals & spoof cache [skip ci]"
+          file_pattern: "signals.json spoof_cache.json"
           push_options: '--force'
