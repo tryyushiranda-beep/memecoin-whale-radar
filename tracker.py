@@ -3,17 +3,16 @@ import time
 import json
 
 # ==========================================
-# PARAMETER STRATEGI: WHALE & MARKET CAP (INDODAX)
+# PARAMETER AMAN: PAUS MENENGAH (ANTI KOIN ABAL-ABAL)
 # ==========================================
-MIN_BUY_WALL_IDR = 30_000_000        # Minimal Tembok Penahan Beli Paus Rp 30 Juta
-MIN_VOL_24H_IDR = 100_000_000        # Minimal Volume Transaksi 24 Jam Rp 100 Juta
-MAX_VOL_24H_IDR = 10_000_000_000     # Maksimal Volume 24 Jam Rp 10 Miliar (Koin Ringan)
+MIN_BUY_WALL_IDR = 30_000_000        # Minimal Tembok Beli Rp 30 Juta (Bukan Ritel)
+MIN_VOL_24H_IDR = 100_000_000        # Minimal Volume 24j Rp 100 Juta (Bukan Koin Mati)
+MAX_VOL_24H_IDR = 5_000_000_000      # Maksimal Volume 24j Rp 5 Miliar (Koin Ringan)
 
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
 
 def get_cheap_lowcap_pairs():
-    """Mengambil koin IDR ber-Market Cap/Volume ringan di Indodax yang harganya masih di area dasar."""
     try:
         response = requests.get(INDODAX_SUMMARIES_URL, timeout=10).json()
         tickers = response.get('tickers', {})
@@ -26,32 +25,27 @@ def get_cheap_lowcap_pairs():
                     vol_idr = float(data.get('vol_idr', 0))
                     high_24h = float(data.get('high', 0))
                     
-                    # Estimasi Market Cap lokal berbasis perputaran likuiditas pasar
                     estimated_mcap_idr = vol_idr * 12.5 
-                    
-                    # Persentase jarak harga dari puncak 24 jam terakhir
                     price_from_high_pct = ((high_24h - last_price) / high_24h) * 100 if high_24h > 0 else 0
                 except (ValueError, TypeError):
                     continue
                 
-                # Cukup pastikan ada volume aktif dan harga tidak berada di titik puncak harian (>= 0.5%)
+                # Hanya pilih koin yang aktif (vol >= 100M) dan tidak di harga puncak
                 if MIN_VOL_24H_IDR <= vol_idr <= MAX_VOL_24H_IDR and last_price > 0:
-                    if price_from_high_pct >= 0.5:
-                        valid_pairs.append({
-                            'id': pair_id,
-                            'symbol': pair_id.replace('_idr', '').upper(),
-                            'price': last_price,
-                            'vol_24h': vol_idr,
-                            'mcap_idr': estimated_mcap_idr,
-                            'discount_pct': round(price_from_high_pct, 1)
-                        })
+                    valid_pairs.append({
+                        'id': pair_id,
+                        'symbol': pair_id.replace('_idr', '').upper(),
+                        'price': last_price,
+                        'vol_24h': vol_idr,
+                        'mcap_idr': estimated_mcap_idr,
+                        'discount_pct': round(price_from_high_pct, 1)
+                    })
         return valid_pairs
     except Exception as e:
-        print(f"[ERROR] Gagal mengambil data bursa Indodax: {e}")
+        print(f"[ERROR] Gagal mengambil data bursa: {e}")
         return []
 
 def analyze_whale_buy_wall(pair_id):
-    """Membaca Order Book Indodax untuk mendeteksi Tembok Beli Penahan milik Paus."""
     url = f"{INDODAX_DEPTH_URL}{pair_id}"
     try:
         data = requests.get(url, timeout=5).json()
@@ -60,7 +54,7 @@ def analyze_whale_buy_wall(pair_id):
         if not bids:
             return 0
 
-        # Hitung murni total modal Tembok Beli Paus di 5 antrean Beli (Bids) teratas
+        # Hitung murni total modal Tembok Beli di 5 antrean Beli (Bids) teratas
         buy_wall_total = 0
         for bid in bids[:5]:
             try:
@@ -76,7 +70,7 @@ def analyze_whale_buy_wall(pair_id):
 
 def run_scanner():
     print("\n==================================================")
-    print("  INDODAX WHALE RADAR: CHEAP & LOW-CAP SCANNER    ")
+    print("  INDODAX WHALE RADAR: SAFE PAUS SCANNER          ")
     print("==================================================")
     
     pairs = get_cheap_lowcap_pairs()
@@ -87,9 +81,8 @@ def run_scanner():
         symbol = pair['symbol']
         price = pair['price']
         
-        time.sleep(0.12)  # Throttling aman untuk mencegah HTTP 429 / Rate Limit
+        time.sleep(0.1)
 
-        # Deteksi keberadaan Tembok Penahan Paus di Order Book Indodax
         buy_wall_idr = analyze_whale_buy_wall(pair_id)
         if buy_wall_idr < MIN_BUY_WALL_IDR:
             continue
@@ -105,13 +98,12 @@ def run_scanner():
             'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
         }
         valid_signals.append(signal_data)
-        print(f"🔥 [WHALE FOUND] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f} | Discount: {pair['discount_pct']}%")
+        print(f"🔥 [WHALE FOUND] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f}")
 
-    # Ekspor hasil pemindaian ke file signals.json
     with open('signals.json', 'w') as f:
         json.dump(valid_signals, f, indent=4)
         
-    print(f"[{time.strftime('%H:%M:%S')}] Pemindaian selesai. {len(valid_signals)} koin murah ber-Tembok Paus tersimpan.")
+    print(f"[{time.strftime('%H:%M:%S')}] Pemindaian selesai. {len(valid_signals)} koin berkualitas tersimpan.")
 
 if __name__ == "__main__":
     run_scanner()
