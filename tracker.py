@@ -4,10 +4,10 @@ import json
 import os
 
 # ==========================================
-# PARAMETER TERKUNCI (STRATEGI INDODAX)
+# PARAMETER STRATEGI INDODAX
 # ==========================================
-MIN_BUY_WALL_IDR = 150_000_000       # Minimal Tembok Beli Rp 150 Juta
-MIN_HAKA_5M_IDR = 30_000_000         # Minimal HAKA Rp 30 Juta dalam 5 menit
+MIN_BUY_WALL_IDR = 20_000_000       # Minimal Tembok Beli Rp 20 Juta (Dilonggarkan untuk Pengujian)
+MIN_HAKA_5M_IDR = 5_000_000         # Minimal HAKA Rp 5 Juta (Dilonggarkan untuk Pengujian)
 MIN_VOL_24H_IDR = 50_000_000        # Minimal Volume 24 Jam Rp 50 Juta (Filter Koin Mati)
 MAX_VOL_24H_IDR = 5_000_000_000      # Maksimal Volume 24 Jam Rp 5 Miliar (Filter Koin Berat)
 
