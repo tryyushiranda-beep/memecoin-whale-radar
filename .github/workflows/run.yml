@@ -2,13 +2,14 @@ name: Indodax Spot Whale Radar Tracker
 
 on:
   schedule:
-    # Memindai otomatis setiap 5 menit sekali
+    # Memindai otomatis setiap 5 menit
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
+# MEMBATALKAN ANTREAN MACET OTOMATIS
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
