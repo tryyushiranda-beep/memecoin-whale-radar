@@ -1,5 +1,18 @@
 [
     {
+        "symbol": "ONL",
+        "chain": "SOLANA",
+        "price_idr": 2300.0,
+        "high_24h_idr": 3398.0,
+        "vol_24h_idr": 113876476,
+        "discount_pct": 32.3,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 110,
+        "trade_url": "https://indodax.com/market/onlidr",
+        "timestamp": "2026-10-13 13:50:37"
+    },
+    {
         "symbol": "KITE",
         "chain": "OPTIMISM",
         "price_idr": 2265.0,
@@ -10,33 +23,20 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/kiteidr",
-        "timestamp": "2026-10-13 13:45:56"
+        "timestamp": "2026-10-13 13:50:44"
     },
     {
         "symbol": "BR",
         "chain": "BSC",
-        "price_idr": 7643.0,
+        "price_idr": 7647.0,
         "high_24h_idr": 8358.0,
-        "vol_24h_idr": 1407968245,
-        "discount_pct": 8.6,
+        "vol_24h_idr": 1399981835,
+        "discount_pct": 8.5,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/bridr",
-        "timestamp": "2026-10-13 13:45:29"
-    },
-    {
-        "symbol": "BEAM",
-        "chain": "AVALANCHE",
-        "price_idr": 49.0,
-        "high_24h_idr": 53.0,
-        "vol_24h_idr": 72600672,
-        "discount_pct": 7.5,
-        "buy_ratio": 100,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 110,
-        "trade_url": "https://indodax.com/market/beamidr",
-        "timestamp": "2026-10-13 13:45:28"
+        "timestamp": "2026-10-13 13:50:29"
     },
     {
         "symbol": "STIK",
@@ -49,7 +49,20 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/stikidr",
-        "timestamp": "2026-10-13 13:45:47"
+        "timestamp": "2026-10-13 13:50:40"
+    },
+    {
+        "symbol": "BEAM",
+        "chain": "AVALANCHE",
+        "price_idr": 50.0,
+        "high_24h_idr": 53.0,
+        "vol_24h_idr": 72625620,
+        "discount_pct": 5.7,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 110,
+        "trade_url": "https://indodax.com/market/beamidr",
+        "timestamp": "2026-10-13 13:50:28"
     },
     {
         "symbol": "BGB",
@@ -62,33 +75,20 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/bgbidr",
-        "timestamp": "2026-10-13 13:45:28"
+        "timestamp": "2026-10-13 13:50:28"
     },
     {
-        "symbol": "EDEN",
+        "symbol": "MRS",
         "chain": "BSC",
-        "price_idr": 1084.0,
-        "high_24h_idr": 1140.0,
-        "vol_24h_idr": 73075641,
-        "discount_pct": 4.9,
+        "price_idr": 6989.0,
+        "high_24h_idr": 7359.0,
+        "vol_24h_idr": 89375696,
+        "discount_pct": 5.0,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
-        "trade_url": "https://indodax.com/market/edenidr",
-        "timestamp": "2026-10-13 13:45:33"
-    },
-    {
-        "symbol": "XLM",
-        "chain": "CRONOS",
-        "price_idr": 3412.0,
-        "high_24h_idr": 3565.0,
-        "vol_24h_idr": 677977294,
-        "discount_pct": 4.3,
-        "buy_ratio": 100,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 110,
-        "trade_url": "https://indodax.com/market/xlmidr",
-        "timestamp": "2026-10-13 13:45:54"
+        "trade_url": "https://indodax.com/market/mrsidr",
+        "timestamp": "2026-10-13 13:50:35"
     },
     {
         "symbol": "TLM",
@@ -101,7 +101,20 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/tlmidr",
-        "timestamp": "2026-10-13 13:45:48"
+        "timestamp": "2026-10-13 13:50:40"
+    },
+    {
+        "symbol": "XLM",
+        "chain": "CRONOS",
+        "price_idr": 3425.0,
+        "high_24h_idr": 3563.0,
+        "vol_24h_idr": 652908313,
+        "discount_pct": 3.9,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 110,
+        "trade_url": "https://indodax.com/market/xlmidr",
+        "timestamp": "2026-10-13 13:50:43"
     },
     {
         "symbol": "MITO",
@@ -114,7 +127,33 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/mitoidr",
-        "timestamp": "2026-10-13 13:45:40"
+        "timestamp": "2026-10-13 13:50:35"
+    },
+    {
+        "symbol": "W3F",
+        "chain": "SOLANA",
+        "price_idr": 16352.0,
+        "high_24h_idr": 17000.0,
+        "vol_24h_idr": 147765723,
+        "discount_pct": 3.8,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 110,
+        "trade_url": "https://indodax.com/market/w3fidr",
+        "timestamp": "2026-10-13 13:50:42"
+    },
+    {
+        "symbol": "EDEN",
+        "chain": "BSC",
+        "price_idr": 1100.0,
+        "high_24h_idr": 1140.0,
+        "vol_24h_idr": 73351835,
+        "discount_pct": 3.5,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 110,
+        "trade_url": "https://indodax.com/market/edenidr",
+        "timestamp": "2026-10-13 13:50:31"
     },
     {
         "symbol": "WCT",
@@ -127,71 +166,32 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/wctidr",
-        "timestamp": "2026-10-13 13:45:53"
+        "timestamp": "2026-10-13 13:50:42"
     },
     {
-        "symbol": "UNI",
-        "chain": "ARBITRUM",
-        "price_idr": 132156.0,
-        "high_24h_idr": 135496.0,
-        "vol_24h_idr": 123533228,
-        "discount_pct": 2.5,
-        "buy_ratio": 95,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 105,
-        "trade_url": "https://indodax.com/market/uniidr",
-        "timestamp": "2026-10-13 13:45:50"
+        "symbol": "PEPE",
+        "chain": "SOLANA",
+        "price_idr": 0.074641,
+        "high_24h_idr": 0.075002,
+        "vol_24h_idr": 3781742677,
+        "discount_pct": 0.5,
+        "buy_ratio": 79,
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 109,
+        "trade_url": "https://indodax.com/market/pepeidr",
+        "timestamp": "2026-10-13 13:50:37"
     },
     {
         "symbol": "SKYAI",
         "chain": "BSC",
         "price_idr": 571.0,
         "high_24h_idr": 606.0,
-        "vol_24h_idr": 470552922,
+        "vol_24h_idr": 468485027,
         "discount_pct": 5.8,
-        "buy_ratio": 91,
+        "buy_ratio": 92,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 101,
+        "signal_score": 102,
         "trade_url": "https://indodax.com/market/skyaiidr",
-        "timestamp": "2026-10-13 13:45:46"
-    },
-    {
-        "symbol": "PLUME",
-        "chain": "ETHEREUM",
-        "price_idr": 380.0,
-        "high_24h_idr": 408.0,
-        "vol_24h_idr": 158888496,
-        "discount_pct": 6.9,
-        "buy_ratio": 90,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 100,
-        "trade_url": "https://indodax.com/market/plumeidr",
-        "timestamp": "2026-10-13 13:45:44"
-    },
-    {
-        "symbol": "SPX",
-        "chain": "SOLANA",
-        "price_idr": 6503.0,
-        "high_24h_idr": 6705.0,
-        "vol_24h_idr": 190041151,
-        "discount_pct": 3.0,
-        "buy_ratio": 90,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 100,
-        "trade_url": "https://indodax.com/market/spxidr",
-        "timestamp": "2026-10-13 13:45:47"
-    },
-    {
-        "symbol": "AAVE",
-        "chain": "POLYGON",
-        "price_idr": 2829869.0,
-        "high_24h_idr": 3092162.0,
-        "vol_24h_idr": 105914905,
-        "discount_pct": 8.5,
-        "buy_ratio": 89,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 99,
-        "trade_url": "https://indodax.com/market/aaveidr",
-        "timestamp": "2026-10-13 13:45:26"
+        "timestamp": "2026-10-13 13:50:39"
     }
 ]
