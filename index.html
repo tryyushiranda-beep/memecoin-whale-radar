@@ -3,51 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indodax Whale Radar - Spot Scanner</title>
+    <title>Indodax Smart Money Radar</title>
     <style>
         :root {
-            --bg-color: #0b1120;
-            --card-bg: #1e293b;
-            --card-border: #334155;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --accent-green: #22c55e;
-            --accent-green-bg: rgba(34, 197, 94, 0.12);
-            --accent-blue: #38bdf8;
+            --bg-color: #080c14;
+            --card-bg: #111827;
+            --card-border: #1f293d;
+            --text-main: #f9fafb;
+            --text-sub: #9ca3af;
+            --accent-green: #10b981;
+            --accent-green-bg: rgba(16, 185, 129, 0.15);
             --accent-amber: #f59e0b;
-            --danger-red: #ef4444;
+            --accent-gold: #eab308;
+            --accent-gold-bg: rgba(234, 179, 8, 0.18);
+            --accent-blue: #3b82f6;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; max-width: 800px; margin: 0 auto; min-height: 100vh; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; max-width: 600px; margin: 0 auto; min-height: 100vh; }
         header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; }
-        .title-group h1 { font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+        .title-group h1 { font-size: 1.25rem; font-weight: 800; color: var(--accent-gold); }
         .title-group p { font-size: 0.8rem; color: var(--text-sub); margin-top: 3px; }
         .status-badge { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; background: var(--accent-green-bg); color: var(--accent-green); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--accent-green); }
-        .pulse-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); animation: pulse 1.5s infinite; }
+        .pulse-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.8; } }
         .signal-grid { display: grid; gap: 16px; }
         .card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-        .symbol-badge { font-size: 1.2rem; font-weight: 800; color: var(--accent-blue); }
-        .potential-tag { background-color: var(--accent-green-bg); color: var(--accent-green); font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 6px; }
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 10px; }
+        .symbol-badge { font-size: 1.2rem; font-weight: 800; color: var(--text-main); }
+        .chain-tag { font-size: 0.7rem; color: var(--text-sub); background: #374151; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
+        
+        .tag-golden { background-color: var(--accent-gold-bg); color: var(--accent-gold); border: 1px solid var(--accent-gold); font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
+        .tag-momentum { background-color: var(--accent-green-bg); color: var(--accent-green); font-weight: 700; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
+        .tag-normal { background-color: rgba(156, 163, 175, 0.1); color: var(--text-sub); font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
+
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; background: rgba(0, 0, 0, 0.4); padding: 14px; border-radius: 10px; }
         .metric-item span { display: block; font-size: 0.75rem; color: var(--text-sub); margin-bottom: 4px; }
         .metric-item strong { font-size: 0.95rem; color: var(--text-main); }
-        .entry-box { background: rgba(56, 189, 248, 0.08); border: 1px dashed var(--accent-blue); border-radius: 8px; padding: 10px 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
-        .entry-box span { font-size: 0.75rem; color: var(--accent-blue); font-weight: 600; }
-        .entry-box strong { font-size: 0.9rem; color: var(--text-main); }
         .action-btn { display: block; width: 100%; text-align: center; background-color: #2563eb; color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; padding: 12px; border-radius: 8px; }
-        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); background: var(--card-bg); border-radius: 14px; border: 1px dashed var(--card-border); }
-        .last-updated { text-align: center; font-size: 0.75rem; color: var(--text-sub); margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); background: var(--card-bg); border-radius: 14px; }
+        .last-updated { text-align: center; font-size: 0.75rem; color: var(--text-sub); margin-top: 24px; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="title-group">
-            <h1>🐳 WHALE RADAR</h1>
-            <p>Indodax Spot Real-Time Scanner</p>
+            <h1>🔥 INDODAX SMART MONEY</h1>
+            <p>Multi-Layer On-Chain Filter (Bevan 2.0)</p>
         </div>
         <div class="status-badge">
             <div class="pulse-dot"></div>
@@ -56,28 +59,24 @@
     </header>
 
     <main id="signal-container" class="signal-grid">
-        <div class="empty-state">
-            <p>Memuat data sinyal...</p>
-        </div>
+        <div class="empty-state">Memuat pindaian Smart Money...</div>
     </main>
 
-    <div class="last-updated" id="last-updated-time">
-        Status Server: Menunggu pindaian...
-    </div>
+    <div class="last-updated" id="last-updated-time">Status Server: Menunggu pindaian...</div>
 
     <script>
         const SIGNALS_URL = 'signals.json';
 
-        function formatIDR(number) {
-            if (number >= 1000000000) return (number / 1000000000).toFixed(1) + ' Miliar';
-            if (number >= 1000000) return (number / 1000000).toFixed(1) + ' Juta';
-            return 'Rp ' + number.toLocaleString('id-ID');
+        function formatIDR(num) {
+            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + ' Miliar';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + ' Juta';
+            return 'Rp ' + num.toLocaleString('id-ID');
         }
 
         async function fetchSignals() {
             try {
                 const response = await fetch(`${SIGNALS_URL}?t=${new Date().getTime()}`);
-                if (!response.ok) throw new Error('File tidak ditemukan');
+                if (!response.ok) throw new Error('File tidak ada');
 
                 const signals = await response.json();
                 renderSignals(signals);
@@ -92,36 +91,38 @@
         function renderSignals(signals) {
             const container = document.getElementById('signal-container');
             if (!signals || signals.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <p style="font-weight: 600; color: var(--text-main);">Belum Ada Sinyal Terdeteksi</p>
-                        <p style="font-size: 0.75rem; margin-top: 6px;">Radar memindai koin Indodax aktif di harga murah.</p>
-                    </div>
-                `;
+                container.innerHTML = `<div class="empty-state"><p>Belum Ada Akumulasi Smart Money</p></div>`;
                 return;
             }
 
             container.innerHTML = signals.map(signal => {
-                const pairCode = signal.symbol.toLowerCase();
-                const tradeUrl = `https://indodax.com/market/${pairCode}idr`;
+                let badgeClass = "tag-normal";
+                let badgeLabel = `🐋 ${signal.buy_ratio}% Buy Inflow`;
+
+                if (signal.signal_type === "GOLDEN SIGNAL") {
+                    badgeClass = "tag-golden";
+                    badgeLabel = `🔥 GOLDEN (${signal.buy_ratio}% Inflow)`;
+                } else if (signal.signal_type === "HIGH MOMENTUM") {
+                    badgeClass = "tag-momentum";
+                    badgeLabel = `⚡ MOMENTUM (${signal.buy_ratio}% Inflow)`;
+                }
 
                 return `
                     <div class="card">
                         <div class="card-header">
-                            <span class="symbol-badge">${signal.symbol} / IDR</span>
-                            <span class="potential-tag">${signal.potential}</span>
-                        </div>
-                        <div class="entry-box">
-                            <span>🎯 REKOMENDASI ENTRY</span>
-                            <strong>Rp ${signal.price_idr.toLocaleString('id-ID')} (Limit Order)</strong>
+                            <div>
+                                <span class="symbol-badge">${signal.symbol}/IDR</span>
+                                <span class="chain-tag">${signal.chain}</span>
+                            </div>
+                            <span class="${badgeClass}">${badgeLabel}</span>
                         </div>
                         <div class="metrics-grid">
                             <div class="metric-item"><span>Harga Pasar</span><strong>Rp ${signal.price_idr.toLocaleString('id-ID')}</strong></div>
-                            <div class="metric-item"><span>Market Cap (Est)</span><strong style="color: var(--accent-amber);">${formatIDR(signal.mcap_idr)}</strong></div>
-                            <div class="metric-item"><span>Tembok Penahan</span><strong style="color: var(--accent-green);">${formatIDR(signal.buy_wall_idr)}</strong></div>
+                            <div class="metric-item"><span>Area Diskon</span><strong style="color: var(--accent-amber);">–${signal.discount_pct}% dari High</strong></div>
                             <div class="metric-item"><span>Volume 24 Jam</span><strong style="color: var(--accent-blue);">${formatIDR(signal.vol_24h_idr)}</strong></div>
+                            <div class="metric-item"><span>High 24 Jam</span><strong style="color: var(--text-sub);">Rp ${signal.high_24h_idr.toLocaleString('id-ID')}</strong></div>
                         </div>
-                        <a href="${tradeUrl}" target="_blank" class="action-btn">EKSEKUSI BUKA INDODAX ↗</a>
+                        <a href="${signal.trade_url}" target="_blank" class="action-btn">EKSEKUSI BUKA INDODAX ↗</a>
                     </div>
                 `;
             }).join('');
