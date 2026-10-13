@@ -3,16 +3,16 @@ import time
 import json
 
 # ==========================================
-# PARAMETER AMAN: PAUS MENENGAH (ANTI KOIN ABAL-ABAL)
+# PARAMETER PURE INDODAX (RESPONSIF & CEPAT)
 # ==========================================
-MIN_BUY_WALL_IDR = 30_000_000        # Minimal Tembok Beli Rp 30 Juta (Bukan Ritel)
-MIN_VOL_24H_IDR = 100_000_000        # Minimal Volume 24j Rp 100 Juta (Bukan Koin Mati)
+MIN_BUY_WALL_IDR = 15_000_000        # Minimal Tembok Beli Rp 15 Juta
+MIN_VOL_24H_IDR = 50_000_000         # Minimal Volume 24j Rp 50 Juta
 MAX_VOL_24H_IDR = 5_000_000_000      # Maksimal Volume 24j Rp 5 Miliar (Koin Ringan)
 
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
 
-def get_cheap_lowcap_pairs():
+def get_cheap_indodax_pairs():
     try:
         response = requests.get(INDODAX_SUMMARIES_URL, timeout=10).json()
         tickers = response.get('tickers', {})
@@ -30,7 +30,7 @@ def get_cheap_lowcap_pairs():
                 except (ValueError, TypeError):
                     continue
                 
-                # Hanya pilih koin yang aktif (vol >= 100M) dan tidak di harga puncak
+                # Filter koin aktif di Indodax
                 if MIN_VOL_24H_IDR <= vol_idr <= MAX_VOL_24H_IDR and last_price > 0:
                     valid_pairs.append({
                         'id': pair_id,
@@ -42,7 +42,7 @@ def get_cheap_lowcap_pairs():
                     })
         return valid_pairs
     except Exception as e:
-        print(f"[ERROR] Gagal mengambil data bursa: {e}")
+        print(f"[ERROR] Gagal mengambil data Indodax: {e}")
         return []
 
 def analyze_whale_buy_wall(pair_id):
@@ -54,7 +54,7 @@ def analyze_whale_buy_wall(pair_id):
         if not bids:
             return 0
 
-        # Hitung murni total modal Tembok Beli di 5 antrean Beli (Bids) teratas
+        # Hitung total modal Tembok Beli di 5 antrean Beli teratas di Indodax
         buy_wall_total = 0
         for bid in bids[:5]:
             try:
@@ -70,10 +70,10 @@ def analyze_whale_buy_wall(pair_id):
 
 def run_scanner():
     print("\n==================================================")
-    print("  INDODAX WHALE RADAR: SAFE PAUS SCANNER          ")
+    print("  INDODAX SPOT RADAR: PURE DATA SCANNER           ")
     print("==================================================")
     
-    pairs = get_cheap_lowcap_pairs()
+    pairs = get_cheap_indodax_pairs()
     valid_signals = []
 
     for pair in pairs:
@@ -98,12 +98,12 @@ def run_scanner():
             'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
         }
         valid_signals.append(signal_data)
-        print(f"🔥 [WHALE FOUND] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f}")
+        print(f"🔥 [SIGNAL DETECTED] {symbol} | Price: Rp {price:,.0f} | Wall Indodax: Rp {buy_wall_idr:,.0f}")
 
     with open('signals.json', 'w') as f:
         json.dump(valid_signals, f, indent=4)
         
-    print(f"[{time.strftime('%H:%M:%S')}] Pemindaian selesai. {len(valid_signals)} koin berkualitas tersimpan.")
+    print(f"[{time.strftime('%H:%M:%S')}] Selesai. {len(valid_signals)} koin Indodax tersimpan.")
 
 if __name__ == "__main__":
     run_scanner()
