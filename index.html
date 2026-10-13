@@ -14,203 +14,32 @@
             --accent-green: #22c55e;
             --accent-green-bg: rgba(34, 197, 94, 0.12);
             --accent-blue: #38bdf8;
-            --accent-blue-bg: rgba(56, 189, 248, 0.12);
             --accent-amber: #f59e0b;
             --danger-red: #ef4444;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding: 16px;
-            max-width: 800px;
-            margin: 0 auto;
-            min-height: 100vh;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--card-border);
-            margin-bottom: 20px;
-        }
-
-        .title-group h1 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .title-group p {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            margin-top: 3px;
-        }
-
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: var(--accent-green-bg);
-            color: var(--accent-green);
-            padding: 6px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--accent-green);
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-green);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-
-        .signal-grid {
-            display: grid;
-            gap: 16px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
-            padding: 18px;
-            position: relative;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-        }
-
-        .symbol-badge {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--accent-blue);
-            letter-spacing: 0.5px;
-        }
-
-        .potential-tag {
-            background-color: var(--accent-green-bg);
-            color: var(--accent-green);
-            font-weight: 700;
-            font-size: 0.8rem;
-            padding: 4px 10px;
-            border-radius: 6px;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .metric-item span {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--text-sub);
-            margin-bottom: 4px;
-        }
-
-        .metric-item strong {
-            font-size: 0.95rem;
-            color: var(--text-main);
-        }
-
-        .entry-box {
-            background: rgba(56, 189, 248, 0.08);
-            border: 1px dashed var(--accent-blue);
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .entry-box span {
-            font-size: 0.75rem;
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        .entry-box strong {
-            font-size: 0.9rem;
-            color: var(--text-main);
-        }
-
-        .action-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background-color: #2563eb;
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            padding: 12px;
-            border-radius: 8px;
-            transition: background 0.2s;
-        }
-
-        .action-btn:hover {
-            background-color: #1d4ed8;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-sub);
-            background: var(--card-bg);
-            border-radius: 14px;
-            border: 1px dashed var(--card-border);
-        }
-
-        .empty-state p {
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-        }
-
-        .last-updated {
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--text-sub);
-            margin-top: 24px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; max-width: 800px; margin: 0 auto; min-height: 100vh; }
+        header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; }
+        .title-group h1 { font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+        .title-group p { font-size: 0.8rem; color: var(--text-sub); margin-top: 3px; }
+        .status-badge { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; background: var(--accent-green-bg); color: var(--accent-green); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--accent-green); }
+        .pulse-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.8; } }
+        .signal-grid { display: grid; gap: 16px; }
+        .card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .symbol-badge { font-size: 1.2rem; font-weight: 800; color: var(--accent-blue); }
+        .potential-tag { background-color: var(--accent-green-bg); color: var(--accent-green); font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 6px; }
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 10px; }
+        .metric-item span { display: block; font-size: 0.75rem; color: var(--text-sub); margin-bottom: 4px; }
+        .metric-item strong { font-size: 0.95rem; color: var(--text-main); }
+        .entry-box { background: rgba(56, 189, 248, 0.08); border: 1px dashed var(--accent-blue); border-radius: 8px; padding: 10px 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .entry-box span { font-size: 0.75rem; color: var(--accent-blue); font-weight: 600; }
+        .entry-box strong { font-size: 0.9rem; color: var(--text-main); }
+        .action-btn { display: block; width: 100%; text-align: center; background-color: #2563eb; color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; padding: 12px; border-radius: 8px; }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); background: var(--card-bg); border-radius: 14px; border: 1px dashed var(--card-border); }
+        .last-updated { text-align: center; font-size: 0.75rem; color: var(--text-sub); margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
 </head>
 <body>
@@ -220,7 +49,7 @@
             <h1>🐳 WHALE RADAR</h1>
             <p>Indodax Spot Real-Time Scanner</p>
         </div>
-        <div class="status-badge" id="status-badge">
+        <div class="status-badge">
             <div class="pulse-dot"></div>
             <span id="status-text">CONNECTING</span>
         </div>
@@ -228,38 +57,27 @@
 
     <main id="signal-container" class="signal-grid">
         <div class="empty-state">
-            <p>Memuat data sinyal dari signals.json...</p>
+            <p>Memuat data sinyal...</p>
         </div>
     </main>
 
     <div class="last-updated" id="last-updated-time">
-        Status Server: Menunggu pemindaian pertama...
+        Status Server: Menunggu pindaian...
     </div>
 
     <script>
         const SIGNALS_URL = 'signals.json';
-        const REFRESH_INTERVAL = 5000;
 
         function formatIDR(number) {
-            if (number >= 1000000000) {
-                return (number / 1000000000).toFixed(1) + ' Miliar';
-            } else if (number >= 1000000) {
-                return (number / 1000000).toFixed(1) + ' Juta';
-            }
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                maximumFractionDigits: 0
-            }).format(number);
+            if (number >= 1000000000) return (number / 1000000000).toFixed(1) + ' Miliar';
+            if (number >= 1000000) return (number / 1000000).toFixed(1) + ' Juta';
+            return 'Rp ' + number.toLocaleString('id-ID');
         }
 
         async function fetchSignals() {
             try {
                 const response = await fetch(`${SIGNALS_URL}?t=${new Date().getTime()}`);
-                
-                if (!response.ok) {
-                    throw new Error('File signals.json tidak ditemukan');
-                }
+                if (!response.ok) throw new Error('File tidak ditemukan');
 
                 const signals = await response.json();
                 renderSignals(signals);
@@ -268,24 +86,16 @@
                 document.getElementById('last-updated-time').innerText = `Terakhir Diperbarui: ${new Date().toLocaleTimeString('id-ID')}`;
             } catch (error) {
                 document.getElementById('status-text').innerText = 'OFFLINE';
-                const container = document.getElementById('signal-container');
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <p style="color: var(--danger-red); font-weight: 600;">⚠️ Menunggu Data Sinyal...</p>
-                        <p style="font-size: 0.75rem; margin-top: 8px;">GitHub Actions sedang memproses pindaian atau belum ada sinyal baru.</p>
-                    </div>
-                `;
             }
         }
 
         function renderSignals(signals) {
             const container = document.getElementById('signal-container');
-
             if (!signals || signals.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
-                        <p style="font-weight: 600; color: var(--text-main);">Belum Ada Sinyal Whale Terdeteksi</p>
-                        <p style="font-size: 0.75rem; margin-top: 6px;">Radar memindai koin ber-Market Cap ringan dengan Buy Wall ≥ Rp 30M di harga dasar.</p>
+                        <p style="font-weight: 600; color: var(--text-main);">Belum Ada Sinyal Terdeteksi</p>
+                        <p style="font-size: 0.75rem; margin-top: 6px;">Radar memindai koin Indodax aktif di harga murah.</p>
                     </div>
                 `;
                 return;
@@ -294,7 +104,6 @@
             container.innerHTML = signals.map(signal => {
                 const pairCode = signal.symbol.toLowerCase();
                 const tradeUrl = `https://indodax.com/market/${pairCode}idr`;
-                const entryPrice = signal.price_idr;
 
                 return `
                     <div class="card">
@@ -302,41 +111,24 @@
                             <span class="symbol-badge">${signal.symbol} / IDR</span>
                             <span class="potential-tag">${signal.potential}</span>
                         </div>
-
                         <div class="entry-box">
-                            <span>🎯 REKOMENDASI ENTRY (DISKON ${signal.discount_pct}%)</span>
-                            <strong>Rp ${entryPrice.toLocaleString('id-ID')} (Limit Order)</strong>
+                            <span>🎯 REKOMENDASI ENTRY</span>
+                            <strong>Rp ${signal.price_idr.toLocaleString('id-ID')} (Limit Order)</strong>
                         </div>
-                        
                         <div class="metrics-grid">
-                            <div class="metric-item">
-                                <span>Harga Pasar</span>
-                                <strong>Rp ${signal.price_idr.toLocaleString('id-ID')}</strong>
-                            </div>
-                            <div class="metric-item">
-                                <span>Market Cap (Est)</span>
-                                <strong style="color: var(--accent-amber);">Rp ${formatIDR(signal.mcap_idr)}</strong>
-                            </div>
-                            <div class="metric-item">
-                                <span>Tembok Paus</span>
-                                <strong style="color: var(--accent-green);">Rp ${formatIDR(signal.buy_wall_idr)}</strong>
-                            </div>
-                            <div class="metric-item">
-                                <span>Volume 24 Jam</span>
-                                <strong style="color: var(--accent-blue);">Rp ${formatIDR(signal.vol_24h_idr)}</strong>
-                            </div>
+                            <div class="metric-item"><span>Harga Pasar</span><strong>Rp ${signal.price_idr.toLocaleString('id-ID')}</strong></div>
+                            <div class="metric-item"><span>Market Cap (Est)</span><strong style="color: var(--accent-amber);">${formatIDR(signal.mcap_idr)}</strong></div>
+                            <div class="metric-item"><span>Tembok Penahan</span><strong style="color: var(--accent-green);">${formatIDR(signal.buy_wall_idr)}</strong></div>
+                            <div class="metric-item"><span>Volume 24 Jam</span><strong style="color: var(--accent-blue);">${formatIDR(signal.vol_24h_idr)}</strong></div>
                         </div>
-
-                        <a href="${tradeUrl}" target="_blank" class="action-btn">
-                            EKSEKUSI BUKA INDODAX ↗
-                        </a>
+                        <a href="${tradeUrl}" target="_blank" class="action-btn">EKSEKUSI BUKA INDODAX ↗</a>
                     </div>
                 `;
             }).join('');
         }
 
         fetchSignals();
-        setInterval(fetchSignals, REFRESH_INTERVAL);
+        setInterval(fetchSignals, 5000);
     </script>
 </body>
 </html>
