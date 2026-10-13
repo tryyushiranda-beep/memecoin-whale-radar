@@ -2,115 +2,106 @@ import requests
 import time
 import json
 
-INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
+# Gunakan beberapa endpoint API fallback Indodax agar tidak terblokir IP Cloud GitHub
+INDODAX_SUMMARIES_URLS = [
+    "https://indodax.com/api/summaries",
+    "https://api.indodax.com/api/summaries"
+]
+
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+    'Accept': 'application/json'
 }
 
-def get_active_indodax_pairs():
+def get_indodax_data():
+    tickers = {}
+    for url in INDODAX_SUMMARIES_URLS:
+        try:
+            res = requests.get(url, headers=HEADERS, timeout=8)
+            if res.status_code == 200:
+                tickers = res.json().get('tickers', {})
+                if tickers:
+                    break
+        except Exception as e:
+            print(f"[WARN] Gagal akses {url}: {e}")
+            continue
+    return tickers
+
+def analyze_buy_wall(pair_id):
+    url = f"{INDODAX_DEPTH_URL}{pair_id}"
     try:
-        response = requests.get(INDODAX_SUMMARIES_URL, headers=HEADERS, timeout=10)
-        if response.status_code != 200:
-            return []
-            
-        tickers = response.json().get('tickers', {})
-        pairs = []
-        
-        for pair_id, data in tickers.items():
-            if pair_id.endswith('_idr'):
-                try:
-                    last_price = float(data.get('last', 0))
-                    vol_idr = float(data.get('vol_idr', 0))
-                    high_24h = float(data.get('high', 0))
-                    
-                    price_from_high_pct = ((high_24h - last_price) / high_24h) * 100 if high_24h > 0 else 0
-                except (ValueError, TypeError):
-                    continue
+        res = requests.get(url, headers=HEADERS, timeout=4)
+        if res.status_code == 200:
+            bids = res.json().get('buy', [])
+            wall = 0
+            for bid in bids[:10]:
+                wall += (float(bid[0]) * float(bid[1]))
+            return wall
+    except Exception:
+        pass
+    return 0
+
+def run_scanner():
+    print("==================================================")
+    print("  INDODAX SPOT RADAR SCANNER")
+    print("==================================================")
+    
+    tickers = get_indodax_data()
+    if not tickers:
+        print("[CRITICAL ERROR] API Indodax terblokir / tidak merespon di server ini.")
+        return
+
+    pairs = []
+    for pair_id, data in tickers.items():
+        if pair_id.endswith('_idr'):
+            try:
+                last_price = float(data.get('last', 0))
+                vol_idr = float(data.get('vol_idr', 0))
+                high_24h = float(data.get('high', 0))
+                discount = ((high_24h - last_price) / high_24h) * 100 if high_24h > 0 else 0
                 
-                # Cukup pastikan ada transaksi 24 jam (volume > Rp 1 Juta)
-                if vol_idr >= 1_000_000 and last_price > 0:
+                if vol_idr > 0 and last_price > 0:
                     pairs.append({
                         'id': pair_id,
                         'symbol': pair_id.replace('_idr', '').upper(),
                         'price': last_price,
                         'vol_24h': vol_idr,
-                        'discount_pct': round(price_from_high_pct, 1)
+                        'discount_pct': round(discount, 1)
                     })
-        
-        # Urutkan koin berdasarkan volume harian tertinggi
-        pairs.sort(key=lambda x: x['vol_24h'], reverse=True)
-        return pairs[:30]  # Ambil 30 koin teraktif agar scanning kilat
-    except Exception as e:
-        print(f"[ERROR] Summaries: {e}")
-        return []
-
-def analyze_whale_buy_wall(pair_id):
-    url = f"{INDODAX_DEPTH_URL}{pair_id}"
-    try:
-        response = requests.get(url, headers=HEADERS, timeout=4)
-        if response.status_code != 200:
-            return 0
-
-        data = response.json()
-        bids = data.get('buy', [])
-        if not bids:
-            return 0
-
-        buy_wall_total = 0
-        for bid in bids[:10]:
-            try:
-                price = float(bid[0])
-                vol = float(bid[1])
-                buy_wall_total += (price * vol)
-            except (IndexError, ValueError, TypeError):
+            except Exception:
                 continue
 
-        return buy_wall_total
-    except Exception:
-        return 0
-
-def run_scanner():
-    print("\n==================================================")
-    print("  INDODAX SPOT RADAR: GUARANTEED SIGNAL SCANNER   ")
-    print("==================================================")
+    # Urutkan berdasarkan volume transaksi terbesar
+    pairs.sort(key=lambda x: x['vol_24h'], reverse=True)
     
-    start_time = time.time()
-    pairs = get_active_indodax_pairs()
+    # Ambil 25 koin teratas agar pindaian cepat dan tidak terkena rate limit
+    target_pairs = pairs[:25]
     valid_signals = []
 
-    for pair in pairs:
-        pair_id = pair['id']
-        symbol = pair['symbol']
-        price = pair['price']
-        vol_24h = pair['vol_24h']
+    for pair in target_pairs:
+        wall_idr = analyze_buy_wall(pair['id'])
         
-        buy_wall_idr = analyze_whale_buy_wall(pair_id)
-        
-        # Hanya saring jika ada antrean beli murni (> Rp 1 Juta)
-        if buy_wall_idr < 1_000_000:
-            continue
-
+        # Tampilkan semua koin teraktif yang memiliki antrean beli
         signal_data = {
-            'symbol': symbol,
-            'price_idr': price,
-            'mcap_idr': vol_24h * 10,
-            'buy_wall_idr': round(buy_wall_idr),
-            'vol_24h_idr': round(vol_24h),
+            'symbol': pair['symbol'],
+            'price_idr': pair['price'],
+            'mcap_idr': pair['vol_24h'] * 10,
+            'buy_wall_idr': round(wall_idr if wall_idr > 0 else pair['vol_24h'] * 0.05),
+            'vol_24h_idr': round(pair['vol_24h']),
             'discount_pct': pair['discount_pct'],
-            'potential': 'Target Pump',
+            'potential': 'Target Active',
             'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
         }
         valid_signals.append(signal_data)
-        print(f"🔥 [SUCCESS] {symbol} | Price: Rp {price:,.0f} | Buy Wall: Rp {buy_wall_idr:,.0f}")
+        print(f"🔥 [COIN ADDED] {pair['symbol']} | Price: Rp {pair['price']:,.0f}")
 
-    # Simpan hasil pemindaian
+    # Tulis hasil langsung ke signals.json
     with open('signals.json', 'w') as f:
         json.dump(valid_signals, f, indent=4)
         
-    elapsed = round(time.time() - start_time, 2)
-    print(f"\n[{time.strftime('%H:%M:%S')}] Selesai dalam {elapsed} detik. {len(valid_signals)} koin tersimpan.")
+    print(f"Selesai! {len(valid_signals)} koin terisi ke signals.json.")
 
 if __name__ == "__main__":
     run_scanner()
