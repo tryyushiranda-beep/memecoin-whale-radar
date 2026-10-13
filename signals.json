@@ -10,20 +10,33 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/lighteridr",
-        "timestamp": "2026-10-13 22:35:29"
+        "timestamp": "2026-10-13 22:40:35"
+    },
+    {
+        "symbol": "WCT",
+        "chain": "OPTIMISM",
+        "price_idr": 712.0,
+        "high_24h_idr": 737.0,
+        "vol_24h_idr": 62010814,
+        "discount_pct": 3.4,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 110,
+        "trade_url": "https://indodax.com/market/wctidr",
+        "timestamp": "2026-10-13 22:40:47"
     },
     {
         "symbol": "UCJL",
         "chain": "SOLANA",
-        "price_idr": 2532.0,
+        "price_idr": 2534.0,
         "high_24h_idr": 2600.0,
-        "vol_24h_idr": 106561727,
-        "discount_pct": 2.6,
+        "vol_24h_idr": 106561999,
+        "discount_pct": 2.5,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/ucjlidr",
-        "timestamp": "2026-10-13 22:35:40"
+        "timestamp": "2026-10-13 22:40:45"
     },
     {
         "symbol": "UNI",
@@ -36,7 +49,7 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/uniidr",
-        "timestamp": "2026-10-13 22:35:40"
+        "timestamp": "2026-10-13 22:40:45"
     },
     {
         "symbol": "USELESS",
@@ -45,24 +58,24 @@
         "high_24h_idr": 3236.0,
         "vol_24h_idr": 217319443,
         "discount_pct": 6.1,
-        "buy_ratio": 93,
+        "buy_ratio": 94,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 103,
+        "signal_score": 104,
         "trade_url": "https://indodax.com/market/uselessidr",
-        "timestamp": "2026-10-13 22:35:40"
+        "timestamp": "2026-10-13 22:40:46"
     },
     {
-        "symbol": "AAVE",
-        "chain": "POLYGON",
-        "price_idr": 2829557.0,
-        "high_24h_idr": 2891113.0,
-        "vol_24h_idr": 71739543,
-        "discount_pct": 2.1,
-        "buy_ratio": 86,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 96,
-        "trade_url": "https://indodax.com/market/aaveidr",
-        "timestamp": "2026-10-13 22:35:21"
+        "symbol": "KRD",
+        "chain": "SOLANA",
+        "price_idr": 2.0,
+        "high_24h_idr": 2.0,
+        "vol_24h_idr": 90675735,
+        "discount_pct": 0.0,
+        "buy_ratio": 70,
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 100,
+        "trade_url": "https://indodax.com/market/krdidr",
+        "timestamp": "2026-10-13 22:40:35"
     },
     {
         "symbol": "JELLYJELLY",
@@ -71,50 +84,37 @@
         "high_24h_idr": 942.0,
         "vol_24h_idr": 247307449,
         "discount_pct": 1.6,
-        "buy_ratio": 85,
+        "buy_ratio": 88,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 95,
+        "signal_score": 98,
         "trade_url": "https://indodax.com/market/jellyjellyidr",
-        "timestamp": "2026-10-13 22:35:29"
+        "timestamp": "2026-10-13 22:40:34"
     },
     {
-        "symbol": "MAGIC",
-        "chain": "BASE",
-        "price_idr": 2252.0,
-        "high_24h_idr": 2555.0,
-        "vol_24h_idr": 809318860,
-        "discount_pct": 11.9,
-        "buy_ratio": 84,
+        "symbol": "AAVE",
+        "chain": "POLYGON",
+        "price_idr": 2832430.0,
+        "high_24h_idr": 2891113.0,
+        "vol_24h_idr": 72061501,
+        "discount_pct": 2.0,
+        "buy_ratio": 87,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 94,
-        "trade_url": "https://indodax.com/market/magicidr",
-        "timestamp": "2026-10-13 22:35:30"
+        "signal_score": 97,
+        "trade_url": "https://indodax.com/market/aaveidr",
+        "timestamp": "2026-10-13 22:40:26"
     },
     {
-        "symbol": "AVAX",
+        "symbol": "PENGU",
         "chain": "SOLANA",
-        "price_idr": 184474.0,
-        "high_24h_idr": 189325.0,
-        "vol_24h_idr": 366426000,
-        "discount_pct": 2.6,
+        "price_idr": 140.039,
+        "high_24h_idr": 143.264,
+        "vol_24h_idr": 1343953416,
+        "discount_pct": 2.3,
         "buy_ratio": 83,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 93,
-        "trade_url": "https://indodax.com/market/avaxidr",
-        "timestamp": "2026-10-13 22:35:23"
-    },
-    {
-        "symbol": "RSR",
-        "chain": "BASE",
-        "price_idr": 39.0,
-        "high_24h_idr": 41.0,
-        "vol_24h_idr": 558899595,
-        "discount_pct": 4.9,
-        "buy_ratio": 77,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 87,
-        "trade_url": "https://indodax.com/market/rsridr",
-        "timestamp": "2026-10-13 22:35:36"
+        "trade_url": "https://indodax.com/market/penguidr",
+        "timestamp": "2026-10-13 22:40:40"
     },
     {
         "symbol": "ACN",
@@ -127,20 +127,46 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 86,
         "trade_url": "https://indodax.com/market/acnidr",
-        "timestamp": "2026-10-13 22:35:21"
+        "timestamp": "2026-10-13 22:40:26"
     },
     {
-        "symbol": "WCT",
-        "chain": "OPTIMISM",
-        "price_idr": 712.0,
-        "high_24h_idr": 737.0,
-        "vol_24h_idr": 62010814,
-        "discount_pct": 3.4,
+        "symbol": "RSR",
+        "chain": "BASE",
+        "price_idr": 39.0,
+        "high_24h_idr": 41.0,
+        "vol_24h_idr": 558338765,
+        "discount_pct": 4.9,
         "buy_ratio": 75,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 85,
-        "trade_url": "https://indodax.com/market/wctidr",
-        "timestamp": "2026-10-13 22:35:41"
+        "trade_url": "https://indodax.com/market/rsridr",
+        "timestamp": "2026-10-13 22:40:42"
+    },
+    {
+        "symbol": "MAGIC",
+        "chain": "BASE",
+        "price_idr": 2244.0,
+        "high_24h_idr": 2555.0,
+        "vol_24h_idr": 809863057,
+        "discount_pct": 12.2,
+        "buy_ratio": 74,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 84,
+        "trade_url": "https://indodax.com/market/magicidr",
+        "timestamp": "2026-10-13 22:40:36"
+    },
+    {
+        "symbol": "SPX",
+        "chain": "SOLANA",
+        "price_idr": 6579.0,
+        "high_24h_idr": 6687.0,
+        "vol_24h_idr": 74230237,
+        "discount_pct": 1.6,
+        "buy_ratio": 72,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 82,
+        "trade_url": "https://indodax.com/market/spxidr",
+        "timestamp": "2026-10-13 22:40:43"
     },
     {
         "symbol": "BIO",
@@ -153,20 +179,7 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 81,
         "trade_url": "https://indodax.com/market/bioidr",
-        "timestamp": "2026-10-13 22:35:23"
-    },
-    {
-        "symbol": "SPX",
-        "chain": "SOLANA",
-        "price_idr": 6579.0,
-        "high_24h_idr": 6687.0,
-        "vol_24h_idr": 74230237,
-        "discount_pct": 1.6,
-        "buy_ratio": 70,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 80,
-        "trade_url": "https://indodax.com/market/spxidr",
-        "timestamp": "2026-10-13 22:35:37"
+        "timestamp": "2026-10-13 22:40:29"
     },
     {
         "symbol": "CHILLGUY",
@@ -175,23 +188,10 @@
         "high_24h_idr": 184.0,
         "vol_24h_idr": 73149192,
         "discount_pct": 2.7,
-        "buy_ratio": 68,
+        "buy_ratio": 70,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 78,
+        "signal_score": 80,
         "trade_url": "https://indodax.com/market/chillguyidr",
-        "timestamp": "2026-10-13 22:35:24"
-    },
-    {
-        "symbol": "KRD",
-        "chain": "SOLANA",
-        "price_idr": 2.0,
-        "high_24h_idr": 2.0,
-        "vol_24h_idr": 90675735,
-        "discount_pct": 0.0,
-        "buy_ratio": 67,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 77,
-        "trade_url": "https://indodax.com/market/krdidr",
-        "timestamp": "2026-10-13 22:35:29"
+        "timestamp": "2026-10-13 22:40:29"
     }
 ]
