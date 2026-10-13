@@ -3,11 +3,11 @@ import time
 import json
 
 # ==========================================
-# PARAMETER PURE INDODAX (RESPONSIF & CEPAT)
+# PARAMETER RESPONSIF INDODAX (SUPER CEPAT)
 # ==========================================
-MIN_BUY_WALL_IDR = 15_000_000        # Minimal Tembok Beli Rp 15 Juta
-MIN_VOL_24H_IDR = 50_000_000         # Minimal Volume 24j Rp 50 Juta
-MAX_VOL_24H_IDR = 5_000_000_000      # Maksimal Volume 24j Rp 5 Miliar (Koin Ringan)
+MIN_BUY_WALL_IDR = 5_000_000         # Minimal Tembok Beli Rp 5 Juta
+MIN_VOL_24H_IDR = 10_000_000         # Minimal Volume 24j Rp 10 Juta
+MAX_VOL_24H_IDR = 10_000_000_000     # Maksimal Volume 24j Rp 10 Miliar
 
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
@@ -30,7 +30,6 @@ def get_cheap_indodax_pairs():
                 except (ValueError, TypeError):
                     continue
                 
-                # Filter koin aktif di Indodax
                 if MIN_VOL_24H_IDR <= vol_idr <= MAX_VOL_24H_IDR and last_price > 0:
                     valid_pairs.append({
                         'id': pair_id,
@@ -42,7 +41,7 @@ def get_cheap_indodax_pairs():
                     })
         return valid_pairs
     except Exception as e:
-        print(f"[ERROR] Gagal mengambil data Indodax: {e}")
+        print(f"[ERROR] Gagal mengambil data: {e}")
         return []
 
 def analyze_whale_buy_wall(pair_id):
@@ -54,9 +53,8 @@ def analyze_whale_buy_wall(pair_id):
         if not bids:
             return 0
 
-        # Hitung total modal Tembok Beli di 5 antrean Beli teratas di Indodax
         buy_wall_total = 0
-        for bid in bids[:5]:
+        for bid in bids[:10]: # Membaca 10 antrean Beli teratas
             try:
                 price = float(bid[0])
                 vol = float(bid[1])
@@ -70,7 +68,7 @@ def analyze_whale_buy_wall(pair_id):
 
 def run_scanner():
     print("\n==================================================")
-    print("  INDODAX SPOT RADAR: PURE DATA SCANNER           ")
+    print("  INDODAX SPOT RADAR: FAST SCANNER                ")
     print("==================================================")
     
     pairs = get_cheap_indodax_pairs()
@@ -81,7 +79,7 @@ def run_scanner():
         symbol = pair['symbol']
         price = pair['price']
         
-        time.sleep(0.1)
+        time.sleep(0.08)
 
         buy_wall_idr = analyze_whale_buy_wall(pair_id)
         if buy_wall_idr < MIN_BUY_WALL_IDR:
@@ -94,16 +92,16 @@ def run_scanner():
             'buy_wall_idr': round(buy_wall_idr),
             'vol_24h_idr': round(pair['vol_24h']),
             'discount_pct': pair['discount_pct'],
-            'potential': 'Target Pump Besok',
+            'potential': 'Target Pump',
             'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
         }
         valid_signals.append(signal_data)
-        print(f"🔥 [SIGNAL DETECTED] {symbol} | Price: Rp {price:,.0f} | Wall Indodax: Rp {buy_wall_idr:,.0f}")
+        print(f"🔥 [SIGNAL DETECTED] {symbol} | Price: Rp {price:,.0f} | Wall: Rp {buy_wall_idr:,.0f}")
 
     with open('signals.json', 'w') as f:
         json.dump(valid_signals, f, indent=4)
         
-    print(f"[{time.strftime('%H:%M:%S')}] Selesai. {len(valid_signals)} koin Indodax tersimpan.")
+    print(f"[{time.strftime('%H:%M:%S')}] Selesai. {len(valid_signals)} koin tersimpan.")
 
 if __name__ == "__main__":
     run_scanner()
