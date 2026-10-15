@@ -2,93 +2,67 @@
     {
         "symbol": "AIH",
         "chain": "ROBINHOOD",
-        "price_idr": 4806.0,
+        "price_idr": 4903.0,
         "high_24h_idr": 5848.0,
-        "vol_24h_idr": 151064105,
-        "discount_pct": 17.8,
+        "vol_24h_idr": 152087227,
+        "discount_pct": 16.2,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/aihidr",
-        "timestamp": "2026-10-15 12:50:25"
+        "timestamp": "2026-10-15 12:55:20"
     },
     {
         "symbol": "IOST",
         "chain": "ROBINHOOD",
         "price_idr": 14.0,
         "high_24h_idr": 16.0,
-        "vol_24h_idr": 222759912,
+        "vol_24h_idr": 112284545,
         "discount_pct": 12.5,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/iostidr",
-        "timestamp": "2026-10-15 12:50:33"
+        "timestamp": "2026-10-15 12:55:27"
     },
     {
         "symbol": "MON",
         "chain": "ROBINHOOD",
-        "price_idr": 402.003,
+        "price_idr": 402.045,
         "high_24h_idr": 442.985,
-        "vol_24h_idr": 98081448,
-        "discount_pct": 9.3,
+        "vol_24h_idr": 100591816,
+        "discount_pct": 9.2,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/monidr",
-        "timestamp": "2026-10-15 12:50:35"
-    },
-    {
-        "symbol": "AIOZ",
-        "chain": "BSC",
-        "price_idr": 1860.0,
-        "high_24h_idr": 1995.0,
-        "vol_24h_idr": 92768435,
-        "discount_pct": 6.8,
-        "buy_ratio": 100,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 110,
-        "trade_url": "https://indodax.com/market/aiozidr",
-        "timestamp": "2026-10-15 12:50:26"
+        "timestamp": "2026-10-15 12:55:30"
     },
     {
         "symbol": "SN",
         "chain": "SOLANA",
         "price_idr": 1450.0,
         "high_24h_idr": 1548.0,
-        "vol_24h_idr": 246393923,
+        "vol_24h_idr": 246433022,
         "discount_pct": 6.3,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/snidr",
-        "timestamp": "2026-10-15 12:50:41"
+        "timestamp": "2026-10-15 12:55:35"
     },
     {
         "symbol": "LIGHTER",
         "chain": "SOLANA",
         "price_idr": 55485.0,
-        "high_24h_idr": 59000.0,
-        "vol_24h_idr": 303864201,
-        "discount_pct": 6.0,
+        "high_24h_idr": 58900.0,
+        "vol_24h_idr": 282667406,
+        "discount_pct": 5.8,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/lighteridr",
-        "timestamp": "2026-10-15 12:50:33"
-    },
-    {
-        "symbol": "ISLM",
-        "chain": "ROBINHOOD",
-        "price_idr": 50.0,
-        "high_24h_idr": 53.0,
-        "vol_24h_idr": 99574383,
-        "discount_pct": 5.7,
-        "buy_ratio": 100,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 110,
-        "trade_url": "https://indodax.com/market/islmidr",
-        "timestamp": "2026-10-15 12:50:33"
+        "timestamp": "2026-10-15 12:55:28"
     },
     {
         "symbol": "FUEL",
@@ -101,59 +75,98 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/fuelidr",
-        "timestamp": "2026-10-15 12:50:30"
+        "timestamp": "2026-10-15 12:55:25"
     },
     {
         "symbol": "MRS",
         "chain": "BSC",
-        "price_idr": 8125.0,
+        "price_idr": 8120.0,
         "high_24h_idr": 8500.0,
-        "vol_24h_idr": 149330574,
-        "discount_pct": 4.4,
+        "vol_24h_idr": 149361125,
+        "discount_pct": 4.5,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/mrsidr",
-        "timestamp": "2026-10-15 12:50:36"
+        "timestamp": "2026-10-15 12:55:30"
+    },
+    {
+        "symbol": "AIOZ",
+        "chain": "BSC",
+        "price_idr": 1929.0,
+        "high_24h_idr": 1995.0,
+        "vol_24h_idr": 93163985,
+        "discount_pct": 3.3,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 110,
+        "trade_url": "https://indodax.com/market/aiozidr",
+        "timestamp": "2026-10-15 12:55:20"
     },
     {
         "symbol": "NXA",
         "chain": "ROBINHOOD",
-        "price_idr": 20313.0,
+        "price_idr": 20300.0,
         "high_24h_idr": 21000.0,
-        "vol_24h_idr": 128963229,
+        "vol_24h_idr": 128972700,
         "discount_pct": 3.3,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/nxaidr",
-        "timestamp": "2026-10-15 12:50:37"
+        "timestamp": "2026-10-15 12:55:31"
     },
     {
         "symbol": "GLIDR",
         "chain": "ROBINHOOD",
         "price_idr": 580.0,
         "high_24h_idr": 598.0,
-        "vol_24h_idr": 148214694,
+        "vol_24h_idr": 148257243,
         "discount_pct": 3.0,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/glidridr",
-        "timestamp": "2026-10-15 12:50:30"
+        "timestamp": "2026-10-15 12:55:26"
     },
     {
         "symbol": "CONX",
         "chain": "ROBINHOOD",
-        "price_idr": 159601.0,
+        "price_idr": 159598.0,
         "high_24h_idr": 164000.0,
-        "vol_24h_idr": 101556010,
+        "vol_24h_idr": 101483593,
         "discount_pct": 2.7,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/conxidr",
-        "timestamp": "2026-10-15 12:50:28"
+        "timestamp": "2026-10-15 12:55:23"
+    },
+    {
+        "symbol": "ISLM",
+        "chain": "ROBINHOOD",
+        "price_idr": 53.0,
+        "high_24h_idr": 53.0,
+        "vol_24h_idr": 102046857,
+        "discount_pct": 0.0,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 110,
+        "trade_url": "https://indodax.com/market/islmidr",
+        "timestamp": "2026-10-15 12:55:28"
+    },
+    {
+        "symbol": "SUI",
+        "chain": "SOLANA",
+        "price_idr": 17503.0,
+        "high_24h_idr": 18582.0,
+        "vol_24h_idr": 2091685677,
+        "discount_pct": 5.8,
+        "buy_ratio": 72,
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 102,
+        "trade_url": "https://indodax.com/market/suiidr",
+        "timestamp": "2026-10-15 12:55:38"
     },
     {
         "symbol": "UNI",
@@ -166,32 +179,19 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 100,
         "trade_url": "https://indodax.com/market/uniidr",
-        "timestamp": "2026-10-15 12:50:43"
+        "timestamp": "2026-10-15 12:55:39"
     },
     {
         "symbol": "PENGU",
         "chain": "SOLANA",
-        "price_idr": 131.848,
+        "price_idr": 131.713,
         "high_24h_idr": 138.475,
-        "vol_24h_idr": 1305702472,
-        "discount_pct": 4.8,
+        "vol_24h_idr": 1291863955,
+        "discount_pct": 4.9,
         "buy_ratio": 84,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 94,
         "trade_url": "https://indodax.com/market/penguidr",
-        "timestamp": "2026-10-15 12:50:38"
-    },
-    {
-        "symbol": "BR",
-        "chain": "BSC",
-        "price_idr": 7040.0,
-        "high_24h_idr": 7692.0,
-        "vol_24h_idr": 381779334,
-        "discount_pct": 8.5,
-        "buy_ratio": 80,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 90,
-        "trade_url": "https://indodax.com/market/bridr",
-        "timestamp": "2026-10-15 12:50:27"
+        "timestamp": "2026-10-15 12:55:32"
     }
 ]
