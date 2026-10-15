@@ -1,18 +1,5 @@
 [
     {
-        "symbol": "MCT",
-        "chain": "PULSECHAIN",
-        "price_idr": 21.0,
-        "high_24h_idr": 26.0,
-        "vol_24h_idr": 445239554,
-        "discount_pct": 19.2,
-        "buy_ratio": 100,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 110,
-        "trade_url": "https://indodax.com/market/mctidr",
-        "timestamp": "2026-10-15 19:35:41"
-    },
-    {
         "symbol": "GENIUS",
         "chain": "BSC",
         "price_idr": 5110.0,
@@ -23,7 +10,7 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/geniusidr",
-        "timestamp": "2026-10-15 19:35:35"
+        "timestamp": "2026-10-15 19:40:35"
     },
     {
         "symbol": "DEP",
@@ -36,7 +23,7 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/depidr",
-        "timestamp": "2026-10-15 19:35:31"
+        "timestamp": "2026-10-15 19:40:32"
     },
     {
         "symbol": "DRX",
@@ -49,20 +36,33 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/drxidr",
-        "timestamp": "2026-10-15 19:35:33"
+        "timestamp": "2026-10-15 19:40:33"
     },
     {
         "symbol": "MRS",
         "chain": "BSC",
-        "price_idr": 8259.0,
+        "price_idr": 8258.0,
         "high_24h_idr": 8500.0,
-        "vol_24h_idr": 171684986,
+        "vol_24h_idr": 171667734,
         "discount_pct": 2.8,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 110,
         "trade_url": "https://indodax.com/market/mrsidr",
-        "timestamp": "2026-10-15 19:35:42"
+        "timestamp": "2026-10-15 19:40:43"
+    },
+    {
+        "symbol": "BOME",
+        "chain": "SOLANA",
+        "price_idr": 13.0,
+        "high_24h_idr": 14.0,
+        "vol_24h_idr": 128151992,
+        "discount_pct": 7.1,
+        "buy_ratio": 98,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 108,
+        "trade_url": "https://indodax.com/market/bomeidr",
+        "timestamp": "2026-10-15 19:40:29"
     },
     {
         "symbol": "PAXG",
@@ -71,24 +71,11 @@
         "high_24h_idr": 74749996.0,
         "vol_24h_idr": 67525339,
         "discount_pct": 0.0,
-        "buy_ratio": 100,
+        "buy_ratio": 92,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 110,
+        "signal_score": 102,
         "trade_url": "https://indodax.com/market/paxgidr",
-        "timestamp": "2026-10-15 19:35:45"
-    },
-    {
-        "symbol": "BOME",
-        "chain": "SOLANA",
-        "price_idr": 13.0,
-        "high_24h_idr": 14.0,
-        "vol_24h_idr": 128401729,
-        "discount_pct": 7.1,
-        "buy_ratio": 98,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 108,
-        "trade_url": "https://indodax.com/market/bomeidr",
-        "timestamp": "2026-10-15 19:35:29"
+        "timestamp": "2026-10-15 19:40:46"
     },
     {
         "symbol": "MUBARAK",
@@ -101,20 +88,20 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 100,
         "trade_url": "https://indodax.com/market/mubarakidr",
-        "timestamp": "2026-10-15 19:35:42"
+        "timestamp": "2026-10-15 19:40:43"
     },
     {
-        "symbol": "AVAX",
-        "chain": "BEAM",
-        "price_idr": 179999.0,
-        "high_24h_idr": 180000.0,
-        "vol_24h_idr": 197672441,
-        "discount_pct": 0.0,
-        "buy_ratio": 89,
+        "symbol": "CHILLGUY",
+        "chain": "SOLANA",
+        "price_idr": 176.0,
+        "high_24h_idr": 180.0,
+        "vol_24h_idr": 55066981,
+        "discount_pct": 2.2,
+        "buy_ratio": 88,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 99,
-        "trade_url": "https://indodax.com/market/avaxidr",
-        "timestamp": "2026-10-15 19:35:28"
+        "signal_score": 98,
+        "trade_url": "https://indodax.com/market/chillguyidr",
+        "timestamp": "2026-10-15 19:40:30"
     },
     {
         "symbol": "XAUT",
@@ -127,33 +114,33 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 98,
         "trade_url": "https://indodax.com/market/xautidr",
-        "timestamp": "2026-10-15 19:35:53"
+        "timestamp": "2026-10-15 19:40:54"
     },
     {
-        "symbol": "CHILLGUY",
-        "chain": "SOLANA",
-        "price_idr": 176.0,
-        "high_24h_idr": 180.0,
-        "vol_24h_idr": 55066981,
-        "discount_pct": 2.2,
-        "buy_ratio": 87,
+        "symbol": "AVAX",
+        "chain": "BEAM",
+        "price_idr": 179999.0,
+        "high_24h_idr": 180000.0,
+        "vol_24h_idr": 197672441,
+        "discount_pct": 0.0,
+        "buy_ratio": 86,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 97,
-        "trade_url": "https://indodax.com/market/chillguyidr",
-        "timestamp": "2026-10-15 19:35:29"
+        "signal_score": 96,
+        "trade_url": "https://indodax.com/market/avaxidr",
+        "timestamp": "2026-10-15 19:40:28"
     },
     {
         "symbol": "AUDIO",
         "chain": "SOLANA",
         "price_idr": 279.0,
         "high_24h_idr": 299.0,
-        "vol_24h_idr": 83816312,
+        "vol_24h_idr": 83525441,
         "discount_pct": 6.7,
-        "buy_ratio": 86,
+        "buy_ratio": 85,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 96,
+        "signal_score": 95,
         "trade_url": "https://indodax.com/market/audioidr",
-        "timestamp": "2026-10-15 19:35:28"
+        "timestamp": "2026-10-15 19:40:28"
     },
     {
         "symbol": "AZTEC",
@@ -166,7 +153,20 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 94,
         "trade_url": "https://indodax.com/market/aztecidr",
-        "timestamp": "2026-10-15 19:35:28"
+        "timestamp": "2026-10-15 19:40:29"
+    },
+    {
+        "symbol": "NEAR",
+        "chain": "BSC",
+        "price_idr": 96604.0,
+        "high_24h_idr": 96604.0,
+        "vol_24h_idr": 991106406,
+        "discount_pct": 0.0,
+        "buy_ratio": 76,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 86,
+        "trade_url": "https://indodax.com/market/nearidr",
+        "timestamp": "2026-10-15 19:40:44"
     },
     {
         "symbol": "GTC",
@@ -179,19 +179,19 @@
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 85,
         "trade_url": "https://indodax.com/market/gtcidr",
-        "timestamp": "2026-10-15 19:35:35"
+        "timestamp": "2026-10-15 19:40:36"
     },
     {
-        "symbol": "NEAR",
+        "symbol": "KOMA",
         "chain": "BSC",
-        "price_idr": 96215.0,
-        "high_24h_idr": 96215.0,
-        "vol_24h_idr": 949857115,
-        "discount_pct": 0.0,
-        "buy_ratio": 72,
+        "price_idr": 348.254,
+        "high_24h_idr": 353.792,
+        "vol_24h_idr": 84698361,
+        "discount_pct": 1.6,
+        "buy_ratio": 73,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 82,
-        "trade_url": "https://indodax.com/market/nearidr",
-        "timestamp": "2026-10-15 19:35:42"
+        "signal_score": 83,
+        "trade_url": "https://indodax.com/market/komaidr",
+        "timestamp": "2026-10-15 19:40:40"
     }
 ]
