@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indodax Smart Money Radar</title>
+    <title>Indodax Smart Money Radar v6</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -16,41 +16,47 @@
             --accent-amber: #f59e0b;
             --accent-gold: #eab308;
             --accent-gold-bg: rgba(234, 179, 8, 0.18);
+            --accent-purple: #a855f7;
+            --accent-purple-bg: rgba(168, 85, 247, 0.2);
             --accent-blue: #3b82f6;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; max-width: 600px; margin: 0 auto; min-height: 100vh; }
         header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; }
-        .title-group h1 { font-size: 1.25rem; font-weight: 800; color: var(--accent-gold); }
-        .title-group p { font-size: 0.8rem; color: var(--text-sub); margin-top: 3px; }
+        .title-group h1 { font-size: 1.2rem; font-weight: 800; color: var(--accent-gold); letter-spacing: -0.5px; }
+        .title-group p { font-size: 0.78rem; color: var(--text-sub); margin-top: 3px; }
         .status-badge { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; background: var(--accent-green-bg); color: var(--accent-green); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--accent-green); }
         .pulse-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.8; } }
+        
         .signal-grid { display: grid; gap: 16px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; }
+        .card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
         .symbol-badge { font-size: 1.2rem; font-weight: 800; color: var(--text-main); }
         .chain-tag { font-size: 0.7rem; color: var(--text-sub); background: #374151; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
         
+        .tag-super { background-color: var(--accent-purple-bg); color: var(--accent-purple); border: 1px solid var(--accent-purple); font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
         .tag-golden { background-color: var(--accent-gold-bg); color: var(--accent-gold); border: 1px solid var(--accent-gold); font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
         .tag-momentum { background-color: var(--accent-green-bg); color: var(--accent-green); font-weight: 700; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
         .tag-normal { background-color: rgba(156, 163, 175, 0.1); color: var(--text-sub); font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
 
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; background: rgba(0, 0, 0, 0.4); padding: 14px; border-radius: 10px; }
-        .metric-item span { display: block; font-size: 0.75rem; color: var(--text-sub); margin-bottom: 4px; }
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; background: rgba(0, 0, 0, 0.4); padding: 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03); }
+        .metric-item span { display: block; font-size: 0.72rem; color: var(--text-sub); margin-bottom: 4px; }
         .metric-item strong { font-size: 0.95rem; color: var(--text-main); }
-        .action-btn { display: block; width: 100%; text-align: center; background-color: #2563eb; color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; padding: 12px; border-radius: 8px; }
-        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); background: var(--card-bg); border-radius: 14px; }
-        .last-updated { text-align: center; font-size: 0.75rem; color: var(--text-sub); margin-top: 24px; }
+        
+        .action-btn { display: block; width: 100%; text-align: center; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; text-decoration: none; font-weight: 700; font-size: 0.88rem; padding: 12px; border-radius: 8px; transition: opacity 0.2s; }
+        .action-btn:active { opacity: 0.8; }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); background: var(--card-bg); border-radius: 14px; border: 1px dashed var(--card-border); }
+        .last-updated { text-align: center; font-size: 0.75rem; color: var(--text-sub); margin-top: 24px; padding-bottom: 24px; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="title-group">
-            <h1>🔥 INDODAX SMART MONEY</h1>
-            <p>Multi-Layer On-Chain Filter (Bevan 2.0)</p>
+            <h1>🔥 SMART MONEY RADAR v6</h1>
+            <p>Indodax Multi-Layer Filter (Ultra-Robust)</p>
         </div>
         <div class="status-badge">
             <div class="pulse-dot"></div>
@@ -59,7 +65,7 @@
     </header>
 
     <main id="signal-container" class="signal-grid">
-        <div class="empty-state">Memuat pindaian Smart Money...</div>
+        <div class="empty-state">Memuat pindaian Smart Money terbaru...</div>
     </main>
 
     <div class="last-updated" id="last-updated-time">Status Server: Menunggu pindaian...</div>
@@ -76,7 +82,7 @@
         async function fetchSignals() {
             try {
                 const response = await fetch(`${SIGNALS_URL}?t=${new Date().getTime()}`);
-                if (!response.ok) throw new Error('File tidak ada');
+                if (!response.ok) throw new Error('File data tidak ditemukan');
 
                 const signals = await response.json();
                 renderSignals(signals);
@@ -85,13 +91,15 @@
                 document.getElementById('last-updated-time').innerText = `Terakhir Diperbarui: ${new Date().toLocaleTimeString('id-ID')}`;
             } catch (error) {
                 document.getElementById('status-text').innerText = 'OFFLINE';
+                document.getElementById('status-text').parentElement.style.borderColor = '#ef4444';
+                document.getElementById('status-text').parentElement.style.color = '#ef4444';
             }
         }
 
         function renderSignals(signals) {
             const container = document.getElementById('signal-container');
             if (!signals || signals.length === 0) {
-                container.innerHTML = `<div class="empty-state"><p>Belum Ada Akumulasi Smart Money</p></div>`;
+                container.innerHTML = `<div class="empty-state"><p>Belum ada akumulasi Smart Money yang memenuhi kriteria.</p></div>`;
                 return;
             }
 
@@ -99,9 +107,12 @@
                 let badgeClass = "tag-normal";
                 let badgeLabel = `🐋 ${signal.buy_ratio}% Buy Inflow`;
 
-                if (signal.signal_type === "GOLDEN SIGNAL") {
+                if (signal.signal_type === "SUPER GOLDEN SIGNAL") {
+                    badgeClass = "tag-super";
+                    badgeLabel = `🔥 SUPER GOLDEN (${signal.buy_ratio}% Inflow)`;
+                } else if (signal.signal_type === "GOLDEN SIGNAL") {
                     badgeClass = "tag-golden";
-                    badgeLabel = `🔥 GOLDEN (${signal.buy_ratio}% Inflow)`;
+                    badgeLabel = `🌟 GOLDEN (${signal.buy_ratio}% Inflow)`;
                 } else if (signal.signal_type === "HIGH MOMENTUM") {
                     badgeClass = "tag-momentum";
                     badgeLabel = `⚡ MOMENTUM (${signal.buy_ratio}% Inflow)`;
@@ -119,8 +130,8 @@
                         <div class="metrics-grid">
                             <div class="metric-item"><span>Harga Pasar</span><strong>Rp ${signal.price_idr.toLocaleString('id-ID')}</strong></div>
                             <div class="metric-item"><span>Area Diskon</span><strong style="color: var(--accent-amber);">–${signal.discount_pct}% dari High</strong></div>
-                            <div class="metric-item"><span>Volume 24 Jam</span><strong style="color: var(--accent-blue);">${formatIDR(signal.vol_24h_idr)}</strong></div>
-                            <div class="metric-item"><span>High 24 Jam</span><strong style="color: var(--text-sub);">Rp ${signal.high_24h_idr.toLocaleString('id-ID')}</strong></div>
+                            <div class="metric-item"><span>Volume 24h</span><strong style="color: var(--accent-blue);">${formatIDR(signal.vol_24h_idr)}</strong></div>
+                            <div class="metric-item"><span>High 24h</span><strong style="color: var(--text-sub);">Rp ${signal.high_24h_idr.toLocaleString('id-ID')}</strong></div>
                         </div>
                         <a href="${signal.trade_url}" target="_blank" class="action-btn">EKSEKUSI BUKA INDODAX ↗</a>
                     </div>
@@ -129,7 +140,7 @@
         }
 
         fetchSignals();
-        setInterval(fetchSignals, 5000);
+        setInterval(fetchSignals, 10000);
     </script>
 </body>
 </html>
