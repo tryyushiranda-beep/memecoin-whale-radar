@@ -2,9 +2,8 @@ name: Indodax Smart Money Scanner v6
 
 on:
   schedule:
-    # Berjalan otomatis setiap 5 menit
     - cron: '*/5 * * * *'
-  workflow_dispatch: # Memungkinkan tombol "Run workflow" manual dari web GitHub
+  workflow_dispatch:
 
 jobs:
   scan-and-update:
