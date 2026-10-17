@@ -59,6 +59,11 @@ def get_indodax_altcoins():
                 vol_idr = float(data.get('vol_idr', 0))
                 high_24h = float(data.get('high', 0))
 
+                # --- FIX PERBAIKAN DESIMAL INDODAX ---
+                # Mencegah bug data harga pasar terbalik/membengkak dari nilai High 24h
+                if high_24h > 0 and last_price > (high_24h * 10):
+                    last_price = last_price / 1000
+
                 # Filter Altcoin Aktif (Volume Rp 50 Juta - Rp 5 Miliar)
                 if last_price > 0 and 50_000_000 <= vol_idr <= 5_000_000_000:
                     candidates.append({
@@ -93,7 +98,7 @@ def check_smart_money_with_fallback(symbol, chain, main_pair):
     except Exception:
         pass
 
-    # 2. FALLBACK (Jika GMGN Terkena 403 / Cloudflare Block):
+    # 2. FALLBACK (Jika GMGN Terkena Cloudflare Block):
     try:
         h1_txns = main_pair.get('txns', {}).get('h1', {})
         buys = float(h1_txns.get('buys', 0))
@@ -201,7 +206,7 @@ def process_single_coin(coin):
 
 def run_scanner():
     print("==================================================")
-    print("  INDODAX SMART MONEY RADAR v6 (ULTRA-ROBUST)     ")
+    print("  INDODAX SMART MONEY RADAR v6.1 (FIXED DECIMAL)  ")
     print("==================================================")
 
     altcoins = get_indodax_altcoins()
