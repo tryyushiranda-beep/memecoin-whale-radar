@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indodax Smart Money Radar v6</title>
+    <title>Indodax Smart Money Radar v6.1</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -55,7 +55,7 @@
 
     <header>
         <div class="title-group">
-            <h1>🔥 SMART MONEY RADAR v6</h1>
+            <h1>🔥 SMART MONEY RADAR v6.1</h1>
             <p>Indodax Multi-Layer Filter (Ultra-Robust)</p>
         </div>
         <div class="status-badge">
@@ -77,6 +77,11 @@
             if (num >= 1000000000) return (num / 1000000000).toFixed(1) + ' Miliar';
             if (num >= 1000000) return (num / 1000000).toFixed(1) + ' Juta';
             return 'Rp ' + num.toLocaleString('id-ID');
+        }
+
+        function formatPrice(price) {
+            if (price < 10) return 'Rp ' + price.toFixed(2);
+            return 'Rp ' + Math.round(price).toLocaleString('id-ID');
         }
 
         async function fetchSignals() {
@@ -128,10 +133,10 @@
                             <span class="${badgeClass}">${badgeLabel}</span>
                         </div>
                         <div class="metrics-grid">
-                            <div class="metric-item"><span>Harga Pasar</span><strong>Rp ${signal.price_idr.toLocaleString('id-ID')}</strong></div>
+                            <div class="metric-item"><span>Harga Pasar</span><strong>${formatPrice(signal.price_idr)}</strong></div>
                             <div class="metric-item"><span>Area Diskon</span><strong style="color: var(--accent-amber);">–${signal.discount_pct}% dari High</strong></div>
                             <div class="metric-item"><span>Volume 24h</span><strong style="color: var(--accent-blue);">${formatIDR(signal.vol_24h_idr)}</strong></div>
-                            <div class="metric-item"><span>High 24h</span><strong style="color: var(--text-sub);">Rp ${signal.high_24h_idr.toLocaleString('id-ID')}</strong></div>
+                            <div class="metric-item"><span>High 24h</span><strong style="color: var(--text-sub);">${formatPrice(signal.high_24h_idr)}</strong></div>
                         </div>
                         <a href="${signal.trade_url}" target="_blank" class="action-btn">EKSEKUSI BUKA INDODAX ↗</a>
                     </div>
