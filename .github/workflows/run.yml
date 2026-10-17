@@ -1,45 +1,36 @@
-name: Indodax Smart Money Radar Tracker
+name: Indodax Smart Money Scanner v6
 
 on:
   schedule:
+    # Berjalan otomatis setiap 5 menit
     - cron: '*/5 * * * *'
-  workflow_dispatch:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_dispatch: # Memungkinkan tombol "Run workflow" manual dari web GitHub
 
 jobs:
-  build:
+  scan-and-update:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Setup Python Environment
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-          cache: 'pip'
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests
+          pip install requests urllib3
 
-      - name: Run Tracker Script
+      - name: Run Tracker v6 Script
+        run: python tracker.py
+
+      - name: Commit and Push Updated Signals
         run: |
-          python tracker.py
-
-      - name: Commit and Push Changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "auto: update signals.json [skip ci]"
-          file_pattern: "signals.json"
-          push_options: '--force'
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add signals.json
+          git commit -m "Auto-update signals.json via Tracker v6 [skip ci]" || exit 0
+          git push
