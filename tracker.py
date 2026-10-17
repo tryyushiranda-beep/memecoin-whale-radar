@@ -16,7 +16,6 @@ USER_AGENTS = [
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
 ]
 
-# SOLUSI 4: Inisialisasi Session dengan Automatic Retry & Timeout Strategy
 def create_robust_session():
     session = requests.Session()
     retries = Retry(
@@ -60,6 +59,7 @@ def get_indodax_altcoins():
                 vol_idr = float(data.get('vol_idr', 0))
                 high_24h = float(data.get('high', 0))
 
+                # Filter Altcoin Aktif (Volume Rp 50 Juta - Rp 5 Miliar)
                 if last_price > 0 and 50_000_000 <= vol_idr <= 5_000_000_000:
                     candidates.append({
                         'symbol': symbol,
@@ -76,9 +76,6 @@ def get_indodax_altcoins():
         return []
 
 def check_smart_money_with_fallback(symbol, chain, main_pair):
-    """
-    SOLUSI 2: Bypass Cloudflare GMGN dengan Fallback ke DexScreener Unique Buyers/Makers Data
-    """
     chain_map = {'SOLANA': 'sol', 'ETH': 'eth', 'BSC': 'bsc', 'BASE': 'base', 'ARBITRUM': 'arb'}
     chain_code = chain_map.get(chain.upper(), 'sol')
     
@@ -96,14 +93,12 @@ def check_smart_money_with_fallback(symbol, chain, main_pair):
     except Exception:
         pass
 
-    # 2. FALLBACK (Jika GMGN terkena 403 / Cloudflare Block):
-    # Gunakan data rasio Unique Buyers vs Sellers (Makers) dari DexScreener
+    # 2. FALLBACK (Jika GMGN Terkena 403 / Cloudflare Block):
     try:
         h1_txns = main_pair.get('txns', {}).get('h1', {})
         buys = float(h1_txns.get('buys', 0))
         sells = float(h1_txns.get('sells', 0))
         
-        # Jika transaksi beli mendominasi signifikan dan ada aktivitas pembeli unik
         if buys >= 15 and (buys / (buys + sells if (buys + sells) > 0 else 1)) >= 0.65:
             return True, int(buys)
     except Exception:
@@ -112,21 +107,15 @@ def check_smart_money_with_fallback(symbol, chain, main_pair):
     return False, 0
 
 def find_best_matching_pair(pairs, target_symbol):
-    """
-    SOLUSI 3: Optimasi Pencarian Simbol & Pemangkasan Loop Pair Sampah
-    """
     valid_pairs = []
     
-    # Batasi pemeriksaan maksimal 12 pair teratas untuk menghemat memori & CPU
     for pair in pairs[:12]:
         base_token = pair.get('baseToken', {}).get('symbol', '').upper()
         liquidity_usd = float(pair.get('liquidity', {}).get('usd', 0))
         
-        # Matching simbol presisi
         if base_token != target_symbol:
             continue
             
-        # Abaikan pair tanpa likuiditas memadai (< $2.000)
         if liquidity_usd < 2000:
             continue
             
@@ -143,7 +132,7 @@ def process_single_coin(coin):
     try:
         time.sleep(random.uniform(0.05, 0.12))
         url = f"{DEX_SEARCH_URL}{symbol}"
-        res = session.get(url, headers=get_random_headers(), timeout=7) # Solusi 4: Timeout lebih longgar
+        res = session.get(url, headers=get_random_headers(), timeout=7)
         
         if res.status_code == 200:
             pairs = res.json().get('pairs', [])
@@ -158,15 +147,10 @@ def process_single_coin(coin):
                 
                 total_tx = buys_h1 + sells_h1
                 
-                # --- SOLUSI 1: PEMBOBOTAN AKURAT TANPA ASUMSI TRUNCATED AVERAGE ---
                 if vol_h1 > 0 and total_tx > 0:
                     raw_ratio = buys_h1 / total_tx
-                    
-                    # Terapkan fungsi penyeimbang marjin transaksi (Mencegah Outlier Jual Raksasa)
-                    # Jika jumlah transaksi jual sangat sedikit tapi volumenya ada, rasio disesuaikan secara dinamis
                     sell_ratio = sells_h1 / total_tx
                     if sell_ratio < 0.20 and raw_ratio >= 0.70:
-                        # Tekanan beli dominan murni
                         buy_ratio = round(raw_ratio * 100)
                     else:
                         buy_ratio = round(raw_ratio * 100)
@@ -175,22 +159,18 @@ def process_single_coin(coin):
                 else:
                     buy_ratio = 50
 
-                # Cek Ledakan Volume
                 vol_explosion = False
                 if mcap > 0 and (vol_h1 / mcap) >= 0.15:
                     vol_explosion = True
 
-                # Cek Smart Money dengan Fallback Mechanism (SOLUSI 2)
                 has_smart_wallet, smart_count = check_smart_money_with_fallback(symbol, chain, main_pair)
 
-                # Hitung Skor Sinyal
                 signal_score = buy_ratio
                 if vol_explosion:
                     signal_score += 20
                 if has_smart_wallet:
                     signal_score += 25
 
-                # Tentukan Jenis Sinyal
                 if buy_ratio >= 65 and vol_explosion and has_smart_wallet:
                     signal_type = "SUPER GOLDEN SIGNAL"
                 elif buy_ratio >= 65 and vol_explosion:
@@ -227,7 +207,6 @@ def run_scanner():
     altcoins = get_indodax_altcoins()
     valid_signals = []
 
-    # Safe Multi-Threading
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = executor.map(process_single_coin, altcoins)
         for res in results:
