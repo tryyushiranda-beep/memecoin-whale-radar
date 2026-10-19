@@ -2,80 +2,67 @@
     {
         "symbol": "VINE",
         "chain": "SOLANA",
-        "price_idr": 137.0,
+        "price_idr": 131.0,
         "high_24h_idr": 172.0,
-        "vol_24h_idr": 59354932,
-        "discount_pct": 20.3,
-        "buy_ratio": 85,
+        "vol_24h_idr": 59539693,
+        "discount_pct": 23.8,
+        "buy_ratio": 83,
         "signal_type": "HIGH MOMENTUM",
-        "signal_score": 110,
+        "signal_score": 108,
         "trade_url": "https://indodax.com/market/vineidr",
-        "timestamp": "2026-10-19 10:55:34"
+        "timestamp": "2026-10-19 11:00:40"
     },
     {
         "symbol": "SN",
         "chain": "SOLANA",
-        "price_idr": 1932.0,
+        "price_idr": 1845.0,
         "high_24h_idr": 2399.0,
-        "vol_24h_idr": 216535594,
-        "discount_pct": 19.5,
+        "vol_24h_idr": 217318643,
+        "discount_pct": 23.1,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 100,
         "trade_url": "https://indodax.com/market/snidr",
-        "timestamp": "2026-10-19 10:55:33"
+        "timestamp": "2026-10-19 11:00:39"
+    },
+    {
+        "symbol": "CST",
+        "chain": "BSC",
+        "price_idr": 265000.0,
+        "high_24h_idr": 295000.0,
+        "vol_24h_idr": 954485269,
+        "discount_pct": 10.2,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 100,
+        "trade_url": "https://indodax.com/market/cstidr",
+        "timestamp": "2026-10-19 11:00:34"
     },
     {
         "symbol": "TSLAX",
         "chain": "SOLANA",
         "price_idr": 6450449.0,
         "high_24h_idr": 7000000.0,
-        "vol_24h_idr": 73095122,
+        "vol_24h_idr": 73023368,
         "discount_pct": 7.9,
         "buy_ratio": 55,
         "signal_type": "NORMAL",
         "signal_score": 75,
         "trade_url": "https://indodax.com/market/tslaxidr",
-        "timestamp": "2026-10-19 10:55:34"
-    },
-    {
-        "symbol": "DUSK",
-        "chain": "ETHEREUM",
-        "price_idr": 2088.0,
-        "high_24h_idr": 2235.0,
-        "vol_24h_idr": 62893360,
-        "discount_pct": 6.6,
-        "buy_ratio": 67,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 67,
-        "trade_url": "https://indodax.com/market/duskidr",
-        "timestamp": "2026-10-19 10:55:26"
-    },
-    {
-        "symbol": "POL",
-        "chain": "SOLANA",
-        "price_idr": 1651.0,
-        "high_24h_idr": 1685.0,
-        "vol_24h_idr": 217858124,
-        "discount_pct": 2.0,
-        "buy_ratio": 57,
-        "signal_type": "NORMAL",
-        "signal_score": 57,
-        "trade_url": "https://indodax.com/market/polidr",
-        "timestamp": "2026-10-19 10:55:31"
+        "timestamp": "2026-10-19 11:00:40"
     },
     {
         "symbol": "GLIDR",
         "chain": "BSC",
         "price_idr": 593.0,
         "high_24h_idr": 603.0,
-        "vol_24h_idr": 113993546,
+        "vol_24h_idr": 114022520,
         "discount_pct": 1.7,
-        "buy_ratio": 54,
+        "buy_ratio": 56,
         "signal_type": "NORMAL",
-        "signal_score": 54,
+        "signal_score": 56,
         "trade_url": "https://indodax.com/market/glidridr",
-        "timestamp": "2026-10-19 10:55:27"
+        "timestamp": "2026-10-19 11:00:35"
     },
     {
         "symbol": "BOME",
@@ -84,24 +71,37 @@
         "high_24h_idr": 12.0,
         "vol_24h_idr": 195241846,
         "discount_pct": 8.3,
+        "buy_ratio": 52,
+        "signal_type": "NORMAL",
+        "signal_score": 52,
+        "trade_url": "https://indodax.com/market/bomeidr",
+        "timestamp": "2026-10-19 11:00:33"
+    },
+    {
+        "symbol": "GTC",
+        "chain": "ETHEREUM",
+        "price_idr": 5210.0,
+        "high_24h_idr": 5585.0,
+        "vol_24h_idr": 484483000,
+        "discount_pct": 6.7,
         "buy_ratio": 51,
         "signal_type": "NORMAL",
         "signal_score": 51,
-        "trade_url": "https://indodax.com/market/bomeidr",
-        "timestamp": "2026-10-19 10:55:25"
+        "trade_url": "https://indodax.com/market/gtcidr",
+        "timestamp": "2026-10-19 11:00:35"
     },
     {
         "symbol": "SUN",
         "chain": "TRON",
         "price_idr": 294.0,
         "high_24h_idr": 400.0,
-        "vol_24h_idr": 251420404,
+        "vol_24h_idr": 251400364,
         "discount_pct": 26.5,
         "buy_ratio": 50,
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/sunidr",
-        "timestamp": "2026-10-19 10:55:33"
+        "timestamp": "2026-10-19 11:00:39"
     },
     {
         "symbol": "PYTH",
@@ -114,7 +114,7 @@
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/pythidr",
-        "timestamp": "2026-10-19 10:55:31"
+        "timestamp": "2026-10-19 11:00:38"
     },
     {
         "symbol": "CNG",
@@ -127,7 +127,7 @@
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/cngidr",
-        "timestamp": "2026-10-19 10:55:25"
+        "timestamp": "2026-10-19 11:00:34"
     },
     {
         "symbol": "CAST",
@@ -140,20 +140,20 @@
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/castidr",
-        "timestamp": "2026-10-19 10:55:25"
+        "timestamp": "2026-10-19 11:00:33"
     },
     {
         "symbol": "TEN",
         "chain": "BASE",
         "price_idr": 81.0,
         "high_24h_idr": 100.0,
-        "vol_24h_idr": 474255515,
+        "vol_24h_idr": 457465366,
         "discount_pct": 19.0,
         "buy_ratio": 50,
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/tenidr",
-        "timestamp": "2026-10-19 10:55:33"
+        "timestamp": "2026-10-19 11:00:39"
     },
     {
         "symbol": "NMR",
@@ -166,32 +166,32 @@
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/nmridr",
-        "timestamp": "2026-10-19 10:55:30"
-    },
-    {
-        "symbol": "SHOW",
-        "chain": "BASE",
-        "price_idr": 86509.0,
-        "high_24h_idr": 104903.0,
-        "vol_24h_idr": 577766404,
-        "discount_pct": 17.5,
-        "buy_ratio": 50,
-        "signal_type": "NORMAL",
-        "signal_score": 50,
-        "trade_url": "https://indodax.com/market/showidr",
-        "timestamp": "2026-10-19 10:55:32"
+        "timestamp": "2026-10-19 11:00:37"
     },
     {
         "symbol": "WEALTH",
         "chain": "SOLANA",
-        "price_idr": 430937.0,
+        "price_idr": 430928.0,
         "high_24h_idr": 522555.0,
-        "vol_24h_idr": 114434582,
+        "vol_24h_idr": 114918269,
         "discount_pct": 17.5,
         "buy_ratio": 50,
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/wealthidr",
-        "timestamp": "2026-10-19 10:55:35"
+        "timestamp": "2026-10-19 11:00:41"
+    },
+    {
+        "symbol": "SKYA",
+        "chain": "ETHEREUM",
+        "price_idr": 5.0,
+        "high_24h_idr": 6.0,
+        "vol_24h_idr": 65383816,
+        "discount_pct": 16.7,
+        "buy_ratio": 50,
+        "signal_type": "NORMAL",
+        "signal_score": 50,
+        "trade_url": "https://indodax.com/market/skyaidr",
+        "timestamp": "2026-10-19 11:00:39"
     }
 ]
