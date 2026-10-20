@@ -1,1 +1,34 @@
-[]
+[
+    {
+        "symbol": "VELVET",
+        "chain": "BASE",
+        "token_address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd",
+        "price_idr": 1161.0,
+        "high_24h_idr": 1182.0,
+        "vol_24h_idr": 67251466,
+        "discount_pct": 1.8,
+        "buy_ratio": 53,
+        "freshness": "\ud83d\udea8 WHALE BUY ($1207 via DEX <15m)",
+        "signal_type": "SUPER GOLDEN SIGNAL",
+        "signal_score": 88,
+        "trade_url": "https://indodax.com/market/velvetidr",
+        "tracker_url": "https://dexscreener.com/base/0x6b0F53cbD9272D8117e9535FE25371dedF39a1bE",
+        "timestamp": "2026-10-20 05:05:23"
+    },
+    {
+        "symbol": "STRK",
+        "chain": "SOLANA",
+        "token_address": "HsRpHQn6VbyMs5b5j5SV6xQ2VvpvvCCzu19GjytVSCoz",
+        "price_idr": 1015.0,
+        "high_24h_idr": 1087.0,
+        "vol_24h_idr": 396900052,
+        "discount_pct": 6.6,
+        "buy_ratio": 41,
+        "freshness": "\ud83d\udea8 WHALE BUY ($2774 via DEX <15m)",
+        "signal_type": "SUPER GOLDEN SIGNAL",
+        "signal_score": 76,
+        "trade_url": "https://indodax.com/market/strkidr",
+        "tracker_url": "https://gmgn.ai/sol/token/HsRpHQn6VbyMs5b5j5SV6xQ2VvpvvCCzu19GjytVSCoz",
+        "timestamp": "2026-10-20 05:05:22"
+    }
+]
