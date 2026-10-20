@@ -6,7 +6,8 @@ from concurrent.futures import ThreadPoolExecutor
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-HEAVY_COINS = ['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 'MATIC', 'ADA', 'DOT']
+# Mengabaikan koin berat / koin utama yang berbobot besar
+HEAVY_COINS = ['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 'MATIC', 'ADA', 'DOT', 'BOME', 'PEPE', 'SHIB', 'WIF', 'BONK']
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 DEX_SEARCH_URL = "https://api.dexscreener.com/latest/dex/search?q="
 
@@ -63,8 +64,8 @@ def get_indodax_altcoins():
                 if high_24h > 0 and last_price > (high_24h * 10):
                     last_price = last_price / 1000
 
-                # Filter Volume 24 Jam Rp 50 Juta - Rp 5 Miliar
-                if last_price > 0 and 50_000_000 <= vol_idr <= 5_000_000_000:
+                # DIBATASI: Filter Volume 24 Jam Rp 50 Juta s/d Rp 500 Juta (Fokus Micro-Cap / Low-Cap)
+                if last_price > 0 and 50_000_000 <= vol_idr <= 500_000_000:
                     candidates.append({
                         'symbol': symbol,
                         'price_idr': last_price,
@@ -149,6 +150,11 @@ def process_single_coin(coin):
                 token_address = main_pair.get('baseToken', {}).get('address', '')
                 pair_address = main_pair.get('pairAddress', '')
                 
+                # MEMBATASI MARKET CAP: Maksimal $5,000,000 ($5 Juta USD)
+                # Mengabaikan koin dengan Market Cap raksasa seperti BOME yang kebal dorongan modal kecil
+                if mcap > 5_000_000:
+                    return None
+
                 total_tx = buys_h1 + sells_h1
                 
                 if vol_h1 > 0 and total_tx > 0:
@@ -214,7 +220,7 @@ def process_single_coin(coin):
 
 def run_scanner():
     print("==================================================")
-    print("  INDODAX SMART MONEY RADAR v6.3 (WALLET LINK)    ")
+    print("  INDODAX SMART MONEY RADAR v6.4 (MICRO-CAP)      ")
     print("==================================================")
 
     altcoins = get_indodax_altcoins()
@@ -232,7 +238,7 @@ def run_scanner():
     with open('signals.json', 'w') as f:
         json.dump(final_signals, f, indent=4)
 
-    print(f"Selesai! {len(final_signals)} altcoin/memecoin valid tersimpan di signals.json.")
+    print(f"Selesai! {len(final_signals)} altcoin/memecoin Micro-Cap valid tersimpan di signals.json.")
 
 if __name__ == "__main__":
     run_scanner()
