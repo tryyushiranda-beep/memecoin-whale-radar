@@ -60,11 +60,10 @@ def get_indodax_altcoins():
                 vol_idr = float(data.get('vol_idr', 0))
                 high_24h = float(data.get('high', 0))
 
-                # Koreksi Anomali Desimal Indodax
                 if high_24h > 0 and last_price > (high_24h * 10):
                     last_price = last_price / 1000
 
-                # Filter Volume 24h Indodax Rp 50 Juta s/d Rp 500 Juta (Micro-Cap Focus)
+                # Micro-Cap Filter Indodax Rp 50 Juta s/d Rp 500 Juta
                 if last_price > 0 and 50_000_000 <= vol_idr <= 500_000_000:
                     candidates.append({
                         'symbol': symbol,
@@ -80,29 +79,33 @@ def get_indodax_altcoins():
         print(f"[ERROR] Fetching Indodax Data: {e}")
         return []
 
-def find_best_matching_pair(pairs, target_symbol):
+def find_all_matching_pairs(pairs, target_symbol):
+    """
+    MULTI-CHAIN SEARCH: Memindai seluruh chain (Solana, BSC, ETH, Base, Arb)
+    dan mengurutkannya berdasarkan likuiditas & volume Beli tertinggi.
+    """
     valid_pairs = []
-    for pair in pairs[:12]:
+    supported_chains = ['SOLANA', 'BSC', 'ETHEREUM', 'BASE', 'ARBITRUM', 'AVALANCHE', 'POLYGON']
+    
+    for pair in pairs:
         base_token = pair.get('baseToken', {}).get('symbol', '').upper()
+        chain_id = pair.get('chainId', '').upper()
         liquidity_usd = float(pair.get('liquidity', {}).get('usd', 0))
+        vol_h1 = float(pair.get('volume', {}).get('h1', 0))
         
-        if base_token != target_symbol or liquidity_usd < 2000:
-            continue
+        if base_token == target_symbol and liquidity_usd >= 2000 and chain_id in supported_chains:
+            # Skor berdasarkan gabungan Likuiditas + Volume H1
+            score = liquidity_usd + (vol_h1 * 2)
+            valid_pairs.append((score, pair))
             
-        valid_pairs.append((liquidity_usd, pair))
-        
     if not valid_pairs:
-        return None
+        return []
         
+    # Urutkan dari pair terbaik (skor paling tinggi)
     valid_pairs.sort(key=lambda x: x[0], reverse=True)
-    return valid_pairs[0][1]
+    return [p[1] for p in valid_pairs]
 
 def check_gmgn_whale_activity(chain, token_address):
-    """
-    INSPEKSI GMGN API (MURNI PER-WALLET BUY):
-    Memeriksa pembeli teratas di GMGN.
-    Transaksi JUAL diabaikan total, hanya menghitung total_buy_usd >= $1,000 dalam 15 menit.
-    """
     chain_map = {'SOLANA': 'sol', 'ETH': 'eth', 'BSC': 'bsc', 'BASE': 'base', 'ARBITRUM': 'arb'}
     chain_code = chain_map.get(chain.upper(), 'sol')
     
@@ -118,7 +121,7 @@ def check_gmgn_whale_activity(chain, token_address):
                 last_active = float(buyer.get('last_active_timestamp', 0))
                 buy_amount_usd = float(buyer.get('total_buy_usd', 0))
                 
-                # Memastikan transaksi BUY per-wallet masif >= $1,000 USD dalam 15 menit (900 detik)
+                # Cek transaksi Beli Paus per-wallet >= $1,000 USD <15m
                 if (current_time - last_active <= 900) and buy_amount_usd >= 1000:
                     return True, round(buy_amount_usd)
     except Exception:
@@ -126,10 +129,6 @@ def check_gmgn_whale_activity(chain, token_address):
     return False, 0
 
 def check_dexscreener_whale_tx(chain, pair_address):
-    """
-    INSPEKSI DEXSCREENER API (MURNI BUY VOLUME INFLOW):
-    Memeriksa volume Beli 5-15 menit terakhir.
-    """
     try:
         url = f"https://api.dexscreener.com/latest/dex/pairs/{chain.lower()}/{pair_address}"
         res = session.get(url, headers=get_random_headers(), timeout=5)
@@ -156,68 +155,64 @@ def process_single_coin(coin):
         
         if res.status_code == 200:
             pairs = res.json().get('pairs', [])
-            main_pair = find_best_matching_pair(pairs, symbol)
+            candidate_pairs = find_all_matching_pairs(pairs, symbol)
             
-            if main_pair:
+            # Pindai semua pasangan koin lintas chain yang ditemukan
+            for main_pair in candidate_pairs[:3]:
                 buys_h1 = float(main_pair.get('txns', {}).get('h1', {}).get('buys', 0))
                 sells_h1 = float(main_pair.get('txns', {}).get('h1', {}).get('sells', 0))
-                vol_h1 = float(main_pair.get('volume', {}).get('h1', 0))
                 mcap = float(main_pair.get('fdv', 0) or main_pair.get('marketCap', 0))
                 chain = main_pair.get('chainId', 'unknown').upper()
                 token_address = main_pair.get('baseToken', {}).get('address', '')
                 pair_address = main_pair.get('pairAddress', '')
                 
-                # 1. Filter Market Cap Maksimal $5,000,000 USD (Hanya Micro-Cap)
                 if mcap > 5_000_000:
-                    return None
+                    continue
 
-                # 2. VERIFIKASI DUAL WHALE BUY (Murni Pembelian Paus >= $1,000 USD)
+                # Verifikasi Dual Whale Buy (>= $1,000 dalam 15 Min)
                 gmgn_has_whale, gmgn_val = check_gmgn_whale_activity(chain, token_address)
                 dex_has_whale, dex_val = check_dexscreener_whale_tx(chain, pair_address)
                 
-                # WAJIB LOLOS SALAH SATU ATAU KEDUANYA
-                if not (gmgn_has_whale or dex_has_whale):
-                    return None  # Abaikan jika tidak ada transaksi Beli Paus $1,000+ dalam 15 menit
+                if gmgn_has_whale or dex_has_whale:
+                    whale_inflow_val = max(gmgn_val, dex_val)
+                    total_tx = buys_h1 + sells_h1
+                    buy_ratio = round((buys_h1 / total_tx) * 100) if total_tx > 0 else 50
+                    buy_ratio = min(max(buy_ratio, 0), 100)
 
-                whale_inflow_val = max(gmgn_val, dex_val)
-                total_tx = buys_h1 + sells_h1
-                buy_ratio = round((buys_h1 / total_tx) * 100) if total_tx > 0 else 50
-                buy_ratio = min(max(buy_ratio, 0), 100)
+                    discount_pct = ((coin['high_24h_idr'] - coin['price_idr']) / coin['high_24h_idr']) * 100 if coin['high_24h_idr'] > 0 else 0
 
-                discount_pct = ((coin['high_24h_idr'] - coin['price_idr']) / coin['high_24h_idr']) * 100 if coin['high_24h_idr'] > 0 else 0
+                    source_label = "GMGN + DEX" if (gmgn_has_whale and dex_has_whale) else ("GMGN" if gmgn_has_whale else "DEX")
+                    freshness_status = f"🚨 WHALE BUY (${whale_inflow_val} via {source_label} <15m)"
 
-                source_label = "GMGN + DEX" if (gmgn_has_whale and dex_has_whale) else ("GMGN" if gmgn_has_whale else "DEX")
-                freshness_status = f"🚨 WHALE BUY (${whale_inflow_val} via {source_label} <15m)"
+                    if chain == 'SOLANA':
+                        tracker_url = f"https://gmgn.ai/sol/token/{token_address}" if token_address else f"https://solscan.io/token/{token_address}"
+                    else:
+                        chain_slug = chain.lower()
+                        tracker_url = f"https://dexscreener.com/{chain_slug}/{pair_address}"
 
-                if chain == 'SOLANA':
-                    tracker_url = f"https://gmgn.ai/sol/token/{token_address}" if token_address else f"https://solscan.io/token/{token_address}"
-                else:
-                    chain_slug = chain.lower()
-                    tracker_url = f"https://dexscreener.com/{chain_slug}/{pair_address}"
-
-                return {
-                    'symbol': symbol,
-                    'chain': chain,
-                    'token_address': token_address,
-                    'price_idr': coin['price_idr'],
-                    'high_24h_idr': coin['high_24h_idr'],
-                    'vol_24h_idr': round(coin['vol_24h_idr']),
-                    'discount_pct': round(discount_pct, 1),
-                    'buy_ratio': buy_ratio,
-                    'freshness': freshness_status,
-                    'signal_type': "SUPER GOLDEN SIGNAL",
-                    'signal_score': buy_ratio + 35,
-                    'trade_url': f"https://indodax.com/market/{symbol.lower()}idr",
-                    'tracker_url': tracker_url,
-                    'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
-                }
+                    return {
+                        'symbol': symbol,
+                        'chain': chain,
+                        'token_address': token_address,
+                        'price_idr': coin['price_idr'],
+                        'high_24h_idr': coin['high_24h_idr'],
+                        'vol_24h_idr': round(coin['vol_24h_idr']),
+                        'discount_pct': round(discount_pct, 1),
+                        'buy_ratio': buy_ratio,
+                        'freshness': freshness_status,
+                        'signal_type': "SUPER GOLDEN SIGNAL",
+                        'signal_score': buy_ratio + 35,
+                        'trade_url': f"https://indodax.com/market/{symbol.lower()}idr",
+                        'tracker_url': tracker_url,
+                        'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
+                    }
     except Exception:
         pass
     return None
 
 def run_scanner():
     print("==================================================")
-    print("  INDODAX RADAR v6.7 (AUTO DUAL WHALE BUY FILTER) ")
+    print("  INDODAX RADAR v6.8 (MULTI-CHAIN DUAL WHALE)     ")
     print("==================================================")
 
     altcoins = get_indodax_altcoins()
@@ -235,7 +230,7 @@ def run_scanner():
     with open('signals.json', 'w') as f:
         json.dump(final_signals, f, indent=4)
 
-    print(f"Selesai! {len(final_signals)} koin terkonfirmasi transaksi Paus BUY tersimpan.")
+    print(f"Selesai! {len(final_signals)} koin terkonfirmasi Paus lintas chain tersimpan.")
 
 if __name__ == "__main__":
     run_scanner()
