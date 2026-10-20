@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-# Mengabaikan koin berat / koin utama yang berbobot besar
+# Mengabaikan koin berat / koin utama ber-Market Cap raksasa
 HEAVY_COINS = ['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 'MATIC', 'ADA', 'DOT', 'BOME', 'PEPE', 'SHIB', 'WIF', 'BONK']
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 DEX_SEARCH_URL = "https://api.dexscreener.com/latest/dex/search?q="
@@ -64,7 +64,7 @@ def get_indodax_altcoins():
                 if high_24h > 0 and last_price > (high_24h * 10):
                     last_price = last_price / 1000
 
-                # DIBATASI: Filter Volume 24 Jam Rp 50 Juta s/d Rp 500 Juta (Fokus Micro-Cap / Low-Cap)
+                # DIBATASI: Volume 24h Rp 50 Juta s/d Rp 500 Juta (Fokus Micro-Cap)
                 if last_price > 0 and 50_000_000 <= vol_idr <= 500_000_000:
                     candidates.append({
                         'symbol': symbol,
@@ -150,10 +150,26 @@ def process_single_coin(coin):
                 token_address = main_pair.get('baseToken', {}).get('address', '')
                 pair_address = main_pair.get('pairAddress', '')
                 
-                # MEMBATASI MARKET CAP: Maksimal $5,000,000 ($5 Juta USD)
-                # Mengabaikan koin dengan Market Cap raksasa seperti BOME yang kebal dorongan modal kecil
+                # 1. FILTER MARKET CAP: Maksimal $5,000,000 USD (Hanya Micro-Cap)
                 if mcap > 5_000_000:
                     return None
+
+                # 2. FILTER FRESHNESS & MINIMAL VOLUME PAUS (1-15 MENIT TERAKHIR)
+                m5_buys = float(main_pair.get('txns', {}).get('m5', {}).get('buys', 0))
+                m5_vol = float(main_pair.get('volume', {}).get('m5', 0))
+                h1_buys = float(main_pair.get('txns', {}).get('h1', {}).get('buys', 0))
+                
+                # Membuang koin jika tidak ada aktivitas transaksi beli segar dalam 5-15m
+                if m5_buys < 1 and h1_buys < 4:
+                    return None
+                    
+                # Menentukan Label Segar untuk Tampilan Dasbor
+                if m5_buys >= 3 and m5_vol >= 1000:
+                    freshness_status = "⚡ FRESH (<5m) | Paus Masuk"
+                elif m5_buys >= 1:
+                    freshness_status = "🔥 IDEAL (5-15m) | Akumulasi"
+                else:
+                    freshness_status = "⏱️ TOLERANSI (<15m)"
 
                 total_tx = buys_h1 + sells_h1
                 
@@ -192,7 +208,6 @@ def process_single_coin(coin):
 
                 discount_pct = ((coin['high_24h_idr'] - coin['price_idr']) / coin['high_24h_idr']) * 100 if coin['high_24h_idr'] > 0 else 0
 
-                # Penentuan URL Pelacak Wallet sesuai Jaringan
                 if chain == 'SOLANA':
                     tracker_url = f"https://gmgn.ai/sol/token/{token_address}" if token_address else f"https://solscan.io/token/{token_address}"
                 else:
@@ -208,6 +223,7 @@ def process_single_coin(coin):
                     'vol_24h_idr': round(coin['vol_24h_idr']),
                     'discount_pct': round(discount_pct, 1),
                     'buy_ratio': buy_ratio,
+                    'freshness': freshness_status,
                     'signal_type': signal_type,
                     'signal_score': signal_score,
                     'trade_url': f"https://indodax.com/market/{symbol.lower()}idr",
@@ -220,7 +236,7 @@ def process_single_coin(coin):
 
 def run_scanner():
     print("==================================================")
-    print("  INDODAX SMART MONEY RADAR v6.4 (MICRO-CAP)      ")
+    print("  INDODAX RADAR v6.5 (MICRO-CAP & FRESH 15m)      ")
     print("==================================================")
 
     altcoins = get_indodax_altcoins()
@@ -238,7 +254,7 @@ def run_scanner():
     with open('signals.json', 'w') as f:
         json.dump(final_signals, f, indent=4)
 
-    print(f"Selesai! {len(final_signals)} altcoin/memecoin Micro-Cap valid tersimpan di signals.json.")
+    print(f"Selesai! {len(final_signals)} koin segar (1-15m) tersimpan di signals.json.")
 
 if __name__ == "__main__":
     run_scanner()
