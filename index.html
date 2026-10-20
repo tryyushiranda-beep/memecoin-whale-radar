@@ -81,8 +81,8 @@
     <div class="last-updated" id="last-updated-time">Status Server: Menunggu pindaian...</div>
 
     <script>
-        // URL Absolut untuk mencegah masalah 404 / path relatif di GitHub Pages
-        const SIGNALS_URL = 'https://tryyushiranda-beep.github.io/signals.json';
+        // Membaca file signals.json yang berada di folder yang sama (Path Relatif)
+        const SIGNALS_URL = 'signals.json';
         let notifiedCoins = new Set();
 
         function formatIDR(num) {
