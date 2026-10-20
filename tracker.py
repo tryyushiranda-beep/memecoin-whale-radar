@@ -6,7 +6,13 @@ from concurrent.futures import ThreadPoolExecutor
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-HEAVY_COINS = ['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 'MATIC', 'ADA', 'DOT', 'BOME', 'PEPE', 'SHIB', 'WIF', 'BONK']
+# Mengabaikan koin utama / Layer 1 / Layer 2 ber-Supply raksasa
+HEAVY_COINS = [
+    'BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 
+    'MATIC', 'ADA', 'DOT', 'BOME', 'PEPE', 'SHIB', 'WIF', 'BONK',
+    'STRK', 'ARB', 'OP', 'SUI', 'APT', 'SEI', 'NEAR', 'FET', 'TIA', 'RENDER'
+]
+
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 DEX_SEARCH_URL = "https://api.dexscreener.com/latest/dex/search?q="
 
@@ -54,7 +60,6 @@ def get_indodax_altcoins():
                 if high_24h > 0 and last_price > (high_24h * 10):
                     last_price = last_price / 1000
 
-                # Perluas sedikit batas volume Indodax Rp 30 Juta - Rp 800 Juta
                 if last_price > 0 and 30_000_000 <= vol_idr <= 800_000_000:
                     candidates.append({
                         'symbol': symbol,
@@ -144,13 +149,27 @@ def process_single_coin(coin):
             for main_pair in candidate_pairs[:3]:
                 buys_h1 = float(main_pair.get('txns', {}).get('h1', {}).get('buys', 0))
                 sells_h1 = float(main_pair.get('txns', {}).get('h1', {}).get('sells', 0))
-                mcap = float(main_pair.get('fdv', 0) or main_pair.get('marketCap', 0))
+                mcap = float(main_pair.get('marketCap', 0) or 0)
+                fdv = float(main_pair.get('fdv', 0) or 0)
+                price_usd = float(main_pair.get('priceUsd', 0) or 0)
                 chain = main_pair.get('chainId', 'unknown').upper()
                 token_address = main_pair.get('baseToken', {}).get('address', '')
                 pair_address = main_pair.get('pairAddress', '')
                 
-                if mcap > 6_000_000:
+                # -------------------------------------------------------------
+                # FILTER OTOMATIS TOTAL SUPPLY & FDV RAKSASA
+                # -------------------------------------------------------------
+                # Calculate estimated supply: FDV / Price
+                estimated_total_supply = (fdv / price_usd) if (price_usd > 0 and fdv > 0) else 0
+
+                # 1. Filter Market Cap & FDV Maksimal $6,000,000 USD (Micro-Cap Only)
+                if mcap > 6_000_000 or fdv > 10_000_000:
                     continue
+
+                # 2. Filter Total Supply Maksimal 1 Miliar Token (Abaikan koin dengan supply raksasa)
+                if estimated_total_supply > 1_000_000_000:
+                    continue
+                # -------------------------------------------------------------
 
                 gmgn_has_whale, gmgn_val = check_gmgn_whale_activity(chain, token_address)
                 dex_has_whale, dex_val = check_dexscreener_whale_tx(chain, pair_address)
@@ -165,7 +184,6 @@ def process_single_coin(coin):
 
                     source_label = "GMGN + DEX" if (gmgn_has_whale and dex_has_whale) else ("GMGN" if gmgn_has_whale else "DEX")
 
-                    # KLASIFIKASI TIERING WHALE
                     if whale_inflow_val >= 1000:
                         freshness_status = f"🚨 SUPER WHALE (${whale_inflow_val} via {source_label} <15m)"
                         signal_type = "SUPER GOLDEN SIGNAL"
@@ -203,7 +221,7 @@ def process_single_coin(coin):
 
 def run_scanner():
     print("==================================================")
-    print("  INDODAX RADAR v6.9 (TIERED SMART WHALE)         ")
+    print("  INDODAX RADAR v6.10 (SUPPLY & FDV WHALE FILTER) ")
     print("==================================================")
 
     altcoins = get_indodax_altcoins()
@@ -221,7 +239,7 @@ def run_scanner():
     with open('signals.json', 'w') as f:
         json.dump(final_signals, f, indent=4)
 
-    print(f"Selesai! {len(final_signals)} koin terkonfirmasi Paus tersimpan.")
+    print(f"Selesai! {len(final_signals)} koin terkonfirmasi Paus Micro-Cap tersimpan.")
 
 if __name__ == "__main__":
     run_scanner()
