@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-# Daftar koin raksasa / Layer 1 / Layer 2 utama yang wajib diabaikan
+# Top Tier / Large-cap Coins yang diabaikan
 HEAVY_COINS = [
     'BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 
     'MATIC', 'ADA', 'DOT', 'BOME', 'PEPE', 'SHIB', 'WIF', 'BONK',
@@ -157,7 +157,7 @@ def process_single_coin(coin):
                 token_address = main_pair.get('baseToken', {}).get('address', '')
                 pair_address = main_pair.get('pairAddress', '')
 
-                # FILTER UTAMA CUAN: Market Cap / FDV Maksimal $5.000.000 USD (True Micro-Cap)
+                # Filter Micro-Cap Max $5.000.000 USD
                 if (mcap > 5_000_000 and mcap != 0) or (fdv > 6_000_000 and fdv != 0):
                     continue
 
@@ -171,7 +171,6 @@ def process_single_coin(coin):
                     buy_ratio = min(max(buy_ratio, 0), 100)
 
                     discount_pct = ((coin['high_24h_idr'] - coin['price_idr']) / coin['high_24h_idr']) * 100 if coin['high_24h_idr'] > 0 else 0
-
                     source_label = "GMGN + DEX" if (gmgn_has_whale and dex_has_whale) else ("GMGN" if gmgn_has_whale else "DEX")
 
                     if whale_inflow_val >= 1000:
