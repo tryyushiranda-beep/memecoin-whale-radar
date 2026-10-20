@@ -7,29 +7,13 @@
         "high_24h_idr": 750.0,
         "vol_24h_idr": 36742480,
         "discount_pct": 4.4,
-        "buy_ratio": 51,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($2495 via DEX <15m)",
+        "buy_ratio": 49,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($1825 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
-        "signal_score": 101,
+        "signal_score": 99,
         "trade_url": "https://indodax.com/market/pufferidr",
         "tracker_url": "https://dexscreener.com/bsc/0xDA7630A141dBB6382DDb6409AeA7331da543B0Bb",
-        "timestamp": "2026-10-20 05:25:34"
-    },
-    {
-        "symbol": "VELVET",
-        "chain": "BASE",
-        "token_address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd",
-        "price_idr": 1138.0,
-        "high_24h_idr": 1182.0,
-        "vol_24h_idr": 67633700,
-        "discount_pct": 3.7,
-        "buy_ratio": 54,
-        "freshness": "\u26a1 SMART ACCUMULATION ($598 via DEX <15m)",
-        "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 79,
-        "trade_url": "https://indodax.com/market/velvetidr",
-        "tracker_url": "https://dexscreener.com/base/0x6b0F53cbD9272D8117e9535FE25371dedF39a1bE",
-        "timestamp": "2026-10-20 05:25:36"
+        "timestamp": "2026-10-20 05:28:03"
     },
     {
         "symbol": "TSLAX",
@@ -39,12 +23,28 @@
         "high_24h_idr": 6886985.0,
         "vol_24h_idr": 53440171,
         "discount_pct": 3.4,
-        "buy_ratio": 50,
-        "freshness": "\u26a1 SMART ACCUMULATION ($512 via DEX <15m)",
-        "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 75,
+        "buy_ratio": 49,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($1350 via DEX <15m)",
+        "signal_type": "SUPER GOLDEN SIGNAL",
+        "signal_score": 99,
         "trade_url": "https://indodax.com/market/tslaxidr",
         "tracker_url": "https://gmgn.ai/sol/token/XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
-        "timestamp": "2026-10-20 05:25:36"
+        "timestamp": "2026-10-20 05:28:06"
+    },
+    {
+        "symbol": "VELVET",
+        "chain": "BASE",
+        "token_address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd",
+        "price_idr": 1138.0,
+        "high_24h_idr": 1182.0,
+        "vol_24h_idr": 67557744,
+        "discount_pct": 3.7,
+        "buy_ratio": 52,
+        "freshness": "\u26a1 SMART ACCUMULATION ($527 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 77,
+        "trade_url": "https://indodax.com/market/velvetidr",
+        "tracker_url": "https://dexscreener.com/base/0x6b0F53cbD9272D8117e9535FE25371dedF39a1bE",
+        "timestamp": "2026-10-20 05:28:06"
     }
 ]
