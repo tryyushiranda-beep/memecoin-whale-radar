@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indodax Smart Money Radar v6.1</title>
+    <title>Indodax Smart Money Radar v6.3</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -30,6 +30,9 @@
         .pulse-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.8; } }
         
+        .notif-btn { width: 100%; background: #1f293d; color: var(--text-main); border: 1px solid var(--card-border); padding: 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .notif-btn:active { opacity: 0.8; }
+
         .signal-grid { display: grid; gap: 16px; }
         .card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
@@ -45,8 +48,11 @@
         .metric-item span { display: block; font-size: 0.72rem; color: var(--text-sub); margin-bottom: 4px; }
         .metric-item strong { font-size: 0.95rem; color: var(--text-main); }
         
-        .action-btn { display: block; width: 100%; text-align: center; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; text-decoration: none; font-weight: 700; font-size: 0.88rem; padding: 12px; border-radius: 8px; transition: opacity 0.2s; }
-        .action-btn:active { opacity: 0.8; }
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .action-btn { display: block; text-align: center; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; text-decoration: none; font-weight: 700; font-size: 0.8rem; padding: 10px; border-radius: 8px; }
+        .tracker-btn { display: block; text-align: center; background: #374151; color: #f3f4f6; text-decoration: none; font-weight: 700; font-size: 0.8rem; padding: 10px; border-radius: 8px; border: 1px solid #4b5563; }
+        .action-btn:active, .tracker-btn:active { opacity: 0.8; }
+        
         .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); background: var(--card-bg); border-radius: 14px; border: 1px dashed var(--card-border); }
         .last-updated { text-align: center; font-size: 0.75rem; color: var(--text-sub); margin-top: 24px; padding-bottom: 24px; }
     </style>
@@ -55,14 +61,18 @@
 
     <header>
         <div class="title-group">
-            <h1>🔥 SMART MONEY RADAR v6.1</h1>
-            <p>Indodax Multi-Layer Filter (Ultra-Robust)</p>
+            <h1>🔥 SMART MONEY RADAR v6.3</h1>
+            <p>Indodax Multi-Layer Filter + Wallet Tracker</p>
         </div>
         <div class="status-badge">
             <div class="pulse-dot"></div>
             <span id="status-text">CONNECTING</span>
         </div>
     </header>
+
+    <button id="enable-notif-btn" class="notif-btn" onclick="requestNotificationPermission()">
+        🔔 Aktifkan Notifikasi Web (HP/Browser)
+    </button>
 
     <main id="signal-container" class="signal-grid">
         <div class="empty-state">Memuat pindaian Smart Money terbaru...</div>
@@ -72,6 +82,7 @@
 
     <script>
         const SIGNALS_URL = 'signals.json';
+        let notifiedCoins = new Set();
 
         function formatIDR(num) {
             if (num >= 1000000000) return (num / 1000000000).toFixed(1) + ' Miliar';
@@ -84,6 +95,34 @@
             return 'Rp ' + Math.round(price).toLocaleString('id-ID');
         }
 
+        function requestNotificationPermission() {
+            if (!("Notification" in window)) {
+                alert("Browser kamu tidak mendukung notifikasi web.");
+                return;
+            }
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    document.getElementById('enable-notif-btn').innerText = '✅ Notifikasi Web Aktif';
+                    document.getElementById('enable-notif-btn').style.borderColor = '#10b981';
+                    new Notification("Smart Money Radar", { body: "Notifikasi sinyal siap diaktifkan!" });
+                }
+            });
+        }
+
+        function checkAndSendNotification(signals) {
+            if (Notification.permission !== "granted") return;
+
+            signals.forEach(signal => {
+                if ((signal.signal_type === "SUPER GOLDEN SIGNAL" || signal.signal_type === "GOLDEN SIGNAL") && !notifiedCoins.has(signal.symbol)) {
+                    new Notification(`🔥 ${signal.signal_type}: ${signal.symbol}/IDR`, {
+                        body: `Buy Inflow: ${signal.buy_ratio}% | Diskon: -${signal.discount_pct}% | Harga: ${formatPrice(signal.price_idr)}`,
+                        icon: 'https://indodax.com/favicon.ico'
+                    });
+                    notifiedCoins.add(signal.symbol);
+                }
+            });
+        }
+
         async function fetchSignals() {
             try {
                 const response = await fetch(`${SIGNALS_URL}?t=${new Date().getTime()}`);
@@ -91,6 +130,7 @@
 
                 const signals = await response.json();
                 renderSignals(signals);
+                checkAndSendNotification(signals);
                 
                 document.getElementById('status-text').innerText = 'LIVE';
                 document.getElementById('last-updated-time').innerText = `Terakhir Diperbarui: ${new Date().toLocaleTimeString('id-ID')}`;
@@ -123,6 +163,8 @@
                     badgeLabel = `⚡ MOMENTUM (${signal.buy_ratio}% Inflow)`;
                 }
 
+                let trackerLabel = signal.chain === 'SOLANA' ? '🔍 PAUS GMGN ↗' : '🔍 TXNS PAUS ↗';
+
                 return `
                     <div class="card">
                         <div class="card-header">
@@ -138,10 +180,18 @@
                             <div class="metric-item"><span>Volume 24h</span><strong style="color: var(--accent-blue);">${formatIDR(signal.vol_24h_idr)}</strong></div>
                             <div class="metric-item"><span>High 24h</span><strong style="color: var(--text-sub);">${formatPrice(signal.high_24h_idr)}</strong></div>
                         </div>
-                        <a href="${signal.trade_url}" target="_blank" class="action-btn">EKSEKUSI BUKA INDODAX ↗</a>
+                        <div class="btn-group">
+                            <a href="${signal.tracker_url}" target="_blank" class="tracker-btn">${trackerLabel}</a>
+                            <a href="${signal.trade_url}" target="_blank" class="action-btn">INDODAX ↗</a>
+                        </div>
                     </div>
                 `;
             }).join('');
+        }
+
+        if (Notification.permission === "granted") {
+            document.getElementById('enable-notif-btn').innerText = '✅ Notifikasi Web Aktif';
+            document.getElementById('enable-notif-btn').style.borderColor = '#10b981';
         }
 
         fetchSignals();
