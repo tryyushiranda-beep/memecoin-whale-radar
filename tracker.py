@@ -59,12 +59,11 @@ def get_indodax_altcoins():
                 vol_idr = float(data.get('vol_idr', 0))
                 high_24h = float(data.get('high', 0))
 
-                # --- FIX PERBAIKAN DESIMAL INDODAX ---
-                # Mencegah bug data harga pasar terbalik/membengkak dari nilai High 24h
+                # Koreksi Anomali Desimal Indodax
                 if high_24h > 0 and last_price > (high_24h * 10):
                     last_price = last_price / 1000
 
-                # Filter Altcoin Aktif (Volume Rp 50 Juta - Rp 5 Miliar)
+                # Filter Volume 24 Jam Rp 50 Juta - Rp 5 Miliar
                 if last_price > 0 and 50_000_000 <= vol_idr <= 5_000_000_000:
                     candidates.append({
                         'symbol': symbol,
@@ -84,7 +83,6 @@ def check_smart_money_with_fallback(symbol, chain, main_pair):
     chain_map = {'SOLANA': 'sol', 'ETH': 'eth', 'BSC': 'bsc', 'BASE': 'base', 'ARBITRUM': 'arb'}
     chain_code = chain_map.get(chain.upper(), 'sol')
     
-    # 1. Coba GMGN API Terlebih Dahulu
     try:
         time.sleep(random.uniform(0.1, 0.2))
         url = f"https://gmgn.ai/defi/quotation/v1/smartmoney/{chain_code}/wallet_activity?symbol={symbol.lower()}"
@@ -98,7 +96,6 @@ def check_smart_money_with_fallback(symbol, chain, main_pair):
     except Exception:
         pass
 
-    # 2. FALLBACK (Jika GMGN Terkena Cloudflare Block):
     try:
         h1_txns = main_pair.get('txns', {}).get('h1', {})
         buys = float(h1_txns.get('buys', 0))
@@ -145,10 +142,12 @@ def process_single_coin(coin):
             
             if main_pair:
                 buys_h1 = float(main_pair.get('txns', {}).get('h1', {}).get('buys', 0))
-                sells_h1 = float(main_pair.get('txns', {}).get('h1', {}).get('sells', 0))
+                sells_h1 = float(main_pair.get('txns', {}).get('sells', 0))
                 vol_h1 = float(main_pair.get('volume', {}).get('h1', 0))
                 mcap = float(main_pair.get('fdv', 0) or main_pair.get('marketCap', 0))
                 chain = main_pair.get('chainId', 'unknown').upper()
+                token_address = main_pair.get('baseToken', {}).get('address', '')
+                pair_address = main_pair.get('pairAddress', '')
                 
                 total_tx = buys_h1 + sells_h1
                 
@@ -187,9 +186,17 @@ def process_single_coin(coin):
 
                 discount_pct = ((coin['high_24h_idr'] - coin['price_idr']) / coin['high_24h_idr']) * 100 if coin['high_24h_idr'] > 0 else 0
 
+                # Penentuan URL Pelacak Wallet sesuai Jaringan
+                if chain == 'SOLANA':
+                    tracker_url = f"https://gmgn.ai/sol/token/{token_address}" if token_address else f"https://solscan.io/token/{token_address}"
+                else:
+                    chain_slug = chain.lower()
+                    tracker_url = f"https://dexscreener.com/{chain_slug}/{pair_address}"
+
                 return {
                     'symbol': symbol,
                     'chain': chain,
+                    'token_address': token_address,
                     'price_idr': coin['price_idr'],
                     'high_24h_idr': coin['high_24h_idr'],
                     'vol_24h_idr': round(coin['vol_24h_idr']),
@@ -198,6 +205,7 @@ def process_single_coin(coin):
                     'signal_type': signal_type,
                     'signal_score': signal_score,
                     'trade_url': f"https://indodax.com/market/{symbol.lower()}idr",
+                    'tracker_url': tracker_url,
                     'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
                 }
     except Exception:
@@ -206,7 +214,7 @@ def process_single_coin(coin):
 
 def run_scanner():
     print("==================================================")
-    print("  INDODAX SMART MONEY RADAR v6.1 (FIXED DECIMAL)  ")
+    print("  INDODAX SMART MONEY RADAR v6.3 (WALLET LINK)    ")
     print("==================================================")
 
     altcoins = get_indodax_altcoins()
