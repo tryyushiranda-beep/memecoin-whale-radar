@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-# Top Tier / Large-cap Coins yang diabaikan
+# Top Tier / Large-cap Coins yang wajib diabaikan
 HEAVY_COINS = [
     'BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 
     'MATIC', 'ADA', 'DOT', 'BOME', 'PEPE', 'SHIB', 'WIF', 'BONK',
