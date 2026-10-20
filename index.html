@@ -81,7 +81,8 @@
     <div class="last-updated" id="last-updated-time">Status Server: Menunggu pindaian...</div>
 
     <script>
-        const SIGNALS_URL = 'signals.json';
+        // URL Absolut untuk mencegah masalah 404 / path relatif di GitHub Pages
+        const SIGNALS_URL = 'https://tryyushiranda-beep.github.io/signals.json';
         let notifiedCoins = new Set();
 
         function formatIDR(num) {
@@ -133,11 +134,11 @@
                 checkAndSendNotification(signals);
                 
                 document.getElementById('status-text').innerText = 'LIVE';
+                document.getElementById('status-text').parentElement.style.borderColor = '#10b981';
+                document.getElementById('status-text').parentElement.style.color = '#10b981';
                 document.getElementById('last-updated-time').innerText = `Terakhir Diperbarui: ${new Date().toLocaleTimeString('id-ID')}`;
             } catch (error) {
-                document.getElementById('status-text').innerText = 'OFFLINE';
-                document.getElementById('status-text').parentElement.style.borderColor = '#ef4444';
-                document.getElementById('status-text').parentElement.style.color = '#ef4444';
+                document.getElementById('status-text').innerText = 'CONNECTING';
             }
         }
 
