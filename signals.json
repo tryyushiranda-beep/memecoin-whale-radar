@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "symbol": "HIGH",
+        "chain": "ETHEREUM",
+        "token_address": "0x71Ab77b7dbB4fa7e017BC15090b2163221420282",
+        "price_idr": 492.0,
+        "high_24h_idr": 550.0,
+        "vol_24h_idr": 42633456,
+        "discount_pct": 10.5,
+        "buy_ratio": 100,
+        "freshness": "\u26a1 SMART ACCUMULATION ($250 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 125,
+        "trade_url": "https://indodax.com/market/highidr",
+        "tracker_url": "https://dexscreener.com/ethereum/0x3854612b93B140726167cCA5418B01E832515d42",
+        "timestamp": "2026-10-20 09:15:31"
+    }
+]
