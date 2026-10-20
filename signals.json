@@ -1,33 +1,18 @@
 [
     {
-        "symbol": "SN",
-        "chain": "SOLANA",
-        "token_address": "3FDydrowEeGNwEnTxZj13cgMqKgmzw1ewEX3CHXtpump",
-        "price_idr": 2511.0,
-        "high_24h_idr": 2700.0,
-        "vol_24h_idr": 145753114,
-        "discount_pct": 7.0,
-        "buy_ratio": 100,
-        "signal_type": "HIGH MOMENTUM",
-        "signal_score": 100,
-        "trade_url": "https://indodax.com/market/snidr",
-        "tracker_url": "https://gmgn.ai/sol/token/3FDydrowEeGNwEnTxZj13cgMqKgmzw1ewEX3CHXtpump",
-        "timestamp": "2026-10-20 02:00:39"
-    },
-    {
         "symbol": "GLIDR",
         "chain": "BSC",
         "token_address": "0xC2B1dDB75046c4915C641CC0DC0d0F160Ef82Be5",
         "price_idr": 590.0,
         "high_24h_idr": 620.0,
-        "vol_24h_idr": 139363945,
+        "vol_24h_idr": 139318637,
         "discount_pct": 4.8,
         "buy_ratio": 100,
         "signal_type": "HIGH MOMENTUM",
         "signal_score": 100,
         "trade_url": "https://indodax.com/market/glidridr",
         "tracker_url": "https://dexscreener.com/bsc/0xB9a46a0265b9d22766aa92Fdafa565D8c1b077EC",
-        "timestamp": "2026-10-20 02:00:36"
+        "timestamp": "2026-10-20 02:05:28"
     },
     {
         "symbol": "TLM",
@@ -42,7 +27,7 @@
         "signal_score": 100,
         "trade_url": "https://indodax.com/market/tlmidr",
         "tracker_url": "https://dexscreener.com/bsc/0xE6b421a4408c82381b226Ab5B6F8C4b639044359",
-        "timestamp": "2026-10-20 02:00:39"
+        "timestamp": "2026-10-20 02:05:31"
     },
     {
         "symbol": "TSLAX",
@@ -57,7 +42,22 @@
         "signal_score": 100,
         "trade_url": "https://indodax.com/market/tslaxidr",
         "tracker_url": "https://gmgn.ai/sol/token/XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
-        "timestamp": "2026-10-20 02:00:39"
+        "timestamp": "2026-10-20 02:05:31"
+    },
+    {
+        "symbol": "SN",
+        "chain": "SOLANA",
+        "token_address": "3FDydrowEeGNwEnTxZj13cgMqKgmzw1ewEX3CHXtpump",
+        "price_idr": 2634.0,
+        "high_24h_idr": 2700.0,
+        "vol_24h_idr": 166327491,
+        "discount_pct": 2.4,
+        "buy_ratio": 100,
+        "signal_type": "HIGH MOMENTUM",
+        "signal_score": 100,
+        "trade_url": "https://indodax.com/market/snidr",
+        "tracker_url": "https://gmgn.ai/sol/token/3FDydrowEeGNwEnTxZj13cgMqKgmzw1ewEX3CHXtpump",
+        "timestamp": "2026-10-20 02:05:30"
     },
     {
         "symbol": "CNG",
@@ -65,29 +65,29 @@
         "token_address": "0xA0F11dd8E16B77f93ba369E2e64519c6d45d0031",
         "price_idr": 5127.0,
         "high_24h_idr": 6499.0,
-        "vol_24h_idr": 128244325,
+        "vol_24h_idr": 126848842,
         "discount_pct": 21.1,
         "buy_ratio": 50,
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/cngidr",
         "tracker_url": "https://dexscreener.com/bsc/0x36643695D17d8477d43D5394AAdC38850DB5491A",
-        "timestamp": "2026-10-20 02:00:35"
+        "timestamp": "2026-10-20 02:05:27"
     },
     {
         "symbol": "ERN",
         "chain": "ETHEREUM",
         "token_address": "0xBBc2AE13b23d715c30720F079fcd9B4a74093505",
-        "price_idr": 4395.0,
+        "price_idr": 4370.0,
         "high_24h_idr": 5482.0,
-        "vol_24h_idr": 172798926,
-        "discount_pct": 19.8,
+        "vol_24h_idr": 172862974,
+        "discount_pct": 20.3,
         "buy_ratio": 50,
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/ernidr",
         "tracker_url": "https://dexscreener.com/ethereum/0x570fEbDf89C07f256C75686CaCa215289bB11CFc",
-        "timestamp": "2026-10-20 02:00:36"
+        "timestamp": "2026-10-20 02:05:28"
     },
     {
         "symbol": "FUEL",
@@ -102,37 +102,22 @@
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/fuelidr",
         "tracker_url": "https://dexscreener.com/bsc/0xFD6583Aea0978158349d45740d1B1BC2bC223391",
-        "timestamp": "2026-10-20 02:00:36"
+        "timestamp": "2026-10-20 02:05:28"
     },
     {
         "symbol": "PM",
         "chain": "SOLANA",
         "token_address": "3BWA5RBXyPXuMGZmVL8Snefu573FMJNGpsVi79baiBLV",
-        "price_idr": 5088.0,
+        "price_idr": 5090.0,
         "high_24h_idr": 5999.0,
-        "vol_24h_idr": 254052760,
+        "vol_24h_idr": 255957535,
         "discount_pct": 15.2,
         "buy_ratio": 50,
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/pmidr",
         "tracker_url": "https://gmgn.ai/sol/token/3BWA5RBXyPXuMGZmVL8Snefu573FMJNGpsVi79baiBLV",
-        "timestamp": "2026-10-20 02:00:38"
-    },
-    {
-        "symbol": "CAST",
-        "chain": "BASE",
-        "token_address": "0xb82dC567Bd39a4bF692d7af62657d5dFeeE5541A",
-        "price_idr": 3130000.0,
-        "high_24h_idr": 3500000.0,
-        "vol_24h_idr": 128670403,
-        "discount_pct": 10.6,
-        "buy_ratio": 50,
-        "signal_type": "NORMAL",
-        "signal_score": 50,
-        "trade_url": "https://indodax.com/market/castidr",
-        "tracker_url": "https://dexscreener.com/base/0x155774a837b527b8c2d9fad2ebcc089a995f54f2d108d64ab08e686d6079a8ac",
-        "timestamp": "2026-10-20 02:00:35"
+        "timestamp": "2026-10-20 02:05:30"
     },
     {
         "symbol": "WEALTH",
@@ -147,22 +132,37 @@
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/wealthidr",
         "tracker_url": "https://gmgn.ai/sol/token/GFRxeCdpomjJaYQEuwPDAPghyBD3H9zqnWY2HJPjpump",
-        "timestamp": "2026-10-20 02:00:40"
+        "timestamp": "2026-10-20 02:05:31"
+    },
+    {
+        "symbol": "CAST",
+        "chain": "BASE",
+        "token_address": "0xb82dC567Bd39a4bF692d7af62657d5dFeeE5541A",
+        "price_idr": 3170000.0,
+        "high_24h_idr": 3500000.0,
+        "vol_24h_idr": 131394653,
+        "discount_pct": 9.4,
+        "buy_ratio": 50,
+        "signal_type": "NORMAL",
+        "signal_score": 50,
+        "trade_url": "https://indodax.com/market/castidr",
+        "tracker_url": "https://dexscreener.com/base/0x155774a837b527b8c2d9fad2ebcc089a995f54f2d108d64ab08e686d6079a8ac",
+        "timestamp": "2026-10-20 02:05:27"
     },
     {
         "symbol": "W3F",
         "chain": "ROBINHOOD",
         "token_address": "0xC88fAf1aA8F8cF2b62926Cb71fF92035EbedFD46",
-        "price_idr": 14704.0,
+        "price_idr": 14690.0,
         "high_24h_idr": 15998.0,
-        "vol_24h_idr": 155588149,
-        "discount_pct": 8.1,
+        "vol_24h_idr": 155287736,
+        "discount_pct": 8.2,
         "buy_ratio": 50,
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/w3fidr",
         "tracker_url": "https://dexscreener.com/robinhood/0x10c38cdae473dfff1cbd30f37340014323427cda298eff9e2f882441a44476fe",
-        "timestamp": "2026-10-20 02:00:40"
+        "timestamp": "2026-10-20 02:05:31"
     },
     {
         "symbol": "TEN",
@@ -170,14 +170,14 @@
         "token_address": "0x4FB9B20DaFE45d91ae287f2E07B2e79709308178",
         "price_idr": 78.0,
         "high_24h_idr": 84.0,
-        "vol_24h_idr": 197180092,
+        "vol_24h_idr": 197013765,
         "discount_pct": 7.1,
         "buy_ratio": 50,
         "signal_type": "NORMAL",
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/tenidr",
         "tracker_url": "https://dexscreener.com/base/0xfc40fEcbEdEcf85f2F8e36D50247c2452668f5Aa",
-        "timestamp": "2026-10-20 02:00:39"
+        "timestamp": "2026-10-20 02:05:30"
     },
     {
         "symbol": "VCG",
@@ -192,7 +192,7 @@
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/vcgidr",
         "tracker_url": "https://dexscreener.com/bsc/0xAe3691AdfEc53fE142ae0595F91811b1113d886f",
-        "timestamp": "2026-10-20 02:00:40"
+        "timestamp": "2026-10-20 02:05:31"
     },
     {
         "symbol": "HUMANITY",
@@ -207,7 +207,7 @@
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/humanityidr",
         "tracker_url": "https://dexscreener.com/base/0xe9c96f0a08c0e25487e71e0837e169e1811bbac6e1ed63e41a605c9a9d3a90b1",
-        "timestamp": "2026-10-20 02:00:37"
+        "timestamp": "2026-10-20 02:05:29"
     },
     {
         "symbol": "JASMY",
@@ -222,6 +222,6 @@
         "signal_score": 50,
         "trade_url": "https://indodax.com/market/jasmyidr",
         "tracker_url": "https://gmgn.ai/sol/token/73oPS4T4LRytzsMykSxseDgsktatW9PvGZDU4MuiaXGX",
-        "timestamp": "2026-10-20 02:00:37"
+        "timestamp": "2026-10-20 02:05:29"
     }
 ]
