@@ -2,8 +2,8 @@ name: Indodax Smart Money Scanner
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Berjalan otomatis setiap 5 menit
-  workflow_dispatch:       # Tombol 'Run workflow' manual
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   run-scanner:
