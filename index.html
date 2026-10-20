@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indodax Smart Money Radar v6.13</title>
+    <title>Indodax Smart Money Radar v6.17</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -61,8 +61,8 @@
 
     <header>
         <div class="title-group">
-            <h1>🔥 SMART MONEY RADAR v6.13</h1>
-            <p>Max 1B Supply & Micro-Cap Whale Filter</p>
+            <h1>🔥 SMART MONEY RADAR v6.17</h1>
+            <p>Pure Micro-Cap & Pre-Pump Whale Accumulation Radar</p>
         </div>
         <div class="status-badge">
             <div class="pulse-dot"></div>
@@ -75,7 +75,7 @@
     </button>
 
     <main id="signal-container" class="signal-grid">
-        <div class="empty-state">Memuat pindaian koin Paus max 1B supply...</div>
+        <div class="empty-state">Memuat pindaian koin Pre-Pump Paus...</div>
     </main>
 
     <div class="last-updated" id="last-updated-time">Status Server: Menunggu pindaian...</div>
@@ -144,7 +144,7 @@
         function renderSignals(signals) {
             const container = document.getElementById('signal-container');
             if (!signals || signals.length === 0) {
-                container.innerHTML = `<div class="empty-state"><p>Tidak ada koin Micro-Cap (Supply ≤ 1B) yang memenuhi kriteria transaksi Beli Paus saat ini.</p></div>`;
+                container.innerHTML = `<div class="empty-state"><p>Tidak ada koin Micro-Cap yang memenuhi kriteria akumulasi Beli Paus saat ini.</p></div>`;
                 return;
             }
 
