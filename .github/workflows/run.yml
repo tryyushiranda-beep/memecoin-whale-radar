@@ -1,19 +1,18 @@
-name: Indodax Smart Money Scanner v6
+name: Indodax Whale Tracker Scanner
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
+    - cron: '*/5 * * * *' # Jalan otomatis tiap 5 menit
+  workflow_dispatch: # Supaya bisa di-run manual
 
 jobs:
-  scan-and-update:
+  build-and-run:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Python Environment
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
@@ -23,13 +22,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests urllib3
 
-      - name: Run Tracker v6 Script
+      - name: Run Tracker Script
         run: python tracker.py
 
-      - name: Commit and Push Updated Signals
+      - name: Commit and Push Generated signals.json
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add signals.json
-          git commit -m "Auto-update signals.json via Tracker v6 [skip ci]" || exit 0
+          git commit -m "auto: update signals.json [skip ci]" || exit 0
           git push
