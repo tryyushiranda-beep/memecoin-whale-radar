@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indodax Smart Money Radar v6.3</title>
+    <title>Indodax Smart Money Radar v6.5</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -35,10 +35,12 @@
 
         .signal-grid { display: grid; gap: 16px; }
         .card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .symbol-badge { font-size: 1.2rem; font-weight: 800; color: var(--text-main); }
         .chain-tag { font-size: 0.7rem; color: var(--text-sub); background: #374151; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
         
+        .freshness-bar { font-size: 0.75rem; font-weight: 700; color: var(--accent-green); background: rgba(16, 185, 129, 0.08); padding: 6px 10px; border-radius: 6px; margin-bottom: 12px; border: 1px dashed rgba(16, 185, 129, 0.3); }
+
         .tag-super { background-color: var(--accent-purple-bg); color: var(--accent-purple); border: 1px solid var(--accent-purple); font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
         .tag-golden { background-color: var(--accent-gold-bg); color: var(--accent-gold); border: 1px solid var(--accent-gold); font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
         .tag-momentum { background-color: var(--accent-green-bg); color: var(--accent-green); font-weight: 700; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
@@ -61,8 +63,8 @@
 
     <header>
         <div class="title-group">
-            <h1>🔥 SMART MONEY RADAR v6.3</h1>
-            <p>Indodax Multi-Layer Filter + Wallet Tracker</p>
+            <h1>🔥 SMART MONEY RADAR v6.5</h1>
+            <p>Micro-Cap Filter + Freshness 15m Tracker</p>
         </div>
         <div class="status-badge">
             <div class="pulse-dot"></div>
@@ -75,7 +77,7 @@
     </button>
 
     <main id="signal-container" class="signal-grid">
-        <div class="empty-state">Memuat pindaian Smart Money terbaru...</div>
+        <div class="empty-state">Memuat pindaian koin segar...</div>
     </main>
 
     <div class="last-updated" id="last-updated-time">Status Server: Menunggu pindaian...</div>
@@ -115,7 +117,7 @@
             signals.forEach(signal => {
                 if ((signal.signal_type === "SUPER GOLDEN SIGNAL" || signal.signal_type === "GOLDEN SIGNAL") && !notifiedCoins.has(signal.symbol)) {
                     new Notification(`🔥 ${signal.signal_type}: ${signal.symbol}/IDR`, {
-                        body: `Buy Inflow: ${signal.buy_ratio}% | Diskon: -${signal.discount_pct}% | Harga: ${formatPrice(signal.price_idr)}`,
+                        body: `Buy Inflow: ${signal.buy_ratio}% | Diskon: -${signal.discount_pct}% | ${signal.freshness}`,
                         icon: 'https://indodax.com/favicon.ico'
                     });
                     notifiedCoins.add(signal.symbol);
@@ -144,7 +146,7 @@
         function renderSignals(signals) {
             const container = document.getElementById('signal-container');
             if (!signals || signals.length === 0) {
-                container.innerHTML = `<div class="empty-state"><p>Belum ada akumulasi Smart Money yang memenuhi kriteria.</p></div>`;
+                container.innerHTML = `<div class="empty-state"><p>Belum ada transaksi Paus segar (<15m) yang memenuhi kriteria.</p></div>`;
                 return;
             }
 
@@ -173,6 +175,9 @@
                                 <span class="chain-tag">${signal.chain}</span>
                             </div>
                             <span class="${badgeClass}">${badgeLabel}</span>
+                        </div>
+                        <div class="freshness-bar">
+                            ${signal.freshness || '🔥 IDEAL (1-15m)'}
                         </div>
                         <div class="metrics-grid">
                             <div class="metric-item"><span>Harga Pasar</span><strong>${formatPrice(signal.price_idr)}</strong></div>
