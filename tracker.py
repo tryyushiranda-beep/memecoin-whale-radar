@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-# Daftar koin raksasa / Layer 1 / Layer 2 yang wajib diabaikan
+# Daftar koin raksasa / Layer 1 / Layer 2 utama yang wajib diabaikan
 HEAVY_COINS = [
     'BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 
     'MATIC', 'ADA', 'DOT', 'BOME', 'PEPE', 'SHIB', 'WIF', 'BONK',
@@ -61,8 +61,8 @@ def get_indodax_altcoins():
                 if high_24h > 0 and last_price > (high_24h * 10):
                     last_price = last_price / 1000
 
-                # Filter Volume Indodax Rp 30 Juta s/d Rp 800 Juta
-                if last_price > 0 and 30_000_000 <= vol_idr <= 800_000_000:
+                # Filter Volume Indodax Rp 20 Juta s/d Rp 1 Miliar
+                if last_price > 0 and 20_000_000 <= vol_idr <= 1_000_000_000:
                     candidates.append({
                         'symbol': symbol,
                         'price_idr': last_price,
@@ -87,7 +87,7 @@ def find_all_matching_pairs(pairs, target_symbol):
         liquidity_usd = float(pair.get('liquidity', {}).get('usd', 0))
         vol_h1 = float(pair.get('volume', {}).get('h1', 0))
         
-        if base_token == target_symbol and liquidity_usd >= 1000 and chain_id in supported_chains:
+        if base_token == target_symbol and liquidity_usd >= 800 and chain_id in supported_chains:
             score = liquidity_usd + (vol_h1 * 2)
             valid_pairs.append((score, pair))
             
@@ -113,7 +113,7 @@ def check_gmgn_whale_activity(chain, token_address):
                 last_active = float(buyer.get('last_active_timestamp', 0))
                 buy_amount_usd = float(buyer.get('total_buy_usd', 0))
                 
-                if (current_time - last_active <= 900) and buy_amount_usd >= 400:
+                if (current_time - last_active <= 900) and buy_amount_usd >= 300:
                     return True, round(buy_amount_usd)
     except Exception:
         pass
@@ -131,7 +131,7 @@ def check_dexscreener_whale_tx(chain, pair_address):
             
             if m5_buys_count > 0:
                 avg_tx_size = m5_vol_buy / m5_buys_count
-                if m5_vol_buy >= 400 or avg_tx_size >= 200:
+                if m5_vol_buy >= 300 or avg_tx_size >= 150:
                     return True, round(m5_vol_buy)
     except Exception:
         pass
@@ -153,19 +153,12 @@ def process_single_coin(coin):
                 sells_h1 = float(main_pair.get('txns', {}).get('h1', {}).get('sells', 0))
                 mcap = float(main_pair.get('marketCap', 0) or 0)
                 fdv = float(main_pair.get('fdv', 0) or 0)
-                price_usd = float(main_pair.get('priceUsd', 0) or 0)
                 chain = main_pair.get('chainId', 'unknown').upper()
                 token_address = main_pair.get('baseToken', {}).get('address', '')
                 pair_address = main_pair.get('pairAddress', '')
-                
-                estimated_total_supply = (fdv / price_usd) if (price_usd > 0 and fdv > 0) else 0
 
-                # 1. Filter Market Cap / FDV Maksimal $8,000,000 USD (Micro-Cap)
-                if (mcap > 8_000_000 and mcap != 0) or (fdv > 10_000_000 and fdv != 0):
-                    continue
-
-                # 2. STRICT FILTER: Total Supply Maksimal TERBATAS 1 MILIAR TOKEN
-                if estimated_total_supply > 1_000_000_000:
+                # FILTER UTAMA CUAN: Market Cap / FDV Maksimal $5.000.000 USD (True Micro-Cap)
+                if (mcap > 5_000_000 and mcap != 0) or (fdv > 6_000_000 and fdv != 0):
                     continue
 
                 gmgn_has_whale, gmgn_val = check_gmgn_whale_activity(chain, token_address)
@@ -218,7 +211,7 @@ def process_single_coin(coin):
 
 def run_scanner():
     print("==================================================")
-    print("  INDODAX RADAR v6.13 (MAX 1B SUPPLY FILTER)       ")
+    print("  INDODAX RADAR v6.17 (PURE PROFIT / NO SUPPLY CAP)")
     print("==================================================")
 
     altcoins = get_indodax_altcoins()
