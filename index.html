@@ -81,8 +81,8 @@
     <div class="last-updated" id="last-updated-time">Status Server: Menunggu pindaian...</div>
 
     <script>
-        // Membaca file signals.json yang berada di folder yang sama (Path Relatif)
-        const SIGNALS_URL = 'signals.json';
+        // Menggunakan Raw GitHub URL langsung dari repositori memecoin-whale-radar
+        const SIGNALS_URL = 'https://raw.githubusercontent.com/tryyushiranda-beep/memecoin-whale-radar/main/signals.json';
         let notifiedCoins = new Set();
 
         function formatIDR(num) {
