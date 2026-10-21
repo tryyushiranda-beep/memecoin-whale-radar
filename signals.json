@@ -1,19 +1,35 @@
 [
     {
-        "symbol": "META",
+        "symbol": "HIGH",
+        "chain": "ETHEREUM",
+        "token_address": "0x71Ab77b7dbB4fa7e017BC15090b2163221420282",
+        "price_idr": 496.0,
+        "high_24h_idr": 643.0,
+        "vol_24h_idr": 61014652,
+        "discount_pct": 22.9,
+        "buy_ratio": 100,
+        "freshness": "\u26a1 SMART ACCUMULATION ($250 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 125,
+        "trade_url": "https://indodax.com/market/highidr",
+        "tracker_url": "https://dexscreener.com/ethereum/0x3854612b93B140726167cCA5418B01E832515d42",
+        "timestamp": "2026-10-21 19:05:30"
+    },
+    {
+        "symbol": "WBTC",
         "chain": "SOLANA",
-        "token_address": "tWCA5RA9Ep2Z3EjZDvoxWnrB8fmNjQznxSReKpypump",
-        "price_idr": 141.0,
-        "high_24h_idr": 142.0,
-        "vol_24h_idr": 119999995,
+        "token_address": "5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
+        "price_idr": 1489500815.0,
+        "high_24h_idr": 1500000000.0,
+        "vol_24h_idr": 34363896,
         "discount_pct": 0.7,
-        "buy_ratio": 68,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($3499 via DEX <15m)",
+        "buy_ratio": 31,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($1898 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
-        "signal_score": 118,
-        "trade_url": "https://indodax.com/market/metaidr",
-        "tracker_url": "https://gmgn.ai/sol/token/tWCA5RA9Ep2Z3EjZDvoxWnrB8fmNjQznxSReKpypump",
-        "timestamp": "2026-10-21 19:00:44"
+        "signal_score": 81,
+        "trade_url": "https://indodax.com/market/wbtcidr",
+        "tracker_url": "https://gmgn.ai/sol/token/5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
+        "timestamp": "2026-10-21 19:05:38"
     },
     {
         "symbol": "GOOGLX",
@@ -23,12 +39,12 @@
         "high_24h_idr": 6215416.0,
         "vol_24h_idr": 33841478,
         "discount_pct": 3.5,
-        "buy_ratio": 55,
-        "freshness": "\u26a1 SMART ACCUMULATION ($175 via DEX <15m)",
-        "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 80,
+        "buy_ratio": 20,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($17029 via DEX <15m)",
+        "signal_type": "SUPER GOLDEN SIGNAL",
+        "signal_score": 70,
         "trade_url": "https://indodax.com/market/googlxidr",
         "tracker_url": "https://gmgn.ai/sol/token/XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
-        "timestamp": "2026-10-21 19:00:42"
+        "timestamp": "2026-10-21 19:05:29"
     }
 ]
