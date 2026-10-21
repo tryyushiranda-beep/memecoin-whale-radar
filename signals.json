@@ -1,34 +1,18 @@
 [
     {
-        "symbol": "RLC",
-        "chain": "ARBITRUM",
-        "token_address": "0xe649e6a1F2afc63ca268C2363691ceCAF75CF47C",
-        "price_idr": 12932.0,
-        "high_24h_idr": 12983.0,
-        "vol_24h_idr": 26224878,
-        "discount_pct": 0.4,
-        "buy_ratio": 71,
-        "freshness": "\u26a1 SMART ACCUMULATION ($362 via DEX <15m)",
+        "symbol": "VANRY",
+        "chain": "BASE",
+        "token_address": "0x07848a7b542a9cd856122C6c4Ab9ec87c44F8b63",
+        "price_idr": 10.0,
+        "high_24h_idr": 11.0,
+        "vol_24h_idr": 33293252,
+        "discount_pct": 9.1,
+        "buy_ratio": 48,
+        "freshness": "\u26a1 SMART ACCUMULATION ($615 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 96,
-        "trade_url": "https://indodax.com/market/rlcidr",
-        "tracker_url": "https://dexscreener.com/arbitrum/0x0EB43B37539a4261Aa1860f9476094Bb2C00A894",
-        "timestamp": "2026-10-21 10:30:40"
-    },
-    {
-        "symbol": "WBTC",
-        "chain": "SOLANA",
-        "token_address": "5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
-        "price_idr": 1489499760.0,
-        "high_24h_idr": 1489499760.0,
-        "vol_24h_idr": 32442611,
-        "discount_pct": 0.0,
-        "buy_ratio": 11,
-        "freshness": "\u26a1 SMART ACCUMULATION ($157 via DEX <15m)",
-        "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 36,
-        "trade_url": "https://indodax.com/market/wbtcidr",
-        "tracker_url": "https://gmgn.ai/sol/token/5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
-        "timestamp": "2026-10-21 10:30:42"
+        "signal_score": 73,
+        "trade_url": "https://indodax.com/market/vanryidr",
+        "tracker_url": "https://dexscreener.com/base/0xE5ff8a4Dc6F0DC2fE166392139FD1836E8591a8C",
+        "timestamp": "2026-10-21 10:35:32"
     }
 ]
