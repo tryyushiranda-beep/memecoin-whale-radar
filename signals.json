@@ -1,18 +1,34 @@
 [
     {
+        "symbol": "WBTC",
+        "chain": "SOLANA",
+        "token_address": "5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
+        "price_idr": 1489538084.0,
+        "high_24h_idr": 1489538084.0,
+        "vol_24h_idr": 32609886,
+        "discount_pct": 0.0,
+        "buy_ratio": 46,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($3309 via DEX <15m)",
+        "signal_type": "SUPER GOLDEN SIGNAL",
+        "signal_score": 96,
+        "trade_url": "https://indodax.com/market/wbtcidr",
+        "tracker_url": "https://gmgn.ai/sol/token/5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
+        "timestamp": "2026-10-21 13:40:45"
+    },
+    {
         "symbol": "GOOGLX",
         "chain": "SOLANA",
         "token_address": "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
         "price_idr": 6050000.0,
         "high_24h_idr": 6243874.0,
-        "vol_24h_idr": 20711504,
+        "vol_24h_idr": 22593862,
         "discount_pct": 3.1,
-        "buy_ratio": 52,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($17008 via DEX <15m)",
+        "buy_ratio": 15,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($2225 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
-        "signal_score": 102,
+        "signal_score": 65,
         "trade_url": "https://indodax.com/market/googlxidr",
         "tracker_url": "https://gmgn.ai/sol/token/XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
-        "timestamp": "2026-10-21 13:35:29"
+        "timestamp": "2026-10-21 13:40:36"
     }
 ]
