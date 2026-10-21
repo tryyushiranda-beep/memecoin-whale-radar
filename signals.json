@@ -1,18 +1,34 @@
 [
     {
-        "symbol": "RLC",
-        "chain": "ARBITRUM",
-        "token_address": "0xe649e6a1F2afc63ca268C2363691ceCAF75CF47C",
-        "price_idr": 13141.0,
-        "high_24h_idr": 13231.0,
-        "vol_24h_idr": 26806584,
-        "discount_pct": 0.7,
-        "buy_ratio": 53,
-        "freshness": "\u26a1 SMART ACCUMULATION ($526 via DEX <15m)",
+        "symbol": "VANRY",
+        "chain": "BASE",
+        "token_address": "0x07848a7b542a9cd856122C6c4Ab9ec87c44F8b63",
+        "price_idr": 10.0,
+        "high_24h_idr": 11.0,
+        "vol_24h_idr": 32503089,
+        "discount_pct": 9.1,
+        "buy_ratio": 43,
+        "freshness": "\u26a1 SMART ACCUMULATION ($583 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 78,
-        "trade_url": "https://indodax.com/market/rlcidr",
-        "tracker_url": "https://dexscreener.com/arbitrum/0x0EB43B37539a4261Aa1860f9476094Bb2C00A894",
-        "timestamp": "2026-10-21 11:10:35"
+        "signal_score": 68,
+        "trade_url": "https://indodax.com/market/vanryidr",
+        "tracker_url": "https://dexscreener.com/base/0xE5ff8a4Dc6F0DC2fE166392139FD1836E8591a8C",
+        "timestamp": "2026-10-21 11:15:32"
+    },
+    {
+        "symbol": "IOTX",
+        "chain": "BSC",
+        "token_address": "0x9678E42ceBEb63F23197D726B29b1CB20d0064E5",
+        "price_idr": 75.0,
+        "high_24h_idr": 76.0,
+        "vol_24h_idr": 34763166,
+        "discount_pct": 1.3,
+        "buy_ratio": 39,
+        "freshness": "\u26a1 SMART ACCUMULATION ($585 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 64,
+        "trade_url": "https://indodax.com/market/iotxidr",
+        "tracker_url": "https://dexscreener.com/bsc/0xc13aA76AAc067c86aE38028019F414D731b3D86A",
+        "timestamp": "2026-10-21 11:15:29"
     }
 ]
