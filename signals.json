@@ -7,12 +7,28 @@
         "high_24h_idr": 6215416.0,
         "vol_24h_idr": 33841478,
         "discount_pct": 3.5,
-        "buy_ratio": 36,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($4305 via DEX <15m)",
+        "buy_ratio": 52,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($20259 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
-        "signal_score": 86,
+        "signal_score": 102,
         "trade_url": "https://indodax.com/market/googlxidr",
         "tracker_url": "https://gmgn.ai/sol/token/XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
-        "timestamp": "2026-10-21 19:50:26"
+        "timestamp": "2026-10-21 19:55:30"
+    },
+    {
+        "symbol": "HIGH",
+        "chain": "ETHEREUM",
+        "token_address": "0x71Ab77b7dbB4fa7e017BC15090b2163221420282",
+        "price_idr": 496.0,
+        "high_24h_idr": 643.0,
+        "vol_24h_idr": 61014652,
+        "discount_pct": 22.9,
+        "buy_ratio": 50,
+        "freshness": "\u26a1 SMART ACCUMULATION ($831 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 75,
+        "trade_url": "https://indodax.com/market/highidr",
+        "tracker_url": "https://dexscreener.com/ethereum/0x3854612b93B140726167cCA5418B01E832515d42",
+        "timestamp": "2026-10-21 19:55:30"
     }
 ]
