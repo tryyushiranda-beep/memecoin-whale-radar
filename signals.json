@@ -5,14 +5,30 @@
         "token_address": "7nRtEVneLhdc4L4dHyiExoSZoSMJx9VEBTr7wbmDpump",
         "price_idr": 157.545,
         "high_24h_idr": 162.0,
-        "vol_24h_idr": 27986433,
+        "vol_24h_idr": 27885483,
         "discount_pct": 2.8,
         "buy_ratio": 55,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($15527 via DEX <15m)",
+        "freshness": "\ud83d\udea8 SUPER WHALE ($4022 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
         "signal_score": 105,
         "trade_url": "https://indodax.com/market/funidr",
         "tracker_url": "https://gmgn.ai/sol/token/7nRtEVneLhdc4L4dHyiExoSZoSMJx9VEBTr7wbmDpump",
-        "timestamp": "2026-10-22 19:50:28"
+        "timestamp": "2026-10-22 19:55:22"
+    },
+    {
+        "symbol": "AGI",
+        "chain": "BSC",
+        "token_address": "0x818835503F55283cd51A4399f595e295A9338753",
+        "price_idr": 94.0,
+        "high_24h_idr": 124.0,
+        "vol_24h_idr": 65480128,
+        "discount_pct": 24.2,
+        "buy_ratio": 69,
+        "freshness": "\u26a1 SMART ACCUMULATION ($304 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 94,
+        "trade_url": "https://indodax.com/market/agiidr",
+        "tracker_url": "https://dexscreener.com/bsc/0x27795f5310232b241934ab4E1EC520d17A8b16B9",
+        "timestamp": "2026-10-22 19:55:20"
     }
 ]
