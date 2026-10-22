@@ -1,5 +1,21 @@
 [
     {
+        "symbol": "MOODENG",
+        "chain": "ETHEREUM",
+        "token_address": "0x28561B8A2360F463011c16b6Cc0B0cbEF8dbBcad",
+        "price_idr": 735.0,
+        "high_24h_idr": 770.0,
+        "vol_24h_idr": 107974039,
+        "discount_pct": 4.5,
+        "buy_ratio": 100,
+        "freshness": "\u26a1 SMART ACCUMULATION ($554 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 125,
+        "trade_url": "https://indodax.com/market/moodengidr",
+        "tracker_url": "https://dexscreener.com/ethereum/0x470DC172d6502Ac930B59322EcE5345dd456A03D",
+        "timestamp": "2026-10-22 20:15:27"
+    },
+    {
         "symbol": "FUN",
         "chain": "SOLANA",
         "token_address": "B5n77C5iUHNNcY1JhsV5iUSFBrbGFYUUz7ARGqyEVMXZ",
@@ -7,28 +23,12 @@
         "high_24h_idr": 162.0,
         "vol_24h_idr": 27885483,
         "discount_pct": 2.8,
-        "buy_ratio": 61,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($60579 via DEX <15m)",
+        "buy_ratio": 59,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($58738 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
-        "signal_score": 111,
+        "signal_score": 109,
         "trade_url": "https://indodax.com/market/funidr",
         "tracker_url": "https://gmgn.ai/sol/token/B5n77C5iUHNNcY1JhsV5iUSFBrbGFYUUz7ARGqyEVMXZ",
-        "timestamp": "2026-10-22 20:10:30"
-    },
-    {
-        "symbol": "NMD",
-        "chain": "SOLANA",
-        "token_address": "HeZ1YykFietUphgSG7nTcDxhpEFASLwD6aVAv63doY6w",
-        "price_idr": 42750.0,
-        "high_24h_idr": 44500.0,
-        "vol_24h_idr": 125969074,
-        "discount_pct": 3.9,
-        "buy_ratio": 44,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($1820 via DEX <15m)",
-        "signal_type": "SUPER GOLDEN SIGNAL",
-        "signal_score": 94,
-        "trade_url": "https://indodax.com/market/nmdidr",
-        "tracker_url": "https://gmgn.ai/sol/token/HeZ1YykFietUphgSG7nTcDxhpEFASLwD6aVAv63doY6w",
-        "timestamp": "2026-10-22 20:10:34"
+        "timestamp": "2026-10-22 20:15:25"
     }
 ]
