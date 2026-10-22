@@ -7,12 +7,28 @@
         "high_24h_idr": 6215416.0,
         "vol_24h_idr": 34046827,
         "discount_pct": 2.1,
-        "buy_ratio": 11,
-        "freshness": "\u26a1 SMART ACCUMULATION ($720 via DEX <15m)",
+        "buy_ratio": 43,
+        "freshness": "\u26a1 SMART ACCUMULATION ($469 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 36,
+        "signal_score": 68,
         "trade_url": "https://indodax.com/market/googlxidr",
         "tracker_url": "https://gmgn.ai/sol/token/XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
-        "timestamp": "2026-10-22 00:00:42"
+        "timestamp": "2026-10-22 00:05:29"
+    },
+    {
+        "symbol": "WBTC",
+        "chain": "SOLANA",
+        "token_address": "5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
+        "price_idr": 1489501382.0,
+        "high_24h_idr": 1500000000.0,
+        "vol_24h_idr": 35477788,
+        "discount_pct": 0.7,
+        "buy_ratio": 10,
+        "freshness": "\u26a1 SMART ACCUMULATION ($400 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 35,
+        "trade_url": "https://indodax.com/market/wbtcidr",
+        "tracker_url": "https://gmgn.ai/sol/token/5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
+        "timestamp": "2026-10-22 00:05:38"
     }
 ]
