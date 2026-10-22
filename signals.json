@@ -1,34 +1,18 @@
 [
     {
-        "symbol": "AUDIO",
+        "symbol": "AGI",
         "chain": "SOLANA",
-        "token_address": "9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM",
-        "price_idr": 275.0,
-        "high_24h_idr": 286.0,
-        "vol_24h_idr": 26872940,
-        "discount_pct": 3.8,
-        "buy_ratio": 94,
-        "freshness": "\u26a1 SMART ACCUMULATION ($459 via DEX <15m)",
+        "token_address": "CaWZeUM4FvX9dPkjGc2xHS6tSN3qJfTWyvaG77aM5o7h",
+        "price_idr": 89.0,
+        "high_24h_idr": 124.0,
+        "vol_24h_idr": 60103669,
+        "discount_pct": 28.2,
+        "buy_ratio": 75,
+        "freshness": "\u26a1 SMART ACCUMULATION ($425 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 119,
-        "trade_url": "https://indodax.com/market/audioidr",
-        "tracker_url": "https://gmgn.ai/sol/token/9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM",
-        "timestamp": "2026-10-22 10:50:31"
-    },
-    {
-        "symbol": "GTC",
-        "chain": "SOLANA",
-        "token_address": "EzgEw9qevbREonkg9LdPDyBNNm2KDuQfwb9kwyAVFLVL",
-        "price_idr": 5050.0,
-        "high_24h_idr": 5645.0,
-        "vol_24h_idr": 386723687,
-        "discount_pct": 10.5,
-        "buy_ratio": 47,
-        "freshness": "\u26a1 SMART ACCUMULATION ($158 via DEX <15m)",
-        "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 72,
-        "trade_url": "https://indodax.com/market/gtcidr",
-        "tracker_url": "https://gmgn.ai/sol/token/EzgEw9qevbREonkg9LdPDyBNNm2KDuQfwb9kwyAVFLVL",
-        "timestamp": "2026-10-22 10:50:35"
+        "signal_score": 100,
+        "trade_url": "https://indodax.com/market/agiidr",
+        "tracker_url": "https://gmgn.ai/sol/token/CaWZeUM4FvX9dPkjGc2xHS6tSN3qJfTWyvaG77aM5o7h",
+        "timestamp": "2026-10-22 10:55:23"
     }
 ]
