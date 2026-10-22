@@ -3,17 +3,17 @@
         "symbol": "NMD",
         "chain": "BSC",
         "token_address": "0xb4Ad8291A974055A7edE040461eFcDbFA6a63b52",
-        "price_idr": 43896.0,
+        "price_idr": 43935.0,
         "high_24h_idr": 44992.0,
-        "vol_24h_idr": 100809285,
-        "discount_pct": 2.4,
-        "buy_ratio": 69,
-        "freshness": "\u26a1 SMART ACCUMULATION ($840 via DEX <15m)",
+        "vol_24h_idr": 100773336,
+        "discount_pct": 2.3,
+        "buy_ratio": 71,
+        "freshness": "\u26a1 SMART ACCUMULATION ($468 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 94,
+        "signal_score": 96,
         "trade_url": "https://indodax.com/market/nmdidr",
         "tracker_url": "https://dexscreener.com/bsc/0x3C1dEEd1229dFAdF12Dab7273f1Bb29d73414458",
-        "timestamp": "2026-10-22 01:15:30"
+        "timestamp": "2026-10-22 01:20:36"
     },
     {
         "symbol": "WBTC",
@@ -23,12 +23,28 @@
         "high_24h_idr": 1500000000.0,
         "vol_24h_idr": 35477788,
         "discount_pct": 0.7,
-        "buy_ratio": 53,
-        "freshness": "\u26a1 SMART ACCUMULATION ($509 via DEX <15m)",
+        "buy_ratio": 59,
+        "freshness": "\u26a1 SMART ACCUMULATION ($441 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 78,
+        "signal_score": 84,
         "trade_url": "https://indodax.com/market/wbtcidr",
         "tracker_url": "https://gmgn.ai/sol/token/5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
-        "timestamp": "2026-10-22 01:15:34"
+        "timestamp": "2026-10-22 01:20:40"
+    },
+    {
+        "symbol": "GOOGLX",
+        "chain": "SOLANA",
+        "token_address": "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
+        "price_idr": 6084737.0,
+        "high_24h_idr": 6215416.0,
+        "vol_24h_idr": 33950813,
+        "discount_pct": 2.1,
+        "buy_ratio": 37,
+        "freshness": "\u26a1 SMART ACCUMULATION ($451 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 62,
+        "trade_url": "https://indodax.com/market/googlxidr",
+        "tracker_url": "https://gmgn.ai/sol/token/XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
+        "timestamp": "2026-10-22 01:20:32"
     }
 ]
