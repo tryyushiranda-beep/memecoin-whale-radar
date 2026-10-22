@@ -3,16 +3,32 @@
         "symbol": "NEON",
         "chain": "SOLANA",
         "token_address": "NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
-        "price_idr": 95.0,
+        "price_idr": 89.0,
         "high_24h_idr": 96.0,
-        "vol_24h_idr": 910439449,
-        "discount_pct": 1.0,
+        "vol_24h_idr": 974545632,
+        "discount_pct": 7.3,
         "buy_ratio": 47,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($1454 via DEX <15m)",
+        "freshness": "\ud83d\udea8 SUPER WHALE ($4646 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
         "signal_score": 97,
         "trade_url": "https://indodax.com/market/neonidr",
         "tracker_url": "https://gmgn.ai/sol/token/NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
-        "timestamp": "2026-10-22 16:35:29"
+        "timestamp": "2026-10-22 16:40:35"
+    },
+    {
+        "symbol": "VANRY",
+        "chain": "BASE",
+        "token_address": "0x07848a7b542a9cd856122C6c4Ab9ec87c44F8b63",
+        "price_idr": 9.0,
+        "high_24h_idr": 11.0,
+        "vol_24h_idr": 83489018,
+        "discount_pct": 18.2,
+        "buy_ratio": 42,
+        "freshness": "\u26a1 SMART ACCUMULATION ($453 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 67,
+        "trade_url": "https://indodax.com/market/vanryidr",
+        "tracker_url": "https://dexscreener.com/base/0xE5ff8a4Dc6F0DC2fE166392139FD1836E8591a8C",
+        "timestamp": "2026-10-22 16:40:39"
     }
 ]
