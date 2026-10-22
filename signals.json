@@ -1,1 +1,34 @@
-[]
+[
+    {
+        "symbol": "AGI",
+        "chain": "BSC",
+        "token_address": "0x818835503F55283cd51A4399f595e295A9338753",
+        "price_idr": 91.0,
+        "high_24h_idr": 124.0,
+        "vol_24h_idr": 62777170,
+        "discount_pct": 26.6,
+        "buy_ratio": 74,
+        "freshness": "\u26a1 SMART ACCUMULATION ($502 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 99,
+        "trade_url": "https://indodax.com/market/agiidr",
+        "tracker_url": "https://dexscreener.com/bsc/0x27795f5310232b241934ab4E1EC520d17A8b16B9",
+        "timestamp": "2026-10-22 14:25:24"
+    },
+    {
+        "symbol": "MOODENG",
+        "chain": "ETHEREUM",
+        "token_address": "0x28561B8A2360F463011c16b6Cc0B0cbEF8dbBcad",
+        "price_idr": 730.0,
+        "high_24h_idr": 798.0,
+        "vol_24h_idr": 175556886,
+        "discount_pct": 8.5,
+        "buy_ratio": 25,
+        "freshness": "\u26a1 SMART ACCUMULATION ($491 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 50,
+        "trade_url": "https://indodax.com/market/moodengidr",
+        "tracker_url": "https://dexscreener.com/ethereum/0x470DC172d6502Ac930B59322EcE5345dd456A03D",
+        "timestamp": "2026-10-22 14:25:29"
+    }
+]
