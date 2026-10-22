@@ -1,1 +1,34 @@
-[]
+[
+    {
+        "symbol": "NEON",
+        "chain": "SOLANA",
+        "token_address": "NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
+        "price_idr": 87.0,
+        "high_24h_idr": 93.0,
+        "vol_24h_idr": 724358502,
+        "discount_pct": 6.5,
+        "buy_ratio": 92,
+        "freshness": "\u26a1 SMART ACCUMULATION ($834 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 117,
+        "trade_url": "https://indodax.com/market/neonidr",
+        "tracker_url": "https://gmgn.ai/sol/token/NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
+        "timestamp": "2026-10-22 16:15:33"
+    },
+    {
+        "symbol": "AUDIO",
+        "chain": "SOLANA",
+        "token_address": "9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM",
+        "price_idr": 266.0,
+        "high_24h_idr": 286.0,
+        "vol_24h_idr": 25708295,
+        "discount_pct": 7.0,
+        "buy_ratio": 87,
+        "freshness": "\u26a1 SMART ACCUMULATION ($555 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 112,
+        "trade_url": "https://indodax.com/market/audioidr",
+        "tracker_url": "https://gmgn.ai/sol/token/9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM",
+        "timestamp": "2026-10-22 16:15:28"
+    }
+]
