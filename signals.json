@@ -1,18 +1,50 @@
 [
     {
+        "symbol": "WBTC",
+        "chain": "SOLANA",
+        "token_address": "5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
+        "price_idr": 1417001212.0,
+        "high_24h_idr": 1570196393.0,
+        "vol_24h_idr": 37033961,
+        "discount_pct": 9.8,
+        "buy_ratio": 50,
+        "freshness": "\u26a1 SMART ACCUMULATION ($809 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 75,
+        "trade_url": "https://indodax.com/market/wbtcidr",
+        "tracker_url": "https://gmgn.ai/sol/token/5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
+        "timestamp": "2026-10-22 05:30:43"
+    },
+    {
         "symbol": "IOTX",
         "chain": "BSC",
         "token_address": "0x9678E42ceBEb63F23197D726B29b1CB20d0064E5",
         "price_idr": 81.0,
         "high_24h_idr": 87.0,
-        "vol_24h_idr": 150392829,
+        "vol_24h_idr": 150693469,
         "discount_pct": 6.9,
-        "buy_ratio": 49,
-        "freshness": "\u26a1 SMART ACCUMULATION ($483 via DEX <15m)",
+        "buy_ratio": 48,
+        "freshness": "\u26a1 SMART ACCUMULATION ($316 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 74,
+        "signal_score": 73,
         "trade_url": "https://indodax.com/market/iotxidr",
         "tracker_url": "https://dexscreener.com/bsc/0xc13aA76AAc067c86aE38028019F414D731b3D86A",
-        "timestamp": "2026-10-22 05:25:31"
+        "timestamp": "2026-10-22 05:30:38"
+    },
+    {
+        "symbol": "NEON",
+        "chain": "SOLANA",
+        "token_address": "NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
+        "price_idr": 86.0,
+        "high_24h_idr": 97.0,
+        "vol_24h_idr": 953696142,
+        "discount_pct": 11.3,
+        "buy_ratio": 27,
+        "freshness": "\u26a1 SMART ACCUMULATION ($383 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 52,
+        "trade_url": "https://indodax.com/market/neonidr",
+        "tracker_url": "https://gmgn.ai/sol/token/NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
+        "timestamp": "2026-10-22 05:30:40"
     }
 ]
