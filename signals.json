@@ -1,18 +1,18 @@
 [
     {
-        "symbol": "WBTC",
-        "chain": "SOLANA",
-        "token_address": "5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
-        "price_idr": 1489501910.0,
-        "high_24h_idr": 1500000000.0,
-        "vol_24h_idr": 35922311,
-        "discount_pct": 0.7,
-        "buy_ratio": 30,
-        "freshness": "\u26a1 SMART ACCUMULATION ($604 via DEX <15m)",
+        "symbol": "APEX",
+        "chain": "BSC",
+        "token_address": "0x10834340776f2D6ec557dFFd65048bfb9Bae0627",
+        "price_idr": 4231.0,
+        "high_24h_idr": 4299.0,
+        "vol_24h_idr": 20341565,
+        "discount_pct": 1.6,
+        "buy_ratio": 100,
+        "freshness": "\u26a1 SMART ACCUMULATION ($770 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 55,
-        "trade_url": "https://indodax.com/market/wbtcidr",
-        "tracker_url": "https://gmgn.ai/sol/token/5XZw2LKTyrfvfiskJ78AMpackRjPcyCif1WhUsPDuVqQ",
-        "timestamp": "2026-10-22 03:05:30"
+        "signal_score": 125,
+        "trade_url": "https://indodax.com/market/apexidr",
+        "tracker_url": "https://dexscreener.com/bsc/0x80700E436E0a0a9373b40A84E2c10e0eD95BA12C",
+        "timestamp": "2026-10-22 03:10:25"
     }
 ]
