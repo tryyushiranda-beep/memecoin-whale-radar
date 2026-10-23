@@ -1,1 +1,34 @@
-[]
+[
+    {
+        "symbol": "NOM",
+        "chain": "SOLANA",
+        "token_address": "2MDr15dTn6km3NWusFcnZyhq3vWpYDg7vWprghpzbonk",
+        "price_idr": 29.512,
+        "high_24h_idr": 30.734,
+        "vol_24h_idr": 95776288,
+        "discount_pct": 4.0,
+        "buy_ratio": 67,
+        "freshness": "\u26a1 SMART ACCUMULATION ($172 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 92,
+        "trade_url": "https://indodax.com/market/nomidr",
+        "tracker_url": "https://gmgn.ai/sol/token/2MDr15dTn6km3NWusFcnZyhq3vWpYDg7vWprghpzbonk",
+        "timestamp": "2026-10-23 20:18:58"
+    },
+    {
+        "symbol": "VANRY",
+        "chain": "BASE",
+        "token_address": "0x07848a7b542a9cd856122C6c4Ab9ec87c44F8b63",
+        "price_idr": 10.0,
+        "high_24h_idr": 11.0,
+        "vol_24h_idr": 63611208,
+        "discount_pct": 9.1,
+        "buy_ratio": 52,
+        "freshness": "\u26a1 SMART ACCUMULATION ($273 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 77,
+        "trade_url": "https://indodax.com/market/vanryidr",
+        "tracker_url": "https://dexscreener.com/base/0xE5ff8a4Dc6F0DC2fE166392139FD1836E8591a8C",
+        "timestamp": "2026-10-23 20:19:00"
+    }
+]
