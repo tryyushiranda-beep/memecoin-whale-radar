@@ -1,1 +1,34 @@
-[]
+[
+    {
+        "symbol": "NMD",
+        "chain": "SOLANA",
+        "token_address": "nyBkgopL2VLixukLDWNgrTCXucce5CwGhHSJ2DCt2eN",
+        "price_idr": 42830.0,
+        "high_24h_idr": 43545.0,
+        "vol_24h_idr": 126127666,
+        "discount_pct": 1.6,
+        "buy_ratio": 48,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($9450 via DEX <15m)",
+        "signal_type": "SUPER GOLDEN SIGNAL",
+        "signal_score": 98,
+        "trade_url": "https://indodax.com/market/nmdidr",
+        "tracker_url": "https://gmgn.ai/sol/token/nyBkgopL2VLixukLDWNgrTCXucce5CwGhHSJ2DCt2eN",
+        "timestamp": "2026-10-23 02:15:33"
+    },
+    {
+        "symbol": "AGI",
+        "chain": "SOLANA",
+        "token_address": "CaWZeUM4FvX9dPkjGc2xHS6tSN3qJfTWyvaG77aM5o7h",
+        "price_idr": 100.0,
+        "high_24h_idr": 124.0,
+        "vol_24h_idr": 72789593,
+        "discount_pct": 19.4,
+        "buy_ratio": 38,
+        "freshness": "\u26a1 SMART ACCUMULATION ($784 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 63,
+        "trade_url": "https://indodax.com/market/agiidr",
+        "tracker_url": "https://gmgn.ai/sol/token/CaWZeUM4FvX9dPkjGc2xHS6tSN3qJfTWyvaG77aM5o7h",
+        "timestamp": "2026-10-23 02:15:26"
+    }
+]
