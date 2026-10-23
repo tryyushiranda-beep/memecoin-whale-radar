@@ -1,34 +1,18 @@
 [
     {
-        "symbol": "MEW",
-        "chain": "ARBITRUM",
-        "token_address": "0x2148E8f6cc773AB8f5D164F13a6dEB4bAFFeC31c",
-        "price_idr": 9.86,
-        "high_24h_idr": 10.96,
-        "vol_24h_idr": 77177686,
-        "discount_pct": 10.0,
-        "buy_ratio": 67,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($1446 via DEX <15m)",
+        "symbol": "PUMP",
+        "chain": "SOLANA",
+        "token_address": "9593dFjsLKKRAaz4LX1eK2DDEgrzfu3idb6yvMysD6A1",
+        "price_idr": 81.68,
+        "high_24h_idr": 90.0,
+        "vol_24h_idr": 546772843,
+        "discount_pct": 9.2,
+        "buy_ratio": 50,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($19105 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
-        "signal_score": 117,
-        "trade_url": "https://indodax.com/market/mewidr",
-        "tracker_url": "https://dexscreener.com/arbitrum/0xB2383E611C6B68638A6Eb0E632F870255eE252EC",
-        "timestamp": "2026-10-23 14:20:30"
-    },
-    {
-        "symbol": "REZ",
-        "chain": "BASE",
-        "token_address": "0xf757c9804cF2EE8d8Ed64e0A8936293Fe43a7252",
-        "price_idr": 78.0,
-        "high_24h_idr": 79.0,
-        "vol_24h_idr": 21986884,
-        "discount_pct": 1.3,
-        "buy_ratio": 71,
-        "freshness": "\u26a1 SMART ACCUMULATION ($200 via DEX <15m)",
-        "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 96,
-        "trade_url": "https://indodax.com/market/rezidr",
-        "tracker_url": "https://dexscreener.com/base/0xd55767AdCABF9a486Fbd3E8DEB5f75A4AD31965F",
-        "timestamp": "2026-10-23 14:20:32"
+        "signal_score": 100,
+        "trade_url": "https://indodax.com/market/pumpidr",
+        "tracker_url": "https://gmgn.ai/sol/token/9593dFjsLKKRAaz4LX1eK2DDEgrzfu3idb6yvMysD6A1",
+        "timestamp": "2026-10-23 14:25:34"
     }
 ]
