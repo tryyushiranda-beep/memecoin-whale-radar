@@ -1,34 +1,34 @@
 [
     {
+        "symbol": "AGI",
+        "chain": "SOLANA",
+        "token_address": "CaWZeUM4FvX9dPkjGc2xHS6tSN3qJfTWyvaG77aM5o7h",
+        "price_idr": 98.0,
+        "high_24h_idr": 124.0,
+        "vol_24h_idr": 73486141,
+        "discount_pct": 21.0,
+        "buy_ratio": 100,
+        "freshness": "\u26a1 SMART ACCUMULATION ($499 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 125,
+        "trade_url": "https://indodax.com/market/agiidr",
+        "tracker_url": "https://gmgn.ai/sol/token/CaWZeUM4FvX9dPkjGc2xHS6tSN3qJfTWyvaG77aM5o7h",
+        "timestamp": "2026-10-23 05:20:29"
+    },
+    {
         "symbol": "NVDAX",
         "chain": "SOLANA",
         "token_address": "8zBevqDZT6e4EzUcayySuY6CTtbhMvwFokGv91QA41Zm",
         "price_idr": 3989992.0,
         "high_24h_idr": 4055890.0,
-        "vol_24h_idr": 21912201,
+        "vol_24h_idr": 21922159,
         "discount_pct": 1.6,
-        "buy_ratio": 70,
-        "freshness": "\ud83d\udea8 SUPER WHALE ($18020 via DEX <15m)",
+        "buy_ratio": 69,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($16527 via DEX <15m)",
         "signal_type": "SUPER GOLDEN SIGNAL",
-        "signal_score": 120,
+        "signal_score": 119,
         "trade_url": "https://indodax.com/market/nvdaxidr",
         "tracker_url": "https://gmgn.ai/sol/token/8zBevqDZT6e4EzUcayySuY6CTtbhMvwFokGv91QA41Zm",
-        "timestamp": "2026-10-23 05:15:32"
-    },
-    {
-        "symbol": "GTC",
-        "chain": "SOLANA",
-        "token_address": "EzgEw9qevbREonkg9LdPDyBNNm2KDuQfwb9kwyAVFLVL",
-        "price_idr": 5819.0,
-        "high_24h_idr": 6272.0,
-        "vol_24h_idr": 847577596,
-        "discount_pct": 7.2,
-        "buy_ratio": 21,
-        "freshness": "\u26a1 SMART ACCUMULATION ($170 via DEX <15m)",
-        "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 46,
-        "trade_url": "https://indodax.com/market/gtcidr",
-        "tracker_url": "https://gmgn.ai/sol/token/EzgEw9qevbREonkg9LdPDyBNNm2KDuQfwb9kwyAVFLVL",
-        "timestamp": "2026-10-23 05:15:29"
+        "timestamp": "2026-10-23 05:20:35"
     }
 ]
