@@ -7,12 +7,28 @@
         "high_24h_idr": 10.96,
         "vol_24h_idr": 57029895,
         "discount_pct": 20.3,
-        "buy_ratio": 80,
-        "freshness": "\u26a1 SMART ACCUMULATION ($336 via DEX <15m)",
+        "buy_ratio": 78,
+        "freshness": "\u26a1 SMART ACCUMULATION ($496 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 105,
+        "signal_score": 103,
         "trade_url": "https://indodax.com/market/mewidr",
         "tracker_url": "https://dexscreener.com/arbitrum/0xB2383E611C6B68638A6Eb0E632F870255eE252EC",
-        "timestamp": "2026-10-23 11:20:30"
+        "timestamp": "2026-10-23 11:25:25"
+    },
+    {
+        "symbol": "MOODENG",
+        "chain": "ETHEREUM",
+        "token_address": "0x28561B8A2360F463011c16b6Cc0B0cbEF8dbBcad",
+        "price_idr": 744.0,
+        "high_24h_idr": 788.0,
+        "vol_24h_idr": 211199915,
+        "discount_pct": 5.6,
+        "buy_ratio": 50,
+        "freshness": "\u26a1 SMART ACCUMULATION ($218 via DEX <15m)",
+        "signal_type": "GOLDEN SIGNAL",
+        "signal_score": 75,
+        "trade_url": "https://indodax.com/market/moodengidr",
+        "tracker_url": "https://dexscreener.com/ethereum/0x470DC172d6502Ac930B59322EcE5345dd456A03D",
+        "timestamp": "2026-10-23 11:25:26"
     }
 ]
