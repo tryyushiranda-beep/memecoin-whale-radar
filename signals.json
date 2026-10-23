@@ -1,18 +1,34 @@
 [
     {
+        "symbol": "HIGH",
+        "chain": "ETHEREUM",
+        "token_address": "0x71Ab77b7dbB4fa7e017BC15090b2163221420282",
+        "price_idr": 488.0,
+        "high_24h_idr": 494.0,
+        "vol_24h_idr": 37123756,
+        "discount_pct": 1.2,
+        "buy_ratio": 73,
+        "freshness": "\ud83d\udea8 SUPER WHALE ($7116 via DEX <15m)",
+        "signal_type": "SUPER GOLDEN SIGNAL",
+        "signal_score": 123,
+        "trade_url": "https://indodax.com/market/highidr",
+        "tracker_url": "https://dexscreener.com/ethereum/0x3854612b93B140726167cCA5418B01E832515d42",
+        "timestamp": "2026-10-23 11:05:27"
+    },
+    {
         "symbol": "MEW",
         "chain": "ARBITRUM",
         "token_address": "0x2148E8f6cc773AB8f5D164F13a6dEB4bAFFeC31c",
         "price_idr": 8.73,
         "high_24h_idr": 10.96,
-        "vol_24h_idr": 57140265,
+        "vol_24h_idr": 57115325,
         "discount_pct": 20.3,
-        "buy_ratio": 84,
-        "freshness": "\u26a1 SMART ACCUMULATION ($939 via DEX <15m)",
+        "buy_ratio": 83,
+        "freshness": "\u26a1 SMART ACCUMULATION ($347 via DEX <15m)",
         "signal_type": "GOLDEN SIGNAL",
-        "signal_score": 109,
+        "signal_score": 108,
         "trade_url": "https://indodax.com/market/mewidr",
         "tracker_url": "https://dexscreener.com/arbitrum/0xB2383E611C6B68638A6Eb0E632F870255eE252EC",
-        "timestamp": "2026-10-23 11:00:43"
+        "timestamp": "2026-10-23 11:05:28"
     }
 ]
