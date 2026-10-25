@@ -3,87 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indodax Smart Money Radar v6.17</title>
+    <title>BTC Dip-Buy Whale Radar v2.0</title>
     <style>
         :root {
             --bg-color: #080c14;
             --card-bg: #111827;
-            --card-border: #1f293d;
+            --border-color: #1f293d;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
             --text-main: #f9fafb;
             --text-sub: #9ca3af;
-            --accent-green: #10b981;
-            --accent-green-bg: rgba(16, 185, 129, 0.15);
-            --accent-amber: #f59e0b;
-            --accent-gold: #eab308;
-            --accent-gold-bg: rgba(234, 179, 8, 0.18);
-            --accent-purple: #a855f7;
-            --accent-purple-bg: rgba(168, 85, 247, 0.2);
-            --accent-blue: #3b82f6;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; max-width: 600px; margin: 0 auto; min-height: 100vh; }
-        header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; }
-        .title-group h1 { font-size: 1.2rem; font-weight: 800; color: var(--accent-gold); letter-spacing: -0.5px; }
-        .title-group p { font-size: 0.78rem; color: var(--text-sub); margin-top: 3px; }
-        .status-badge { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; background: var(--accent-green-bg); color: var(--accent-green); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--accent-green); }
-        .pulse-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.8; } }
+        body { background: var(--bg-color); color: var(--text-main); padding: 16px; max-width: 500px; margin: 0 auto; min-height: 100vh; }
         
-        .notif-btn { width: 100%; background: #1f293d; color: var(--text-main); border: 1px solid var(--card-border); padding: 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .notif-btn:active { opacity: 0.8; }
+        header { border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px; }
+        header h1 { font-size: 1.15rem; color: #facc15; display: flex; align-items: center; gap: 8px; }
+        header p { font-size: 0.75rem; color: var(--text-sub); margin-top: 4px; }
 
-        .signal-grid { display: grid; gap: 16px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .symbol-badge { font-size: 1.2rem; font-weight: 800; color: var(--text-main); }
-        .chain-tag { font-size: 0.7rem; color: var(--text-sub); background: #374151; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
-        
-        .freshness-bar { font-size: 0.75rem; font-weight: 700; color: var(--accent-green); background: rgba(16, 185, 129, 0.08); padding: 6px 10px; border-radius: 6px; margin-bottom: 12px; border: 1px dashed rgba(16, 185, 129, 0.3); }
+        .btc-banner { border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.8rem; }
+        .btc-correcting { background: rgba(239, 68, 68, 0.15); border: 1px solid var(--accent-red); }
+        .btc-normal { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); }
 
-        .tag-super { background-color: var(--accent-purple-bg); color: var(--accent-purple); border: 1px solid var(--accent-purple); font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
-        .tag-golden { background-color: var(--accent-gold-bg); color: var(--accent-gold); border: 1px solid var(--accent-gold); font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
-
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; background: rgba(0, 0, 0, 0.4); padding: 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03); }
-        .metric-item span { display: block; font-size: 0.72rem; color: var(--text-sub); margin-bottom: 4px; }
-        .metric-item strong { font-size: 0.95rem; color: var(--text-main); }
+        .grid { display: grid; gap: 12px; }
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .symbol { font-size: 1.1rem; font-weight: bold; }
+        .tag-status { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid var(--accent-amber); font-size: 0.68rem; padding: 3px 8px; border-radius: 6px; font-weight: bold; }
         
-        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .action-btn { display: block; text-align: center; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; text-decoration: none; font-weight: 700; font-size: 0.8rem; padding: 10px; border-radius: 8px; }
-        .tracker-btn { display: block; text-align: center; background: #374151; color: #f3f4f6; text-decoration: none; font-weight: 700; font-size: 0.8rem; padding: 10px; border-radius: 8px; border: 1px solid #4b5563; }
-        .action-btn:active, .tracker-btn:active { opacity: 0.8; }
+        .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; font-size: 0.8rem; }
+        .metrics div span { display: block; color: var(--text-sub); font-size: 0.7rem; }
         
-        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); background: var(--card-bg); border-radius: 14px; border: 1px dashed var(--card-border); }
-        .last-updated { text-align: center; font-size: 0.75rem; color: var(--text-sub); margin-top: 24px; padding-bottom: 24px; }
+        .btn-trade { display: block; text-align: center; background: #2563eb; color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: bold; padding: 8px; border-radius: 6px; }
+        .btn-trade:active { opacity: 0.8; }
+        .empty { text-align: center; padding: 30px; color: var(--text-sub); font-size: 0.85rem; line-height: 1.4; }
+        .footer { text-align: center; font-size: 0.7rem; color: var(--text-sub); margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="title-group">
-            <h1>🔥 SMART MONEY RADAR v6.17</h1>
-            <p>Pure Micro-Cap & Pre-Pump Whale Accumulation Radar</p>
-        </div>
-        <div class="status-badge">
-            <div class="pulse-dot"></div>
-            <span id="status-text">CONNECTING</span>
-        </div>
+        <h1>🐋 REAL WHALE HAKA RADAR</h1>
+        <p>Altcoin Diskon Dibeli Paus ≥ Rp 10 Juta Saat BTC Koreksi</p>
     </header>
 
-    <button id="enable-notif-btn" class="notif-btn" onclick="requestNotificationPermission()">
-        🔔 Aktifkan Notifikasi Web (HP/Browser)
-    </button>
+    <div id="btc-banner" class="btc-banner btc-normal">
+        Memuat status pasar BTC...
+    </div>
 
-    <main id="signal-container" class="signal-grid">
-        <div class="empty-state">Memuat pindaian koin Pre-Pump Paus...</div>
+    <main id="signals-container" class="grid">
+        <div class="empty">Memuat pindaian eksekusi Paus...</div>
     </main>
 
-    <div class="last-updated" id="last-updated-time">Status Server: Menunggu pindaian...</div>
+    <div class="footer" id="last-update">Status: Menunggu data...</div>
 
     <script>
-        // Menggunakan Raw GitHub URL langsung dari repositori memecoin-whale-radar
-        const SIGNALS_URL = 'https://raw.githubusercontent.com/tryyushiranda-beep/memecoin-whale-radar/main/signals.json';
-        let notifiedCoins = new Set();
+        const REPO_USER = "tryyushiranda-beep";
+        const REPO_NAME = "memecoin-whale-radar";
+        const DATA_URL = `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/main/decoupling_signals.json`;
 
         function formatIDR(num) {
             if (num >= 1000000000) return (num / 1000000000).toFixed(1) + ' Miliar';
@@ -91,99 +70,69 @@
             return 'Rp ' + num.toLocaleString('id-ID');
         }
 
-        function formatPrice(price) {
-            if (price < 10) return 'Rp ' + price.toFixed(2);
-            return 'Rp ' + Math.round(price).toLocaleString('id-ID');
-        }
-
-        function requestNotificationPermission() {
-            if (!("Notification" in window)) {
-                alert("Browser kamu tidak mendukung notifikasi web.");
-                return;
-            }
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    document.getElementById('enable-notif-btn').innerText = '✅ Notifikasi Web Aktif';
-                    document.getElementById('enable-notif-btn').style.borderColor = '#10b981';
-                    new Notification("Smart Money Radar", { body: "Notifikasi sinyal Paus siap diaktifkan!" });
-                }
-            });
-        }
-
-        function checkAndSendNotification(signals) {
-            if (Notification.permission !== "granted") return;
-
-            signals.forEach(signal => {
-                if (!notifiedCoins.has(signal.symbol)) {
-                    new Notification(`🚨 WHALE DETECTED: ${signal.symbol}/IDR`, {
-                        body: `${signal.freshness} | Diskon: -${signal.discount_pct}%`,
-                        icon: 'https://indodax.com/favicon.ico'
-                    });
-                    notifiedCoins.add(signal.symbol);
-                }
-            });
-        }
-
         async function fetchSignals() {
             try {
-                const response = await fetch(`${SIGNALS_URL}?t=${new Date().getTime()}`);
-                if (!response.ok) throw new Error('File data tidak ditemukan');
-
-                const signals = await response.json();
-                renderSignals(signals);
-                checkAndSendNotification(signals);
+                const res = await fetch(`${DATA_URL}?t=${new Date().getTime()}`);
+                if (!res.ok) throw new Error("Gagal mengambil data");
                 
-                document.getElementById('status-text').innerText = 'LIVE';
-                document.getElementById('status-text').parentElement.style.borderColor = '#10b981';
-                document.getElementById('status-text').parentElement.style.color = '#10b981';
-                document.getElementById('last-updated-time').innerText = `Terakhir Diperbarui: ${new Date().toLocaleTimeString('id-ID')}`;
-            } catch (error) {
-                document.getElementById('status-text').innerText = 'CONNECTING';
+                const data = await res.json();
+                renderBTCStatus(data.btc_status);
+                renderSignals(data.signals, data.btc_status.is_correcting);
+                document.getElementById('last-update').innerText = `Terakhir Diperbarui: ${data.updated_at}`;
+            } catch (err) {
+                document.getElementById('btc-banner').innerText = "⚠️ Gagal menghubungkan ke data.";
             }
         }
 
-        function renderSignals(signals) {
-            const container = document.getElementById('signal-container');
-            if (!signals || signals.length === 0) {
-                container.innerHTML = `<div class="empty-state"><p>Tidak ada koin Micro-Cap yang memenuhi kriteria akumulasi Beli Paus saat ini.</p></div>`;
+        function renderBTCStatus(btc) {
+            const banner = document.getElementById('btc-banner');
+            if (btc.is_correcting) {
+                banner.className = "btc-banner btc-correcting";
+                banner.innerHTML = `
+                    <strong>⚠️ STATUS BTC: SEDANG KOREKSI</strong>
+                    <div style="font-size: 0.72rem; margin-top: 4px; color: var(--text-sub);">
+                        Radar aktif mencari Altcoin dengan transaksi Haka Paus (≥ Rp 10 Juta).
+                    </div>
+                `;
+            } else {
+                banner.className = "btc-banner btc-normal";
+                banner.innerHTML = `
+                    <strong>✅ STATUS BTC: STABIL / NAIK</strong>
+                    <div style="font-size: 0.72rem; margin-top: 4px; color: var(--text-sub);">
+                        BTC tidak sedang koreksi. Radar diposisikan *standby*.
+                    </div>
+                `;
+            }
+        }
+
+        function renderSignals(signals, isCorrecting) {
+            const container = document.getElementById('signals-container');
+            
+            if (!isCorrecting) {
+                container.innerHTML = `<div class="card empty">Radar standby. Sinyal hanya muncul saat BTC sedang koreksi agar entri beli lebih aman.</div>`;
                 return;
             }
 
-            container.innerHTML = signals.map(signal => {
-                let badgeClass = signal.signal_type === "SUPER GOLDEN SIGNAL" ? "tag-super" : "tag-golden";
-                let badgeLabel = `🐋 ${signal.buy_ratio}% Buy Inflow`;
-                let trackerLabel = signal.chain === 'SOLANA' ? '🔍 PAUS GMGN ↗' : '🔍 TXNS PAUS ↗';
+            if (!signals || signals.length === 0) {
+                container.innerHTML = `<div class="card empty">BTC sedang koreksi, namun belum terdeteksi transaksi Haka Paus ≥ Rp 10 Juta di altcoin saat ini.</div>`;
+                return;
+            }
 
-                return `
-                    <div class="card">
-                        <div class="card-header">
-                            <div>
-                                <span class="symbol-badge">${signal.symbol}/IDR</span>
-                                <span class="chain-tag">${signal.chain}</span>
-                            </div>
-                            <span class="${badgeClass}">${badgeLabel}</span>
-                        </div>
-                        <div class="freshness-bar">
-                            ${signal.freshness}
-                        </div>
-                        <div class="metrics-grid">
-                            <div class="metric-item"><span>Harga Pasar</span><strong>${formatPrice(signal.price_idr)}</strong></div>
-                            <div class="metric-item"><span>Area Diskon</span><strong style="color: var(--accent-amber);">–${signal.discount_pct}% dari High</strong></div>
-                            <div class="metric-item"><span>Volume 24h</span><strong style="color: var(--accent-blue);">${formatIDR(signal.vol_24h_idr)}</strong></div>
-                            <div class="metric-item"><span>High 24h</span><strong style="color: var(--text-sub);">${formatPrice(signal.high_24h_idr)}</strong></div>
-                        </div>
-                        <div class="btn-group">
-                            <a href="${signal.tracker_url}" target="_blank" class="tracker-btn">${trackerLabel}</a>
-                            <a href="${signal.trade_url}" target="_blank" class="action-btn">INDODAX ↗</a>
-                        </div>
+            container.innerHTML = signals.map(s => `
+                <div class="card">
+                    <div class="card-header">
+                        <span class="symbol">${s.symbol}/IDR</span>
+                        <span class="tag-status">${s.status_tag}</span>
                     </div>
-                `;
-            }).join('');
-        }
-
-        if (Notification.permission === "granted") {
-            document.getElementById('enable-notif-btn').innerText = '✅ Notifikasi Web Aktif';
-            document.getElementById('enable-notif-btn').style.borderColor = '#10b981';
+                    <div class="metrics">
+                        <div><span>Eksekusi Beli Riil</span><strong style="color: var(--accent-green);">${s.real_buy_pct}% Buy</strong></div>
+                        <div><span>Diskon dari High 24h</span><strong style="color: var(--accent-amber);">–${s.discount_pct}%</strong></div>
+                        <div><span>Harga Saat Ini</span><strong>Rp ${s.price_idr.toLocaleString('id-ID')}</strong></div>
+                        <div><span>Total Beli Riil</span><strong>${formatIDR(s.real_buy_volume)}</strong></div>
+                    </div>
+                    <a href="${s.trade_url}" target="_blank" class="btn-trade">INDODAX ↗</a>
+                </div>
+            `).join('');
         }
 
         fetchSignals();
