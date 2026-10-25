@@ -1,12 +1,17 @@
 import requests
 import json
-import time
+from datetime import datetime, timedelta, timezone
 
 INDODAX_TRADES_URL = "https://indodax.com/api/trades/"
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
 
 HEAVY_COINS = ['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 'ADA', 'MATIC']
+
+def get_wib_time():
+    """Mendapatkan jam WIB (UTC+7) secara akurat tanpa terpengaruh jam server GitHub"""
+    wib = timezone(timedelta(hours=7))
+    return datetime.now(wib).strftime("%d %b %Y - %H:%M:%S WIB")
 
 def get_market_data():
     try:
@@ -18,7 +23,10 @@ def get_market_data():
     return {}
 
 def check_btc_correcting():
-    """Cek apakah BTC sedang tertekan/koreksi di Order Book"""
+    """
+    ANALISIS KEDALAMAN ORDER BOOK BTC AKURAT
+    Membaca 50 antrean Jual vs Beli untuk mencerminkan indikator di aplikasi Indodax.
+    """
     try:
         res = requests.get(f"{INDODAX_DEPTH_URL}btc_idr", timeout=5)
         if res.status_code == 200:
@@ -26,21 +34,22 @@ def check_btc_correcting():
             sell_orders = data.get('sell', [])
             buy_orders = data.get('buy', [])
             
-            tot_sell = sum(float(i[0]) * float(i[1]) for i in sell_orders[:10])
-            tot_buy = sum(float(i[0]) * float(i[1]) for i in buy_orders[:10])
+            # Hitung kedalaman hingga 50 antrean agar presisi seperti di app Indodax
+            tot_sell_idr = sum(float(i[0]) * float(i[1]) for i in sell_orders[:50])
+            tot_buy_idr = sum(float(i[0]) * float(i[1]) for i in buy_orders[:50])
             
-            if (tot_sell + tot_buy) > 0:
-                sell_pct = (tot_sell / (tot_sell + tot_buy)) * 100
+            grand_total = tot_sell_idr + tot_buy_idr
+            if grand_total > 0:
+                sell_pct = (tot_sell_idr / grand_total) * 100
+                print(f"[DEBUG BTC] Tekanan Jual: {sell_pct:.1f}% | Beli: {100-sell_pct:.1f}%")
+                # Koreksi dianggap valid jika tekanan jual >= 51.5%
                 return sell_pct >= 51.5
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[ERROR] Cek BTC gagal: {e}")
     return False
 
 def get_real_whale_buys(pair_id):
-    """
-    ANALISIS TRANSAKSI EKSEKUSI RIIL (MARKET BUY / HAKA)
-    Hanya menghitung transaksi Beli bernilai MINIMAL Rp 10 JUTA sekali klik.
-    """
+    """ANALISIS HAKA PAUS >= RP 10 JUTA"""
     try:
         url = f"{INDODAX_TRADES_URL}{pair_id}"
         res = requests.get(url, timeout=5)
@@ -51,7 +60,6 @@ def get_real_whale_buys(pair_id):
             total_real_sell_idr = 0
             whale_transactions_count = 0
 
-            # Cek 50 transaksi eksekusi terakhir
             for t in trades[:50]:
                 price = float(t.get('price', 0))
                 amount = float(t.get('amount', 0))
@@ -60,7 +68,6 @@ def get_real_whale_buys(pair_id):
 
                 if trade_type == 'buy':
                     total_real_buy_idr += idr_val
-                    # SYARAT BARU: HANYA DAHULUKAN TRANSAKSI HAKA >= RP 10 JUTA
                     if idr_val >= 10_000_000:
                         whale_transactions_count += 1
                 elif trade_type == 'sell':
@@ -68,7 +75,7 @@ def get_real_whale_buys(pair_id):
 
             grand_total = total_real_buy_idr + total_real_sell_idr
             if grand_total > 0:
-                real_buy_pct = round((total_buy_idr / grand_total) * 100, 1) if 'total_buy_idr' in locals() else round((total_real_buy_idr / grand_total) * 100, 1)
+                real_buy_pct = round((total_real_buy_idr / grand_total) * 100, 1)
                 return real_buy_pct, round(total_real_buy_idr), whale_transactions_count
     except Exception:
         pass
@@ -84,7 +91,7 @@ def run_decoupling_radar():
     anomalies = []
 
     if btc_is_correcting:
-        print("[INFO] BTC Koreksi Terdeteksi. Memindai Eksekusi Haka Paus >= Rp 10 Juta...")
+        print("[INFO] BTC Koreksi Terdeteksi. Memindai Haka Paus >= Rp 10 Juta...")
 
         for pair_id, data in tickers.items():
             if not pair_id.endswith('_idr'):
@@ -104,14 +111,9 @@ def run_decoupling_radar():
 
                 discount_pct = round(((high_price - last_price) / high_price) * 100, 1) if high_price > 0 else 0
 
-                # Dapatkan transaksi Beli Riil (Filter Rp 10 Juta)
                 real_buy_pct, real_buy_volume, whale_tx_count = get_real_whale_buys(pair_id)
 
-                # KLASIFIKASI SINYAL PAUS:
-                # 1. Total Eksekusi Beli Riil >= 65%
-                # 2. Ada MINIMAL 1x transaksi Haka langsung >= Rp 10 Juta
                 if real_buy_pct >= 65.0 and whale_tx_count >= 1:
-                    
                     status_tag = f"🐋 {whale_tx_count}x HAKA PAUS (>=10M)"
 
                     anomalies.append({
@@ -124,27 +126,29 @@ def run_decoupling_radar():
                         'vol_24h_idr': round(vol_idr),
                         'status_tag': status_tag,
                         'trade_url': f"https://indodax.com/market/{pair_id}",
-                        'timestamp': time.strftime("%H:%M:%S WIB")
+                        'timestamp': get_wib_time()
                     })
             except Exception:
                 continue
 
-        # Urutkan berdasarkan frekuensi transaksi Rp 10 Juta terbanyak
         anomalies.sort(key=lambda x: (x['whale_tx_count'], x['real_buy_pct']), reverse=True)
 
-    # Simpan Output ke file JSON
     output_data = {
         'btc_status': {
             'is_correcting': btc_is_correcting
         },
-        'updated_at': time.strftime("%d %b %Y - %H:%M:%S WIB"),
+        'updated_at': get_wib_time(),
         'signals': anomalies[:10]
     }
 
+    # Simpan ke kedua file JSON agar dasbor versi mana pun tetap sinkron
     with open('decoupling_signals.json', 'w') as f:
         json.dump(output_data, f, indent=4)
 
-    print(f"[SUCCESS] Pindaian selesai. Ditemukan {len(anomalies)} koin dengan HAKA Paus >= Rp 10 Juta!")
+    with open('signals.json', 'w') as f:
+        json.dump(output_data, f, indent=4)
+
+    print(f"[SUCCESS] Selesai. Ditemukan {len(anomalies)} koin dengan HAKA Paus >= Rp 10 Juta!")
 
 if __name__ == "__main__":
     run_decoupling_radar()
