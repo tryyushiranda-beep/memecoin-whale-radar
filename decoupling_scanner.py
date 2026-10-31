@@ -2,180 +2,138 @@ import requests
 import json
 from datetime import datetime, timedelta
 
-INDODAX_TRADES_URL = "https://indodax.com/api/trades/"
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
+INDODAX_TRADES_URL = "https://indodax.com/api/trades/"
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
 
+# Koin-koin berkapitalisasi besar yang diabaikan agar fokus ke altcoin/memecoin spekulatif
 HEAVY_COINS = ['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 'ADA', 'MATIC']
 
 def get_wib_time():
+    """Mendapatkan jam WIB (UTC+7) murni presisi dari UTC server"""
     wib_now = datetime.utcnow() + timedelta(hours=7)
     return wib_now.strftime("%d %b %Y - %H:%M:%S WIB")
 
-def get_market_data():
+def run_ultra_early_scanner():
     try:
         res = requests.get(INDODAX_SUMMARIES_URL, timeout=10)
-        if res.status_code == 200:
-            return res.json().get('tickers', {})
+        if res.status_code != 200:
+            print("[ERROR] Gagal mengambil data summaries Indodax.")
+            return
+        tickers = res.json().get('tickers', {})
     except Exception as e:
-        print(f"[ERROR] Summaries gagal: {e}")
-    return {}
-
-def check_btc_correcting():
-    """
-    ANALISIS KOREKSI BTC REAL-TIME
-    Memeriksa kedalaman Order Book & Perubahan Harga 24 Jam
-    """
-    # 1. CEK DENGAN KEDALAMAN ORDER BOOK
-    try:
-        res = requests.get(f"{INDODAX_DEPTH_URL}btc_idr", timeout=5)
-        if res.status_code == 200:
-            data = res.json()
-            sell_orders = data.get('sell', [])
-            buy_orders = data.get('buy', [])
-            
-            tot_sell_idr = 0
-            tot_buy_idr = 0
-
-            # Hitung antrean Jual
-            for item in sell_orders[:30]:
-                val1 = float(item[0])
-                val2 = float(item[1])
-                # Antisipasi pembalikan posisi harga/jumlah dari API
-                tot_sell_idr += (val1 * val2) if (val1 > 100_000 or val2 > 100_000) else val1
-
-            # Hitung antrean Beli
-            for item in buy_orders[:30]:
-                val1 = float(item[0])
-                val2 = float(item[1])
-                tot_buy_idr += (val1 * val2) if (val1 > 100_000 or val2 > 100_000) else val1
-
-            grand_total = tot_sell_idr + tot_buy_idr
-            if grand_total > 0:
-                sell_pct = (tot_sell_idr / grand_total) * 100
-                print(f"[DEBUG BTC] Persentase Tekanan Jual: {sell_pct:.1f}%")
-                
-                # Asal antrean Jual > Beli (>= 50.1%), langsung deteksi KOREKSI
-                if sell_pct >= 50.1:
-                    return True
-    except Exception as e:
-        print(f"[ERROR] Cek Depth BTC gagal: {e}")
-
-    # 2. BACKUP: CEK PERUBAHAN HARGA HARI INI
-    try:
-        tickers = get_market_data()
-        btc_data = tickers.get('btc_idr', {})
-        last_price = float(btc_data.get('last', 0))
-        high_price = float(btc_data.get('high', 0))
-        
-        if high_price > 0:
-            drop_pct = ((high_price - last_price) / high_price) * 100
-            if drop_pct >= 0.5:  # Jika harga BTC turun >= 0.5% dari harga tertinggi hari ini
-                return True
-    except Exception:
-        pass
-
-    # KETENTUAN UTAMA: Buka radar selama ada tekanan jual di aplikasi Indodax
-    return True
-
-def get_real_whale_buys(pair_id):
-    try:
-        url = f"{INDODAX_TRADES_URL}{pair_id}"
-        res = requests.get(url, timeout=5)
-        if res.status_code == 200:
-            trades = res.json()
-            
-            total_real_buy_idr = 0
-            total_real_sell_idr = 0
-            whale_transactions_count = 0
-
-            for t in trades[:50]:
-                price = float(t.get('price', 0))
-                amount = float(t.get('amount', 0))
-                trade_type = t.get('type', '')
-                idr_val = price * amount
-
-                if trade_type == 'buy':
-                    total_real_buy_idr += idr_val
-                    if idr_val >= 10_000_000:
-                        whale_transactions_count += 1
-                elif trade_type == 'sell':
-                    total_real_sell_idr += idr_val
-
-            grand_total = total_real_buy_idr + total_real_sell_idr
-            if grand_total > 0:
-                real_buy_pct = round((total_real_buy_idr / grand_total) * 100, 1)
-                return real_buy_pct, round(total_real_buy_idr), whale_transactions_count
-    except Exception:
-        pass
-    return 0, 0, 0
-
-def run_decoupling_radar():
-    tickers = get_market_data()
-    if not tickers:
-        print("[ERROR] Ticker kosong.")
+        print(f"[ERROR] Exception: {e}")
         return
 
-    btc_is_correcting = check_btc_correcting()
-    anomalies = []
+    early_signals = []
 
-    if btc_is_correcting:
-        print("[INFO] BTC Koreksi Terdeteksi. Memindai Haka Paus...")
+    print(f"[INFO] Memulai pemindaian Dini Pump pada {get_wib_time()}...")
 
-        for pair_id, data in tickers.items():
-            if not pair_id.endswith('_idr'):
+    for pair_id, data in tickers.items():
+        if not pair_id.endswith('_idr'):
+            continue
+        
+        symbol = pair_id.replace('_idr', '').upper()
+        if symbol in HEAVY_COINS:
+            continue
+
+        try:
+            last_price = float(data.get('last', 0))
+            low_24h = float(data.get('low', 0))
+            vol_idr = float(data.get('vol_idr', 0))
+
+            # Filter koin mati (Volume 24h minimal Rp 15 Juta)
+            if last_price <= 0 or low_24h <= 0 or vol_idr < 15_000_000:
+                continue
+
+            # SYARAT 1: HARGA MASIH DI BOTTOM (Belum naik lebih dari 8% dari Low 24h)
+            gain_from_bottom = round(((last_price - low_24h) / low_24h) * 100, 1)
+            if gain_from_bottom > 8.0:
+                continue
+
+            # SYARAT 2: CEK TRANSAKSI TERKINI (Mencari Akumulasi Halus)
+            t_res = requests.get(f"{INDODAX_TRADES_URL}{pair_id}", timeout=3)
+            if t_res.status_code != 200:
                 continue
             
-            symbol = pair_id.replace('_idr', '').upper()
-            if symbol in HEAVY_COINS:
+            trades = t_res.json()
+            if not trades or len(trades) < 10:
                 continue
 
-            try:
-                vol_idr = float(data.get('vol_idr', 0))
-                last_price = float(data.get('last', 0))
-                high_price = float(data.get('high', 0))
+            buy_count = 0
+            recent_buy_idr = 0
+            
+            # Cek 15 transaksi terakhir
+            for t in trades[:15]:
+                if t.get('type') == 'buy':
+                    p = float(t.get('price', 0))
+                    a = float(t.get('amount', 0))
+                    val = p * a
+                    recent_buy_idr += val
+                    # Hitung eksekusi beli pecahan sedang (>= Rp 500rb)
+                    if val >= 500_000:
+                        buy_count += 1
 
-                if vol_idr < 30_000_000 or last_price <= 0:
-                    continue
+            # SYARAT 3: CEK KEDALAMAN TEMBOK JUAL (Order Book Ask)
+            d_res = requests.get(f"{INDODAX_DEPTH_URL}{pair_id}", timeout=3)
+            thin_wall = False
+            top_5_sell_idr = 0
+            
+            if d_res.status_code == 200:
+                depth = d_res.json()
+                sell_orders = depth.get('sell', [])
+                
+                # Hitung akumulasi nilai Rupiah di 5 antrean jual teratas
+                top_5_sell_idr = sum(float(i[0]) * float(i[1]) for i in sell_orders[:5])
+                
+                # Jika tembok jual 5 tingkat ke atas <= Rp 20 Juta -> SANGAT TIPIS (Mudah Memicu Mega Pump)
+                if top_5_sell_idr <= 20_000_000:
+                    thin_wall = True
 
-                discount_pct = round(((high_price - last_price) / high_price) * 100, 1) if high_price > 0 else 0
-                real_buy_pct, real_buy_volume, whale_tx_count = get_real_whale_buys(pair_id)
+            # DETEKSI PINTU MASUK DINI:
+            # - Minimal 2x Haka pecahan sedang
+            # - Total Beli terkini >= Rp 2 Juta
+            # - Tembok jual tipis
+            if buy_count >= 2 and recent_buy_idr >= 2_000_000 and thin_wall:
+                status_tag = "⚡ READY TO EXPLODE"
+                if top_5_sell_idr <= 8_000_000:
+                    status_tag = "🔥 ULTRA THIN WALL"
 
-                if real_buy_pct >= 65.0 and whale_tx_count >= 1:
-                    status_tag = f"🐋 {whale_tx_count}x HAKA PAUS (>=10M)"
+                early_signals.append({
+                    'symbol': symbol,
+                    'price_idr': last_price,
+                    'gain_from_bottom': gain_from_bottom,
+                    'recent_buy_idr': round(recent_buy_idr),
+                    'top_5_sell_idr': round(top_5_sell_idr),
+                    'vol_24h_idr': round(vol_idr),
+                    'status_tag': status_tag,
+                    'trade_url': f"https://indodax.com/market/{pair_id}",
+                    'timestamp': get_wib_time()
+                })
 
-                    anomalies.append({
-                        'symbol': symbol,
-                        'price_idr': last_price,
-                        'discount_pct': discount_pct,
-                        'real_buy_pct': real_buy_pct,
-                        'real_buy_volume': real_buy_volume,
-                        'whale_tx_count': whale_tx_count,
-                        'vol_24h_idr': round(vol_idr),
-                        'status_tag': status_tag,
-                        'trade_url': f"https://indodax.com/market/{pair_id}",
-                        'timestamp': get_wib_time()
-                    })
-            except Exception:
-                continue
+        except Exception:
+            continue
 
-        anomalies.sort(key=lambda x: (x['whale_tx_count'], x['real_buy_pct']), reverse=True)
+    # Urutkan berdasarkan tembok jual paling tipis
+    early_signals.sort(key=lambda x: x['top_5_sell_idr'])
 
     output_data = {
         'btc_status': {
-            'is_correcting': btc_is_correcting
+            'is_correcting': True
         },
         'updated_at': get_wib_time(),
-        'signals': anomalies[:10]
+        'total_signals': len(early_signals),
+        'signals': early_signals[:10]
     }
 
+    # Simpan langsung ke kedua nama file JSON agar sinkron sempurna dengan dasbor
     with open('decoupling_signals.json', 'w') as f:
         json.dump(output_data, f, indent=4)
 
     with open('signals.json', 'w') as f:
         json.dump(output_data, f, indent=4)
 
-    print(f"[SUCCESS] Selesai pada {get_wib_time()}")
+    print(f"[SUCCESS] Selesai pada {get_wib_time()}. Ditemukan {len(early_signals)} koin potensial.")
 
 if __name__ == "__main__":
-    run_decoupling_radar()
+    run_ultra_early_scanner()
