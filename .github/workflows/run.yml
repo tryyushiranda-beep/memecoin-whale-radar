@@ -1,4 +1,4 @@
-name: Decoupling Radar Scanner
+name: Ultra Early Pump Scanner
 
 on:
   schedule:
@@ -21,13 +21,13 @@ jobs:
       - name: Install Dependencies
         run: pip install requests
 
-      - name: Run Decoupling Scanner
+      - name: Run Scanner Script
         run: python decoupling_scanner.py
 
-      - name: Commit and Push Data
+      - name: Commit and Push Signals Data
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add decoupling_signals.json
-          git commit -m "auto: update decoupling signals [skip ci]" || exit 0
+          git add decoupling_signals.json signals.json
+          git commit -m "auto: update ultra early pump signals [skip ci]" || exit 0
           git push
