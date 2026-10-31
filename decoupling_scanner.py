@@ -126,10 +126,7 @@ def run_ultra_early_scanner():
         'signals': early_signals[:10]
     }
 
-    # Simpan langsung ke kedua nama file JSON agar sinkron sempurna dengan dasbor
-    with open('decoupling_signals.json', 'w') as f:
-        json.dump(output_data, f, indent=4)
-
+    # HANYA DISIMPAN KE signals.json
     with open('signals.json', 'w') as f:
         json.dump(output_data, f, indent=4)
 
