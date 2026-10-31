@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTC Dip-Buy Whale Radar v2.0</title>
+    <title>Ultra-Early Pump Detector</title>
     <style>
         :root {
             --bg-color: #080c14;
             --card-bg: #111827;
             --border-color: #1f293d;
             --accent-green: #10b981;
-            --accent-red: #ef4444;
             --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
             --text-main: #f9fafb;
             --text-sub: #9ca3af;
         }
@@ -22,10 +22,6 @@
         header { border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px; }
         header h1 { font-size: 1.15rem; color: #facc15; display: flex; align-items: center; gap: 8px; }
         header p { font-size: 0.75rem; color: var(--text-sub); margin-top: 4px; }
-
-        .btc-banner { border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.8rem; }
-        .btc-correcting { background: rgba(239, 68, 68, 0.15); border: 1px solid var(--accent-red); }
-        .btc-normal { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); }
 
         .grid { display: grid; gap: 12px; }
         .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; }
@@ -45,16 +41,12 @@
 <body>
 
     <header>
-        <h1>🐋 REAL WHALE HAKA RADAR</h1>
-        <p>Altcoin Diskon Dibeli Paus ≥ Rp 10 Juta Saat BTC Koreksi</p>
+        <h1>⚡ ULTRA-EARLY PUMP DETECTOR</h1>
+        <p>Deteksi Altcoin di Dasar (+0% s/d +8%) & Tembok Jual Tipis</p>
     </header>
 
-    <div id="btc-banner" class="btc-banner btc-normal">
-        Memuat status pasar BTC...
-    </div>
-
     <main id="signals-container" class="grid">
-        <div class="empty">Memuat pindaian eksekusi Paus...</div>
+        <div class="empty">Memuat sinyal pindaian dini...</div>
     </main>
 
     <div class="footer" id="last-update">Status: Menunggu data...</div>
@@ -65,7 +57,7 @@
         const DATA_URL = `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/main/decoupling_signals.json`;
 
         function formatIDR(num) {
-            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + ' Miliar';
+            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + ' M';
             if (num >= 1000000) return (num / 1000000).toFixed(1) + ' Juta';
             return 'Rp ' + num.toLocaleString('id-ID');
         }
@@ -76,45 +68,18 @@
                 if (!res.ok) throw new Error("Gagal mengambil data");
                 
                 const data = await res.json();
-                renderBTCStatus(data.btc_status);
-                renderSignals(data.signals, data.btc_status.is_correcting);
+                renderSignals(data.signals);
                 document.getElementById('last-update').innerText = `Terakhir Diperbarui: ${data.updated_at}`;
             } catch (err) {
-                document.getElementById('btc-banner').innerText = "⚠️ Gagal menghubungkan ke data.";
+                document.getElementById('signals-container').innerHTML = `<div class="card empty">⚠️ Memuat data gagal. Mencoba menghubungkan kembali...</div>`;
             }
         }
 
-        function renderBTCStatus(btc) {
-            const banner = document.getElementById('btc-banner');
-            if (btc.is_correcting) {
-                banner.className = "btc-banner btc-correcting";
-                banner.innerHTML = `
-                    <strong>⚠️ STATUS BTC: SEDANG KOREKSI</strong>
-                    <div style="font-size: 0.72rem; margin-top: 4px; color: var(--text-sub);">
-                        Radar aktif mencari Altcoin dengan transaksi Haka Paus (≥ Rp 10 Juta).
-                    </div>
-                `;
-            } else {
-                banner.className = "btc-banner btc-normal";
-                banner.innerHTML = `
-                    <strong>✅ STATUS BTC: STABIL / NAIK</strong>
-                    <div style="font-size: 0.72rem; margin-top: 4px; color: var(--text-sub);">
-                        BTC tidak sedang koreksi. Radar diposisikan *standby*.
-                    </div>
-                `;
-            }
-        }
-
-        function renderSignals(signals, isCorrecting) {
+        function renderSignals(signals) {
             const container = document.getElementById('signals-container');
-            
-            if (!isCorrecting) {
-                container.innerHTML = `<div class="card empty">Radar standby. Sinyal hanya muncul saat BTC sedang koreksi agar entri beli lebih aman.</div>`;
-                return;
-            }
 
             if (!signals || signals.length === 0) {
-                container.innerHTML = `<div class="card empty">BTC sedang koreksi, namun belum terdeteksi transaksi Haka Paus ≥ Rp 10 Juta di altcoin saat ini.</div>`;
+                container.innerHTML = `<div class="card empty">Belum ada altcoin dengan tembok jual super tipis dan akumulasi dini saat ini. Radar standby memindai setiap 5 menit.</div>`;
                 return;
             }
 
@@ -125,18 +90,18 @@
                         <span class="tag-status">${s.status_tag}</span>
                     </div>
                     <div class="metrics">
-                        <div><span>Eksekusi Beli Riil</span><strong style="color: var(--accent-green);">${s.real_buy_pct}% Buy</strong></div>
-                        <div><span>Diskon dari High 24h</span><strong style="color: var(--accent-amber);">–${s.discount_pct}%</strong></div>
+                        <div><span>Posisi dari Bottom 24h</span><strong style="color: var(--accent-green);">+${s.gain_from_bottom}%</strong></div>
+                        <div><span>Beban Tembok Jual Top 5</span><strong style="color: var(--accent-amber);">${formatIDR(s.top_5_sell_idr)}</strong></div>
                         <div><span>Harga Saat Ini</span><strong>Rp ${s.price_idr.toLocaleString('id-ID')}</strong></div>
-                        <div><span>Total Beli Riil</span><strong>${formatIDR(s.real_buy_volume)}</strong></div>
+                        <div><span>Total Haka Terkini</span><strong>${formatIDR(s.recent_buy_idr)}</strong></div>
                     </div>
-                    <a href="${s.trade_url}" target="_blank" class="btn-trade">INDODAX ↗</a>
+                    <a href="${s.trade_url}" target="_blank" class="btn-trade">SERBU DI INDODAX ↗</a>
                 </div>
             `).join('');
         }
 
         fetchSignals();
-        setInterval(fetchSignals, 10000);
+        setInterval(fetchSignals, 5000);
     </script>
 </body>
 </html>
