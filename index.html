@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultra-Early Pump Detector</title>
+    <title>Ultra-Early Pump Detector & Auto Tracker</title>
     <style>
         :root {
             --bg-color: #080c14;
@@ -11,7 +11,7 @@
             --border-color: #1f293d;
             --accent-green: #10b981;
             --accent-amber: #f59e0b;
-            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
             --text-main: #f9fafb;
             --text-sub: #9ca3af;
         }
@@ -20,20 +20,28 @@
         body { background: var(--bg-color); color: var(--text-main); padding: 16px; max-width: 500px; margin: 0 auto; min-height: 100vh; }
         
         header { border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px; }
-        header h1 { font-size: 1.15rem; color: #facc15; display: flex; align-items: center; gap: 8px; }
+        header h1 { font-size: 1.15rem; color: #facc15; }
         header p { font-size: 0.75rem; color: var(--text-sub); margin-top: 4px; }
+
+        .mode-switch { display: flex; background: #111827; border: 1px solid var(--border-color); border-radius: 10px; padding: 4px; margin-bottom: 14px; }
+        .mode-btn { flex: 1; background: transparent; border: none; color: var(--text-sub); padding: 8px; font-weight: bold; font-size: 0.78rem; border-radius: 8px; cursor: pointer; }
+        .mode-btn.active { background: var(--accent-blue); color: #fff; }
+
+        .narrative-filter { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; }
+        .filter-btn { background: #1f293d; border: none; color: var(--text-sub); font-size: 0.72rem; padding: 6px 12px; border-radius: 20px; white-space: nowrap; font-weight: bold; cursor: pointer; }
+        .filter-btn.active { background: var(--accent-blue); color: #fff; }
 
         .grid { display: grid; gap: 12px; }
         .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .symbol { font-size: 1.1rem; font-weight: bold; }
+        .badge-narrative { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
         .tag-status { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid var(--accent-amber); font-size: 0.68rem; padding: 3px 8px; border-radius: 6px; font-weight: bold; }
         
         .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; font-size: 0.8rem; }
         .metrics div span { display: block; color: var(--text-sub); font-size: 0.7rem; }
         
         .btn-trade { display: block; text-align: center; background: #2563eb; color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: bold; padding: 8px; border-radius: 6px; }
-        .btn-trade:active { opacity: 0.8; }
         .empty { text-align: center; padding: 30px; color: var(--text-sub); font-size: 0.85rem; line-height: 1.4; }
         .footer { text-align: center; font-size: 0.7rem; color: var(--text-sub); margin-top: 20px; }
     </style>
@@ -42,11 +50,24 @@
 
     <header>
         <h1>⚡ ULTRA-EARLY PUMP DETECTOR</h1>
-        <p>Deteksi Altcoin di Dasar (+0% s/d +8%) & Tembok Jual Tipis</p>
+        <p>Deteksi Dini & Otomatisasi Jejak Evaluasi Profit Sinyal</p>
     </header>
 
+    <div class="mode-switch">
+        <button class="mode-btn active" onclick="switchView('LIVE')">📡 SINYAL AKTIF</button>
+        <button class="mode-btn" onclick="switchView('TRACKER')">📊 REKAM RIWAYAT (AUTO)</button>
+    </div>
+
+    <div id="narrative-bar" class="narrative-filter">
+        <button class="filter-btn active" onclick="filterCategory('ALL')">SEMUA</button>
+        <button class="filter-btn" onclick="filterCategory('MEME_AI')">🔥 MEME / AI</button>
+        <button class="filter-btn" onclick="filterCategory('LAYER1_DEFI')">🌐 L1 / DEFI</button>
+        <button class="filter-btn" onclick="filterCategory('GAMING_NFT')">🎮 GAMING</button>
+        <button class="filter-btn" onclick="filterCategory('ALTCOIN_MICRO')">💎 MICRO-CAP</button>
+    </div>
+
     <main id="signals-container" class="grid">
-        <div class="empty">Memuat sinyal pindaian dini...</div>
+        <div class="empty">Memuat data...</div>
     </main>
 
     <div class="footer" id="last-update">Status: Menunggu data...</div>
@@ -54,8 +75,11 @@
     <script>
         const REPO_USER = "tryyushiranda-beep";
         const REPO_NAME = "memecoin-whale-radar";
-        // Diubah mengarah ke signals.json sesuai Opsi B
         const DATA_URL = `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/main/signals.json`;
+
+        let rawData = { signals: [], history: [] };
+        let currentMode = 'LIVE';
+        let currentFilter = 'ALL';
 
         function formatIDR(num) {
             if (num >= 1000000000) return (num / 1000000000).toFixed(1) + ' M';
@@ -68,37 +92,101 @@
                 const res = await fetch(`${DATA_URL}?t=${new Date().getTime()}`);
                 if (!res.ok) throw new Error("Gagal mengambil data");
                 
-                const data = await res.json();
-                renderSignals(data.signals);
-                document.getElementById('last-update').innerText = `Terakhir Diperbarui: ${data.updated_at}`;
+                rawData = await res.json();
+                renderView();
+                document.getElementById('last-update').innerText = `Terakhir Diperbarui: ${rawData.updated_at}`;
             } catch (err) {
                 document.getElementById('signals-container').innerHTML = `<div class="card empty">⚠️ Memuat data gagal. Mencoba menghubungkan kembali...</div>`;
             }
         }
 
-        function renderSignals(signals) {
-            const container = document.getElementById('signals-container');
+        function switchView(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('narrative-bar').style.display = (mode === 'LIVE') ? 'flex' : 'none';
+            renderView();
+        }
 
-            if (!signals || signals.length === 0) {
-                container.innerHTML = `<div class="card empty">Belum ada altcoin dengan tembok jual super tipis dan akumulasi dini saat ini. Radar standby memindai setiap 5 menit.</div>`;
+        function filterCategory(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderView();
+        }
+
+        function renderView() {
+            if (currentMode === 'LIVE') {
+                renderLiveSignals();
+            } else {
+                renderTrackerHistory();
+            }
+        }
+
+        function renderLiveSignals() {
+            const container = document.getElementById('signals-container');
+            let filtered = rawData.signals || [];
+            
+            if (currentFilter !== 'ALL') {
+                filtered = filtered.filter(s => s.narrative === currentFilter);
+            }
+
+            if (!filtered || filtered.length === 0) {
+                container.innerHTML = `<div class="card empty">Tidak ada sinyal aktif saat ini. Radar standby memindai setiap 5 menit.</div>`;
                 return;
             }
 
-            container.innerHTML = signals.map(s => `
+            container.innerHTML = filtered.map(s => `
                 <div class="card">
                     <div class="card-header">
-                        <span class="symbol">${s.symbol}/IDR</span>
+                        <div>
+                            <span class="symbol">${s.symbol}/IDR</span>
+                            <span class="badge-narrative">${s.narrative || 'ALTCOIN'}</span>
+                        </div>
                         <span class="tag-status">${s.status_tag}</span>
                     </div>
                     <div class="metrics">
-                        <div><span>Posisi dari Bottom 24h</span><strong style="color: var(--accent-green);">+${s.gain_from_bottom}%</strong></div>
-                        <div><span>Beban Tembok Jual Top 5</span><strong style="color: var(--accent-amber);">${formatIDR(s.top_5_sell_idr)}</strong></div>
+                        <div><span>Posisi dari Bottom</span><strong style="color: var(--accent-green);">+${s.gain_from_bottom}%</strong></div>
+                        <div><span>Tembok Jual Top 5</span><strong style="color: var(--accent-amber);">${formatIDR(s.top_5_sell_idr)}</strong></div>
                         <div><span>Harga Saat Ini</span><strong>Rp ${s.price_idr.toLocaleString('id-ID')}</strong></div>
                         <div><span>Total Haka Terkini</span><strong>${formatIDR(s.recent_buy_idr)}</strong></div>
                     </div>
                     <a href="${s.trade_url}" target="_blank" class="btn-trade">SERBU DI INDODAX ↗</a>
                 </div>
             `).join('');
+        }
+
+        function renderTrackerHistory() {
+            const container = document.getElementById('signals-container');
+            const history = rawData.history || [];
+
+            if (!history || history.length === 0) {
+                container.innerHTML = `<div class="card empty">Belum ada riwayat sinyal yang terekam. Biarkan bot berjalan beberapa putaran.</div>`;
+                return;
+            }
+
+            container.innerHTML = history.map(h => {
+                const peakGainColor = h.peak_gain_pct > 0 ? 'var(--accent-green)' : 'var(--text-sub)';
+                return `
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <span class="symbol">${h.symbol}/IDR</span>
+                                <span class="badge-narrative">${h.narrative}</span>
+                            </div>
+                            <span class="tag-status" style="border-color: #3b82f6; color: #60a5fa;">${h.status}</span>
+                        </div>
+                        <div class="metrics">
+                            <div><span>Harga Masuk Sinyal</span><strong>Rp ${h.entry_price.toLocaleString('id-ID')}</strong></div>
+                            <div><span>Harga Terendah/Saat Ini</span><strong>Rp ${h.current_price.toLocaleString('id-ID')}</strong></div>
+                            <div><span>Gain Maksimal (Peak)</span><strong style="color: ${peakGainColor}; font-size: 0.9rem;">+${h.peak_gain_pct}%</strong></div>
+                            <div><span>Gain Real-time Saat Ini</span><strong>${h.current_gain_pct}%</strong></div>
+                        </div>
+                        <div style="font-size: 0.68rem; color: var(--text-sub); text-align: right;">Sinyal Muncul Pada: ${h.entry_time}</div>
+                    </div>
+                `;
+            }).join('');
         }
 
         fetchSignals();
