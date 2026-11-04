@@ -1,24 +1,101 @@
 import requests
 import json
+import os
 from datetime import datetime, timedelta
 
 INDODAX_SUMMARIES_URL = "https://indodax.com/api/summaries"
 INDODAX_TRADES_URL = "https://indodax.com/api/trades/"
 INDODAX_DEPTH_URL = "https://indodax.com/api/depth/"
 
-# Koin-koin berkapitalisasi besar yang diabaikan agar fokus ke altcoin/memecoin spekulatif
+# Koin-koin berkapitalisasi raksasa yang diabaikan agar fokus ke altcoin spekulatif
 HEAVY_COINS = ['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'SOL', 'XRP', 'TRX', 'DOGE', 'ADA', 'MATIC']
 
+# Pemetaan Narasi Koin
+NARRATIVE_MAP = {
+    'MEME_AI': ['GOAT', 'GRIFFAIN', 'ACT', 'AVA', 'FARTCOIN', 'PEPE', 'SHIB', 'BONK', 'FLOKI', 'MEME', 'WIF', 'POPCAT'],
+    'LAYER1_DEFI': ['SUI', 'APT', 'AVAX', 'NEAR', 'FTM', 'INJ', 'SEI', 'TIA', 'RENDER', 'FET'],
+    'GAMING_NFT': ['GALA', 'ILV', 'SAND', 'MANA', 'AXS', 'ALICE', 'PIEVERSE']
+}
+
+HISTORY_FILE = 'signal_history.json'
+
+def get_narrative(symbol):
+    """Menentukan narasi koin"""
+    for category, symbols in NARRATIVE_MAP.items():
+        if symbol in symbols:
+            return category
+    return 'ALTCOIN_MICRO'
+
 def get_wib_time():
-    """Mendapatkan jam WIB (UTC+7) murni presisi dari UTC server"""
+    """Mendapatkan jam WIB murni"""
     wib_now = datetime.utcnow() + timedelta(hours=7)
     return wib_now.strftime("%d %b %Y - %H:%M:%S WIB")
+
+def load_history():
+    """Memuat riwayat sinyal dari file JSON"""
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, 'r') as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+def save_history(history):
+    """Menyimpan 30 riwayat sinyal terakhir"""
+    with open(HISTORY_FILE, 'w') as f:
+        json.dump(history[:30], f, indent=4)
+
+def update_signal_history(current_tickers, active_signals):
+    """Evaluasi performansi sinyal secara real-time"""
+    history = load_history()
+    
+    # Update koin yang sedang dipantau di riwayat
+    for item in history:
+        pair_id = f"{item['symbol'].lower()}_idr"
+        if pair_id in current_tickers:
+            current_price = float(current_tickers[pair_id].get('last', 0))
+            if current_price > 0:
+                item['current_price'] = current_price
+                if current_price > item['max_price_seen']:
+                    item['max_price_seen'] = current_price
+                
+                peak_gain = round(((item['max_price_seen'] - item['entry_price']) / item['entry_price']) * 100, 1)
+                current_gain = round(((current_price - item['entry_price']) / item['entry_price']) * 100, 1)
+                
+                item['peak_gain_pct'] = peak_gain
+                item['current_gain_pct'] = current_gain
+
+                # Status Evaluasi
+                if peak_gain >= 15.0:
+                    item['status'] = '🔥 PUMP SUCCESS'
+                elif current_gain <= -5.0:
+                    item['status'] = '🛑 CUT LOSS'
+
+    # Tambahkan sinyal aktif baru ke riwayat
+    existing_symbols = [h['symbol'] for h in history]
+    for sig in active_signals:
+        if sig['symbol'] not in existing_symbols:
+            history.insert(0, {
+                'symbol': sig['symbol'],
+                'narrative': sig['narrative'],
+                'entry_price': sig['price_idr'],
+                'max_price_seen': sig['price_idr'],
+                'current_price': sig['price_idr'],
+                'peak_gain_pct': 0.0,
+                'current_gain_pct': 0.0,
+                'status': '⏳ MONITORING',
+                'entry_time': get_wib_time()
+            })
+
+    save_history(history)
+    return history
 
 def run_ultra_early_scanner():
     try:
         res = requests.get(INDODAX_SUMMARIES_URL, timeout=10)
         if res.status_code != 200:
-            print("[ERROR] Gagal mengambil data summaries Indodax.")
+            print("[ERROR] Gagal mengambil data summaries.")
             return
         tickers = res.json().get('tickers', {})
     except Exception as e:
@@ -26,8 +103,6 @@ def run_ultra_early_scanner():
         return
 
     early_signals = []
-
-    print(f"[INFO] Memulai pemindaian Dini Pump pada {get_wib_time()}...")
 
     for pair_id, data in tickers.items():
         if not pair_id.endswith('_idr'):
@@ -46,12 +121,12 @@ def run_ultra_early_scanner():
             if last_price <= 0 or low_24h <= 0 or vol_idr < 15_000_000:
                 continue
 
-            # SYARAT 1: HARGA MASIH DI BOTTOM (Belum naik lebih dari 8% dari Low 24h)
+            # SYARAT 1: HARGA MASIH DI BOTTOM (+0% s/d +8% dari Low 24h)
             gain_from_bottom = round(((last_price - low_24h) / low_24h) * 100, 1)
             if gain_from_bottom > 8.0:
                 continue
 
-            # SYARAT 2: CEK TRANSAKSI TERKINI (Mencari Akumulasi Halus)
+            # SYARAT 2: TRANSAKSI TERKINI (Akumulasi Dini)
             t_res = requests.get(f"{INDODAX_TRADES_URL}{pair_id}", timeout=3)
             if t_res.status_code != 200:
                 continue
@@ -63,18 +138,16 @@ def run_ultra_early_scanner():
             buy_count = 0
             recent_buy_idr = 0
             
-            # Cek 15 transaksi terakhir
             for t in trades[:15]:
                 if t.get('type') == 'buy':
                     p = float(t.get('price', 0))
                     a = float(t.get('amount', 0))
                     val = p * a
                     recent_buy_idr += val
-                    # Hitung eksekusi beli pecahan sedang (>= Rp 500rb)
                     if val >= 500_000:
                         buy_count += 1
 
-            # SYARAT 3: CEK KEDALAMAN TEMBOK JUAL (Order Book Ask)
+            # SYARAT 3: KEDALAMAN TEMBOK JUAL (Top 5 Ask <= 20 Juta)
             d_res = requests.get(f"{INDODAX_DEPTH_URL}{pair_id}", timeout=3)
             thin_wall = False
             top_5_sell_idr = 0
@@ -82,18 +155,12 @@ def run_ultra_early_scanner():
             if d_res.status_code == 200:
                 depth = d_res.json()
                 sell_orders = depth.get('sell', [])
-                
-                # Hitung akumulasi nilai Rupiah di 5 antrean jual teratas
                 top_5_sell_idr = sum(float(i[0]) * float(i[1]) for i in sell_orders[:5])
                 
-                # Jika tembok jual 5 tingkat ke atas <= Rp 20 Juta -> SANGAT TIPIS (Mudah Memicu Mega Pump)
                 if top_5_sell_idr <= 20_000_000:
                     thin_wall = True
 
-            # DETEKSI PINTU MASUK DINI:
-            # - Minimal 2x Haka pecahan sedang
-            # - Total Beli terkini >= Rp 2 Juta
-            # - Tembok jual tipis
+            # DETEKSI PINTU MASUK DINI
             if buy_count >= 2 and recent_buy_idr >= 2_000_000 and thin_wall:
                 status_tag = "⚡ READY TO EXPLODE"
                 if top_5_sell_idr <= 8_000_000:
@@ -101,6 +168,7 @@ def run_ultra_early_scanner():
 
                 early_signals.append({
                     'symbol': symbol,
+                    'narrative': get_narrative(symbol),
                     'price_idr': last_price,
                     'gain_from_bottom': gain_from_bottom,
                     'recent_buy_idr': round(recent_buy_idr),
@@ -117,20 +185,22 @@ def run_ultra_early_scanner():
     # Urutkan berdasarkan tembok jual paling tipis
     early_signals.sort(key=lambda x: x['top_5_sell_idr'])
 
+    history_data = update_signal_history(tickers, early_signals[:15])
+
     output_data = {
-        'btc_status': {
-            'is_correcting': True
-        },
         'updated_at': get_wib_time(),
         'total_signals': len(early_signals),
-        'signals': early_signals[:10]
+        'signals': early_signals[:15],
+        'history': history_data[:10]
     }
 
-    # HANYA DISIMPAN KE signals.json
     with open('signals.json', 'w') as f:
         json.dump(output_data, f, indent=4)
 
-    print(f"[SUCCESS] Selesai pada {get_wib_time()}. Ditemukan {len(early_signals)} koin potensial.")
+    with open('decoupling_signals.json', 'w') as f:
+        json.dump(output_data, f, indent=4)
+
+    print(f"[SUCCESS] Selesai pada {get_wib_time()}. Ditemukan {len(early_signals)} koin.")
 
 if __name__ == "__main__":
     run_ultra_early_scanner()
