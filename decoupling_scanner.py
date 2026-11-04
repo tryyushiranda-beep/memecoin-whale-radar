@@ -88,7 +88,6 @@ def run_ultra_early_scanner():
     try:
         res = requests.get(INDODAX_SUMMARIES_URL, headers=headers, timeout=10)
         if res.status_code != 200:
-            print("[ERROR] Gagal mengambil data summaries.")
             return
         tickers = res.json().get('tickers', {})
     except Exception as e:
@@ -110,16 +109,13 @@ def run_ultra_early_scanner():
             low_24h = float(data.get('low', 0))
             vol_idr = float(data.get('vol_idr', 0))
 
-            # Filter volume minimal Rp 10 Juta (agar lebih banyak koin potensial terjangkau)
             if last_price <= 0 or low_24h <= 0 or vol_idr < 10_000_000:
                 continue
 
-            # SYARAT 1: MASIH DI BOTTOM (+0% s/d +10% dari Low 24h)
             gain_from_bottom = round(((last_price - low_24h) / low_24h) * 100, 1)
             if gain_from_bottom > 10.0:
                 continue
 
-            # SYARAT 2: TRANSAKSI TERKINI (Haka Dini)
             t_res = requests.get(f"{INDODAX_TRADES_URL}{pair_id}", headers=headers, timeout=4)
             if t_res.status_code != 200:
                 continue
@@ -137,10 +133,9 @@ def run_ultra_early_scanner():
                     a = float(t.get('amount', 0))
                     val = p * a
                     recent_buy_idr += val
-                    if val >= 300_000:  # Minimal 1x transaksi Haka Rp300rb
+                    if val >= 300_000:
                         buy_count += 1
 
-            # SYARAT 3: TEMBOK JUAL (Top 5 Ask <= 30 Juta)
             d_res = requests.get(f"{INDODAX_DEPTH_URL}{pair_id}", headers=headers, timeout=4)
             thin_wall = False
             top_5_sell_idr = 0
@@ -150,10 +145,9 @@ def run_ultra_early_scanner():
                 sell_orders = depth.get('sell', [])
                 if isinstance(sell_orders, list):
                     top_5_sell_idr = sum(float(i[0]) * float(i[1]) for i in sell_orders[:5])
-                    if top_5_sell_idr <= 30_000_000:  # Batas tembok jual hingga Rp30 Juta
+                    if top_5_sell_idr <= 30_000_000:
                         thin_wall = True
 
-            # Lolos jika total Haka terkini >= Rp 1 Juta dan tembok relatif tipis
             if (buy_count >= 1 and recent_buy_idr >= 1_000_000 and thin_wall) or gain_from_bottom <= 3.0:
                 status_tag = "⚡ READY TO EXPLODE"
                 if top_5_sell_idr <= 10_000_000:
@@ -175,9 +169,7 @@ def run_ultra_early_scanner():
         except Exception:
             continue
 
-    # Urutkan koin berdasarkan tembok terdeteksi paling tipis
     early_signals.sort(key=lambda x: x['top_5_sell_idr'])
-
     history_data = update_signal_history(tickers, early_signals[:15])
 
     output_data = {
