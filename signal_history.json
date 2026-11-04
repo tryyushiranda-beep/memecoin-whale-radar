@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "OKUSD",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 18125.0,
+        "max_price_seen": 18125.0,
+        "current_price": 18125.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 05:06:08 WIB"
+    },
+    {
         "symbol": "UNMD",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 5.0,
@@ -14,10 +25,10 @@
         "symbol": "PONKE",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 306.0,
-        "max_price_seen": 306.0,
-        "current_price": 306.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 325.0,
+        "current_price": 325.0,
+        "peak_gain_pct": 6.2,
+        "current_gain_pct": 6.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 04:41:05 WIB"
     },
@@ -136,9 +147,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1475.0,
         "max_price_seen": 1495.0,
-        "current_price": 1475.0,
+        "current_price": 1470.0,
         "peak_gain_pct": 1.4,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -0.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 02:41:12 WIB"
     },
@@ -290,9 +301,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 9.0,
         "max_price_seen": 10.0,
-        "current_price": 10.0,
+        "current_price": 9.0,
         "peak_gain_pct": 11.1,
-        "current_gain_pct": 11.1,
+        "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 01:31:21 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 14.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 01:26:02 WIB"
-    },
-    {
-        "symbol": "COW",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 2015.0,
-        "max_price_seen": 2110.0,
-        "current_price": 2095.0,
-        "peak_gain_pct": 4.7,
-        "current_gain_pct": 4.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 01:21:13 WIB"
     }
 ]
