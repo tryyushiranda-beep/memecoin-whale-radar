@@ -1,7 +1,19 @@
 {
-    "updated_at": "05 Nov 2026 - 00:46:04 WIB",
+    "updated_at": "05 Nov 2026 - 00:51:09 WIB",
     "total_signals": 15,
     "signals": [
+        {
+            "symbol": "AMP",
+            "narrative": "ALTCOIN_MICRO",
+            "price_idr": 12.0,
+            "gain_from_bottom": 0.0,
+            "recent_buy_idr": 0,
+            "top_5_sell_idr": 0,
+            "vol_24h_idr": 44109653,
+            "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
+            "trade_url": "https://indodax.com/market/amp_idr",
+            "timestamp": "05 Nov 2026 - 00:50:31 WIB"
+        },
         {
             "symbol": "CAST",
             "narrative": "ALTCOIN_MICRO",
@@ -12,7 +24,7 @@
             "vol_24h_idr": 45167109,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/cast_idr",
-            "timestamp": "05 Nov 2026 - 00:45:34 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:32 WIB"
         },
         {
             "symbol": "CJL",
@@ -24,7 +36,7 @@
             "vol_24h_idr": 72925946,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/cjl_idr",
-            "timestamp": "05 Nov 2026 - 00:45:35 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:34 WIB"
         },
         {
             "symbol": "HART",
@@ -36,7 +48,7 @@
             "vol_24h_idr": 85840345,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/hart_idr",
-            "timestamp": "05 Nov 2026 - 00:45:37 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:36 WIB"
         },
         {
             "symbol": "HOT",
@@ -48,19 +60,7 @@
             "vol_24h_idr": 206508054,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/hot_idr",
-            "timestamp": "05 Nov 2026 - 00:45:38 WIB"
-        },
-        {
-            "symbol": "MELANIA",
-            "narrative": "ALTCOIN_MICRO",
-            "price_idr": 1200.0,
-            "gain_from_bottom": 0.0,
-            "recent_buy_idr": 0,
-            "top_5_sell_idr": 0,
-            "vol_24h_idr": 14970978,
-            "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
-            "trade_url": "https://indodax.com/market/melania_idr",
-            "timestamp": "05 Nov 2026 - 00:45:39 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:37 WIB"
         },
         {
             "symbol": "MPRO",
@@ -69,10 +69,22 @@
             "gain_from_bottom": 0.0,
             "recent_buy_idr": 0,
             "top_5_sell_idr": 0,
-            "vol_24h_idr": 18381101,
+            "vol_24h_idr": 18269245,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/mpro_idr",
-            "timestamp": "05 Nov 2026 - 00:45:40 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:39 WIB"
+        },
+        {
+            "symbol": "ONL",
+            "narrative": "ALTCOIN_MICRO",
+            "price_idr": 715.0,
+            "gain_from_bottom": 0.0,
+            "recent_buy_idr": 0,
+            "top_5_sell_idr": 0,
+            "vol_24h_idr": 2183402328,
+            "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
+            "trade_url": "https://indodax.com/market/onl_idr",
+            "timestamp": "05 Nov 2026 - 00:50:40 WIB"
         },
         {
             "symbol": "PORTAL",
@@ -84,19 +96,19 @@
             "vol_24h_idr": 33763984,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/portal_idr",
-            "timestamp": "05 Nov 2026 - 00:45:42 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:42 WIB"
         },
         {
-            "symbol": "TOKEN",
+            "symbol": "TRUMP",
             "narrative": "ALTCOIN_MICRO",
-            "price_idr": 29.0,
+            "price_idr": 22435.0,
             "gain_from_bottom": 0.0,
             "recent_buy_idr": 0,
             "top_5_sell_idr": 0,
-            "vol_24h_idr": 20619749,
+            "vol_24h_idr": 481151202,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
-            "trade_url": "https://indodax.com/market/token_idr",
-            "timestamp": "05 Nov 2026 - 00:45:43 WIB"
+            "trade_url": "https://indodax.com/market/trump_idr",
+            "timestamp": "05 Nov 2026 - 00:50:44 WIB"
         },
         {
             "symbol": "ZRO",
@@ -108,7 +120,7 @@
             "vol_24h_idr": 106816587,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/zro_idr",
-            "timestamp": "05 Nov 2026 - 00:45:44 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:45 WIB"
         },
         {
             "symbol": "OKUSD",
@@ -117,10 +129,10 @@
             "gain_from_bottom": 0.1,
             "recent_buy_idr": 0,
             "top_5_sell_idr": 0,
-            "vol_24h_idr": 90949883,
+            "vol_24h_idr": 90219075,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/okusd_idr",
-            "timestamp": "05 Nov 2026 - 00:45:45 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:47 WIB"
         },
         {
             "symbol": "USDX",
@@ -132,7 +144,7 @@
             "vol_24h_idr": 16650771,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/usdx_idr",
-            "timestamp": "05 Nov 2026 - 00:45:47 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:48 WIB"
         },
         {
             "symbol": "LISTA",
@@ -144,7 +156,7 @@
             "vol_24h_idr": 35895603,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/lista_idr",
-            "timestamp": "05 Nov 2026 - 00:45:48 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:50 WIB"
         },
         {
             "symbol": "NEORPNEW",
@@ -156,7 +168,7 @@
             "vol_24h_idr": 109126944,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/neorpnew_idr",
-            "timestamp": "05 Nov 2026 - 00:45:49 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:52 WIB"
         },
         {
             "symbol": "NVDAX",
@@ -168,22 +180,21 @@
             "vol_24h_idr": 45070797,
             "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
             "trade_url": "https://indodax.com/market/nvdax_idr",
-            "timestamp": "05 Nov 2026 - 00:45:50 WIB"
-        },
-        {
-            "symbol": "MOLT",
-            "narrative": "ALTCOIN_MICRO",
-            "price_idr": 0.053201,
-            "gain_from_bottom": 0.4,
-            "recent_buy_idr": 0,
-            "top_5_sell_idr": 0,
-            "vol_24h_idr": 12283164,
-            "status_tag": "\ud83d\udd25 ULTRA THIN WALL",
-            "trade_url": "https://indodax.com/market/molt_idr",
-            "timestamp": "05 Nov 2026 - 00:45:52 WIB"
+            "timestamp": "05 Nov 2026 - 00:50:53 WIB"
         }
     ],
     "history": [
+        {
+            "symbol": "AMP",
+            "narrative": "ALTCOIN_MICRO",
+            "entry_price": 12.0,
+            "max_price_seen": 12.0,
+            "current_price": 12.0,
+            "peak_gain_pct": 0.0,
+            "current_gain_pct": 0.0,
+            "status": "\u23f3 MONITORING",
+            "entry_time": "05 Nov 2026 - 00:51:09 WIB"
+        },
         {
             "symbol": "NEORPNEW",
             "narrative": "ALTCOIN_MICRO",
@@ -233,9 +244,9 @@
             "narrative": "ALTCOIN_MICRO",
             "entry_price": 735.0,
             "max_price_seen": 762.0,
-            "current_price": 738.0,
+            "current_price": 748.0,
             "peak_gain_pct": 3.7,
-            "current_gain_pct": 0.4,
+            "current_gain_pct": 1.8,
             "status": "\u23f3 MONITORING",
             "entry_time": "05 Nov 2026 - 00:36:14 WIB"
         },
@@ -266,9 +277,9 @@
             "narrative": "ALTCOIN_MICRO",
             "entry_price": 2817.0,
             "max_price_seen": 3098.0,
-            "current_price": 3098.0,
+            "current_price": 2815.0,
             "peak_gain_pct": 10.0,
-            "current_gain_pct": 10.0,
+            "current_gain_pct": -0.1,
             "status": "\u23f3 MONITORING",
             "entry_time": "05 Nov 2026 - 00:31:22 WIB"
         },
@@ -282,17 +293,6 @@
             "current_gain_pct": 0.0,
             "status": "\u23f3 MONITORING",
             "entry_time": "05 Nov 2026 - 00:31:22 WIB"
-        },
-        {
-            "symbol": "TRUMP",
-            "narrative": "ALTCOIN_MICRO",
-            "entry_price": 24009.0,
-            "max_price_seen": 24984.0,
-            "current_price": 23699.0,
-            "peak_gain_pct": 4.1,
-            "current_gain_pct": -1.3,
-            "status": "\u23f3 MONITORING",
-            "entry_time": "05 Nov 2026 - 00:25:58 WIB"
         }
     ]
 }
