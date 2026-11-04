@@ -1,13 +1,24 @@
 [
     {
-        "symbol": "UNMD",
+        "symbol": "VINE",
         "narrative": "ALTCOIN_MICRO",
-        "entry_price": 5.0,
-        "max_price_seen": 5.0,
-        "current_price": 5.0,
+        "entry_price": 120.0,
+        "max_price_seen": 120.0,
+        "current_price": 120.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
+        "entry_time": "04 Nov 2026 - 21:56:10 WIB"
+    },
+    {
+        "symbol": "UNMD",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 5.0,
+        "max_price_seen": 6.0,
+        "current_price": 6.0,
+        "peak_gain_pct": 20.0,
+        "current_gain_pct": 20.0,
+        "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "04 Nov 2026 - 21:51:14 WIB"
     },
     {
@@ -25,10 +36,10 @@
         "symbol": "SOLV",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 70.683,
-        "max_price_seen": 70.683,
-        "current_price": 70.683,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 72.595,
+        "current_price": 72.595,
+        "peak_gain_pct": 2.7,
+        "current_gain_pct": 2.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "04 Nov 2026 - 21:46:14 WIB"
     },
@@ -91,10 +102,10 @@
         "symbol": "HUMA",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 300.163,
-        "max_price_seen": 300.163,
-        "current_price": 300.163,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 331.699,
+        "current_price": 331.699,
+        "peak_gain_pct": 10.5,
+        "current_gain_pct": 10.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "04 Nov 2026 - 20:51:10 WIB"
     },
@@ -114,9 +125,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2481.0,
         "max_price_seen": 2481.0,
-        "current_price": 2481.0,
+        "current_price": 2471.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -0.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "04 Nov 2026 - 20:41:18 WIB"
     },
@@ -125,7 +136,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2285.0,
         "max_price_seen": 2350.0,
-        "current_price": 2350.0,
+        "current_price": 2349.0,
         "peak_gain_pct": 2.8,
         "current_gain_pct": 2.8,
         "status": "\u23f3 MONITORING",
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "04 Nov 2026 - 19:36:03 WIB"
-    },
-    {
-        "symbol": "MPRO",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1.0,
-        "max_price_seen": 2.0,
-        "current_price": 2.0,
-        "peak_gain_pct": 100.0,
-        "current_gain_pct": 100.0,
-        "status": "\ud83d\udd25 PUMP SUCCESS",
-        "entry_time": "04 Nov 2026 - 19:31:16 WIB"
     }
 ]
