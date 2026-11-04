@@ -1,12 +1,23 @@
 [
     {
+        "symbol": "MEME",
+        "narrative": "MEME_AI",
+        "entry_price": 7.0,
+        "max_price_seen": 7.0,
+        "current_price": 7.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 06:36:08 WIB"
+    },
+    {
         "symbol": "LYFEL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 39211.0,
         "max_price_seen": 39211.0,
-        "current_price": 39211.0,
+        "current_price": 39143.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 06:31:16 WIB"
     },
@@ -26,9 +37,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 30.0,
         "max_price_seen": 31.0,
-        "current_price": 31.0,
+        "current_price": 30.0,
         "peak_gain_pct": 3.3,
-        "current_gain_pct": 3.3,
+        "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 06:11:30 WIB"
     },
@@ -136,9 +147,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1002.0,
         "max_price_seen": 1003.0,
-        "current_price": 1003.0,
+        "current_price": 1001.0,
         "peak_gain_pct": 0.1,
-        "current_gain_pct": 0.1,
+        "current_gain_pct": -0.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 05:31:21 WIB"
     },
@@ -169,7 +180,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 18125.0,
         "max_price_seen": 18125.0,
-        "current_price": 18122.0,
+        "current_price": 18121.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": -0.0,
         "status": "\u23f3 MONITORING",
@@ -312,20 +323,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1475.0,
         "max_price_seen": 1495.0,
-        "current_price": 1437.0,
+        "current_price": 1426.0,
         "peak_gain_pct": 1.4,
-        "current_gain_pct": -2.6,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 02:41:12 WIB"
-    },
-    {
-        "symbol": "ZRO",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 32500.0,
-        "max_price_seen": 34395.0,
-        "current_price": 33291.0,
-        "peak_gain_pct": 5.8,
-        "current_gain_pct": 2.4,
+        "current_gain_pct": -3.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 02:41:12 WIB"
     }
