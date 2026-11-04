@@ -1,13 +1,24 @@
 [
     {
-        "symbol": "MPRO",
+        "symbol": "LISTA",
         "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1.0,
-        "max_price_seen": 1.0,
-        "current_price": 1.0,
+        "entry_price": 1318.0,
+        "max_price_seen": 1318.0,
+        "current_price": 1318.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 02:21:08 WIB"
+    },
+    {
+        "symbol": "MPRO",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 1.0,
+        "max_price_seen": 2.0,
+        "current_price": 2.0,
+        "peak_gain_pct": 100.0,
+        "current_gain_pct": 100.0,
+        "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "05 Nov 2026 - 02:16:04 WIB"
     },
     {
@@ -212,10 +223,10 @@
         "symbol": "NEORPNEW",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1001.0,
-        "max_price_seen": 1004.0,
-        "current_price": 1003.0,
-        "peak_gain_pct": 0.3,
-        "current_gain_pct": 0.2,
+        "max_price_seen": 1006.0,
+        "current_price": 1006.0,
+        "peak_gain_pct": 0.5,
+        "current_gain_pct": 0.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 00:46:04 WIB"
     },
@@ -316,17 +327,6 @@
         "peak_gain_pct": 4.1,
         "current_gain_pct": -2.5,
         "status": "\ud83d\uded1 CUT LOSS",
-        "entry_time": "05 Nov 2026 - 00:25:58 WIB"
-    },
-    {
-        "symbol": "CAST",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 2210200.0,
-        "max_price_seen": 2210200.0,
-        "current_price": 2210200.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 00:25:58 WIB"
     }
 ]
