@@ -37,8 +37,11 @@ def load_history():
     return []
 
 def save_history(history):
-    with open(HISTORY_FILE, 'w') as f:
-        json.dump(history[:30], f, indent=4)
+    try:
+        with open(HISTORY_FILE, 'w') as f:
+            json.dump(history[:30], f, indent=4)
+    except Exception as e:
+        print(f"[WARN] Gagal simpan history: {e}")
 
 def update_signal_history(current_tickers, active_signals):
     history = load_history()
@@ -84,17 +87,21 @@ def update_signal_history(current_tickers, active_signals):
     return history
 
 def run_ultra_early_scanner():
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+    print(f"[START] Memulai scanner pada {get_wib_time()}")
+    
     try:
-        res = requests.get(INDODAX_SUMMARIES_URL, headers=headers, timeout=10)
+        res = requests.get(INDODAX_SUMMARIES_URL, headers=headers, timeout=12)
         if res.status_code != 200:
+            print(f"[ERROR] Summaries HTTP status {res.status_code}")
             return
         tickers = res.json().get('tickers', {})
     except Exception as e:
-        print(f"[ERROR] Exception: {e}")
+        print(f"[ERROR] Summaries request failed: {e}")
         return
 
     early_signals = []
+    fallback_signals = []
 
     for pair_id, data in tickers.items():
         if not pair_id.endswith('_idr'):
@@ -109,73 +116,82 @@ def run_ultra_early_scanner():
             low_24h = float(data.get('low', 0))
             vol_idr = float(data.get('vol_idr', 0))
 
-            if last_price <= 0 or low_24h <= 0 or vol_idr < 10_000_000:
+            if last_price <= 0 or low_24h <= 0 or vol_idr < 5_000_000:
                 continue
 
             gain_from_bottom = round(((last_price - low_24h) / low_24h) * 100, 1)
-            if gain_from_bottom > 10.0:
-                continue
-
-            t_res = requests.get(f"{INDODAX_TRADES_URL}{pair_id}", headers=headers, timeout=4)
-            if t_res.status_code != 200:
-                continue
             
-            trades = t_res.json()
-            if not isinstance(trades, list) or len(trades) < 5:
+            # Saring koin yang berada dekat bottom (+0% s/d +12%)
+            if gain_from_bottom > 12.0:
                 continue
 
-            buy_count = 0
-            recent_buy_idr = 0
-            
-            for t in trades[:15]:
-                if t.get('type') == 'buy':
-                    p = float(t.get('price', 0))
-                    a = float(t.get('amount', 0))
-                    val = p * a
-                    recent_buy_idr += val
-                    if val >= 300_000:
-                        buy_count += 1
-
-            d_res = requests.get(f"{INDODAX_DEPTH_URL}{pair_id}", headers=headers, timeout=4)
-            thin_wall = False
             top_5_sell_idr = 0
-            
-            if d_res.status_code == 200:
-                depth = d_res.json()
-                sell_orders = depth.get('sell', [])
-                if isinstance(sell_orders, list):
-                    top_5_sell_idr = sum(float(i[0]) * float(i[1]) for i in sell_orders[:5])
-                    if top_5_sell_idr <= 30_000_000:
-                        thin_wall = True
+            recent_buy_idr = 0
+            buy_count = 0
 
-            if (buy_count >= 1 and recent_buy_idr >= 1_000_000 and thin_wall) or gain_from_bottom <= 3.0:
-                status_tag = "⚡ READY TO EXPLODE"
-                if top_5_sell_idr <= 10_000_000:
-                    status_tag = "🔥 ULTRA THIN WALL"
+            # Cek Depth (Tembok Jual)
+            try:
+                d_res = requests.get(f"{INDODAX_DEPTH_URL}{pair_id}", headers=headers, timeout=3)
+                if d_res.status_code == 200:
+                    depth = d_res.json()
+                    sell_orders = depth.get('sell', [])
+                    if isinstance(sell_orders, list):
+                        top_5_sell_idr = sum(float(i[0]) * float(i[1]) for i in sell_orders[:5])
+            except Exception:
+                top_5_sell_idr = 50_000_000
 
-                early_signals.append({
-                    'symbol': symbol,
-                    'narrative': get_narrative(symbol),
-                    'price_idr': last_price,
-                    'gain_from_bottom': gain_from_bottom,
-                    'recent_buy_idr': round(recent_buy_idr),
-                    'top_5_sell_idr': round(top_5_sell_idr),
-                    'vol_24h_idr': round(vol_idr),
-                    'status_tag': status_tag,
-                    'trade_url': f"https://indodax.com/market/{pair_id}",
-                    'timestamp': get_wib_time()
-                })
+            # Cek Trades (Haka Terkini)
+            try:
+                t_res = requests.get(f"{INDODAX_TRADES_URL}{pair_id}", headers=headers, timeout=3)
+                if t_res.status_code == 200:
+                    trades = t_res.json()
+                    if isinstance(trades, list):
+                        for t in trades[:15]:
+                            if t.get('type') == 'buy':
+                                p = float(t.get('price', 0))
+                                a = float(t.get('amount', 0))
+                                val = p * a
+                                recent_buy_idr += val
+                                if val >= 200_000:
+                                    buy_count += 1
+            except Exception:
+                pass
+
+            # Siapkan data sinyal dasar
+            item_data = {
+                'symbol': symbol,
+                'narrative': get_narrative(symbol),
+                'price_idr': last_price,
+                'gain_from_bottom': gain_from_bottom,
+                'recent_buy_idr': round(recent_buy_idr),
+                'top_5_sell_idr': round(top_5_sell_idr),
+                'vol_24h_idr': round(vol_idr),
+                'status_tag': "⚡ READY TO EXPLODE" if top_5_sell_idr > 10_000_000 else "🔥 ULTRA THIN WALL",
+                'trade_url': f"https://indodax.com/market/{pair_id}",
+                'timestamp': get_wib_time()
+            }
+
+            # Masukkan ke fallback list jika dekat bottom (+0% s/d +5%)
+            if gain_from_bottom <= 5.0:
+                fallback_signals.append(item_data)
+
+            # Masukkan ke sinyal prioritas utama
+            if recent_buy_idr >= 500_000 or (buy_count >= 1 and top_5_sell_idr <= 35_000_000):
+                early_signals.append(item_data)
 
         except Exception:
             continue
 
-    early_signals.sort(key=lambda x: x['top_5_sell_idr'])
-    history_data = update_signal_history(tickers, early_signals[:15])
+    # Jika sinyal utama sepi, gunakan fallback sinyal yang paling dekat bottom
+    final_signals = early_signals if len(early_signals) > 0 else fallback_signals
+    final_signals.sort(key=lambda x: (x['gain_from_bottom'], x['top_5_sell_idr']))
+
+    history_data = update_signal_history(tickers, final_signals[:15])
 
     output_data = {
         'updated_at': get_wib_time(),
-        'total_signals': len(early_signals),
-        'signals': early_signals[:15],
+        'total_signals': len(final_signals[:15]),
+        'signals': final_signals[:15],
         'history': history_data[:10]
     }
 
@@ -185,7 +201,7 @@ def run_ultra_early_scanner():
     with open('decoupling_signals.json', 'w') as f:
         json.dump(output_data, f, indent=4)
 
-    print(f"[SUCCESS] Selesai pada {get_wib_time()}. Ditemukan {len(early_signals)} koin.")
+    print(f"[SUCCESS] Scanner Selesai pada {get_wib_time()}. Menyimpan {len(final_signals[:15])} sinyal.")
 
 if __name__ == "__main__":
     run_ultra_early_scanner()
