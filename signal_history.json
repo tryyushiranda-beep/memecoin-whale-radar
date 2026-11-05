@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "ETC",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 125000.0,
+        "max_price_seen": 125000.0,
+        "current_price": 125000.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 00:56:07 WIB"
+    },
+    {
+        "symbol": "EDEN",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 938.0,
+        "max_price_seen": 938.0,
+        "current_price": 938.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 00:56:07 WIB"
+    },
+    {
         "symbol": "ANIME",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 45.001,
@@ -36,10 +58,10 @@
         "symbol": "LTC",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 934000.0,
-        "max_price_seen": 934000.0,
-        "current_price": 934000.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 936000.0,
+        "current_price": 936000.0,
+        "peak_gain_pct": 0.2,
+        "current_gain_pct": 0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 00:52:03 WIB"
     },
@@ -113,10 +135,10 @@
         "symbol": "AIH",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1257.0,
-        "max_price_seen": 1257.0,
-        "current_price": 1253.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.3,
+        "max_price_seen": 1296.0,
+        "current_price": 1296.0,
+        "peak_gain_pct": 3.1,
+        "current_gain_pct": 3.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 00:37:11 WIB"
     },
@@ -304,28 +326,6 @@
         "current_price": 343.0,
         "peak_gain_pct": 0.9,
         "current_gain_pct": 0.6,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 23:26:07 WIB"
-    },
-    {
-        "symbol": "GLM",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1883.0,
-        "max_price_seen": 1883.0,
-        "current_price": 1883.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 23:26:07 WIB"
-    },
-    {
-        "symbol": "GID",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 2304002.0,
-        "max_price_seen": 2366066.0,
-        "current_price": 2363683.0,
-        "peak_gain_pct": 2.7,
-        "current_gain_pct": 2.6,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 23:26:07 WIB"
     }
