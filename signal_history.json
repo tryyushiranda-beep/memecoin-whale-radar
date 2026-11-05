@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "BLUR",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 135.0,
+        "max_price_seen": 135.0,
+        "current_price": 135.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 17:06:10 WIB"
+    },
+    {
         "symbol": "SKYA",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 5.0,
@@ -70,9 +81,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 420.0,
         "max_price_seen": 420.0,
-        "current_price": 420.0,
+        "current_price": 416.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 16:56:07 WIB"
     },
@@ -114,9 +125,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 290.0,
         "max_price_seen": 299.8,
-        "current_price": 299.8,
+        "current_price": 286.0,
         "peak_gain_pct": 3.4,
-        "current_gain_pct": 3.4,
+        "current_gain_pct": -1.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 16:46:17 WIB"
     },
@@ -124,10 +135,10 @@
         "symbol": "VELODROME",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 638.0,
-        "max_price_seen": 664.0,
-        "current_price": 664.0,
-        "peak_gain_pct": 4.1,
-        "current_gain_pct": 4.1,
+        "max_price_seen": 689.0,
+        "current_price": 689.0,
+        "peak_gain_pct": 8.0,
+        "current_gain_pct": 8.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 16:36:06 WIB"
     },
@@ -179,10 +190,10 @@
         "symbol": "BOME",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 11.0,
-        "max_price_seen": 11.0,
-        "current_price": 11.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 12.0,
+        "current_price": 12.0,
+        "peak_gain_pct": 9.1,
+        "current_gain_pct": 9.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 16:21:18 WIB"
     },
@@ -191,9 +202,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 47.558,
         "max_price_seen": 47.558,
-        "current_price": 47.558,
+        "current_price": 47.458,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 16:17:01 WIB"
     },
@@ -315,17 +326,6 @@
         "current_price": 478.0,
         "peak_gain_pct": 1.5,
         "current_gain_pct": 1.5,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 15:06:07 WIB"
-    },
-    {
-        "symbol": "GRASS",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 10125.0,
-        "max_price_seen": 10194.0,
-        "current_price": 10112.0,
-        "peak_gain_pct": 0.7,
-        "current_gain_pct": -0.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 15:06:07 WIB"
     }
