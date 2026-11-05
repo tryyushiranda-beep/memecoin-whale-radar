@@ -1,5 +1,38 @@
 [
     {
+        "symbol": "TMG",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 30.0,
+        "max_price_seen": 30.0,
+        "current_price": 30.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 13:36:05 WIB"
+    },
+    {
+        "symbol": "CJL",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 2.0,
+        "max_price_seen": 2.0,
+        "current_price": 2.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 13:36:05 WIB"
+    },
+    {
+        "symbol": "PUFFER",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 504.0,
+        "max_price_seen": 504.0,
+        "current_price": 504.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 13:36:05 WIB"
+    },
+    {
         "symbol": "VANRY",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 7.0,
@@ -14,10 +47,10 @@
         "symbol": "HAEDAL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 473.0,
-        "max_price_seen": 476.0,
-        "current_price": 476.0,
-        "peak_gain_pct": 0.6,
-        "current_gain_pct": 0.6,
+        "max_price_seen": 479.0,
+        "current_price": 479.0,
+        "peak_gain_pct": 1.3,
+        "current_gain_pct": 1.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 13:26:04 WIB"
     },
@@ -124,10 +157,10 @@
         "symbol": "MYX",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1014.0,
-        "max_price_seen": 1015.0,
-        "current_price": 1015.0,
-        "peak_gain_pct": 0.1,
-        "current_gain_pct": 0.1,
+        "max_price_seen": 1021.0,
+        "current_price": 1021.0,
+        "peak_gain_pct": 0.7,
+        "current_gain_pct": 0.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 12:36:03 WIB"
     },
@@ -223,10 +256,10 @@
         "symbol": "IOST",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 12.0,
-        "max_price_seen": 12.0,
-        "current_price": 12.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 13.0,
+        "current_price": 13.0,
+        "peak_gain_pct": 8.3,
+        "current_gain_pct": 8.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 11:51:07 WIB"
     },
@@ -246,9 +279,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 392.0,
         "max_price_seen": 397.0,
-        "current_price": 396.0,
+        "current_price": 395.0,
         "peak_gain_pct": 1.3,
-        "current_gain_pct": 1.0,
+        "current_gain_pct": 0.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 11:46:03 WIB"
     },
@@ -295,38 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 11:31:15 WIB"
-    },
-    {
-        "symbol": "UNMD",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 5.0,
-        "max_price_seen": 6.0,
-        "current_price": 6.0,
-        "peak_gain_pct": 20.0,
-        "current_gain_pct": 20.0,
-        "status": "\ud83d\udd25 PUMP SUCCESS",
-        "entry_time": "05 Nov 2026 - 11:26:08 WIB"
-    },
-    {
-        "symbol": "DEGEN",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 15.0,
-        "max_price_seen": 16.0,
-        "current_price": 16.0,
-        "peak_gain_pct": 6.7,
-        "current_gain_pct": 6.7,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 11:26:08 WIB"
-    },
-    {
-        "symbol": "HOT",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 8.0,
-        "max_price_seen": 9.0,
-        "current_price": 8.0,
-        "peak_gain_pct": 12.5,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 11:21:11 WIB"
     }
 ]
