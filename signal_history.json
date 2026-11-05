@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "HOT",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 8.0,
+        "max_price_seen": 8.0,
+        "current_price": 8.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 15:25:56 WIB"
+    },
+    {
         "symbol": "LUNA",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 710.0,
@@ -58,10 +69,10 @@
         "symbol": "BMT",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 473.0,
-        "max_price_seen": 473.0,
-        "current_price": 473.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 475.0,
+        "current_price": 475.0,
+        "peak_gain_pct": 0.4,
+        "current_gain_pct": 0.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 15:01:23 WIB"
     },
@@ -147,9 +158,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1470.0,
         "max_price_seen": 1477.0,
-        "current_price": 1467.0,
+        "current_price": 1468.0,
         "peak_gain_pct": 0.5,
-        "current_gain_pct": -0.2,
+        "current_gain_pct": -0.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 14:36:08 WIB"
     },
@@ -246,9 +257,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 27.372,
         "max_price_seen": 27.855,
-        "current_price": 27.233,
+        "current_price": 27.67,
         "peak_gain_pct": 1.8,
-        "current_gain_pct": -0.5,
+        "current_gain_pct": 1.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 13:56:00 WIB"
     },
@@ -315,17 +326,6 @@
         "current_price": 16.0,
         "peak_gain_pct": 6.7,
         "current_gain_pct": 6.7,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 13:41:13 WIB"
-    },
-    {
-        "symbol": "NVDAX",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 3592478.0,
-        "max_price_seen": 3739999.0,
-        "current_price": 3600000.0,
-        "peak_gain_pct": 4.1,
-        "current_gain_pct": 0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 13:41:13 WIB"
     }
