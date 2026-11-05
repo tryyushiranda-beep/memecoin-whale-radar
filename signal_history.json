@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "BEAM",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 76.0,
+        "max_price_seen": 76.0,
+        "current_price": 76.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 01:31:25 WIB"
+    },
+    {
+        "symbol": "BCH",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 4940000.0,
+        "max_price_seen": 4940000.0,
+        "current_price": 4940000.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 01:31:25 WIB"
+    },
+    {
         "symbol": "BUILDON",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2067.0,
@@ -268,7 +290,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 248.0,
         "max_price_seen": 260.0,
-        "current_price": 259.999,
+        "current_price": 260.0,
         "peak_gain_pct": 4.8,
         "current_gain_pct": 4.8,
         "status": "\u23f3 MONITORING",
@@ -306,27 +328,5 @@
         "current_gain_pct": -0.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 00:21:11 WIB"
-    },
-    {
-        "symbol": "ICP",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 44528.0,
-        "max_price_seen": 44528.0,
-        "current_price": 44235.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.7,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 00:16:14 WIB"
-    },
-    {
-        "symbol": "BOME",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 11.0,
-        "max_price_seen": 11.0,
-        "current_price": 11.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 00:16:14 WIB"
     }
 ]
