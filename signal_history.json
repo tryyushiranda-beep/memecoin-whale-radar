@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "USDX",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 17820.0,
+        "max_price_seen": 17820.0,
+        "current_price": 17820.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 10:41:09 WIB"
+    },
+    {
         "symbol": "ISLM",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 41.0,
@@ -26,9 +37,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 187000.0,
         "max_price_seen": 203730.0,
-        "current_price": 203730.0,
+        "current_price": 198820.0,
         "peak_gain_pct": 8.9,
-        "current_gain_pct": 8.9,
+        "current_gain_pct": 6.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 10:31:18 WIB"
     },
@@ -48,9 +59,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 494.0,
         "max_price_seen": 494.0,
-        "current_price": 490.0,
+        "current_price": 486.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.8,
+        "current_gain_pct": -1.6,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 10:11:10 WIB"
     },
@@ -279,9 +290,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 510.0,
         "max_price_seen": 512.0,
-        "current_price": 510.0,
+        "current_price": 509.0,
         "peak_gain_pct": 0.4,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 08:21:08 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 20.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "05 Nov 2026 - 07:56:08 WIB"
-    },
-    {
-        "symbol": "SUNDOG",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 15.0,
-        "max_price_seen": 16.0,
-        "current_price": 16.0,
-        "peak_gain_pct": 6.7,
-        "current_gain_pct": 6.7,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 07:51:12 WIB"
     }
 ]
