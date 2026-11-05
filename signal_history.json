@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "DEGEN",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 14.0,
+        "max_price_seen": 14.0,
+        "current_price": 14.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 06:51:14 WIB"
+    },
+    {
+        "symbol": "CAST",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 2108200.0,
+        "max_price_seen": 2108200.0,
+        "current_price": 2108200.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 06:51:14 WIB"
+    },
+    {
         "symbol": "CJL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
@@ -180,9 +202,9 @@
         "narrative": "LAYER1_DEFI",
         "entry_price": 2630.0,
         "max_price_seen": 2630.0,
-        "current_price": 2624.0,
+        "current_price": 2608.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.2,
+        "current_gain_pct": -0.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 06:06:10 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": -3.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 03:26:16 WIB"
-    },
-    {
-        "symbol": "AUDIO",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 211.0,
-        "max_price_seen": 225.0,
-        "current_price": 225.0,
-        "peak_gain_pct": 6.6,
-        "current_gain_pct": 6.6,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 03:26:16 WIB"
-    },
-    {
-        "symbol": "ANIME",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 41.311,
-        "max_price_seen": 41.311,
-        "current_price": 41.311,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 03:21:14 WIB"
     }
 ]
