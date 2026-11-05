@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "MYRO",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 24.0,
+        "max_price_seen": 24.0,
+        "current_price": 24.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 13:11:07 WIB"
+    },
+    {
         "symbol": "HUMA",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 300.0,
@@ -59,9 +70,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1014.0,
         "max_price_seen": 1014.0,
-        "current_price": 1009.0,
+        "current_price": 1002.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.5,
+        "current_gain_pct": -1.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 12:36:03 WIB"
     },
@@ -125,9 +136,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 352.0,
         "max_price_seen": 355.0,
-        "current_price": 350.0,
+        "current_price": 349.0,
         "peak_gain_pct": 0.9,
-        "current_gain_pct": -0.6,
+        "current_gain_pct": -0.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 12:01:22 WIB"
     },
@@ -290,7 +301,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000001.0,
         "max_price_seen": 1000009.0,
-        "current_price": 1000006.0,
+        "current_price": 1000009.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 11:11:18 WIB"
-    },
-    {
-        "symbol": "NVDAX",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 3620654.0,
-        "max_price_seen": 4016317.0,
-        "current_price": 4016317.0,
-        "peak_gain_pct": 10.9,
-        "current_gain_pct": 10.9,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 11:06:04 WIB"
     }
 ]
