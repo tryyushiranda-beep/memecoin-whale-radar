@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "XR",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 36.0,
+        "max_price_seen": 36.0,
+        "current_price": 36.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 09:56:08 WIB"
+    },
+    {
         "symbol": "GWEI",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 355.0,
@@ -180,7 +191,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 301.006,
         "max_price_seen": 328.095,
-        "current_price": 305.0,
+        "current_price": 304.993,
         "peak_gain_pct": 9.0,
         "current_gain_pct": 1.3,
         "status": "\u23f3 MONITORING",
@@ -311,22 +322,11 @@
         "symbol": "ISLM",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 41.0,
-        "max_price_seen": 42.0,
-        "current_price": 42.0,
-        "peak_gain_pct": 2.4,
-        "current_gain_pct": 2.4,
+        "max_price_seen": 43.0,
+        "current_price": 43.0,
+        "peak_gain_pct": 4.9,
+        "current_gain_pct": 4.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 07:26:07 WIB"
-    },
-    {
-        "symbol": "UAI",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1415.0,
-        "max_price_seen": 1802.0,
-        "current_price": 1802.0,
-        "peak_gain_pct": 27.3,
-        "current_gain_pct": 27.3,
-        "status": "\ud83d\udd25 PUMP SUCCESS",
-        "entry_time": "05 Nov 2026 - 07:21:15 WIB"
     }
 ]
