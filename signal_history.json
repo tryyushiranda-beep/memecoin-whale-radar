@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "EDEN",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 938.0,
+        "max_price_seen": 938.0,
+        "current_price": 938.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 03:26:16 WIB"
+    },
+    {
+        "symbol": "AUDIO",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 211.0,
+        "max_price_seen": 211.0,
+        "current_price": 211.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 03:26:16 WIB"
+    },
+    {
         "symbol": "ANIME",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 41.311,
@@ -257,9 +279,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 783.0,
         "max_price_seen": 791.0,
-        "current_price": 785.0,
+        "current_price": 787.0,
         "peak_gain_pct": 1.0,
-        "current_gain_pct": 0.3,
+        "current_gain_pct": 0.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 01:06:10 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": 2.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 01:01:20 WIB"
-    },
-    {
-        "symbol": "ARC",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 650.0,
-        "max_price_seen": 650.0,
-        "current_price": 639.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -1.7,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 01:01:20 WIB"
-    },
-    {
-        "symbol": "ETC",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 125000.0,
-        "max_price_seen": 127600.0,
-        "current_price": 127600.0,
-        "peak_gain_pct": 2.1,
-        "current_gain_pct": 2.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 00:56:07 WIB"
     }
 ]
