@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "CAKE",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 35731.0,
+        "max_price_seen": 35731.0,
+        "current_price": 35731.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 01:41:14 WIB"
+    },
+    {
+        "symbol": "APU",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 0.225,
+        "max_price_seen": 0.225,
+        "current_price": 0.225,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 01:41:14 WIB"
+    },
+    {
         "symbol": "BOME",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 11.0,
@@ -102,10 +124,10 @@
         "symbol": "COL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 783.0,
-        "max_price_seen": 787.0,
-        "current_price": 786.0,
-        "peak_gain_pct": 0.5,
-        "current_gain_pct": 0.4,
+        "max_price_seen": 791.0,
+        "current_price": 791.0,
+        "peak_gain_pct": 1.0,
+        "current_gain_pct": 1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 01:06:10 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": 3.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 00:37:11 WIB"
-    },
-    {
-        "symbol": "HUMA",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 248.0,
-        "max_price_seen": 260.0,
-        "current_price": 260.0,
-        "peak_gain_pct": 4.8,
-        "current_gain_pct": 4.8,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 00:26:10 WIB"
-    },
-    {
-        "symbol": "CJL",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 2.0,
-        "max_price_seen": 2.0,
-        "current_price": 2.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 00:26:10 WIB"
     }
 ]
