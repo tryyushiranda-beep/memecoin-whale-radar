@@ -1,5 +1,38 @@
 [
     {
+        "symbol": "KDAG",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 8.0,
+        "max_price_seen": 8.0,
+        "current_price": 8.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 14:01:20 WIB"
+    },
+    {
+        "symbol": "IOST",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 12.0,
+        "max_price_seen": 12.0,
+        "current_price": 12.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 14:01:20 WIB"
+    },
+    {
+        "symbol": "BOME",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 11.0,
+        "max_price_seen": 11.0,
+        "current_price": 11.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "05 Nov 2026 - 14:01:20 WIB"
+    },
+    {
         "symbol": "NOM",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 27.372,
@@ -158,7 +191,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 18094.0,
         "max_price_seen": 18100.0,
-        "current_price": 18100.0,
+        "current_price": 18099.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -295,38 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "05 Nov 2026 - 12:21:07 WIB"
-    },
-    {
-        "symbol": "TON",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 21086.0,
-        "max_price_seen": 21192.0,
-        "current_price": 21191.0,
-        "peak_gain_pct": 0.5,
-        "current_gain_pct": 0.5,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 12:16:10 WIB"
-    },
-    {
-        "symbol": "FANC",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1.0,
-        "max_price_seen": 2.0,
-        "current_price": 2.0,
-        "peak_gain_pct": 100.0,
-        "current_gain_pct": 100.0,
-        "status": "\ud83d\udd25 PUMP SUCCESS",
-        "entry_time": "05 Nov 2026 - 12:11:02 WIB"
-    },
-    {
-        "symbol": "GWEI",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 352.0,
-        "max_price_seen": 355.0,
-        "current_price": 342.0,
-        "peak_gain_pct": 0.9,
-        "current_gain_pct": -2.8,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "05 Nov 2026 - 12:01:22 WIB"
     }
 ]
