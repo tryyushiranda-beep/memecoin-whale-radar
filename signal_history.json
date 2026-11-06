@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "CJL",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 2.0,
+        "max_price_seen": 2.0,
+        "current_price": 2.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 06:36:05 WIB"
+    },
+    {
         "symbol": "STIK",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 53.0,
@@ -290,9 +301,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 27.511521,
         "max_price_seen": 27.899997,
-        "current_price": 27.87219,
+        "current_price": 27.752009,
         "peak_gain_pct": 1.4,
-        "current_gain_pct": 1.3,
+        "current_gain_pct": 0.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 02:05:58 WIB"
     },
@@ -315,17 +326,6 @@
         "current_price": 35.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 02:01:29 WIB"
-    },
-    {
-        "symbol": "GNS",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 6353.0,
-        "max_price_seen": 6353.0,
-        "current_price": 6200.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -2.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 02:01:29 WIB"
     }
