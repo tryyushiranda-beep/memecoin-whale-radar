@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "CAST",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 2109000.0,
+        "max_price_seen": 2109000.0,
+        "current_price": 2109000.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 09:36:05 WIB"
+    },
+    {
         "symbol": "CJL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
@@ -59,9 +70,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 42.0,
         "max_price_seen": 43.0,
-        "current_price": 42.0,
+        "current_price": 43.0,
         "peak_gain_pct": 2.4,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": 2.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 08:36:10 WIB"
     },
@@ -147,9 +158,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000004.0,
         "max_price_seen": 1000009.0,
-        "current_price": 1000002.0,
+        "current_price": 1000007.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.0,
+        "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 07:56:10 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 06:56:07 WIB"
-    },
-    {
-        "symbol": "DEGEN",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 14.0,
-        "max_price_seen": 14.0,
-        "current_price": 14.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 06:51:14 WIB"
     }
 ]
