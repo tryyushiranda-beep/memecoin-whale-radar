@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "KDAG",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 9.0,
+        "max_price_seen": 9.0,
+        "current_price": 9.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 01:06:10 WIB"
+    },
+    {
         "symbol": "DEGEN",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 14.0,
@@ -213,7 +224,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 3413.0,
         "max_price_seen": 3434.0,
-        "current_price": 3418.0,
+        "current_price": 3415.0,
         "peak_gain_pct": 0.6,
         "current_gain_pct": 0.1,
         "status": "\u23f3 MONITORING",
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 22:56:01 WIB"
-    },
-    {
-        "symbol": "NEORPNEW",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1003.0,
-        "max_price_seen": 1004.0,
-        "current_price": 1003.0,
-        "peak_gain_pct": 0.1,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 22:51:11 WIB"
     }
 ]
