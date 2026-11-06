@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "HNT",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 5326.0,
+        "max_price_seen": 5326.0,
+        "current_price": 5326.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 07:46:10 WIB"
+    },
+    {
+        "symbol": "REP",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 12101.0,
+        "max_price_seen": 12101.0,
+        "current_price": 12101.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 07:46:10 WIB"
+    },
+    {
         "symbol": "HIGH",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 390.0,
@@ -158,9 +180,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
         "max_price_seen": 3.0,
-        "current_price": 2.0,
+        "current_price": 3.0,
         "peak_gain_pct": 50.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": 50.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 06:46:09 WIB"
     },
@@ -180,9 +202,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1220.0,
         "max_price_seen": 1220.0,
-        "current_price": 1191.0,
+        "current_price": 1204.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -2.4,
+        "current_gain_pct": -1.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 06:36:10 WIB"
     },
@@ -212,10 +234,10 @@
         "symbol": "BSV",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 294000.0,
-        "max_price_seen": 300000.0,
-        "current_price": 300000.0,
-        "peak_gain_pct": 2.0,
-        "current_gain_pct": 2.0,
+        "max_price_seen": 303000.0,
+        "current_price": 303000.0,
+        "peak_gain_pct": 3.1,
+        "current_gain_pct": 3.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 06:31:11 WIB"
     },
@@ -304,28 +326,6 @@
         "current_price": 2121.0,
         "peak_gain_pct": 5.3,
         "current_gain_pct": 5.3,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 06:11:13 WIB"
-    },
-    {
-        "symbol": "AVAX",
-        "narrative": "LAYER1_DEFI",
-        "entry_price": 148000.0,
-        "max_price_seen": 148465.0,
-        "current_price": 148465.0,
-        "peak_gain_pct": 0.3,
-        "current_gain_pct": 0.3,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 06:11:13 WIB"
-    },
-    {
-        "symbol": "ATH",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 87.0,
-        "max_price_seen": 88.0,
-        "current_price": 88.0,
-        "peak_gain_pct": 1.1,
-        "current_gain_pct": 1.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 06:11:13 WIB"
     }
