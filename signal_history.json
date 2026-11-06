@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "MPRO",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 1.0,
+        "max_price_seen": 1.0,
+        "current_price": 1.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 18:26:05 WIB"
+    },
+    {
         "symbol": "BOME",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 11.0,
@@ -14,10 +25,10 @@
         "symbol": "ONL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 604.0,
-        "max_price_seen": 609.0,
-        "current_price": 609.0,
-        "peak_gain_pct": 0.8,
-        "current_gain_pct": 0.8,
+        "max_price_seen": 611.0,
+        "current_price": 611.0,
+        "peak_gain_pct": 1.2,
+        "current_gain_pct": 1.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 18:11:05 WIB"
     },
@@ -91,11 +102,11 @@
         "symbol": "FANC",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
-        "max_price_seen": 2.0,
-        "current_price": 2.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
+        "max_price_seen": 3.0,
+        "current_price": 3.0,
+        "peak_gain_pct": 50.0,
+        "current_gain_pct": 50.0,
+        "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 17:46:14 WIB"
     },
     {
@@ -125,9 +136,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 73127526.0,
         "max_price_seen": 73283332.0,
-        "current_price": 73235201.0,
+        "current_price": 73251553.0,
         "peak_gain_pct": 0.2,
-        "current_gain_pct": 0.1,
+        "current_gain_pct": 0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 17:36:07 WIB"
     },
@@ -191,9 +202,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
         "max_price_seen": 3.0,
-        "current_price": 2.0,
+        "current_price": 3.0,
         "peak_gain_pct": 50.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": 50.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 17:16:04 WIB"
     },
@@ -257,9 +268,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 5.0,
         "max_price_seen": 6.0,
-        "current_price": 6.0,
+        "current_price": 5.0,
         "peak_gain_pct": 20.0,
-        "current_gain_pct": 20.0,
+        "current_gain_pct": 0.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 16:46:08 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 16:36:03 WIB"
-    },
-    {
-        "symbol": "TOKEN",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 28.0,
-        "max_price_seen": 30.0,
-        "current_price": 29.0,
-        "peak_gain_pct": 7.1,
-        "current_gain_pct": 3.6,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 16:31:15 WIB"
     }
 ]
