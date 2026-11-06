@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "BGB",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 31227.0,
+        "max_price_seen": 31227.0,
+        "current_price": 31227.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 17:56:13 WIB"
+    },
+    {
+        "symbol": "AMP",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 11.0,
+        "max_price_seen": 11.0,
+        "current_price": 11.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 17:56:13 WIB"
+    },
+    {
         "symbol": "MEME",
         "narrative": "MEME_AI",
         "entry_price": 7.0,
@@ -70,9 +92,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 73127526.0,
         "max_price_seen": 73283332.0,
-        "current_price": 73283332.0,
+        "current_price": 73127526.0,
         "peak_gain_pct": 0.2,
-        "current_gain_pct": 0.2,
+        "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 17:36:07 WIB"
     },
@@ -92,7 +114,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000006.0,
         "max_price_seen": 1000010.0,
-        "current_price": 1000007.0,
+        "current_price": 1000009.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -136,9 +158,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
         "max_price_seen": 3.0,
-        "current_price": 2.0,
+        "current_price": 3.0,
         "peak_gain_pct": 50.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": 50.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 17:16:04 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": 4.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 15:41:13 WIB"
-    },
-    {
-        "symbol": "ALICE",
-        "narrative": "GAMING_NFT",
-        "entry_price": 2010.0,
-        "max_price_seen": 2178.0,
-        "current_price": 2178.0,
-        "peak_gain_pct": 8.4,
-        "current_gain_pct": 8.4,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 15:41:13 WIB"
-    },
-    {
-        "symbol": "DEGEN",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 14.0,
-        "max_price_seen": 15.0,
-        "current_price": 15.0,
-        "peak_gain_pct": 7.1,
-        "current_gain_pct": 7.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 15:36:04 WIB"
     }
 ]
