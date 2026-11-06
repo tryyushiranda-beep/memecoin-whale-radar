@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "TOKEN",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 28.0,
+        "max_price_seen": 28.0,
+        "current_price": 28.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 16:31:15 WIB"
+    },
+    {
         "symbol": "AXL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 680.0,
@@ -113,11 +124,11 @@
         "symbol": "FANC",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
-        "max_price_seen": 2.0,
-        "current_price": 2.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
+        "max_price_seen": 3.0,
+        "current_price": 3.0,
+        "peak_gain_pct": 50.0,
+        "current_gain_pct": 50.0,
+        "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 15:21:12 WIB"
     },
     {
@@ -290,7 +301,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 19154.0,
         "max_price_seen": 19297.0,
-        "current_price": 19297.0,
+        "current_price": 19292.0,
         "peak_gain_pct": 0.7,
         "current_gain_pct": 0.7,
         "status": "\u23f3 MONITORING",
@@ -317,16 +328,5 @@
         "current_gain_pct": 1.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 14:26:04 WIB"
-    },
-    {
-        "symbol": "PROVE",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 3177.0,
-        "max_price_seen": 3598.0,
-        "current_price": 3238.0,
-        "peak_gain_pct": 13.3,
-        "current_gain_pct": 1.9,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 14:11:12 WIB"
     }
 ]
