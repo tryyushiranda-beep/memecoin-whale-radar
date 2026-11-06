@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "NEORPNEW",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 1003.0,
+        "max_price_seen": 1003.0,
+        "current_price": 1003.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 22:51:11 WIB"
+    },
+    {
+        "symbol": "GTC",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 3587.0,
+        "max_price_seen": 3587.0,
+        "current_price": 3587.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 22:51:11 WIB"
+    },
+    {
         "symbol": "MEME",
         "narrative": "MEME_AI",
         "entry_price": 7.0,
@@ -80,10 +102,10 @@
         "symbol": "RVN",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 51.0,
-        "max_price_seen": 51.0,
-        "current_price": 51.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 54.0,
+        "current_price": 54.0,
+        "peak_gain_pct": 5.9,
+        "current_gain_pct": 5.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 22:21:04 WIB"
     },
@@ -113,10 +135,10 @@
         "symbol": "AMP",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 11.0,
-        "max_price_seen": 11.0,
-        "current_price": 11.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 12.0,
+        "current_price": 12.0,
+        "peak_gain_pct": 9.1,
+        "current_gain_pct": 9.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 21:51:00 WIB"
     },
@@ -136,9 +158,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 13640.0,
         "max_price_seen": 13723.0,
-        "current_price": 13670.0,
+        "current_price": 13708.0,
         "peak_gain_pct": 0.6,
-        "current_gain_pct": 0.2,
+        "current_gain_pct": 0.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 21:36:07 WIB"
     },
@@ -213,9 +235,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 19192.0,
         "max_price_seen": 19232.0,
-        "current_price": 19138.0,
+        "current_price": 19191.0,
         "peak_gain_pct": 0.2,
-        "current_gain_pct": -0.3,
+        "current_gain_pct": -0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 20:51:11 WIB"
     },
@@ -224,9 +246,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 127.0,
         "max_price_seen": 132.0,
-        "current_price": 130.0,
+        "current_price": 126.0,
         "peak_gain_pct": 3.9,
-        "current_gain_pct": 2.4,
+        "current_gain_pct": -0.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 20:51:11 WIB"
     },
@@ -256,10 +278,10 @@
         "symbol": "ZIL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 40.0,
-        "max_price_seen": 40.0,
-        "current_price": 39.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -2.5,
+        "max_price_seen": 43.0,
+        "current_price": 43.0,
+        "peak_gain_pct": 7.5,
+        "current_gain_pct": 7.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 20:41:11 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 20:26:02 WIB"
-    },
-    {
-        "symbol": "SUNDOG",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 14.0,
-        "max_price_seen": 15.0,
-        "current_price": 15.0,
-        "peak_gain_pct": 7.1,
-        "current_gain_pct": 7.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 20:16:09 WIB"
-    },
-    {
-        "symbol": "INDR",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1000010.0,
-        "max_price_seen": 1000010.0,
-        "current_price": 1000003.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 20:16:09 WIB"
     }
 ]
