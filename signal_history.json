@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "RVN",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 52.0,
+        "max_price_seen": 52.0,
+        "current_price": 52.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 17:11:11 WIB"
+    },
+    {
         "symbol": "KDAG",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 9.0,
@@ -58,8 +69,8 @@
         "symbol": "USDX",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 17846.0,
-        "max_price_seen": 17846.0,
-        "current_price": 17846.0,
+        "max_price_seen": 17848.0,
+        "current_price": 17848.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -235,9 +246,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
         "max_price_seen": 3.0,
-        "current_price": 3.0,
+        "current_price": 2.0,
         "peak_gain_pct": 50.0,
-        "current_gain_pct": 50.0,
+        "current_gain_pct": 0.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 15:21:12 WIB"
     },
@@ -315,17 +326,6 @@
         "current_price": 39.001,
         "peak_gain_pct": 0.4,
         "current_gain_pct": -2.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 15:01:22 WIB"
-    },
-    {
-        "symbol": "GIGA",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 31.0,
-        "max_price_seen": 32.0,
-        "current_price": 31.0,
-        "peak_gain_pct": 3.2,
-        "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 15:01:22 WIB"
     }
