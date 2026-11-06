@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "PLPA",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 39.001,
+        "max_price_seen": 39.001,
+        "current_price": 39.001,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "06 Nov 2026 - 17:25:59 WIB"
+    },
+    {
         "symbol": "PONKE",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 307.0,
@@ -25,11 +36,11 @@
         "symbol": "CJL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
-        "max_price_seen": 2.0,
-        "current_price": 2.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
+        "max_price_seen": 3.0,
+        "current_price": 3.0,
+        "peak_gain_pct": 50.0,
+        "current_gain_pct": 50.0,
+        "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 17:16:04 WIB"
     },
     {
@@ -92,9 +103,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 5.0,
         "max_price_seen": 6.0,
-        "current_price": 5.0,
+        "current_price": 6.0,
         "peak_gain_pct": 20.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": 20.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "06 Nov 2026 - 16:46:08 WIB"
     },
@@ -235,9 +246,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 12350.0,
         "max_price_seen": 12401.0,
-        "current_price": 12401.0,
+        "current_price": 12342.0,
         "peak_gain_pct": 0.4,
-        "current_gain_pct": 0.4,
+        "current_gain_pct": -0.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 15:36:04 WIB"
     },
@@ -245,10 +256,10 @@
         "symbol": "TLM",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 19.0,
-        "max_price_seen": 20.0,
-        "current_price": 20.0,
-        "peak_gain_pct": 5.3,
-        "current_gain_pct": 5.3,
+        "max_price_seen": 21.0,
+        "current_price": 21.0,
+        "peak_gain_pct": 10.5,
+        "current_gain_pct": 10.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 15:31:08 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 15:11:16 WIB"
-    },
-    {
-        "symbol": "INDR",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1000010.0,
-        "max_price_seen": 1000010.0,
-        "current_price": 1000006.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 15:06:08 WIB"
     }
 ]
