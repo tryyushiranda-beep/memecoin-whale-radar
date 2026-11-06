@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "HOT",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 7.0,
+        "max_price_seen": 7.0,
+        "current_price": 7.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 03:01:26 WIB"
+    },
+    {
         "symbol": "IOST",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 12.0,
@@ -70,9 +81,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 27.511521,
         "max_price_seen": 27.899997,
-        "current_price": 27.585091,
+        "current_price": 27.816885,
         "peak_gain_pct": 1.4,
-        "current_gain_pct": 0.3,
+        "current_gain_pct": 1.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 02:05:58 WIB"
     },
@@ -136,9 +147,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 45.0,
         "max_price_seen": 45.399,
-        "current_price": 45.399,
+        "current_price": 45.207,
         "peak_gain_pct": 0.9,
-        "current_gain_pct": 0.9,
+        "current_gain_pct": 0.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 01:41:11 WIB"
     },
@@ -147,9 +158,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
         "max_price_seen": 3.0,
-        "current_price": 3.0,
+        "current_price": 2.0,
         "peak_gain_pct": 50.0,
-        "current_gain_pct": 50.0,
+        "current_gain_pct": 0.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "07 Nov 2026 - 01:31:19 WIB"
     },
@@ -169,7 +180,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000005.0,
         "max_price_seen": 1000010.0,
-        "current_price": 1000004.0,
+        "current_price": 1000002.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": -0.0,
         "status": "\u23f3 MONITORING",
@@ -315,17 +326,6 @@
         "current_price": 126.0,
         "peak_gain_pct": 2.4,
         "current_gain_pct": 0.8,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "06 Nov 2026 - 23:51:15 WIB"
-    },
-    {
-        "symbol": "EDEN",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 900.0,
-        "max_price_seen": 900.0,
-        "current_price": 900.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "06 Nov 2026 - 23:51:15 WIB"
     }
