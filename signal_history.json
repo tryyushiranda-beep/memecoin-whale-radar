@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "BR",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 8108.0,
+        "max_price_seen": 8108.0,
+        "current_price": 8108.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 01:41:10 WIB"
+    },
+    {
+        "symbol": "ASETQU",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 205673.0,
+        "max_price_seen": 205673.0,
+        "current_price": 205673.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 01:41:10 WIB"
+    },
+    {
         "symbol": "KDAG",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 8.0,
@@ -36,10 +58,10 @@
         "symbol": "HART",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 41.0,
-        "max_price_seen": 41.0,
-        "current_price": 41.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 42.0,
+        "current_price": 42.0,
+        "peak_gain_pct": 2.4,
+        "current_gain_pct": 2.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 01:26:03 WIB"
     },
@@ -81,9 +103,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000004.0,
         "max_price_seen": 1000010.0,
-        "current_price": 1000003.0,
+        "current_price": 1000009.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.0,
+        "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 00:16:09 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": 0.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 22:06:03 WIB"
-    },
-    {
-        "symbol": "ANIME",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 45.004,
-        "max_price_seen": 45.004,
-        "current_price": 45.004,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 21:51:09 WIB"
-    },
-    {
-        "symbol": "CKB",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 19.0,
-        "max_price_seen": 20.0,
-        "current_price": 19.0,
-        "peak_gain_pct": 5.3,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 21:46:09 WIB"
     }
 ]
