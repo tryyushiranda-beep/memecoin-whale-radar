@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "APU",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 0.2,
+        "max_price_seen": 0.2,
+        "current_price": 0.2,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 05:31:14 WIB"
+    },
+    {
         "symbol": "GALAGAMES",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 28.0,
@@ -15,9 +26,9 @@
         "narrative": "LAYER1_DEFI",
         "entry_price": 2580.0,
         "max_price_seen": 2608.0,
-        "current_price": 2608.0,
+        "current_price": 2595.0,
         "peak_gain_pct": 1.1,
-        "current_gain_pct": 1.1,
+        "current_gain_pct": 0.6,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 05:01:22 WIB"
     },
@@ -58,10 +69,10 @@
         "symbol": "BNKR",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 4.601,
-        "max_price_seen": 4.601,
-        "current_price": 4.601,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 4.606,
+        "current_price": 4.606,
+        "peak_gain_pct": 0.1,
+        "current_gain_pct": 0.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 04:21:05 WIB"
     },
@@ -70,9 +81,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 74.333,
         "max_price_seen": 75.466,
-        "current_price": 74.248,
+        "current_price": 75.0,
         "peak_gain_pct": 1.5,
-        "current_gain_pct": -0.1,
+        "current_gain_pct": 0.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 04:16:10 WIB"
     },
@@ -213,9 +224,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 13507.0,
         "max_price_seen": 13706.0,
-        "current_price": 13688.0,
+        "current_price": 13692.0,
         "peak_gain_pct": 1.5,
-        "current_gain_pct": 1.3,
+        "current_gain_pct": 1.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 02:35:59 WIB"
     },
@@ -316,17 +327,6 @@
         "peak_gain_pct": 25.0,
         "current_gain_pct": 12.5,
         "status": "\ud83d\udd25 PUMP SUCCESS",
-        "entry_time": "08 Nov 2026 - 01:36:06 WIB"
-    },
-    {
-        "symbol": "HAEDAL",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 464.0,
-        "max_price_seen": 464.0,
-        "current_price": 462.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.4,
-        "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 01:36:06 WIB"
     }
 ]
