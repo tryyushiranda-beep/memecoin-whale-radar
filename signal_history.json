@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "NOVA",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 6191.0,
+        "max_price_seen": 6191.0,
+        "current_price": 6191.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 12:11:08 WIB"
+    },
+    {
         "symbol": "BLUR",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 130.0,
@@ -14,10 +25,10 @@
         "symbol": "LYFEL",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 38111.0,
-        "max_price_seen": 38111.0,
-        "current_price": 38111.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 38484.0,
+        "current_price": 38484.0,
+        "peak_gain_pct": 1.0,
+        "current_gain_pct": 1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 12:01:23 WIB"
     },
@@ -114,7 +125,7 @@
         "narrative": "MEME_AI",
         "entry_price": 2110.0,
         "max_price_seen": 2132.0,
-        "current_price": 2131.0,
+        "current_price": 2132.0,
         "peak_gain_pct": 1.0,
         "current_gain_pct": 1.0,
         "status": "\u23f3 MONITORING",
@@ -125,9 +136,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2934.0,
         "max_price_seen": 2974.0,
-        "current_price": 2966.0,
+        "current_price": 2974.0,
         "peak_gain_pct": 1.4,
-        "current_gain_pct": 1.1,
+        "current_gain_pct": 1.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 10:46:06 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 10:06:09 WIB"
-    },
-    {
-        "symbol": "GTC",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 3200.0,
-        "max_price_seen": 3900.0,
-        "current_price": 3900.0,
-        "peak_gain_pct": 21.9,
-        "current_gain_pct": 21.9,
-        "status": "\ud83d\udd25 PUMP SUCCESS",
-        "entry_time": "07 Nov 2026 - 10:01:23 WIB"
     }
 ]
