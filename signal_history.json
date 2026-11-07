@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "PENDLE",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 30000.0,
+        "max_price_seen": 30000.0,
+        "current_price": 30000.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 11:55:55 WIB"
+    },
+    {
         "symbol": "CAST",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2080001.0,
@@ -14,10 +25,10 @@
         "symbol": "MON",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 306.243,
-        "max_price_seen": 306.243,
-        "current_price": 306.243,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 329.975,
+        "current_price": 329.975,
+        "peak_gain_pct": 7.7,
+        "current_gain_pct": 7.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 11:36:10 WIB"
     },
@@ -234,10 +245,10 @@
         "symbol": "ARB",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2955.0,
-        "max_price_seen": 2976.0,
-        "current_price": 2961.0,
-        "peak_gain_pct": 0.7,
-        "current_gain_pct": 0.2,
+        "max_price_seen": 2984.0,
+        "current_price": 2984.0,
+        "peak_gain_pct": 1.0,
+        "current_gain_pct": 1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 10:16:06 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": -0.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 09:56:02 WIB"
-    },
-    {
-        "symbol": "EDENA",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 713.0,
-        "max_price_seen": 747.0,
-        "current_price": 743.0,
-        "peak_gain_pct": 4.8,
-        "current_gain_pct": 4.2,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 09:51:03 WIB"
     }
 ]
