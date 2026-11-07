@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "MON",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 306.243,
+        "max_price_seen": 306.243,
+        "current_price": 306.243,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 11:36:10 WIB"
+    },
+    {
         "symbol": "AAVE",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2319798.0,
@@ -58,10 +69,10 @@
         "symbol": "FARTCOIN",
         "narrative": "MEME_AI",
         "entry_price": 2110.0,
-        "max_price_seen": 2129.0,
-        "current_price": 2122.0,
-        "peak_gain_pct": 0.9,
-        "current_gain_pct": 0.6,
+        "max_price_seen": 2132.0,
+        "current_price": 2132.0,
+        "peak_gain_pct": 1.0,
+        "current_gain_pct": 1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 10:46:06 WIB"
     },
@@ -147,9 +158,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
         "max_price_seen": 3.0,
-        "current_price": 2.0,
+        "current_price": 3.0,
         "peak_gain_pct": 50.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": 50.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "07 Nov 2026 - 10:36:08 WIB"
     },
@@ -157,8 +168,8 @@
         "symbol": "INDR",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000001.0,
-        "max_price_seen": 1000007.0,
-        "current_price": 1000007.0,
+        "max_price_seen": 1000009.0,
+        "current_price": 1000009.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -312,21 +323,10 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 422.0,
         "max_price_seen": 423.0,
-        "current_price": 417.0,
+        "current_price": 418.0,
         "peak_gain_pct": 0.2,
-        "current_gain_pct": -1.2,
+        "current_gain_pct": -0.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 09:51:03 WIB"
-    },
-    {
-        "symbol": "FET",
-        "narrative": "LAYER1_DEFI",
-        "entry_price": 2650.0,
-        "max_price_seen": 2727.0,
-        "current_price": 2727.0,
-        "peak_gain_pct": 2.9,
-        "current_gain_pct": 2.9,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 09:46:11 WIB"
     }
 ]
