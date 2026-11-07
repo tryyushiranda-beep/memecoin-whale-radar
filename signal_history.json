@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "DOT",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 16150.0,
+        "max_price_seen": 16150.0,
+        "current_price": 16150.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 04:31:17 WIB"
+    },
+    {
         "symbol": "BNKR",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 4.601,
@@ -317,16 +328,5 @@
         "current_gain_pct": 4.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 00:46:08 WIB"
-    },
-    {
-        "symbol": "KAITO",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 3884.0,
-        "max_price_seen": 3884.0,
-        "current_price": 3880.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 00:25:57 WIB"
     }
 ]
