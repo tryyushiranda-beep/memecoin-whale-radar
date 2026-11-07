@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "AIXBT",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 280.0,
+        "max_price_seen": 280.0,
+        "current_price": 280.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 13:36:06 WIB"
+    },
+    {
         "symbol": "BCH",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 4724000.0,
@@ -70,9 +81,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.0,
         "max_price_seen": 3.0,
-        "current_price": 2.0,
+        "current_price": 3.0,
         "peak_gain_pct": 50.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": 50.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "07 Nov 2026 - 13:11:09 WIB"
     },
@@ -92,9 +103,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 27.500754,
         "max_price_seen": 27.905745,
-        "current_price": 27.697321,
+        "current_price": 27.866995,
         "peak_gain_pct": 1.5,
-        "current_gain_pct": 0.7,
+        "current_gain_pct": 1.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 12:56:06 WIB"
     },
@@ -315,17 +326,6 @@
         "current_price": 345.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": -0.3,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 10:51:08 WIB"
-    },
-    {
-        "symbol": "GALAGAMES",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 28.0,
-        "max_price_seen": 29.0,
-        "current_price": 29.0,
-        "peak_gain_pct": 3.6,
-        "current_gain_pct": 3.6,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 10:51:08 WIB"
     }
