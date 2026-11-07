@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "BOME",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 11.0,
+        "max_price_seen": 11.0,
+        "current_price": 11.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 12:36:05 WIB"
+    },
+    {
         "symbol": "ASETQU",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 205663.0,
@@ -15,9 +26,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 641.0,
         "max_price_seen": 641.0,
-        "current_price": 641.0,
+        "current_price": 639.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -0.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 12:31:18 WIB"
     },
@@ -191,9 +202,9 @@
         "narrative": "MEME_AI",
         "entry_price": 2110.0,
         "max_price_seen": 2137.0,
-        "current_price": 2136.0,
+        "current_price": 2132.0,
         "peak_gain_pct": 1.3,
-        "current_gain_pct": 1.2,
+        "current_gain_pct": 1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 10:46:06 WIB"
     },
@@ -212,10 +223,10 @@
         "symbol": "DOT",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 16333.0,
-        "max_price_seen": 16334.0,
-        "current_price": 16334.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 16425.0,
+        "current_price": 16425.0,
+        "peak_gain_pct": 0.6,
+        "current_gain_pct": 0.6,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 10:46:06 WIB"
     },
@@ -290,7 +301,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000001.0,
         "max_price_seen": 1000009.0,
-        "current_price": 1000009.0,
+        "current_price": 1000008.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -312,21 +323,10 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 400.0,
         "max_price_seen": 407.0,
-        "current_price": 407.0,
+        "current_price": 395.0,
         "peak_gain_pct": 1.8,
-        "current_gain_pct": 1.8,
+        "current_gain_pct": -1.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 10:26:04 WIB"
-    },
-    {
-        "symbol": "CKB",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 19.0,
-        "max_price_seen": 19.0,
-        "current_price": 19.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 10:16:06 WIB"
     }
 ]
