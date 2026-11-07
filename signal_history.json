@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "DEXE",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 22908.0,
+        "max_price_seen": 22908.0,
+        "current_price": 22908.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 22:36:09 WIB"
+    },
+    {
+        "symbol": "AVAX",
+        "narrative": "LAYER1_DEFI",
+        "entry_price": 148855.0,
+        "max_price_seen": 148855.0,
+        "current_price": 148855.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 22:36:09 WIB"
+    },
+    {
         "symbol": "BOME",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 11.0,
@@ -125,9 +147,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2895.0,
         "max_price_seen": 2916.0,
-        "current_price": 2866.0,
+        "current_price": 2869.0,
         "peak_gain_pct": 0.7,
-        "current_gain_pct": -1.0,
+        "current_gain_pct": -0.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 21:31:18 WIB"
     },
@@ -235,9 +257,9 @@
         "narrative": "MEME_AI",
         "entry_price": 0.050301,
         "max_price_seen": 0.051168,
-        "current_price": 0.050982,
+        "current_price": 0.050807,
         "peak_gain_pct": 1.7,
-        "current_gain_pct": 1.4,
+        "current_gain_pct": 1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 20:51:10 WIB"
     },
@@ -246,7 +268,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000005.0,
         "max_price_seen": 1000009.0,
-        "current_price": 1000007.0,
+        "current_price": 1000008.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -306,27 +328,5 @@
         "current_gain_pct": 0.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 19:21:03 WIB"
-    },
-    {
-        "symbol": "BEAM",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 70.0,
-        "max_price_seen": 74.0,
-        "current_price": 74.0,
-        "peak_gain_pct": 5.7,
-        "current_gain_pct": 5.7,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 19:06:06 WIB"
-    },
-    {
-        "symbol": "AIXBT",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 278.0,
-        "max_price_seen": 280.0,
-        "current_price": 278.0,
-        "peak_gain_pct": 0.7,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 18:56:03 WIB"
     }
 ]
