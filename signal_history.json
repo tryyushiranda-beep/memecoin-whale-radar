@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "BONK",
+        "narrative": "MEME_AI",
+        "entry_price": 0.050282,
+        "max_price_seen": 0.050282,
+        "current_price": 0.050282,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 04:01:22 WIB"
+    },
+    {
         "symbol": "AVAX",
         "narrative": "LAYER1_DEFI",
         "entry_price": 147744.0,
@@ -213,9 +224,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 8.0,
         "max_price_seen": 10.0,
-        "current_price": 10.0,
+        "current_price": 8.0,
         "peak_gain_pct": 25.0,
-        "current_gain_pct": 25.0,
+        "current_gain_pct": 0.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "08 Nov 2026 - 01:36:06 WIB"
     },
@@ -290,7 +301,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000004.0,
         "max_price_seen": 1000010.0,
-        "current_price": 1000008.0,
+        "current_price": 1000004.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -301,9 +312,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 927.0,
         "max_price_seen": 942.0,
-        "current_price": 920.0,
+        "current_price": 921.0,
         "peak_gain_pct": 1.6,
-        "current_gain_pct": -0.8,
+        "current_gain_pct": -0.6,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 00:16:09 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 00:16:09 WIB"
-    },
-    {
-        "symbol": "HYPE",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1395000.0,
-        "max_price_seen": 1410009.0,
-        "current_price": 1393000.0,
-        "peak_gain_pct": 1.1,
-        "current_gain_pct": -0.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 00:11:08 WIB"
     }
 ]
