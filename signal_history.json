@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "CKB",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 19.0,
+        "max_price_seen": 19.0,
+        "current_price": 19.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 16:16:03 WIB"
+    },
+    {
+        "symbol": "ZORA",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 92.771,
+        "max_price_seen": 92.771,
+        "current_price": 92.771,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 16:16:03 WIB"
+    },
+    {
         "symbol": "CRV",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 4638.0,
@@ -15,9 +37,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 72.0,
         "max_price_seen": 72.0,
-        "current_price": 72.0,
+        "current_price": 71.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -1.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 16:11:06 WIB"
     },
@@ -125,9 +147,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 305.51,
         "max_price_seen": 315.063,
-        "current_price": 305.65,
+        "current_price": 305.0,
         "peak_gain_pct": 3.1,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 15:21:11 WIB"
     },
@@ -235,9 +257,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 4724000.0,
         "max_price_seen": 4735000.0,
-        "current_price": 4735000.0,
+        "current_price": 4731000.0,
         "peak_gain_pct": 0.2,
-        "current_gain_pct": 0.2,
+        "current_gain_pct": 0.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 13:31:16 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "07 Nov 2026 - 13:11:09 WIB"
-    },
-    {
-        "symbol": "INDR",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1000001.0,
-        "max_price_seen": 1000010.0,
-        "current_price": 1000009.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 13:01:22 WIB"
-    },
-    {
-        "symbol": "DRX",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 27.500754,
-        "max_price_seen": 27.999,
-        "current_price": 27.902317,
-        "peak_gain_pct": 1.8,
-        "current_gain_pct": 1.5,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 12:56:06 WIB"
     }
 ]
