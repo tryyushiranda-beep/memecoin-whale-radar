@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "LYFEL",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 38111.0,
+        "max_price_seen": 38111.0,
+        "current_price": 38111.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 12:01:23 WIB"
+    },
+    {
         "symbol": "PENDLE",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 30000.0,
@@ -26,9 +37,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 306.243,
         "max_price_seen": 329.975,
-        "current_price": 329.975,
+        "current_price": 308.163,
         "peak_gain_pct": 7.7,
-        "current_gain_pct": 7.7,
+        "current_gain_pct": 0.6,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 11:36:10 WIB"
     },
@@ -36,10 +47,10 @@
         "symbol": "AAVE",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2319798.0,
-        "max_price_seen": 2319798.0,
-        "current_price": 2319798.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 2353644.0,
+        "current_price": 2353644.0,
+        "peak_gain_pct": 1.5,
+        "current_gain_pct": 1.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 11:31:17 WIB"
     },
@@ -267,8 +278,8 @@
         "symbol": "ASETQU",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 205661.0,
-        "max_price_seen": 205668.0,
-        "current_price": 205668.0,
+        "max_price_seen": 205700.0,
+        "current_price": 205700.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -315,17 +326,6 @@
         "current_price": 1220.0,
         "peak_gain_pct": 0.2,
         "current_gain_pct": 0.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 09:56:02 WIB"
-    },
-    {
-        "symbol": "BLUR",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 131.0,
-        "max_price_seen": 131.0,
-        "current_price": 130.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 09:56:02 WIB"
     }
