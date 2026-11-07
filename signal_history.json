@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "BICO",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 255.0,
+        "max_price_seen": 255.0,
+        "current_price": 255.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 04:51:09 WIB"
+    },
+    {
         "symbol": "DOT",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 16150.0,
@@ -26,9 +37,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 74.333,
         "max_price_seen": 75.466,
-        "current_price": 75.466,
+        "current_price": 74.248,
         "peak_gain_pct": 1.5,
-        "current_gain_pct": 1.5,
+        "current_gain_pct": -0.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 04:16:10 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 01:21:12 WIB"
-    },
-    {
-        "symbol": "ISLM",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 42.0,
-        "max_price_seen": 44.0,
-        "current_price": 44.0,
-        "peak_gain_pct": 4.8,
-        "current_gain_pct": 4.8,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 00:46:08 WIB"
     }
 ]
