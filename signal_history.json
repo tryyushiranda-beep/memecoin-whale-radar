@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "DEXE",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 23298.0,
+        "max_price_seen": 23298.0,
+        "current_price": 23298.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 17:21:09 WIB"
+    },
+    {
+        "symbol": "BMT",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 413.0,
+        "max_price_seen": 413.0,
+        "current_price": 413.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "07 Nov 2026 - 17:21:09 WIB"
+    },
+    {
         "symbol": "BONK",
         "narrative": "MEME_AI",
         "entry_price": 0.050312,
@@ -103,9 +125,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2935.0,
         "max_price_seen": 2935.0,
-        "current_price": 2933.0,
+        "current_price": 2930.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.1,
+        "current_gain_pct": -0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 16:41:10 WIB"
     },
@@ -158,9 +180,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 230.0,
         "max_price_seen": 231.999,
-        "current_price": 229.897,
+        "current_price": 226.0,
         "peak_gain_pct": 0.9,
-        "current_gain_pct": -0.0,
+        "current_gain_pct": -1.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 16:21:10 WIB"
     },
@@ -201,10 +223,10 @@
         "symbol": "CRV",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 4638.0,
-        "max_price_seen": 4638.0,
-        "current_price": 4638.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 4801.0,
+        "current_price": 4801.0,
+        "peak_gain_pct": 3.5,
+        "current_gain_pct": 3.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 16:11:06 WIB"
     },
@@ -301,32 +323,10 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 42.0,
         "max_price_seen": 43.0,
-        "current_price": 42.0,
+        "current_price": 43.0,
         "peak_gain_pct": 2.4,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": 2.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 15:56:09 WIB"
-    },
-    {
-        "symbol": "CAST",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 2070000.0,
-        "max_price_seen": 2180000.0,
-        "current_price": 2180000.0,
-        "peak_gain_pct": 5.3,
-        "current_gain_pct": 5.3,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 15:46:01 WIB"
-    },
-    {
-        "symbol": "MON",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 305.51,
-        "max_price_seen": 315.063,
-        "current_price": 303.352,
-        "peak_gain_pct": 3.1,
-        "current_gain_pct": -0.7,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 15:21:11 WIB"
     }
 ]
