@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "AIXBT",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 278.0,
+        "max_price_seen": 278.0,
+        "current_price": 278.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 02:41:09 WIB"
+    },
+    {
         "symbol": "ENA",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2845.0,
@@ -14,10 +25,10 @@
         "symbol": "DFG",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 13507.0,
-        "max_price_seen": 13507.0,
-        "current_price": 13507.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 13702.0,
+        "current_price": 13702.0,
+        "peak_gain_pct": 1.4,
+        "current_gain_pct": 1.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 02:35:59 WIB"
     },
@@ -224,9 +235,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1395000.0,
         "max_price_seen": 1410009.0,
-        "current_price": 1407098.0,
+        "current_price": 1406602.0,
         "peak_gain_pct": 1.1,
-        "current_gain_pct": 0.9,
+        "current_gain_pct": 0.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 00:11:08 WIB"
     },
@@ -290,9 +301,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1850.0,
         "max_price_seen": 1869.0,
-        "current_price": 1867.0,
+        "current_price": 1863.0,
         "peak_gain_pct": 1.0,
-        "current_gain_pct": 0.9,
+        "current_gain_pct": 0.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 23:36:04 WIB"
     },
@@ -312,21 +323,10 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 16155.0,
         "max_price_seen": 16405.0,
-        "current_price": 16365.0,
+        "current_price": 16191.0,
         "peak_gain_pct": 1.5,
-        "current_gain_pct": 1.3,
+        "current_gain_pct": 0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "07 Nov 2026 - 23:01:25 WIB"
-    },
-    {
-        "symbol": "AVNT",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1510.0,
-        "max_price_seen": 1514.0,
-        "current_price": 1514.0,
-        "peak_gain_pct": 0.3,
-        "current_gain_pct": 0.3,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "07 Nov 2026 - 22:46:08 WIB"
     }
 ]
