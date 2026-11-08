@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "BOME",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 11.0,
+        "max_price_seen": 11.0,
+        "current_price": 11.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 07:21:08 WIB"
+    },
+    {
         "symbol": "BLUR",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 127.0,
@@ -317,16 +328,5 @@
         "current_gain_pct": 1.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 02:35:59 WIB"
-    },
-    {
-        "symbol": "EIGEN",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 3042.0,
-        "max_price_seen": 3042.0,
-        "current_price": 3008.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -1.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 02:11:10 WIB"
     }
 ]
