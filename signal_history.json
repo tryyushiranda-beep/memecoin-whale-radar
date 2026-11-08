@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "APE",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 1882.0,
+        "max_price_seen": 1882.0,
+        "current_price": 1882.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 16:31:44 WIB"
+    },
+    {
         "symbol": "CHILLGUY",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 149.0,
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 12:11:12 WIB"
-    },
-    {
-        "symbol": "HOT",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 6.0,
-        "max_price_seen": 7.0,
-        "current_price": 7.0,
-        "peak_gain_pct": 16.7,
-        "current_gain_pct": 16.7,
-        "status": "\ud83d\udd25 PUMP SUCCESS",
-        "entry_time": "08 Nov 2026 - 12:01:16 WIB"
     }
 ]
