@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "BANK",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 428.926,
+        "max_price_seen": 428.926,
+        "current_price": 428.926,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 08:21:09 WIB"
+    },
+    {
+        "symbol": "BUILDON",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 2095.0,
+        "max_price_seen": 2095.0,
+        "current_price": 2095.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 08:21:09 WIB"
+    },
+    {
         "symbol": "ISLM",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 41.0,
@@ -25,10 +47,10 @@
         "symbol": "BMT",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 406.0,
-        "max_price_seen": 407.0,
-        "current_price": 407.0,
-        "peak_gain_pct": 0.2,
-        "current_gain_pct": 0.2,
+        "max_price_seen": 420.0,
+        "current_price": 420.0,
+        "peak_gain_pct": 3.4,
+        "current_gain_pct": 3.4,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 07:56:01 WIB"
     },
@@ -91,10 +113,10 @@
         "symbol": "HUMA",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 218.0,
-        "max_price_seen": 218.592,
-        "current_price": 218.592,
-        "peak_gain_pct": 0.3,
-        "current_gain_pct": 0.3,
+        "max_price_seen": 236.988,
+        "current_price": 236.988,
+        "peak_gain_pct": 8.7,
+        "current_gain_pct": 8.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 07:11:14 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 03:56:05 WIB"
-    },
-    {
-        "symbol": "EDEN",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 871.0,
-        "max_price_seen": 885.0,
-        "current_price": 885.0,
-        "peak_gain_pct": 1.6,
-        "current_gain_pct": 1.6,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 03:51:09 WIB"
-    },
-    {
-        "symbol": "BCH",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 4452000.0,
-        "max_price_seen": 4491000.0,
-        "current_price": 4476000.0,
-        "peak_gain_pct": 0.9,
-        "current_gain_pct": 0.5,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 03:51:09 WIB"
     }
 ]
