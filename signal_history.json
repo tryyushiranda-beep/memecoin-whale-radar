@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "DEGEN",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 15.0,
+        "max_price_seen": 15.0,
+        "current_price": 15.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 13:46:03 WIB"
+    },
+    {
+        "symbol": "BCH",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 4450000.0,
+        "max_price_seen": 4450000.0,
+        "current_price": 4450000.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 13:46:03 WIB"
+    },
+    {
         "symbol": "CRO",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 880.0,
@@ -224,7 +246,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1392440.0,
         "max_price_seen": 1400578.0,
-        "current_price": 1397158.0,
+        "current_price": 1397159.0,
         "peak_gain_pct": 0.6,
         "current_gain_pct": 0.3,
         "status": "\u23f3 MONITORING",
@@ -306,27 +328,5 @@
         "current_gain_pct": 3.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 11:06:07 WIB"
-    },
-    {
-        "symbol": "AVNT",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1476.0,
-        "max_price_seen": 1500.0,
-        "current_price": 1495.0,
-        "peak_gain_pct": 1.6,
-        "current_gain_pct": 1.3,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 11:01:22 WIB"
-    },
-    {
-        "symbol": "BANK",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 428.862,
-        "max_price_seen": 433.477,
-        "current_price": 428.862,
-        "peak_gain_pct": 1.1,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 10:56:06 WIB"
     }
 ]
