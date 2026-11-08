@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "CTSI",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 442.0,
+        "max_price_seen": 442.0,
+        "current_price": 442.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 12:46:11 WIB"
+    },
+    {
         "symbol": "MYRO",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 22.0,
@@ -58,11 +69,11 @@
         "symbol": "HOT",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 6.0,
-        "max_price_seen": 6.0,
-        "current_price": 6.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
+        "max_price_seen": 7.0,
+        "current_price": 7.0,
+        "peak_gain_pct": 16.7,
+        "current_gain_pct": 16.7,
+        "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "08 Nov 2026 - 12:01:16 WIB"
     },
     {
@@ -92,7 +103,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1392440.0,
         "max_price_seen": 1393869.0,
-        "current_price": 1393859.0,
+        "current_price": 1393868.0,
         "peak_gain_pct": 0.1,
         "current_gain_pct": 0.1,
         "status": "\u23f3 MONITORING",
@@ -246,9 +257,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2.325,
         "max_price_seen": 2.634,
-        "current_price": 2.592,
+        "current_price": 2.574,
         "peak_gain_pct": 13.3,
-        "current_gain_pct": 11.5,
+        "current_gain_pct": 10.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 10:46:11 WIB"
     },
@@ -268,9 +279,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1450.0,
         "max_price_seen": 1499.0,
-        "current_price": 1415.0,
+        "current_price": 1425.0,
         "peak_gain_pct": 3.4,
-        "current_gain_pct": -2.4,
+        "current_gain_pct": -1.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 10:41:13 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 10:26:07 WIB"
-    },
-    {
-        "symbol": "ASETQU",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 205659.0,
-        "max_price_seen": 205659.0,
-        "current_price": 205659.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 10:21:08 WIB"
     }
 ]
