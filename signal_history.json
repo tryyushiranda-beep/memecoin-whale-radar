@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "HAEDAL",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 448.0,
+        "max_price_seen": 448.0,
+        "current_price": 448.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 10:06:13 WIB"
+    },
+    {
+        "symbol": "FLOKI",
+        "narrative": "MEME_AI",
+        "entry_price": 0.382562,
+        "max_price_seen": 0.382562,
+        "current_price": 0.382562,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 10:06:13 WIB"
+    },
+    {
         "symbol": "GOAT",
         "narrative": "MEME_AI",
         "entry_price": 229.0,
@@ -25,10 +47,10 @@
         "symbol": "MYX",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 897.0,
-        "max_price_seen": 897.0,
-        "current_price": 897.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 902.0,
+        "current_price": 902.0,
+        "peak_gain_pct": 0.6,
+        "current_gain_pct": 0.6,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 09:51:14 WIB"
     },
@@ -48,9 +70,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 205200.0,
         "max_price_seen": 297000.0,
-        "current_price": 290000.0,
+        "current_price": 245170.0,
         "peak_gain_pct": 44.7,
-        "current_gain_pct": 41.3,
+        "current_gain_pct": 19.5,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "08 Nov 2026 - 09:46:13 WIB"
     },
@@ -103,9 +125,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1240.0,
         "max_price_seen": 1296.0,
-        "current_price": 1296.0,
+        "current_price": 1256.0,
         "peak_gain_pct": 4.5,
-        "current_gain_pct": 4.5,
+        "current_gain_pct": 1.3,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 09:25:58 WIB"
     },
@@ -191,9 +213,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2828.0,
         "max_price_seen": 2828.0,
-        "current_price": 2791.0,
+        "current_price": 2800.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -1.3,
+        "current_gain_pct": -1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 08:22:42 WIB"
     },
@@ -235,9 +257,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1206.0,
         "max_price_seen": 1209.0,
-        "current_price": 1205.0,
+        "current_price": 1206.0,
         "peak_gain_pct": 0.2,
-        "current_gain_pct": -0.1,
+        "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 07:56:01 WIB"
     },
@@ -257,9 +279,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1666.0,
         "max_price_seen": 1677.0,
-        "current_price": 1610.0,
+        "current_price": 1616.0,
         "peak_gain_pct": 0.7,
-        "current_gain_pct": -3.4,
+        "current_gain_pct": -3.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 07:41:14 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": -0.8,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 07:16:13 WIB"
-    },
-    {
-        "symbol": "HUMA",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 218.0,
-        "max_price_seen": 236.988,
-        "current_price": 217.525,
-        "peak_gain_pct": 8.7,
-        "current_gain_pct": -0.2,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 07:11:14 WIB"
-    },
-    {
-        "symbol": "CKB",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 18.0,
-        "max_price_seen": 19.0,
-        "current_price": 19.0,
-        "peak_gain_pct": 5.6,
-        "current_gain_pct": 5.6,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 07:11:14 WIB"
     }
 ]
