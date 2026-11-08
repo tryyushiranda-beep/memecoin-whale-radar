@@ -1,12 +1,34 @@
 [
     {
+        "symbol": "HMSTR",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 2.325,
+        "max_price_seen": 2.325,
+        "current_price": 2.325,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 10:46:11 WIB"
+    },
+    {
+        "symbol": "HART",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 41.0,
+        "max_price_seen": 41.0,
+        "current_price": 41.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 10:46:11 WIB"
+    },
+    {
         "symbol": "UAI",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1450.0,
         "max_price_seen": 1450.0,
-        "current_price": 1450.0,
+        "current_price": 1435.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -1.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 10:41:13 WIB"
     },
@@ -279,9 +301,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2828.0,
         "max_price_seen": 2828.0,
-        "current_price": 2780.0,
+        "current_price": 2798.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -1.7,
+        "current_gain_pct": -1.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 08:22:42 WIB"
     },
@@ -300,33 +322,11 @@
         "symbol": "BUILDON",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 2095.0,
-        "max_price_seen": 2095.0,
-        "current_price": 2095.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "max_price_seen": 2220.0,
+        "current_price": 2220.0,
+        "peak_gain_pct": 6.0,
+        "current_gain_pct": 6.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 08:21:09 WIB"
-    },
-    {
-        "symbol": "ISLM",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 41.0,
-        "max_price_seen": 43.0,
-        "current_price": 41.0,
-        "peak_gain_pct": 4.9,
-        "current_gain_pct": 0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 08:16:13 WIB"
-    },
-    {
-        "symbol": "HBAR",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 1206.0,
-        "max_price_seen": 1209.0,
-        "current_price": 1205.0,
-        "peak_gain_pct": 0.2,
-        "current_gain_pct": -0.1,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 07:56:01 WIB"
     }
 ]
