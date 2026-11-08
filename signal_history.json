@@ -1,5 +1,27 @@
 [
     {
+        "symbol": "SPACEID",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 486.0,
+        "max_price_seen": 486.0,
+        "current_price": 486.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 12:26:05 WIB"
+    },
+    {
+        "symbol": "AIXBT",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 272.0,
+        "max_price_seen": 272.0,
+        "current_price": 272.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 12:26:05 WIB"
+    },
+    {
         "symbol": "ALTLAYER",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 96.0,
@@ -70,9 +92,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1204.0,
         "max_price_seen": 1207.0,
-        "current_price": 1207.0,
+        "current_price": 1201.0,
         "peak_gain_pct": 0.2,
-        "current_gain_pct": 0.2,
+        "current_gain_pct": -0.2,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 11:46:08 WIB"
     },
@@ -180,9 +202,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 743.0,
         "max_price_seen": 743.0,
-        "current_price": 727.236,
+        "current_price": 727.846,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": -2.1,
+        "current_gain_pct": -2.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 10:51:11 WIB"
     },
@@ -202,7 +224,7 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000003.0,
         "max_price_seen": 1000010.0,
-        "current_price": 1000007.0,
+        "current_price": 1000005.0,
         "peak_gain_pct": 0.0,
         "current_gain_pct": 0.0,
         "status": "\u23f3 MONITORING",
@@ -235,9 +257,9 @@
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1450.0,
         "max_price_seen": 1499.0,
-        "current_price": 1468.0,
+        "current_price": 1440.0,
         "peak_gain_pct": 3.4,
-        "current_gain_pct": 1.2,
+        "current_gain_pct": -0.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 10:41:13 WIB"
     },
@@ -306,27 +328,5 @@
         "current_gain_pct": 1.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 10:06:13 WIB"
-    },
-    {
-        "symbol": "FLOKI",
-        "narrative": "MEME_AI",
-        "entry_price": 0.382562,
-        "max_price_seen": 0.382562,
-        "current_price": 0.382552,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.0,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 10:06:13 WIB"
-    },
-    {
-        "symbol": "GOAT",
-        "narrative": "MEME_AI",
-        "entry_price": 229.0,
-        "max_price_seen": 231.0,
-        "current_price": 231.0,
-        "peak_gain_pct": 0.9,
-        "current_gain_pct": 0.9,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 10:01:29 WIB"
     }
 ]
