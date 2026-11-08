@@ -1,12 +1,23 @@
 [
     {
+        "symbol": "BIRB",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 1666.0,
+        "max_price_seen": 1666.0,
+        "current_price": 1666.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 07:41:14 WIB"
+    },
+    {
         "symbol": "INDR",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 1000007.0,
         "max_price_seen": 1000007.0,
-        "current_price": 1000007.0,
+        "current_price": 1000001.0,
         "peak_gain_pct": 0.0,
-        "current_gain_pct": 0.0,
+        "current_gain_pct": -0.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 07:36:05 WIB"
     },
@@ -124,10 +135,10 @@
         "symbol": "APU",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 0.2,
-        "max_price_seen": 0.204,
-        "current_price": 0.204,
-        "peak_gain_pct": 2.0,
-        "current_gain_pct": 2.0,
+        "max_price_seen": 0.205,
+        "current_price": 0.205,
+        "peak_gain_pct": 2.5,
+        "current_gain_pct": 2.5,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 05:31:14 WIB"
     },
@@ -146,10 +157,10 @@
         "symbol": "FET",
         "narrative": "LAYER1_DEFI",
         "entry_price": 2580.0,
-        "max_price_seen": 2618.0,
-        "current_price": 2618.0,
-        "peak_gain_pct": 1.5,
-        "current_gain_pct": 1.5,
+        "max_price_seen": 2655.0,
+        "current_price": 2655.0,
+        "peak_gain_pct": 2.9,
+        "current_gain_pct": 2.9,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 05:01:22 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": 16.7,
         "status": "\ud83d\udd25 PUMP SUCCESS",
         "entry_time": "08 Nov 2026 - 03:31:15 WIB"
-    },
-    {
-        "symbol": "AIXBT",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 278.0,
-        "max_price_seen": 278.0,
-        "current_price": 276.0,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -0.7,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 02:41:09 WIB"
     }
 ]
