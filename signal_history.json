@@ -1,5 +1,16 @@
 [
     {
+        "symbol": "INDR",
+        "narrative": "ALTCOIN_MICRO",
+        "entry_price": 1000007.0,
+        "max_price_seen": 1000007.0,
+        "current_price": 1000007.0,
+        "peak_gain_pct": 0.0,
+        "current_gain_pct": 0.0,
+        "status": "\u23f3 MONITORING",
+        "entry_time": "08 Nov 2026 - 07:36:05 WIB"
+    },
+    {
         "symbol": "EIGEN",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 3008.0,
@@ -113,10 +124,10 @@
         "symbol": "APU",
         "narrative": "ALTCOIN_MICRO",
         "entry_price": 0.2,
-        "max_price_seen": 0.2,
-        "current_price": 0.198,
-        "peak_gain_pct": 0.0,
-        "current_gain_pct": -1.0,
+        "max_price_seen": 0.204,
+        "current_price": 0.204,
+        "peak_gain_pct": 2.0,
+        "current_gain_pct": 2.0,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 05:31:14 WIB"
     },
@@ -212,10 +223,10 @@
         "symbol": "BONK",
         "narrative": "MEME_AI",
         "entry_price": 0.050282,
-        "max_price_seen": 0.050642,
-        "current_price": 0.050642,
-        "peak_gain_pct": 0.7,
-        "current_gain_pct": 0.7,
+        "max_price_seen": 0.050813,
+        "current_price": 0.050813,
+        "peak_gain_pct": 1.1,
+        "current_gain_pct": 1.1,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 04:01:22 WIB"
     },
@@ -317,16 +328,5 @@
         "current_gain_pct": -0.7,
         "status": "\u23f3 MONITORING",
         "entry_time": "08 Nov 2026 - 02:41:09 WIB"
-    },
-    {
-        "symbol": "ENA",
-        "narrative": "ALTCOIN_MICRO",
-        "entry_price": 2845.0,
-        "max_price_seen": 2864.0,
-        "current_price": 2854.0,
-        "peak_gain_pct": 0.7,
-        "current_gain_pct": 0.3,
-        "status": "\u23f3 MONITORING",
-        "entry_time": "08 Nov 2026 - 02:35:59 WIB"
     }
 ]
